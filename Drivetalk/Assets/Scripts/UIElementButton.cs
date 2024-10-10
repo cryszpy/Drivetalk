@@ -1,18 +1,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum UIElementType {
-    BUTTON, SLIDER
-}
-
-public class UIElement : MonoBehaviour
+public class UIElementButton : MonoBehaviour
 {
-    public UIElementType elementType;
 
-    public UnityEvent unityEvent = new UnityEvent();
+    [Header("SCRIPT REFERENCES")]
 
+    public UnityEvent unityEvent = new();
+
+    [Tooltip("Version of GameObject to appear when hovered over.")]
     public GameObject hoveredObject;
 
+    [Tooltip("Reference to main camera.")]
     public Camera mainCamera;
 
     public virtual void Start() {
@@ -26,49 +25,48 @@ public class UIElement : MonoBehaviour
 
         if (GameStateManager.Gamestate != GAMESTATE.MENU) {
 
+            // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
+            // Ignore objects in layer 7 (DiegeticUIIgnore)
             int layerMask = ~(1 << 7);
 
+            // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
             if (Physics.Raycast(ray, out RaycastHit hit, 25f, layerMask) && hit.collider.gameObject == gameObject)
             {
-                switch (elementType)
-                {
+                // Execute hover function
+                OnHover();
 
-                    case UIElementType.BUTTON:
-                        OnHover();
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            unityEvent.Invoke();
-                        }
-                        break;
-                    case UIElementType.SLIDER:
-                        OnHover();
-                        if (Input.GetMouseButton(0))
-                        {
-                            unityEvent.Invoke();
-                        }
-                        break;
+                // If this UI element is clicked—
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // Execute click function
+                    unityEvent.Invoke();
                 }
-            } else {
+            } 
+            // If cursor is not hovered over element, reset to default state
+            else {
                 DefaultState();
             }
         }
     }
 
     public virtual void OnClick() {
+        // Disable hovered version of GameObject
         if (hoveredObject.activeSelf) {
             hoveredObject.SetActive(false);
         }
     }
 
     public virtual void OnHover() {
+        // Enable hovered version of GameObject
         if (!hoveredObject.activeSelf) {
             hoveredObject.SetActive(true);
         }
     }
 
     public virtual void DefaultState() {
+        // Disable hovered version of GameObject
         if (hoveredObject.activeSelf) {
             hoveredObject.SetActive(false);
         }

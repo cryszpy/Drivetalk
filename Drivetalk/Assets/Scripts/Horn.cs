@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Horn : UIElement
+public class Horn : UIElementButton
 {
     public override void OnClick()
     {

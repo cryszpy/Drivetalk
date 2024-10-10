@@ -2,19 +2,25 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class GPS : UIElement
+public class GPS : UIElementButton
 {
 
-    [SerializeField] PlayerCamera playerCam;
+    [Tooltip("Reference to the main Cinemachine camera.")]
     [SerializeField] CinemachineCamera cinemachineCam;
+    [Tooltip("Reference to the dolly spline track to follow for this UI element on click.")]
     [SerializeField] CinemachineSplineDolly splineDolly;
     
     public override void OnClick()
     {
         base.OnClick();
         GameStateManager.SetState(GAMESTATE.MENU);
+
+        // Focus on this element
         cinemachineCam.LookAt = gameObject.transform;
+
+        // Start moving the camera on the dolly spline track
         StartCoroutine(StartDollyMovement());
+        
         Cursor.lockState = CursorLockMode.None;
         Debug.Log("GPS clicked!");
     }
