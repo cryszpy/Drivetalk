@@ -28,20 +28,7 @@ public class PlayerCamera : MonoBehaviour
     void Update()
     {
         if (GameStateManager.Gamestate != GAMESTATE.MENU) {
-            //CameraRotation();
+            
         }
-    }
-
-    private void CameraRotation() {
-        rotationY += speedY * Input.GetAxis("Mouse X");
-        rotationX -= speedX * Input.GetAxis("Mouse Y");
-
-        // Restricts vertical camera movement
-        rotationX = Mathf.Clamp(rotationX, camLimitYMin, camLimitYMax);
-
-        // Restricts horizontal camera movement
-        rotationY = Mathf.Clamp(rotationY, camLimitXMin, camLimitXMax);
-
-        transform.eulerAngles = new Vector3(rotationX, rotationY, 0);
     }
 }

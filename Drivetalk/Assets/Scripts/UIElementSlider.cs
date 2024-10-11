@@ -23,21 +23,8 @@ public class UIElementSlider : UIElementButton
     }
 
     public override void Update() {
-
         if (GameStateManager.Gamestate != GAMESTATE.MENU) {
-
-            // Raycast from the UI element to the mouse cursor
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            // Ignore objects in layer 7 (DiegeticUIIgnore)
-            int layerMask = ~(1 << 7);
-
-            // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
-            if (Physics.Raycast(ray, out RaycastHit hit, 25f, layerMask) && hit.collider.gameObject == gameObject)
-            {
-                // Execute hover function
-                OnHover();
-
+            if (hovered) {
                 // If this UI element is clicked—
                 if (Input.GetMouseButton(0))
                 {
@@ -46,10 +33,6 @@ public class UIElementSlider : UIElementButton
                 } else {
                     dragging = false;
                 }
-            } 
-            // If cursor is not hovered over element, reset to default state
-            else {
-                DefaultState();
             }
 
             if (dragging) {
@@ -58,6 +41,29 @@ public class UIElementSlider : UIElementButton
 
             // Updates mouse position every frame
             mousePreviousPos = Input.mousePosition;
+        }
+    }
+
+    public override void FixedUpdate() {
+
+        if (GameStateManager.Gamestate != GAMESTATE.MENU) {
+
+            // Raycast from the UI element to the mouse cursor
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
+            {
+                if (hit.collider.transform == transform) {
+                    // Execute hover function
+                    OnHover();
+                }
+                
+            } 
+            // If cursor is not hovered over element, reset to default state
+            else {
+                DefaultState();
+            }
         }
     }
 

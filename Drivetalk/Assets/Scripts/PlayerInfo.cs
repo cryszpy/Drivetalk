@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -18,5 +19,16 @@ public class PlayerInfo : MonoBehaviour
 
     private static float temperature;
     public static float Temperature { get => temperature; set => temperature = value;}
-    
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+
+            if (GameStateManager.Gamestate != GAMESTATE.PAUSED) {
+                GameStateManager.SetState(GAMESTATE.PAUSED);
+            } else {
+                GameStateManager.SetState(GAMESTATE.PLAYING);
+            }
+        }
+    }
+
 }
