@@ -12,15 +12,6 @@ public class TaxiStopDestination : MonoBehaviour
             Debug.Log("Arrived at taxi stop!");
 
             GeneratePassenger();
-
-            if (!car) {
-                if (collider.TryGetComponent<CarController>(out var script)) {
-                    car = script;
-                    car.PickUpPassenger();
-                }
-            } else {
-                car.PickUpPassenger();
-            }
         }
     }
 

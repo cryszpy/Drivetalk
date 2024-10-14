@@ -11,15 +11,18 @@ public class CarController : MonoBehaviour
 
     public List<GameObject> taxiStops = new();
 
-    [SerializeField] private PassengerList passengerList;
-
     [SerializeField] private GameObject destination;
+
+    [SerializeField] private List<GameObject> passengerSeats;
+    [SerializeField] private GameObject shotgun;
 
     [SerializeField] private Rigidbody rb;
 
     [SerializeField] private Collider coll;
 
     public NavMeshAgent agent;
+
+    [SerializeField] private Passenger currentPassenger;
 
     [Header("STATS")]
 
@@ -64,6 +67,30 @@ public class CarController : MonoBehaviour
     }
 
     public void PickUpPassenger() {
-        Debug.Log("todo lol");
+
+        int index = UnityEngine.Random.Range(0, passengerSeats.Count);
+
+        // Teleports passenger to seat
+        currentPassenger.transform.position = passengerSeats[index].transform.position;
+
+        // Parents passenger to seat
+        currentPassenger.transform.parent = passengerSeats[index].transform;
+
+        // Resets rotation to face forward from seat
+        currentPassenger.transform.localEulerAngles = new(0, 0, 0);
+    }
+
+    private void OnTriggerEnter(Collider collider) {
+
+        if (collider.gameObject.layer == 9) {
+            Debug.Log("Found passenger!");
+
+            if (collider.TryGetComponent<Passenger>(out var script)) {
+                currentPassenger = script;
+                PickUpPassenger();
+            } else {
+                Debug.LogWarning("Could not find Passenger component on this passenger!");
+            }
+        }
     }
 }

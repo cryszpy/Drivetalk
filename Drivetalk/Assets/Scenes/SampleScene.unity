@@ -208,6 +208,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyText: {fileID: 1328901628}
+--- !u!1 &55432003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55432004}
+  m_Layer: 0
+  m_Name: PassengerSeat (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &55432004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55432003}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 512144897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &124070078
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +644,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d731c8432d54899ba3b0b1a91ff37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &305553883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305553884}
+  m_Layer: 0
+  m_Name: Shotgun
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &305553884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305553883}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.279, y: 0, z: 0.135}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 512144897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +1004,10 @@ Transform:
   m_Children:
   - {fileID: 1457727852}
   - {fileID: 1947440944}
+  - {fileID: 305553884}
+  - {fileID: 515669038}
+  - {fileID: 55432004}
+  - {fileID: 1172199928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &512144898
@@ -1037,9 +1103,15 @@ MonoBehaviour:
   - {fileID: 151522915}
   - {fileID: 1541011959}
   destination: {fileID: 192307632}
+  passengerSeats:
+  - {fileID: 515669037}
+  - {fileID: 55432003}
+  - {fileID: 1172199927}
+  shotgun: {fileID: 305553883}
   rb: {fileID: 512144902}
   coll: {fileID: 512144898}
   agent: {fileID: 512144903}
+  currentPassenger: {fileID: 0}
   arrived: 0
 --- !u!54 &512144902
 Rigidbody:
@@ -1090,6 +1162,37 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &515669037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515669038}
+  m_Layer: 0
+  m_Name: PassengerSeat
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515669038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515669037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.302, y: 0, z: -0.221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 512144897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &575440113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3663,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1172199927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172199928}
+  m_Layer: 0
+  m_Name: PassengerSeat (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172199928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172199927}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.299, y: 0, z: -0.221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 512144897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1188288512
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,7 +4941,7 @@ GameObject:
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4820,7 +4954,7 @@ Transform:
   m_GameObject: {fileID: 1457727851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.14222223, y: 0, z: 0.135}
+  m_LocalPosition: {x: -0.2, y: 0, z: 0.135}
   m_LocalScale: {x: 0.22222222, y: 0.5, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5910,7 +6044,7 @@ Transform:
   m_GameObject: {fileID: 1947440943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.14222223, y: -0.5, z: 0.135}
+  m_LocalPosition: {x: -0.2, y: -0.5, z: 0.135}
   m_LocalScale: {x: 0.22222222, y: 0.5, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6700,7 +6834,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 0.15, y: 0.757, z: 2.031}
-  m_LocalScale: {x: 3.25, y: 1.15, z: 0.12000002}
+  m_LocalScale: {x: 2.68, y: 1.15, z: 0.12000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1947440944}
