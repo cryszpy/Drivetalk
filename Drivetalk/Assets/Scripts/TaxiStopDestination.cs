@@ -4,8 +4,6 @@ public class TaxiStopDestination : MonoBehaviour
 {
     public PassengerList passengerList;
 
-    private CarController car;
-
     private void OnTriggerEnter(Collider collider) {
 
         if (collider.CompareTag("Car")) {

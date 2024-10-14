@@ -25,8 +25,8 @@ public class Passenger : MonoBehaviour
 
     public List<DialoguePiece> choices;
 
+    public int currentDialogueNum;
     public int dialogueLeftToFinish;
-
     public List<DialoguePiece> dialogue;
 }
 
