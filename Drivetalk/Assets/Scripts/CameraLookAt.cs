@@ -16,10 +16,10 @@ public class CameraLookAt : MonoBehaviour
     {
         if (GameStateManager.Gamestate != GAMESTATE.MENU) {
 
-            var mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceZ));
-            var cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * cameraOrigin.position) / cameraTargetDivider;
+            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceZ));
+            Vector3 cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * cameraOrigin.position) / cameraTargetDivider;
 
-            transform.position = new Vector3(cameraTargetPosition.x, cameraTargetPosition.y, transform.position.z);
+            transform.position = cameraTargetPosition;
         }
     }
 }

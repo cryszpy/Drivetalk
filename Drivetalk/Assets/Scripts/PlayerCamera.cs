@@ -12,9 +12,6 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float camLimitXMin;
     [SerializeField] private float camLimitXMax;
 
-    public float rotationX;
-    public float rotationY;
-
     private void Start() {
         if (!mainCamera) {
             mainCamera = Camera.main;
@@ -22,13 +19,5 @@ public class PlayerCamera : MonoBehaviour
         }
         //Cursor.lockState = CursorLockMode.Locked;
         GameStateManager.SetState(GAMESTATE.PLAYING);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (GameStateManager.Gamestate != GAMESTATE.MENU) {
-            
-        }
     }
 }

@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 151522919}
   - component: {fileID: 151522918}
   - component: {fileID: 151522917}
+  - component: {fileID: 151522921}
   m_Layer: 0
   m_Name: TAXISTOP (3)
   m_TagString: Untagged
@@ -433,6 +434,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &151522921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151522915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c496714e4eef4ce198be677d9ccaac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerList: {fileID: 11400000, guid: aa98f29b2df9f4ae3968f461a69e4e86, type: 2}
+--- !u!1 &166813858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166813859}
+  - component: {fileID: 166813860}
+  m_Layer: 0
+  m_Name: GameStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &166813859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166813858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &166813860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166813858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9fb164b433b4264a416da7a48b0509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamestateTracker: 0
 --- !u!1 &192307632
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,8 +700,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21976972, y: -0.012901711, z: 0.0029067306, w: 0.97546214}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.25}
+  m_LocalRotation: {x: 0.2197697, y: -0.01290196, z: 0.0029067863, w: 0.97546214}
+  m_LocalPosition: {x: 0.000000603497, y: 0.5, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2341,6 +2400,7 @@ GameObject:
   - component: {fileID: 879164292}
   - component: {fileID: 879164291}
   - component: {fileID: 879164290}
+  - component: {fileID: 879164294}
   m_Layer: 0
   m_Name: TAXISTOP
   m_TagString: Untagged
@@ -2437,6 +2497,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &879164294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879164288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c496714e4eef4ce198be677d9ccaac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerList: {fileID: 11400000, guid: aa98f29b2df9f4ae3968f461a69e4e86, type: 2}
 --- !u!1 &905407362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2580,7 +2653,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  rb: {fileID: 0}
   cinemachineCam: {fileID: 1793819360}
   splineDolly: {fileID: 1793819362}
   screenUI: {fileID: 741628947}
@@ -2844,6 +2916,7 @@ GameObject:
   - component: {fileID: 971704240}
   - component: {fileID: 971704239}
   - component: {fileID: 971704238}
+  - component: {fileID: 971704242}
   m_Layer: 0
   m_Name: TAXISTOP (1)
   m_TagString: Untagged
@@ -2940,6 +3013,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &971704242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971704236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c496714e4eef4ce198be677d9ccaac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerList: {fileID: 11400000, guid: aa98f29b2df9f4ae3968f461a69e4e86, type: 2}
 --- !u!1 &990324519
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,7 +3444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012859189}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.13, y: 1.35, z: 2.2301223}
   m_LocalScale: {x: 3.25, y: 1.15, z: 0.120000035}
   m_ConstrainProportionsScale: 0
@@ -3486,6 +3572,7 @@ GameObject:
   - component: {fileID: 1188288516}
   - component: {fileID: 1188288515}
   - component: {fileID: 1188288514}
+  - component: {fileID: 1188288518}
   m_Layer: 0
   m_Name: TAXISTOP (2)
   m_TagString: Untagged
@@ -3582,6 +3669,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188288518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188288512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c496714e4eef4ce198be677d9ccaac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerList: {fileID: 11400000, guid: aa98f29b2df9f4ae3968f461a69e4e86, type: 2}
 --- !u!1 &1293596610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,7 +4351,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  rb: {fileID: 0}
   rotationMin: 25
   rotationMax: 150
   dragging: 0
@@ -4750,8 +4849,6 @@ MonoBehaviour:
   camLimitYMax: 20
   camLimitXMin: -25
   camLimitXMax: 25
-  rotationX: 0
-  rotationY: 0
 --- !u!114 &1457727854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4925,6 +5022,7 @@ GameObject:
   - component: {fileID: 1541011963}
   - component: {fileID: 1541011962}
   - component: {fileID: 1541011961}
+  - component: {fileID: 1541011965}
   m_Layer: 0
   m_Name: TAXISTOP (4)
   m_TagString: Untagged
@@ -5021,6 +5119,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541011965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541011959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c496714e4eef4ce198be677d9ccaac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerList: {fileID: 11400000, guid: aa98f29b2df9f4ae3968f461a69e4e86, type: 2}
 --- !u!1 &1590781444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5661,7 +5772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793819356}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21976973, y: -0.01290171, z: 0.0029067302, w: 0.97546214}
+  m_LocalRotation: {x: 0.21976973, y: -0.012901961, z: 0.0029067867, w: 0.97546214}
   m_LocalPosition: {x: 0, y: 0.5, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6537,7 +6648,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  rb: {fileID: 0}
 --- !u!136 &2109932174
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6673,6 +6783,7 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 166813859}
   - {fileID: 1376894585}
   - {fileID: 124070079}
   - {fileID: 410087041}

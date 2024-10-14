@@ -10,6 +10,7 @@ public class GameStateManager : MonoBehaviour
 
     private static GAMESTATE gamestate;
     public static GAMESTATE Gamestate { get => gamestate; }
+
     public static void SetState(GAMESTATE newState) {
         gamestate = newState;
         Time.timeScale = gamestate switch
@@ -22,6 +23,8 @@ public class GameStateManager : MonoBehaviour
         };
     }
 
+    public GAMESTATE gamestateTracker;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,5 +35,9 @@ public class GameStateManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    private void Update() {
+        gamestateTracker = Gamestate;
     }
 }

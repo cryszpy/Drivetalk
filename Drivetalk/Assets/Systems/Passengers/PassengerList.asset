@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd9f322a0bf84504ba50ae568b01526, type: 3}
+  m_Name: PassengerList
+  m_EditorClassIdentifier: 
+  rarityProbabilities:
+  - 0.5
+  - 0.7
+  - 0.9
+  - 1
+  passengerQueue: []
+  storyPassengers: []
+  exhaustedStory: []
+  tierOnePassengers:
+  - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
+  exhaustedTierOne: []
+  tierTwoPassengers: []
+  exhaustedTierTwo: []
+  tierThreePassengers: []
+  exhaustedTierThree: []
+  tierFourPassengers: []
+  exhaustedTierFour: []

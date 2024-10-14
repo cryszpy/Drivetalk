@@ -17,9 +17,6 @@ public class PlayerInfo : MonoBehaviour
         Currency += value;
     }
 
-    private static float temperature;
-    public static float Temperature { get => temperature; set => temperature = value;}
-
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
 

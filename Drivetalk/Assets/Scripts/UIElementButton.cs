@@ -20,8 +20,6 @@ public class UIElementButton : MonoBehaviour
 
     protected bool hovered;
 
-    [SerializeField] protected Rigidbody rb;
-
     public virtual void Start() {
         if (!mainCamera) {
             mainCamera = Camera.main;
