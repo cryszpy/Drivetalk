@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CameraLookAt : MonoBehaviour
 {
-    [SerializeField] private CarController car;
-
     [SerializeField] private Camera mainCamera;
     [SerializeField] private PlayerCamera playerCam;
     [SerializeField] private Transform cameraOrigin;

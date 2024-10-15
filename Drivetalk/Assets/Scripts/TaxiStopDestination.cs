@@ -4,12 +4,23 @@ public class TaxiStopDestination : MonoBehaviour
 {
     public PassengerList passengerList;
 
+    private CarController car;
+
     private void OnTriggerEnter(Collider collider) {
 
         if (collider.CompareTag("Car")) {
+
             Debug.Log("Arrived at taxi stop!");
 
-            GeneratePassenger();
+            if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
+                car = script;
+            } else {
+                Debug.LogWarning("Could not find CarController script on car!");
+            }
+            
+            if (!car.currentPassenger) {
+                GeneratePassenger();
+            }
         }
     }
 

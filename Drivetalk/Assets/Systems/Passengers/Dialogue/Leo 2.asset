@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: Leo
+  m_Name: Leo 2
   m_EditorClassIdentifier: 
   dialogueSeen: 0
   choices: []
   sentences:
-  - What up bro
-  - Looks like a clean taxi man
-  - Give props to asher fr fr
+  - woah!
+  - this is the second dialogue piece!
+  - pretty sicko mode

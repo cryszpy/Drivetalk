@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PassengerList
   m_EditorClassIdentifier: 
   rarityProbabilities:
-  - 0.5
+  - 1
   - 0.7
   - 0.9
   - 1

@@ -23,8 +23,11 @@ public class UIElementSlider : UIElementButton
     }
 
     public override void Update() {
+        
         if (GameStateManager.Gamestate != GAMESTATE.MENU) {
+
             if (hovered) {
+
                 // If this UI element is clicked—
                 if (Input.GetMouseButton(0))
                 {

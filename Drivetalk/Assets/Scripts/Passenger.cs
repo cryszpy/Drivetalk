@@ -23,7 +23,9 @@ public class Passenger : MonoBehaviour
     public List<PassengerRequirement> requirements;
     public bool requirementMet;
 
-    public List<DialoguePiece> choices;
+    public float waitTimeMin;
+    public float waitTimeMax;
+    public float holdTime;
 
     public int currentDialogueNum;
     public int dialogueLeftToFinish;

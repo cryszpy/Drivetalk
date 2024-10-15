@@ -9,6 +9,8 @@ public class CarController : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
+    [SerializeField] DialogueManager dialogueManager;
+
     public List<GameObject> taxiStops = new();
 
     [SerializeField] private GameObject destination;
@@ -22,7 +24,7 @@ public class CarController : MonoBehaviour
 
     public NavMeshAgent agent;
 
-    private Passenger currentPassenger;
+    public Passenger currentPassenger;
 
     [SerializeField] Camera rearviewMirrorCam;
 
@@ -35,8 +37,8 @@ public class CarController : MonoBehaviour
     private static float rating;
     public static float Rating { get => rating; set => rating = value; }
 
-    private static float temperature;
-    public static float Temperature { get => temperature; set => temperature = value;}
+    private static ACSetting temperature;
+    public static ACSetting Temperature { get => temperature; set => temperature = value;}
 
     public static List<Passenger> passengersDrivenList = new();
 
@@ -49,17 +51,38 @@ public class CarController : MonoBehaviour
     private static int lastSongPlayedID;
     public static int LastSongPlayedID { get => lastSongPlayedID; set => lastSongPlayedID = value; }
 
+    public float ratingTracker;
+    public ACSetting tempTracker;
+    public float totalPassengersTracker;
+    public float lastPassengerIDTracker;
+    public float lastSongPlayedIDTracker;
+
     private void Start() {
         // Flip camera projection horizontally (for accurate mirror effect)
         Matrix4x4 mat = rearviewMirrorCam.projectionMatrix;
         mat *= Matrix4x4.Scale(new Vector3(1, -1, 1));
         rearviewMirrorCam.projectionMatrix = mat;
+
+        if (!dialogueManager) {
+            if (GameObject.FindGameObjectWithTag("DialogueManager").TryGetComponent<DialogueManager>(out var script)) {
+                dialogueManager = script;
+                Debug.LogWarning("Dialogue manager was not assigned! Reassigned.");
+            } else {
+                Debug.LogError("Could not find dialogue manager!");
+            }
+        }
     }
 
     private void Update() {
         if (arrived) {
             FindNearestStop();
         }
+
+        ratingTracker = Rating;
+        tempTracker = Temperature;
+        totalPassengersTracker = TotalPassengersDriven;
+        lastPassengerIDTracker = LastPassengerID;
+        lastSongPlayedIDTracker = LastSongPlayedID;
     }
 
     private void FindNearestStop() {
@@ -73,10 +96,13 @@ public class CarController : MonoBehaviour
         if (stopDistances.Count != 0) {
             agent.SetDestination(taxiStops[stopDistances.IndexOf(stopDistances.Min())].transform.position);
         }
+
         arrived = false;
     }
 
     public void PickUpPassenger() {
+
+        currentPassenger.tag = "PickedUp";
 
         int index = UnityEngine.Random.Range(0, passengerSeats.Count);
 
@@ -110,12 +136,15 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider) {
 
-        if (collider.gameObject.layer == 9) {
+        if (collider.gameObject.layer == 9 && !collider.gameObject.CompareTag("PickedUp")) {
             Debug.Log("Found passenger!");
 
             if (collider.TryGetComponent<Passenger>(out var script)) {
                 currentPassenger = script;
+                dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum]);
+
                 PickUpPassenger();
+
             } else {
                 Debug.LogWarning("Could not find Passenger component on this passenger!");
             }
