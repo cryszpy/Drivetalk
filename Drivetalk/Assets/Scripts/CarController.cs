@@ -13,8 +13,6 @@ public class CarController : MonoBehaviour
 
     public List<GameObject> taxiStops = new();
 
-    [SerializeField] private GameObject destination;
-
     [SerializeField] private List<GameObject> passengerSeats;
     [SerializeField] private GameObject shotgun;
 
@@ -26,9 +24,10 @@ public class CarController : MonoBehaviour
 
     public Passenger currentPassenger;
 
-    [SerializeField] Camera rearviewMirrorCam;
+    [SerializeField] private Camera rearviewMirrorCam;
 
-    [SerializeField] GameObject dialogueNotif;
+    public GameObject choicesBar;
+    public GameObject choicePrefab;
 
     [Header("STATS")]
 
@@ -108,19 +107,19 @@ public class CarController : MonoBehaviour
 
         switch (index) {
             case 0:
-                rearviewMirrorCam.transform.localPosition = new(-2.5f, 5.57f, -0.6f);
-                rearviewMirrorCam.transform.localEulerAngles = new(-180, -24.2f, -90);
-                rearviewMirrorCam.orthographicSize = 1.9f;
+                rearviewMirrorCam.transform.localPosition = new(-1.43f, 1.73f, -0.6f);
+                rearviewMirrorCam.transform.localEulerAngles = new(-180, -18f, -90);
+                rearviewMirrorCam.orthographicSize = 1.74f;
                 break;
             case 1:
-                rearviewMirrorCam.transform.localPosition = new(-0.34f, 5.2f, -0.6f);
-                rearviewMirrorCam.transform.localEulerAngles = new(-180, -22, -90);
-                rearviewMirrorCam.orthographicSize = 2.04f;
+                rearviewMirrorCam.transform.localPosition = new(-0.56f, 1.73f, -0.6f);
+                rearviewMirrorCam.transform.localEulerAngles = new(-180, -25, -90);
+                rearviewMirrorCam.orthographicSize = 1.74f;
                 break;
             case 2:
-                rearviewMirrorCam.transform.localPosition = new(1.25f, 5, -0.6f);
+                rearviewMirrorCam.transform.localPosition = new(1.03f, 1.73f, -0.6f);
                 rearviewMirrorCam.transform.localEulerAngles = new(-180, -25, -90);
-                rearviewMirrorCam.orthographicSize = 1.75f;
+                rearviewMirrorCam.orthographicSize = 1.74f;
                 break;
         }
 

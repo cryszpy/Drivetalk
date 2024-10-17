@@ -38,7 +38,7 @@ public class AC : UIElementSlider
         // Limit slider rotation to be between a certain minimum and maximum degree angle
         newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
 
-        Debug.Log(newRot);
+        //Debug.Log(newRot);
 
         // Apply change in rotation based on mouse cursor movement
         transform.localEulerAngles = new(transform.localEulerAngles.x, newRot, transform.localEulerAngles.z);

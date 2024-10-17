@@ -135,4 +135,3 @@ MonoBehaviour:
   dialogueLeftToFinish: 2
   dialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
-  - {fileID: 11400000, guid: 8b6b497095a474ba9a26bc4961de9962, type: 2}
