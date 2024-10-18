@@ -1,14 +1,18 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RearviewMirror : GPS
 {
+    public GameObject person;
     [SerializeField] private DialogueManager dialogueManager;
     public GameObject backButton;
 
     public override void OnClick()
     {
         dialogueManager.EnterRMM();
+
+        person = GameObject.FindGameObjectWithTag("PickedUp");
 
         base.OnClick();
         GameStateManager.SetState(GAMESTATE.MENU);
@@ -27,18 +31,15 @@ public class RearviewMirror : GPS
     public override IEnumerator StartDollyMovement() {
         while (splineDolly.CameraPosition < 1) {
             splineDolly.CameraPosition += 0.007f;
+            //person.transform.localScale *= 1.005f;
             yield return new WaitForSeconds(0.01f);
         }
         if (dialogueManager.playingChoices) {
             dialogueManager.ShowChoices();
-        } else {
-            backButton.SetActive(true);
         }
     }
 
     public void BackButton() {
-        backButton.SetActive(false);
-
         dialogueManager.ExitRMM();
 
         StartCoroutine(EndDollyMovement());

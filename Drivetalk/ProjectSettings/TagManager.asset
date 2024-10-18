@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Car
   - PickedUp
+  - Passenger
   layers:
   - Default
   - TransparentFX

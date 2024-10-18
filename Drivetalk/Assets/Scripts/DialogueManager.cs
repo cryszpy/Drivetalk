@@ -44,31 +44,69 @@ public class DialogueManager : MonoBehaviour
 
     public bool playingChoices = false;
 
+    public bool timerPaused = false;
+    public float choiceNotifTimer = 0;
+
     private void Start() {
         sentences = new Queue<string>();
     }
 
     private void Update() {
-        if (mode == DialogueMode.RMM && currentDialogue && !playingChoices && currentDialogue) {
+        if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
             rearviewMirror.backButton.SetActive(true);
             RMM_dialogueBox.SetActive(true);
             dash_dialogueBox.SetActive(false);
-        } else if (mode == DialogueMode.DASH && currentDialogue && !playingChoices && currentDialogue) {
+        } else if (mode == DialogueMode.DASH && currentDialogue && !playingChoices) {
             RMM_dialogueBox.SetActive(false);
             dash_dialogueBox.SetActive(true);
         } else {
             RMM_dialogueBox.SetActive(false);
             dash_dialogueBox.SetActive(false);
         }
+
+        // Choice notification timer
+        if (!timerPaused && playingChoices && mode != DialogueMode.RMM) {
+            choiceNotifTimer += Time.deltaTime;
+            choiceNotif.SetActive(true);
+
+            // Auto-pick "..." option
+            if(choiceNotifTimer > (car.currentPassenger.choiceNotifSolidTime + car.currentPassenger.choiceNotifFlashTime)) {
+                playingChoices = false;
+                timerPaused = false;
+                //Debug.Log("Done" + choiceNotifTimer);
+                choiceNotifAnimator.SetBool("Flash", false);
+                choiceNotifTimer = 0;
+                StartDialogue(currentDialogue.choices[^1].nextDialogue);
+            } 
+            // Switch to flashing
+            else if (choiceNotifTimer > car.currentPassenger.choiceNotifSolidTime) {
+                //Debug.Log("Flashing" + choiceNotifTimer);
+                choiceNotifAnimator.SetBool("Flash", true);
+            } 
+            // Enable and set to solid
+            else if (choiceNotif.activeInHierarchy && choiceNotifTimer <= car.currentPassenger.choiceNotifSolidTime) {
+                //Debug.Log("Solid" + choiceNotifTimer);
+                choiceNotifAnimator.SetBool("Flash", false);
+            }
+        }
     }
 
     public void EnterRMM() {
         mode = DialogueMode.RMM;
+        timerPaused = true;
+        rearviewMirror.backButton.SetActive(true);
         choiceNotif.SetActive(false);
     }
 
     public void ExitRMM() {
         mode = DialogueMode.DASH;
+        timerPaused = false;
+        rearviewMirror.backButton.SetActive(false);
+
+        if (playingChoices) {
+            choiceNotif.SetActive(true);
+            car.choicesBar.SetActive(false);
+        }
     }
 
     public void StartDialogue(DialoguePiece dialogue) {
@@ -104,11 +142,10 @@ public class DialogueManager : MonoBehaviour
         // Display choices
         else if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
 
+            Debug.Log("DPSLAIY");
             playingChoices = true;
 
-            if (mode != DialogueMode.RMM) {
-                StartCoroutine(ChoicesNotification());
-            } else {
+            if (mode == DialogueMode.RMM) {
                 ShowChoices();
             }
             
@@ -122,12 +159,12 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
     }
 
-    public IEnumerator ChoicesNotification() {
+    /* public IEnumerator ChoicesNotification() {
 
         if (playingChoices) {
 
             // Enable and show the interaction notification
-            choiceNotif.SetActive(true);
+            ///choiceNotif.SetActive(true);
             choiceNotifAnimator.SetBool("Flash", false);
 
             yield return new WaitForSeconds(choicesNotifSolid);
@@ -138,19 +175,21 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(choicesNotifFlashing);
 
             // Disable and hide the interaction notification
-            choiceNotif.SetActive(false);
+            //choiceNotif.SetActive(false);
             choiceNotifAnimator.SetBool("Flash", false);
 
             // Automatically go with the last choice option (should be "...") if the player doesn't click to interact
             if (mode != DialogueMode.RMM) {
-                StartDialogue(currentDialogue.choices[^1].nextDialogue);
+                Debug.Log("AHFJIOWFJAWIOFAWIPF");
+                playingChoices = false;
+                
             }
         } else {
             choiceNotif.SetActive(false);
             choiceNotifAnimator.SetBool("Flash", false);
         }
         
-    }
+    } */
 
     public void ShowChoices() {
 
@@ -161,6 +200,8 @@ public class DialogueManager : MonoBehaviour
             }
             choiceButtonsList.Clear();
         }
+
+        car.choicesBar.SetActive(true);
 
         // If there are choices to be displayed—
         if (currentDialogue) {

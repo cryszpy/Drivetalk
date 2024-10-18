@@ -105,7 +105,7 @@ public class CarController : MonoBehaviour
 
         int index = UnityEngine.Random.Range(0, passengerSeats.Count);
 
-        switch (index) {
+        /* switch (index) {
             case 0:
                 rearviewMirrorCam.transform.localPosition = new(-1.43f, 1.73f, -0.6f);
                 rearviewMirrorCam.transform.localEulerAngles = new(-180, -18f, -90);
@@ -121,13 +121,14 @@ public class CarController : MonoBehaviour
                 rearviewMirrorCam.transform.localEulerAngles = new(-180, -25, -90);
                 rearviewMirrorCam.orthographicSize = 1.74f;
                 break;
-        }
+        } */
 
         // Teleports passenger to seat
         currentPassenger.transform.position = passengerSeats[index].transform.position;
 
         // Parents passenger to seat
         currentPassenger.transform.parent = this.transform;
+        Debug.Log("parented");
 
         // Resets rotation to face forward from seat
         currentPassenger.transform.localEulerAngles = new(0, 0, 0);

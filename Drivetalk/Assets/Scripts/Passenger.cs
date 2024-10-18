@@ -23,6 +23,9 @@ public class Passenger : MonoBehaviour
     public List<PassengerRequirement> requirements;
     public bool requirementMet;
 
+    public float choiceNotifSolidTime;
+    public float choiceNotifFlashTime;
+
     public float waitTimeMin;
     public float waitTimeMax;
     public float holdTime;
