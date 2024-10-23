@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Interjection 2
   m_EditorClassIdentifier: 
   interjectionType: 2
+  dashRequirement:
+    reqType: 1
+    acSetting: 2
+    statToCheck: 0
   seen: 0
   sentences:
   - yo can u like make it warmer bruh it be chilly af

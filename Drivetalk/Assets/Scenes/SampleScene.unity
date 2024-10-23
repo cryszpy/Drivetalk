@@ -764,6 +764,11 @@ MonoBehaviour:
   playingChoices: 0
   timerPaused: 0
   choiceNotifTimer: 0
+  dashTicker: 0
+  currentDashReq:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
 --- !u!1 &192307632
 GameObject:
   m_ObjectHideFlags: 0

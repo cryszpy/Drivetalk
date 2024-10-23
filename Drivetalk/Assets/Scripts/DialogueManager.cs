@@ -43,7 +43,12 @@ public class DialogueManager : MonoBehaviour
 
     public bool timerPaused = false;
     public float choiceNotifTimer = 0;
+
     private bool interjected = false;
+    private float dashRequestTimer = 0;
+    private bool dashRequestRunning = false;
+    public float dashTicker;
+    public DashRequestRequirement currentDashReq;
 
     private void Start() {
         sentences = new Queue<string>();
@@ -88,6 +93,40 @@ public class DialogueManager : MonoBehaviour
                 choiceNotifAnimator.SetBool("Flash", false);
             }
         }
+
+        // Dash request timer
+        if (dashRequestRunning) {
+            dashRequestTimer += Time.deltaTime;
+
+            if (CheckDashRequirements(currentDashReq)) {
+                dashRequestRunning = false;
+                // PLUS AFFINITY
+                Debug.Log("GAINED AFFINITY AT: " + dashTicker + "s");
+            }
+
+            if (dashRequestTimer >= dashTicker) {
+                // MINUS AFFINITY
+                Debug.Log("LOST AFFINITY AT: " + dashTicker + "s");
+                dashTicker += car.currentPassenger.dashRequestTickRate;
+            }
+
+            if (dashRequestTimer > car.currentPassenger.dashRequestTime) {
+                dashRequestRunning = false;
+                dashRequestTimer = 0;
+            }
+        }
+    }
+
+    public bool CheckDashRequirements(DashRequestRequirement requirement) {
+        return requirement.reqType switch
+        {
+            DashRequestType.AC_SETTING => CarController.Temperature == requirement.acSetting,
+            DashRequestType.HORN => false,
+            DashRequestType.RADIO_VOLUME => false,
+            DashRequestType.RADIO_SONG => CarController.LastSongPlayedID == requirement.statToCheck,
+            DashRequestType.CIGARETTE => false,
+            _ => false,
+        };
     }
 
     public void EnterRMM() {
@@ -282,6 +321,7 @@ public class DialogueManager : MonoBehaviour
 
         float rand2 = UnityEngine.Random.value;
 
+        // Small talk
         if (rand2 <= car.currentPassenger.interjectionPreferenceThreshold) {
             int rand3 = UnityEngine.Random.Range(0, smallTalkList.Count - 1);
 
@@ -289,13 +329,17 @@ public class DialogueManager : MonoBehaviour
             chosen.seen = true;
 
             StartDialogue(chosen, true);
-        } else {
+        } 
+        // Dash adjust requested
+        else {
             int rand3 = UnityEngine.Random.Range(0, dashAdjustlist.Count - 1);
 
             DialoguePiece chosen = dashAdjustlist[rand3];
             chosen.seen = true;
 
             StartDialogue(chosen, true);
+            dashRequestRunning = true;
+            currentDashReq = chosen.dashRequirement;
         }
     }
 

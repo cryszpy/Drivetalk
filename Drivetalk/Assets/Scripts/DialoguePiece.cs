@@ -9,6 +9,7 @@ public enum InterjectionType {
 public class DialoguePiece : ScriptableObject
 {
     public InterjectionType interjectionType;
+    public DashRequestRequirement dashRequirement;
     
     public bool seen;
 
@@ -18,4 +19,22 @@ public class DialoguePiece : ScriptableObject
     public DialoguePiece nextDialogue;
 
     public DialogueChoice[] choices;
+}
+
+[System.Serializable]
+public struct DashRequestRequirement {
+    public DashRequestType reqType;
+
+    public ACSetting acSetting;
+
+    public float statToCheck;
+}
+
+public enum DashRequestType {
+    NONE,
+    AC_SETTING,
+    HORN, 
+    RADIO_VOLUME,
+    RADIO_SONG,
+    CIGARETTE
 }

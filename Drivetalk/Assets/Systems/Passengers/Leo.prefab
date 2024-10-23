@@ -244,8 +244,10 @@ MonoBehaviour:
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
-  interjectionChance: 0.5
-  interjectionPreferenceThreshold: 0.5
+  interjectionChance: 0.8
+  interjectionPreferenceThreshold: 0.1
+  dashRequestTime: 10
+  dashRequestTickRate: 2
   interjections:
   - {fileID: 11400000, guid: db749c3fb037449f3b461f901708acf7, type: 2}
   - {fileID: 11400000, guid: 93df3ab8faaeb4b87a4ef3a0767efd98, type: 2}
