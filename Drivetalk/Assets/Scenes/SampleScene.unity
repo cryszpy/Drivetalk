@@ -758,7 +758,6 @@ MonoBehaviour:
   choiceButtonsList: []
   choiceNotif: {fileID: 588908255}
   rearviewMirror: {fileID: 280779542}
-  priorityDialogue: []
   textCPS: 0.1
   choicesNotifSolid: 3
   choicesNotifFlashing: 3

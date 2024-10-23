@@ -30,9 +30,17 @@ public class Passenger : MonoBehaviour
     public float waitTimeMax;
     public float holdTime;
 
+    public float interjectionChance;
+    public float interjectionPreferenceThreshold;
+    public List<DialoguePiece> interjections;
+
     public int currentDialogueNum;
     public int dialogueLeftToFinish;
     public List<DialoguePiece> dialogue;
+
+    private void Start() {
+        dialogueLeftToFinish = dialogue.Count;
+    }
 }
 
 public enum PassengerRequirementType {

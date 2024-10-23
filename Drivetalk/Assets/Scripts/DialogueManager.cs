@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private Animator choiceNotifAnimator;
 
-    private Queue<string> sentences;
+    public Queue<string> sentences;
 
     public DialoguePiece currentDialogue;
 
@@ -34,9 +34,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private RearviewMirror rearviewMirror;
     
     [Header("STATS")]
-
-    public List<DialoguePiece> priorityDialogue;
-
     [SerializeField] private float textCPS;
 
     [SerializeField] private float choicesNotifSolid;
@@ -46,12 +43,14 @@ public class DialogueManager : MonoBehaviour
 
     public bool timerPaused = false;
     public float choiceNotifTimer = 0;
+    private bool interjected = false;
 
     private void Start() {
         sentences = new Queue<string>();
     }
 
     private void Update() {
+
         if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
             rearviewMirror.backButton.SetActive(true);
             RMM_dialogueBox.SetActive(true);
@@ -76,7 +75,7 @@ public class DialogueManager : MonoBehaviour
                 //Debug.Log("Done" + choiceNotifTimer);
                 choiceNotifAnimator.SetBool("Flash", false);
                 choiceNotifTimer = 0;
-                StartDialogue(currentDialogue.choices[^1].nextDialogue);
+                StartDialogue(currentDialogue.choices[^1].nextDialogue, false);
             } 
             // Switch to flashing
             else if (choiceNotifTimer > car.currentPassenger.choiceNotifSolidTime) {
@@ -109,16 +108,23 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(DialoguePiece dialogue) {
+    public void StartDialogue(DialoguePiece dialogue, bool isInterjection) {
+
+        // If the dialogue played is the start of a new dialogue block, reset the interjection limit
+        if (car.currentPassenger.dialogue.Contains(dialogue)) {
+            interjected = false;
+        }
 
         currentDialogue = dialogue;
 
-        priorityDialogue.Remove(dialogue);
+        //priorityDialogue.Remove(dialogue);
 
         sentences.Clear();
 
-        car.currentPassenger.currentDialogueNum++;
-        car.currentPassenger.dialogueLeftToFinish--;
+        if (!isInterjection && car.currentPassenger.dialogue.Contains(dialogue)) {
+            car.currentPassenger.currentDialogueNum++;
+            car.currentPassenger.dialogueLeftToFinish--;
+        }
 
         // Remove existing buttons
         foreach (GameObject button in choiceButtonsList) {
@@ -134,21 +140,20 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence() {
 
-        // End dialogue if no choices and nothing else to say
-        if (sentences.Count == 0 && currentDialogue.choices.Length == 0) {
-            EndDialogue();
-            return;
-        } 
         // Display choices
-        else if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
+        if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
 
-            Debug.Log("DPSLAIY");
             playingChoices = true;
 
             if (mode == DialogueMode.RMM) {
                 ShowChoices();
             }
             
+            return;
+        }
+        // End dialogue if no choices and nothing else to say
+        else if (sentences.Count == 0 && currentDialogue.choices.Length == 0) {
+            EndDialogue();
             return;
         }
 
@@ -158,38 +163,6 @@ public class DialogueManager : MonoBehaviour
 
         StartCoroutine(TypeSentence(sentence));
     }
-
-    /* public IEnumerator ChoicesNotification() {
-
-        if (playingChoices) {
-
-            // Enable and show the interaction notification
-            ///choiceNotif.SetActive(true);
-            choiceNotifAnimator.SetBool("Flash", false);
-
-            yield return new WaitForSeconds(choicesNotifSolid);
-
-            // Start flashing the interaction notification
-            choiceNotifAnimator.SetBool("Flash", true);
-
-            yield return new WaitForSeconds(choicesNotifFlashing);
-
-            // Disable and hide the interaction notification
-            //choiceNotif.SetActive(false);
-            choiceNotifAnimator.SetBool("Flash", false);
-
-            // Automatically go with the last choice option (should be "...") if the player doesn't click to interact
-            if (mode != DialogueMode.RMM) {
-                Debug.Log("AHFJIOWFJAWIOFAWIPF");
-                playingChoices = false;
-                
-            }
-        } else {
-            choiceNotif.SetActive(false);
-            choiceNotifAnimator.SetBool("Flash", false);
-        }
-        
-    } */
 
     public void ShowChoices() {
 
@@ -230,11 +203,12 @@ public class DialogueManager : MonoBehaviour
 
         // If choice response exists, play it
         if (choice.nextDialogue != null) {
-            StartDialogue(choice.nextDialogue);
+            StartDialogue(choice.nextDialogue, false);
         }
     }
 
     private IEnumerator TypeSentence(string sentence) {
+        Debug.Log(sentence);
         RMM_dialogueText.text = "";
         dash_dialogueText.text = "";
 
@@ -264,10 +238,91 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator WaitBetweenDialogue() {
         Debug.Log("Waiting...");
+
         float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);
         
         yield return new WaitForSeconds(waitTime);
 
-        StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum]);
+        // INTERJECTIONS
+        if (!interjected) {
+
+            float rand = UnityEngine.Random.value;
+
+            if (rand <= car.currentPassenger.interjectionChance && car.currentPassenger.dialogueLeftToFinish > 0) {
+                Debug.Log("Interjection success!");
+                Interject();
+            } else {
+                Debug.Log("Interjection failed!");
+                StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
+            }
+        } else {
+            Debug.Log("Already interjected once this break!");
+            StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
+        }
+    }
+
+    private void Interject() {
+        interjected = true;
+
+        List<DialoguePiece> smallTalkList = new();
+        List<DialoguePiece> dashAdjustlist = new();
+        
+        AddInterjections(smallTalkList, dashAdjustlist);
+
+        // If all interjection dialogue has already been played, reset and choose again
+        if (smallTalkList.Count <= 0) {
+            ResetInterjectionType(InterjectionType.SMALL_TALK);
+            AddInterjections(smallTalkList, dashAdjustlist);
+        }
+        
+        if (dashAdjustlist.Count <= 0) {
+            ResetInterjectionType(InterjectionType.DASH_ADJUST);
+            AddInterjections(smallTalkList, dashAdjustlist);
+        }
+
+        float rand2 = UnityEngine.Random.value;
+
+        if (rand2 <= car.currentPassenger.interjectionPreferenceThreshold) {
+            int rand3 = UnityEngine.Random.Range(0, smallTalkList.Count - 1);
+
+            DialoguePiece chosen = smallTalkList[rand3];
+            chosen.seen = true;
+
+            StartDialogue(chosen, true);
+        } else {
+            int rand3 = UnityEngine.Random.Range(0, dashAdjustlist.Count - 1);
+
+            DialoguePiece chosen = dashAdjustlist[rand3];
+            chosen.seen = true;
+
+            StartDialogue(chosen, true);
+        }
+    }
+
+    private void AddInterjections(List<DialoguePiece> smallTalkList, List<DialoguePiece> dashAdjustList) {
+
+        foreach (DialoguePiece interjection in car.currentPassenger.interjections) {
+
+            if (!interjection.seen) {
+
+                switch (interjection.interjectionType) {
+                    case InterjectionType.SMALL_TALK:
+                        smallTalkList.Add(interjection);
+                        break;
+                    case InterjectionType.DASH_ADJUST:
+                        dashAdjustList.Add(interjection);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void ResetInterjectionType(InterjectionType type) {
+
+        foreach (DialoguePiece piece in car.currentPassenger.interjections){
+            if (piece.interjectionType == type) {
+                piece.seen = false;
+            }
+        }
     }
 }

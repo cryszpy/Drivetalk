@@ -244,7 +244,13 @@ MonoBehaviour:
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
+  interjectionChance: 0.5
+  interjectionPreferenceThreshold: 0.5
+  interjections:
+  - {fileID: 11400000, guid: db749c3fb037449f3b461f901708acf7, type: 2}
+  - {fileID: 11400000, guid: 93df3ab8faaeb4b87a4ef3a0767efd98, type: 2}
   currentDialogueNum: 0
-  dialogueLeftToFinish: 2
+  dialogueLeftToFinish: 3
   dialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
+  - {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}

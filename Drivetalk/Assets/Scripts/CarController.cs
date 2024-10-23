@@ -141,7 +141,7 @@ public class CarController : MonoBehaviour
 
             if (collider.TryGetComponent<Passenger>(out var script)) {
                 currentPassenger = script;
-                dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum]);
+                dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
 
                 PickUpPassenger();
 
