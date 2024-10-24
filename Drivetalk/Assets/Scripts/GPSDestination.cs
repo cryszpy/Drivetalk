@@ -19,7 +19,9 @@ public class GPSDestination : MonoBehaviour
     }
 
     public void SetGPS() {
-        car.agent.SetDestination(destinationObject.transform.position);
-        StartCoroutine(gps.EndDollyMovement());
+        if (car.currentRideNum < car.totalRideNum) {
+            car.agent.SetDestination(destinationObject.transform.position);
+            StartCoroutine(gps.EndDollyMovement());
+        }
     }
 }

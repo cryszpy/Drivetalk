@@ -17,15 +17,4 @@ public class PlayerInfo : MonoBehaviour
         Currency += value;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-
-            if (GameStateManager.Gamestate != GAMESTATE.PAUSED) {
-                GameStateManager.SetState(GAMESTATE.PAUSED);
-            } else {
-                GameStateManager.SetState(GAMESTATE.PLAYING);
-            }
-        }
-    }
-
 }

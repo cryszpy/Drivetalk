@@ -33,7 +33,13 @@ public class CarController : MonoBehaviour
 
     public bool arrived;
 
+    [SerializeField] private int minRides;
+    [SerializeField] private int maxRides;
+
     public GameObject currentStop;
+
+    public int currentRideNum;
+    public int totalRideNum;
 
     private static float rating;
     public static float Rating { get => rating; set => rating = value; }
@@ -72,18 +78,33 @@ public class CarController : MonoBehaviour
                 Debug.LogError("Could not find dialogue manager!");
             }
         }
+
+        if (totalRideNum <= 0){
+            GenerateDayRides();
+        }
     }
 
     private void Update() {
-        if (arrived) {
+        if (arrived && currentPassenger == null) {
             FindNearestStop();
         }
 
+        // DEV static variable tracking—REMOVE FOR BUILDS
         ratingTracker = Rating;
         tempTracker = Temperature;
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
         lastSongPlayedIDTracker = LastSongPlayedID;
+    }
+
+    private void GenerateDayRides() {
+        int rand = Random.Range(minRides, maxRides);
+
+        totalRideNum = rand;
+
+        currentRideNum = 0;
+
+        Debug.Log("Generated rides for the day! " + totalRideNum);
     }
 
     private void FindNearestStop() {
@@ -106,6 +127,8 @@ public class CarController : MonoBehaviour
         currentPassenger.tag = "PickedUp";
 
         int index = UnityEngine.Random.Range(0, passengerSeats.Count);
+
+        currentRideNum++;
 
         /* switch (index) {
             case 0:
