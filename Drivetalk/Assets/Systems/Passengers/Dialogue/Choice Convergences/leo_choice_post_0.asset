@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
-  m_Name: Leo Choice 1
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: leo_choice_post_0
   m_EditorClassIdentifier: 
   dialogueSeen: 0
-  choiceText: omg woah
-  nextDialogue: {fileID: 11400000, guid: 8b6b497095a474ba9a26bc4961de9962, type: 2}
+  sentences:
+  - woah!
+  - this is post choice!
+  - pretty sicko mode
+  nextDialogue: {fileID: 0}
+  choices: []

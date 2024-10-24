@@ -34,7 +34,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private RearviewMirror rearviewMirror;
     
     [Header("STATS")]
-    [SerializeField] private float textCPS;
 
     [SerializeField] private float choicesNotifSolid;
     [SerializeField] private float choicesNotifFlashing;
@@ -56,6 +55,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update() {
 
+        // Enables and disables all RMM dialogue UI stuff
         if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
             rearviewMirror.backButton.SetActive(true);
             RMM_dialogueBox.SetActive(true);
@@ -98,18 +98,27 @@ public class DialogueManager : MonoBehaviour
         if (dashRequestRunning) {
             dashRequestTimer += Time.deltaTime;
 
+            // If the player follows the dash request
             if (CheckDashRequirements(currentDashReq)) {
+
+                // Disables continued running of dash request
                 dashRequestRunning = false;
                 // PLUS AFFINITY
                 Debug.Log("GAINED AFFINITY AT: " + dashTicker + "s");
+
+                if (currentDialogue == null) {
+                    // play dash control response archetype
+                }
             }
 
+            // Every x seconds, lose 1 affinity
             if (dashRequestTimer >= dashTicker) {
                 // MINUS AFFINITY
                 Debug.Log("LOST AFFINITY AT: " + dashTicker + "s");
                 dashTicker += car.currentPassenger.dashRequestTickRate;
             }
 
+            // Disables dash request when timer reaches limit
             if (dashRequestTimer > car.currentPassenger.dashRequestTime) {
                 dashRequestRunning = false;
                 dashRequestTimer = 0;
@@ -117,6 +126,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Checks for dash request requirements
     public bool CheckDashRequirements(DashRequestRequirement requirement) {
         return requirement.reqType switch
         {
@@ -129,18 +139,35 @@ public class DialogueManager : MonoBehaviour
         };
     }
 
+    // Entering rearview mirror mode
     public void EnterRMM() {
+
+        // Sets the mode
         mode = DialogueMode.RMM;
+
+        // Pauses choice notification timer (so it doesn't count down)
         timerPaused = true;
+
+        // Enables back button
         rearviewMirror.backButton.SetActive(true);
+
+        // Enables choice notification
         choiceNotif.SetActive(false);
     }
 
+    // Exiting rearview mirror mode
     public void ExitRMM() {
+
+        // Sets the mode
         mode = DialogueMode.DASH;
+
+        // Resumes choice notification timer (so it counts down)
         timerPaused = false;
+
+        // Disables back button
         rearviewMirror.backButton.SetActive(false);
 
+        // If choices are playing, enable choice notification and disable choices
         if (playingChoices) {
             choiceNotif.SetActive(true);
             car.choicesBar.SetActive(false);
@@ -154,10 +181,12 @@ public class DialogueManager : MonoBehaviour
             interjected = false;
         }
 
+        // Set the current dialogue
         currentDialogue = dialogue;
 
         //priorityDialogue.Remove(dialogue);
 
+        // Clears any previous sentences before starting a new one
         sentences.Clear();
 
         if (!isInterjection && car.currentPassenger.dialogue.Contains(dialogue)) {
@@ -188,6 +217,11 @@ public class DialogueManager : MonoBehaviour
                 ShowChoices();
             }
             
+            return;
+        }
+        // Dropoff dialogue
+        else if (sentences.Count == 0 && currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute) {
+            DropoffDialogue();
             return;
         }
         // End dialogue if no choices and nothing else to say
@@ -247,6 +281,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     private IEnumerator TypeSentence(string sentence) {
+
+        // PUT TRANSCRIPT LOG FUNCTIONALITY HERE
+
         Debug.Log(sentence);
         RMM_dialogueText.text = "";
         dash_dialogueText.text = "";
@@ -255,7 +292,7 @@ public class DialogueManager : MonoBehaviour
             dash_dialogueText.text += letter;
             RMM_dialogueText.text += letter;
 
-            yield return new WaitForSeconds(textCPS);
+            yield return new WaitForSeconds(car.currentPassenger.textCPS);
         }
 
         yield return new WaitForSeconds(car.currentPassenger.holdTime);
@@ -263,6 +300,26 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+    // Dropoff goodbye salute dialogue and dropoff of passenger
+    public void DropoffDialogue() {
+        Debug.Log("Dropped off passenger, and finished current dialogue piece!");
+
+        currentDialogue = null;
+        
+        // SET SPEECH BUBBLE TO FADE AWAY
+
+        // Unparent passenger from car
+        car.currentPassenger.transform.parent = null;
+
+        // Set passenger position to the destination stop
+        car.currentPassenger.transform.position = car.currentStop.transform.position;
+
+        car.currentStop = null;
+
+        car.currentPassenger = null;
+    }
+
+    // Ends dialogue and starts wait before next sentence group
     public void EndDialogue() {
         Debug.Log("Ended current dialogue piece!");
 
@@ -270,6 +327,7 @@ public class DialogueManager : MonoBehaviour
         
         // SET SPEECH BUBBLE TO FADE AWAY
 
+        // Starts waiting
         if (car.currentPassenger.dialogueLeftToFinish > 0) {
             StartCoroutine(WaitBetweenDialogue());
         }
@@ -282,20 +340,23 @@ public class DialogueManager : MonoBehaviour
         
         yield return new WaitForSeconds(waitTime);
 
-        // INTERJECTIONS
-        if (!interjected) {
+        // If an interjection hasn't already played, and passenger narrative dialogue isn't exhausted—
+        if (!interjected && !(car.currentPassenger.dialogueLeftToFinish == car.currentPassenger.dialogue.Count)) {
 
             float rand = UnityEngine.Random.value;
 
+            // If rolling for an interjection succeeds, then interject
             if (rand <= car.currentPassenger.interjectionChance && car.currentPassenger.dialogueLeftToFinish > 0) {
                 Debug.Log("Interjection success!");
                 Interject();
-            } else {
+            }
+            // Else, continue with dialogue story
+            else {
                 Debug.Log("Interjection failed!");
                 StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
             }
         } else {
-            Debug.Log("Already interjected once this break!");
+            Debug.Log("Already interjected once this break, or this is the pickup dialogue greeting!");
             StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
         }
     }
@@ -304,19 +365,20 @@ public class DialogueManager : MonoBehaviour
         interjected = true;
 
         List<DialoguePiece> smallTalkList = new();
-        List<DialoguePiece> dashAdjustlist = new();
+        List<DialoguePiece> dashRequestList = new();
         
-        AddInterjections(smallTalkList, dashAdjustlist);
+        AddInterjections(smallTalkList, dashRequestList);
 
-        // If all interjection dialogue has already been played, reset and choose again
+        // If all small talk dialogue has already been played, reset and choose again
         if (smallTalkList.Count <= 0) {
             ResetInterjectionType(InterjectionType.SMALL_TALK);
-            AddInterjections(smallTalkList, dashAdjustlist);
+            AddInterjections(smallTalkList, dashRequestList);
         }
         
-        if (dashAdjustlist.Count <= 0) {
-            ResetInterjectionType(InterjectionType.DASH_ADJUST);
-            AddInterjections(smallTalkList, dashAdjustlist);
+        // If all dash request dialogue has already been played, reset and choose again
+        if (dashRequestList.Count <= 0) {
+            ResetInterjectionType(InterjectionType.DASH_REQUEST);
+            AddInterjections(smallTalkList, dashRequestList);
         }
 
         float rand2 = UnityEngine.Random.value;
@@ -332,13 +394,13 @@ public class DialogueManager : MonoBehaviour
         } 
         // Dash adjust requested
         else {
-            int rand3 = UnityEngine.Random.Range(0, dashAdjustlist.Count - 1);
+            int rand3 = UnityEngine.Random.Range(0, dashRequestList.Count - 1);
 
-            DialoguePiece chosen = dashAdjustlist[rand3];
+            DialoguePiece chosen = dashRequestList[rand3];
             chosen.seen = true;
 
             StartDialogue(chosen, true);
-            dashRequestRunning = true;
+            dashRequestRunning = true; // CHECK IF REQUEST IS ALREADY FULFILLED THEN SWITCH
             currentDashReq = chosen.dashRequirement;
         }
     }
@@ -353,7 +415,7 @@ public class DialogueManager : MonoBehaviour
                     case InterjectionType.SMALL_TALK:
                         smallTalkList.Add(interjection);
                         break;
-                    case InterjectionType.DASH_ADJUST:
+                    case InterjectionType.DASH_REQUEST:
                         dashAdjustList.Add(interjection);
                         break;
                 }

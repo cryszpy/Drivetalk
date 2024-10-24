@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: Leo 3
+  m_Name: dropoff_pissy_0
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
   sentences:
-  - LEO 33333333
+  - PEE YOU!! And I'll see you later.
   nextDialogue: {fileID: 0}
   choices: []

@@ -24,10 +24,16 @@ public class Passenger : MonoBehaviour
     [Tooltip("This passenger's name.")]
     public string passengerName;
 
+    [Tooltip("This passenger's generic response archetype.")]
+    public PassengerArchetype archetype;
+
     [Tooltip("Any requirements for this passenger to have a chance of showing up.")]
     public List<PassengerRequirement> requirements;
     [Tooltip("Whether this passenger's spawn requirements have been met.")]
     public bool requirementMet;
+
+    [Tooltip("The rate at which this passenger types out dialogue text. (lower values are faster)")]
+    public float textCPS;
 
     [Tooltip("The amount of time the choice notification UI element stays SOLID for this passenger.")]
     public float choiceNotifSolidTime;

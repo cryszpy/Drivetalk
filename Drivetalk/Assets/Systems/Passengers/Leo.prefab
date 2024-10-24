@@ -237,8 +237,10 @@ MonoBehaviour:
   rarity: 1
   id: 4
   passengerName: Leo
+  archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   requirements: []
   requirementMet: 0
+  textCPS: 0.05
   choiceNotifSolidTime: 2
   choiceNotifFlashTime: 1.5
   waitTimeMin: 1
@@ -252,7 +254,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: db749c3fb037449f3b461f901708acf7, type: 2}
   - {fileID: 11400000, guid: 93df3ab8faaeb4b87a4ef3a0767efd98, type: 2}
   currentDialogueNum: 0
-  dialogueLeftToFinish: 3
+  dialogueLeftToFinish: 2
   dialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
   - {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}

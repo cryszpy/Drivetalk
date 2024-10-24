@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum InterjectionType {
-    NONE, SMALL_TALK, DASH_ADJUST
+    NONE, SMALL_TALK, DASH_REQUEST
 }
 
 [CreateAssetMenu(menuName = "ScriptableObjects/DialoguePiece")]

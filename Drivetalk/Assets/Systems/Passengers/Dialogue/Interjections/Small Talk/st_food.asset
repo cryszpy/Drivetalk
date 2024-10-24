@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: Leo
+  m_Name: st_food
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 1
+  seen: 0
   sentences:
-  - What up bro
-  - Looks like a clean taxi man
-  - Give props to asher fr fr
+  - yo what's your favorite food?
   nextDialogue: {fileID: 0}
   choices:
-  - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}
-  - {fileID: 11400000, guid: f18dd171d05df4f5aa7efce03eb5d51a, type: 2}
+  - {fileID: 11400000, guid: e5bbb39928ec949ed88841c98e72b461, type: 2}
+  - {fileID: 11400000, guid: 6b4ef24ae5f724775a615dfc4d8c031b, type: 2}
+  - {fileID: 11400000, guid: e234b1d5b5d0945ef86c4637593cbef8, type: 2}

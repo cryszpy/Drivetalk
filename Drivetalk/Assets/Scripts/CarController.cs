@@ -9,7 +9,7 @@ public class CarController : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
-    [SerializeField] DialogueManager dialogueManager;
+    public DialogueManager dialogueManager;
 
     public List<GameObject> taxiStops = new();
 
@@ -32,6 +32,8 @@ public class CarController : MonoBehaviour
     [Header("STATS")]
 
     public bool arrived;
+
+    public GameObject currentStop;
 
     private static float rating;
     public static float Rating { get => rating; set => rating = value; }
@@ -142,7 +144,8 @@ public class CarController : MonoBehaviour
             if (collider.TryGetComponent<Passenger>(out var script)) {
                 currentPassenger = script;
                 dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
-                dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
+                dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting, true);
+                //dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
 
                 PickUpPassenger();
 

@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: Leo 2
+  m_Name: dr_ac
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 2
+  dashRequirement:
+    reqType: 1
+    acSetting: 2
+    statToCheck: 0
+  seen: 0
   sentences:
-  - woah!
-  - this is post choice!
-  - pretty sicko mode
-  nextDialogue: {fileID: 0}
+  - yo can u like make it warmer bruh it be chilly af
+  nextDialogue: {fileID: 11400000, guid: 01b19929bf3674212a81e07d9b7a08b2, type: 2}
   choices: []

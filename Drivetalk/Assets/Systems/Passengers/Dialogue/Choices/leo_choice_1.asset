@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
-  m_Name: Leo Choice 2
+  m_Name: leo_choice_1
   m_EditorClassIdentifier: 
   dialogueSeen: 0
   choiceText: no this one

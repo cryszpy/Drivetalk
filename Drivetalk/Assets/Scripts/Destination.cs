@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Destination : MonoBehaviour
@@ -11,6 +12,7 @@ public class Destination : MonoBehaviour
 
             if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
                 car = script;
+                car.currentStop = gameObject;
                 car.arrived = true; // TODO: only set this when trip summary is over and it's time to get back to driving
 
                 if (car.currentPassenger){
@@ -25,10 +27,20 @@ public class Destination : MonoBehaviour
         }
     }
 
-    private void DropOffPassenger() {
-        car.currentPassenger.transform.parent = null;
-        car.currentPassenger.transform.position = this.transform.position;
+    /* private void OnTriggerExit(Collider collider) {
+        if (collider.CompareTag("Car")) {
+            Debug.Log("Leaving destination!");
 
-        car.currentPassenger = null;
+            if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
+                car.currentStop = null;
+
+            } else {
+                Debug.LogWarning("Could not find CarController script on car!");
+            }
+        }
+    } */
+
+    private void DropOffPassenger() {
+        car.dialogueManager.StartDialogue(car.currentPassenger.archetype.dropoffSalute, true);
     }
 }

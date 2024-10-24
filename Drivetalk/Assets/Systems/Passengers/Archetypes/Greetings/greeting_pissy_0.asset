@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: Interjection 1
+  m_Name: greeting_pissy_0
   m_EditorClassIdentifier: 
-  interjectionType: 1
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
   seen: 0
   sentences:
-  - yo what's your favorite food?
+  - This is the PISSY archetype greeting haha heh heh.
   nextDialogue: {fileID: 0}
-  choices:
-  - {fileID: 11400000, guid: e5bbb39928ec949ed88841c98e72b461, type: 2}
-  - {fileID: 11400000, guid: 6b4ef24ae5f724775a615dfc4d8c031b, type: 2}
-  - {fileID: 11400000, guid: e234b1d5b5d0945ef86c4637593cbef8, type: 2}
+  choices: []
