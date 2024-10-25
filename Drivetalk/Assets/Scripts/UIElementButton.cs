@@ -28,7 +28,7 @@ public class UIElementButton : MonoBehaviour
     }
 
     public virtual void Update() {
-        if (GameStateManager.Gamestate != GAMESTATE.MENU) {
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
             if (hovered) {
                 // If this UI element is clicked—
                 if (Input.GetMouseButtonDown(0))
@@ -42,7 +42,7 @@ public class UIElementButton : MonoBehaviour
 
     public virtual void FixedUpdate() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU) {
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);

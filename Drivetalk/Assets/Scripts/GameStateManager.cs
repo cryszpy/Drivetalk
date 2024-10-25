@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum GAMESTATE {
-    MENU, PLAYING, PAUSED, GAMEOVER
+    MAINMENU, MENU, PLAYING, PAUSED, GAMEOVER
 }
 
 public class GameStateManager : MonoBehaviour
@@ -15,6 +15,7 @@ public class GameStateManager : MonoBehaviour
         gamestate = newState;
         Time.timeScale = gamestate switch
         {
+            GAMESTATE.MAINMENU => 1,
             GAMESTATE.MENU => 1,
             GAMESTATE.GAMEOVER => 1,
             GAMESTATE.PAUSED => 0,

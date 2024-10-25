@@ -3,9 +3,8 @@ using UnityEngine;
 public class CameraLookAt : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private PlayerCamera playerCam;
     [SerializeField] private Transform cameraOrigin;
-    [Range(2, 100)] [SerializeField] private float cameraTargetDivider;
+    [Range(2, 100)] public float cameraTargetDivider;
 
     [SerializeField] private float distanceZ;
 
