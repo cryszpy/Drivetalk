@@ -246,8 +246,8 @@ MonoBehaviour:
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
-  interjectionChance: 0.8
-  interjectionPreferenceThreshold: 0.1
+  interjectionChance: 0.95
+  interjectionPreferenceThreshold: 0.01
   dashRequestTime: 10
   dashRequestTickRate: 2
   interjections:

@@ -7,7 +7,7 @@ public class GPSDestination : MonoBehaviour
 
     [SerializeField] private GPS gps;
 
-    private CarController car;
+    [SerializeField] private CarController car;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

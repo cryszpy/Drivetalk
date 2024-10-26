@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool interjected = false;
     private float dashRequestTimer = 0;
-    private bool dashRequestRunning = false;
+    public bool dashRequestRunning = false;
     public float dashTicker;
     public DashRequestRequirement currentDashReq;
 
@@ -208,8 +208,11 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence() {
 
+        if (dashRequestRunning) {
+            return;
+        }
         // Display choices
-        if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
+        else if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
 
             playingChoices = true;
 
@@ -392,7 +395,7 @@ public class DialogueManager : MonoBehaviour
 
             StartDialogue(chosen, true);
         } 
-        // Dash adjust requested
+        // Dash request
         else {
             int rand3 = UnityEngine.Random.Range(0, dashRequestList.Count - 1);
 

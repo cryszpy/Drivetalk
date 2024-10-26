@@ -8,6 +8,10 @@ public class UIElementButton : MonoBehaviour
 
     [Header("SCRIPT REFERENCES")]
 
+    [SerializeField] protected Camera toonCamera;
+
+    [SerializeField] protected DialogueManager dialogueManager;
+
     public UnityEvent unityEvent = new();
 
     [Tooltip("Version of GameObject to appear when hovered over.")]
@@ -18,12 +22,18 @@ public class UIElementButton : MonoBehaviour
 
     [SerializeField] protected LayerMask layerMask;
 
-    protected bool hovered;
+    [SerializeField] protected bool hovered;
+
+    [SerializeField] protected bool insideMinigame = false;
 
     public virtual void Start() {
         if (!mainCamera) {
             mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
+        }
+        if (!dialogueManager) {
+            dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
+            Debug.LogWarning("Dialogue manager not assigned! Reassigned.");
         }
     }
 

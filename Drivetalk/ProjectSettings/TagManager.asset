@@ -8,6 +8,7 @@ TagManager:
   - PickedUp
   - Passenger
   - CameraLookAt
+  - DialogueManager
   layers:
   - Default
   - TransparentFX
