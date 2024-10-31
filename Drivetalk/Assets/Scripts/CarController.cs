@@ -44,8 +44,8 @@ public class CarController : MonoBehaviour
     private static float rating;
     public static float Rating { get => rating; set => rating = value; }
 
-    private static ACSetting temperature;
-    public static ACSetting Temperature { get => temperature; set => temperature = value;}
+    private static float temperature;
+    public static float Temperature { get => temperature; set => temperature = value;}
 
     public static List<Passenger> passengersDrivenList = new();
 
@@ -59,7 +59,7 @@ public class CarController : MonoBehaviour
     public static int LastSongPlayedID { get => lastSongPlayedID; set => lastSongPlayedID = value; }
 
     public float ratingTracker;
-    public ACSetting tempTracker;
+    public float tempTracker;
     public float totalPassengersTracker;
     public float lastPassengerIDTracker;
     public float lastSongPlayedIDTracker;

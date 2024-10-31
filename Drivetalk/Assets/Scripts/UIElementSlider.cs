@@ -2,10 +2,13 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEngine.UIElements;
 
 public class UIElementSlider : UIElementButton
 {
     [Header("SCRIPT REFERENCES")]
+
+    [SerializeField] protected GameObject dialObject;
 
     [Tooltip("Reference to the main Cinemachine camera.")]
     [SerializeField] protected CinemachineCamera cinemachineCam;
@@ -43,7 +46,7 @@ public class UIElementSlider : UIElementButton
 
             if (hovered) {
 
-                // Start minigame
+                /* // Start minigame
                 if (Input.GetMouseButtonDown(0) && dialogueManager.dashRequestRunning)
                 {
                     // Execute click function
@@ -55,11 +58,20 @@ public class UIElementSlider : UIElementButton
                 }
                 else {
                     dragging = false;
+                } */
+
+                if (Input.GetMouseButton(0)) {
+                    unityEvent.Invoke();
+                } else {
+                    dragging = false;
                 }
             }
 
             // If player is fiddling with dial and no dash request is running
-            if (dragging && !dialogueManager.dashRequestRunning) {
+            /* if (dragging && !dialogueManager.dashRequestRunning) {
+                Drag();
+            } */
+            if (dragging) {
                 Drag();
             }
 
@@ -78,7 +90,7 @@ public class UIElementSlider : UIElementButton
             // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
             {
-                if (hit.collider.transform == transform && !Input.GetMouseButton(0)) {
+                if (hit.collider.transform == transform && !Input.GetMouseButtonUp(0)) {
                     // Execute hover function
                     OnHover();
                 }
@@ -91,12 +103,12 @@ public class UIElementSlider : UIElementButton
         }
     }
 
-    public virtual void StartDrag() {
+    /* public virtual void StartDrag() {
         if (hoveredObject.activeSelf) {
             hoveredObject.SetActive(false);
         }
         dragging = true;
-    }
+    } */
 
     public virtual void Drag() {
 
@@ -110,23 +122,24 @@ public class UIElementSlider : UIElementButton
         // Get the mouse's difference in position applied to the slider's desired rotation axis
         rotation = Vector3.Dot(mousePosDelta, Camera.main.transform.up);
 
-        float currentRot = transform.localEulerAngles.y;
+        float currentRot = dialObject.transform.localEulerAngles.y;
         float newRot = currentRot + rotation;
 
         // Limit slider rotation to be between a certain minimum and maximum degree angle
         newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
 
         // Apply change in rotation based on mouse cursor movement
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, newRot, transform.localEulerAngles.z);
+        dialObject.transform.localEulerAngles = new Vector3(dialObject.transform.localEulerAngles.x, newRot, dialObject.transform.localEulerAngles.z);
 
         //Debug.Log("Slider turned!");
     }
 
     public override void OnClick()
     {
+        dragging = true;
         base.OnClick();
 
-        GameStateManager.SetState(GAMESTATE.MENU);
+        /* GameStateManager.SetState(GAMESTATE.MENU);
 
         splineDolly.Spline = spline;
 
@@ -139,7 +152,7 @@ public class UIElementSlider : UIElementButton
         // Start moving the camera on the dolly spline track
         StartCoroutine(StartDollyMovement());
         
-        Debug.Log("Slider clicked!");
+        Debug.Log("Slider clicked!");  */
     }
 
     public virtual IEnumerator StartDollyMovement() {

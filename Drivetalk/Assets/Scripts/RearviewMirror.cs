@@ -9,7 +9,7 @@ public class RearviewMirror : GPS
 
     public override void OnClick()
     {
-        dialogueManager.EnterRMM();
+        //dialogueManager.EnterRMM();
 
         person = GameObject.FindGameObjectWithTag("PickedUp");
 
@@ -30,7 +30,7 @@ public class RearviewMirror : GPS
     }
 
     public void BackButton() {
-        dialogueManager.ExitRMM();
+        //dialogueManager.ExitRMM();
 
         StartCoroutine(EndDollyMovement());
     }

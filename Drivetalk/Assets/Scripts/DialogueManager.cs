@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     private void Update() {
 
         // Enables and disables all RMM dialogue UI stuff
-        if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
+        /* if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
             rearviewMirror.backButton.SetActive(true);
             RMM_dialogueBox.SetActive(true);
             dash_dialogueBox.SetActive(false);
@@ -66,10 +66,10 @@ public class DialogueManager : MonoBehaviour
         } else {
             RMM_dialogueBox.SetActive(false);
             dash_dialogueBox.SetActive(false);
-        }
+        } */
 
         // Choice notification timer
-        if (!timerPaused && playingChoices && mode != DialogueMode.RMM) {
+        /* if (!timerPaused && playingChoices && mode != DialogueMode.RMM) {
             choiceNotifTimer += Time.deltaTime;
             choiceNotif.SetActive(true);
 
@@ -92,10 +92,10 @@ public class DialogueManager : MonoBehaviour
                 //Debug.Log("Solid" + choiceNotifTimer);
                 choiceNotifAnimator.SetBool("Flash", false);
             }
-        }
+        } */
 
         // Dash request timer
-        if (dashRequestRunning) {
+        /* if (dashRequestRunning) {
             dashRequestTimer += Time.deltaTime;
 
             // If the player follows the dash request
@@ -123,11 +123,11 @@ public class DialogueManager : MonoBehaviour
                 dashRequestRunning = false;
                 dashRequestTimer = 0;
             }
-        }
+        } */
     }
 
     // Checks for dash request requirements
-    public bool CheckDashRequirements(DashRequestRequirement requirement) {
+    /* public bool CheckDashRequirements(DashRequestRequirement requirement) {
         return requirement.reqType switch
         {
             DashRequestType.AC_SETTING => CarController.Temperature == requirement.acSetting,
@@ -137,10 +137,10 @@ public class DialogueManager : MonoBehaviour
             DashRequestType.CIGARETTE => false,
             _ => false,
         };
-    }
+    } */
 
     // Entering rearview mirror mode
-    public void EnterRMM() {
+    /* public void EnterRMM() {
 
         // Sets the mode
         mode = DialogueMode.RMM;
@@ -173,8 +173,12 @@ public class DialogueManager : MonoBehaviour
             car.choicesBar.SetActive(false);
         }
     }
-
+ */
     public void StartDialogue(DialoguePiece dialogue, bool isInterjection) {
+
+        if (!dash_dialogueBox.activeInHierarchy) {
+            dash_dialogueBox.SetActive(true);
+        }
 
         // If the dialogue played is the start of a new dialogue block, reset the interjection limit
         if (car.currentPassenger.dialogue.Contains(dialogue)) {
@@ -208,17 +212,19 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence() {
 
-        if (dashRequestRunning) {
+        /* if (dashRequestRunning) {
             return;
-        }
+        } */
         // Display choices
-        else if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
+        if (sentences.Count == 0 && currentDialogue.choices.Length > 0) {
 
             playingChoices = true;
 
-            if (mode == DialogueMode.RMM) {
+            /* if (mode == DialogueMode.RMM) {
                 ShowChoices();
-            }
+            } */
+            ShowChoices();
+            Debug.Log("bruh");
             
             return;
         }
@@ -248,6 +254,10 @@ public class DialogueManager : MonoBehaviour
                 Destroy(button);
             }
             choiceButtonsList.Clear();
+        }
+
+        if (dash_dialogueBox.activeInHierarchy) {
+            dash_dialogueBox.SetActive(false);
         }
 
         car.choicesBar.SetActive(true);
@@ -288,12 +298,12 @@ public class DialogueManager : MonoBehaviour
         // PUT TRANSCRIPT LOG FUNCTIONALITY HERE
 
         Debug.Log(sentence);
-        RMM_dialogueText.text = "";
+        //RMM_dialogueText.text = "";
         dash_dialogueText.text = "";
 
         foreach (char letter in sentence.ToCharArray()) {
             dash_dialogueText.text += letter;
-            RMM_dialogueText.text += letter;
+            //RMM_dialogueText.text += letter;
 
             yield return new WaitForSeconds(car.currentPassenger.textCPS);
         }
@@ -306,6 +316,10 @@ public class DialogueManager : MonoBehaviour
     // Dropoff goodbye salute dialogue and dropoff of passenger
     public void DropoffDialogue() {
         Debug.Log("Dropped off passenger, and finished current dialogue piece!");
+
+        if (dash_dialogueBox.activeInHierarchy) {
+            dash_dialogueBox.SetActive(false);
+        }
 
         currentDialogue = null;
         
@@ -326,6 +340,10 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue() {
         Debug.Log("Ended current dialogue piece!");
 
+        if (dash_dialogueBox.activeInHierarchy) {
+            dash_dialogueBox.SetActive(false);
+        }
+
         currentDialogue = null;
         
         // SET SPEECH BUBBLE TO FADE AWAY
@@ -343,8 +361,10 @@ public class DialogueManager : MonoBehaviour
         
         yield return new WaitForSeconds(waitTime);
 
+        StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
+
         // If an interjection hasn't already played, and passenger narrative dialogue isn't exhausted—
-        if (!interjected && !(car.currentPassenger.dialogueLeftToFinish == car.currentPassenger.dialogue.Count)) {
+        /* if (!interjected && !(car.currentPassenger.dialogueLeftToFinish == car.currentPassenger.dialogue.Count)) {
 
             float rand = UnityEngine.Random.value;
 
@@ -361,7 +381,7 @@ public class DialogueManager : MonoBehaviour
         } else {
             Debug.Log("Already interjected once this break, or this is the pickup dialogue greeting!");
             StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
-        }
+        } */
     }
 
     private void Interject() {
