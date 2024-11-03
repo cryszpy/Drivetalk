@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
 public class Menu : MonoBehaviour
@@ -11,12 +12,17 @@ public class Menu : MonoBehaviour
     [SerializeField] private CinemachineSplineDolly splineDolly;
     [SerializeField] private SplineContainer spline;
 
-    [SerializeField] private GameObject screenUI;
+    [SerializeField] private GameObject mainMenuUI;
+
+    [SerializeField] private GameObject transitionScreen;
+    [SerializeField] private Animator transitionAnimator;
 
     [SerializeField] private GameObject cameraLookAtObject;
     private CameraLookAt cameraLookAt;
     
     [SerializeField] private GameObject pauseMenu;
+
+    [SerializeField] private float transitionTime;
 
     [SerializeField] private bool inMainMenu = true;
 
@@ -44,7 +50,7 @@ public class Menu : MonoBehaviour
         Debug.Log("Starting game!");
 
         // Disables main menu UI
-        screenUI.SetActive(false);
+        mainMenuUI.SetActive(false);
 
         while (splineDolly.CameraPosition < 1) {
             if (cameraLookAt.cameraTargetDivider > 10) {
@@ -77,7 +83,17 @@ public class Menu : MonoBehaviour
         }
         //cinemachineCam.LookAt = null;
         GameStateManager.SetState(GAMESTATE.MAINMENU);
-        screenUI.SetActive(true);
+        mainMenuUI.SetActive(true);
+    }
+
+    private IEnumerator FadeToBlack() {
+        //transitionScreen.SetActive(true);
+
+        transitionAnimator.SetBool("Play", true);
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(0);
     }
 
     public void TogglePauseMenu() {
@@ -96,7 +112,7 @@ public class Menu : MonoBehaviour
 
     public void LoadMainMenu() {
         TogglePauseMenu();
-        StartCoroutine(EndDollyMovement());
+        StartCoroutine(FadeToBlack());
     }
 
     public void PlayButton() {

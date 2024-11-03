@@ -7,7 +7,7 @@ public class Destination : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider) {
         
-        if (collider.CompareTag("Car")) {
+        if (collider.CompareTag("CarFrame")) {
             Debug.Log("Arrived at destination!");
 
             if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: leo_choice_post_0
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
   sentences:
-  - woah!
-  - this is post choice!
-  - pretty sicko mode
+  - Man, I feel that.
   nextDialogue: {fileID: 0}
   choices: []

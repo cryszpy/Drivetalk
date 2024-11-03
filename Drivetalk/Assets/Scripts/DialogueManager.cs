@@ -12,16 +12,17 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
-    public DialogueMode mode;
+    /* public DialogueMode mode; */
     
     public CarController car;
 
+    [SerializeField] private Animator dialogueAnimator;
     public TMP_Text dash_dialogueText;
     public GameObject dash_dialogueBox;
-    public TMP_Text RMM_dialogueText;
-    public GameObject RMM_dialogueBox;
+    /* public TMP_Text RMM_dialogueText;
+    public GameObject RMM_dialogueBox; */
 
-    [SerializeField] private Animator choiceNotifAnimator;
+    //[SerializeField] private Animator choiceNotifAnimator;
 
     public Queue<string> sentences;
 
@@ -29,25 +30,25 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> choiceButtonsList;
 
-    public GameObject choiceNotif;
+    /* public GameObject choiceNotif;
 
-    [SerializeField] private RearviewMirror rearviewMirror;
+    [SerializeField] private RearviewMirror rearviewMirror; */
     
     [Header("STATS")]
 
-    [SerializeField] private float choicesNotifSolid;
-    [SerializeField] private float choicesNotifFlashing;
+    /* [SerializeField] private float choicesNotifSolid;
+    [SerializeField] private float choicesNotifFlashing; */
 
     public bool playingChoices = false;
 
-    public bool timerPaused = false;
+    /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
 
     private bool interjected = false;
     private float dashRequestTimer = 0;
     public bool dashRequestRunning = false;
     public float dashTicker;
-    public DashRequestRequirement currentDashReq;
+    public DashRequestRequirement currentDashReq; */
 
     private void Start() {
         sentences = new Queue<string>();
@@ -174,16 +175,48 @@ public class DialogueManager : MonoBehaviour
         }
     }
  */
+    
+    private void FindReferences() {
+        if (car == null) {
+            if (GameObject.FindGameObjectWithTag("Car").TryGetComponent<CarController>(out var script)) {
+                car = script;
+                Debug.LogWarning("CarController component was null! Reassigned.");
+            } else {
+                Debug.LogError("Could not find CarController component!");
+            }
+        }
+
+        if (dash_dialogueText == null) {
+            if (GameObject.FindGameObjectWithTag("DialogueText").TryGetComponent<TMP_Text>(out var script)) {
+                dash_dialogueText = script;
+                Debug.LogWarning("Dialogue text TMP_Text component was null! Reassigned.");
+            } else {
+                Debug.LogError("Could not find dialogue text TMP_Text component!");
+            }
+        }
+
+        if (dash_dialogueBox == null) {
+            dash_dialogueBox = GameObject.FindGameObjectWithTag("DialogueBox");
+            Debug.LogWarning("Dash dialogue box GameObject was null! Reassigned.");
+        }
+
+        if (dialogueAnimator == null) {
+            dialogueAnimator = dash_dialogueBox.GetComponent<Animator>();
+            Debug.LogWarning("Dialogue box Animator component was null! Reassigned.");
+        }
+
+    }
+    
     public void StartDialogue(DialoguePiece dialogue, bool isInterjection) {
 
-        if (!dash_dialogueBox.activeInHierarchy) {
-            dash_dialogueBox.SetActive(true);
-        }
+        FindReferences();
+
+        dialogueAnimator.SetBool("Play", true);
 
         // If the dialogue played is the start of a new dialogue block, reset the interjection limit
-        if (car.currentPassenger.dialogue.Contains(dialogue)) {
+        /* if (car.currentPassenger.dialogue.Contains(dialogue)) {
             interjected = false;
-        }
+        } */
 
         // Set the current dialogue
         currentDialogue = dialogue;
@@ -199,9 +232,17 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Remove existing buttons
-        foreach (GameObject button in choiceButtonsList) {
-            button.SetActive(false);
+        if (choiceButtonsList.Count > 0) {
+            foreach (GameObject button in choiceButtonsList) {
+                Destroy(button);
+            }
+            choiceButtonsList.Clear();
         }
+        
+        /* foreach (GameObject button in choiceButtonsList) {
+            choiceButtonsList.Remove(button);
+            //button.SetActive(false);
+        } */
 
         foreach (string sentence in dialogue.sentences) {
             sentences.Enqueue(sentence);
@@ -224,7 +265,6 @@ public class DialogueManager : MonoBehaviour
                 ShowChoices();
             } */
             ShowChoices();
-            Debug.Log("bruh");
             
             return;
         }
@@ -256,9 +296,7 @@ public class DialogueManager : MonoBehaviour
             choiceButtonsList.Clear();
         }
 
-        if (dash_dialogueBox.activeInHierarchy) {
-            dash_dialogueBox.SetActive(false);
-        }
+        dialogueAnimator.SetBool("Play", false);
 
         car.choicesBar.SetActive(true);
 
@@ -317,9 +355,7 @@ public class DialogueManager : MonoBehaviour
     public void DropoffDialogue() {
         Debug.Log("Dropped off passenger, and finished current dialogue piece!");
 
-        if (dash_dialogueBox.activeInHierarchy) {
-            dash_dialogueBox.SetActive(false);
-        }
+        dialogueAnimator.SetBool("Play", false);
 
         currentDialogue = null;
         
@@ -340,9 +376,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue() {
         Debug.Log("Ended current dialogue piece!");
 
-        if (dash_dialogueBox.activeInHierarchy) {
-            dash_dialogueBox.SetActive(false);
-        }
+        dialogueAnimator.SetBool("Play", false);
 
         currentDialogue = null;
         
@@ -384,7 +418,7 @@ public class DialogueManager : MonoBehaviour
         } */
     }
 
-    private void Interject() {
+    /* private void Interject() {
         interjected = true;
 
         List<DialoguePiece> smallTalkList = new();
@@ -446,12 +480,12 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ResetInterjectionType(InterjectionType type) {
+    private void ResetInterjectionType(InterjectionType type) { 
 
         foreach (DialoguePiece piece in car.currentPassenger.interjections){
             if (piece.interjectionType == type) {
                 piece.seen = false;
             }
         }
-    }
+    } */
 }

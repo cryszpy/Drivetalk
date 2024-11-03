@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: leo_choice_post_1
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
   sentences:
-  - LEO 33333333
+  - You say that, but I can tell a night owl when I see one.
+  - Takes one to know one, I guess.
   nextDialogue: {fileID: 0}
   choices: []

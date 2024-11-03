@@ -31,6 +31,8 @@ public class CarController : MonoBehaviour
 
     [Header("STATS")]
 
+    Vector3 velocity = Vector3.zero;
+
     public bool arrived;
 
     [SerializeField] private int minRides;
@@ -64,13 +66,18 @@ public class CarController : MonoBehaviour
     public float lastPassengerIDTracker;
     public float lastSongPlayedIDTracker;
 
-    private void Start() {
-        // Flip camera projection horizontally (for accurate mirror effect)
-        Matrix4x4 mat = rearviewMirrorCam.projectionMatrix;
-        mat *= Matrix4x4.Scale(new Vector3(1, -1, 1));
-        rearviewMirrorCam.projectionMatrix = mat;
+    private void Awake() {
+        //agent.updatePosition = false;
+    }
 
-        if (!dialogueManager) {
+    private void Start() {
+
+        // Flip camera projection horizontally (for accurate mirror effect)
+        /* Matrix4x4 mat = rearviewMirrorCam.projectionMatrix;
+        mat *= Matrix4x4.Scale(new Vector3(1, -1, 1));
+        rearviewMirrorCam.projectionMatrix = mat; */
+
+        if (dialogueManager == null) {
             if (GameObject.FindGameObjectWithTag("DialogueManager").TryGetComponent<DialogueManager>(out var script)) {
                 dialogueManager = script;
                 Debug.LogWarning("Dialogue manager was not assigned! Reassigned.");
@@ -95,6 +102,12 @@ public class CarController : MonoBehaviour
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
         lastSongPlayedIDTracker = LastSongPlayedID;
+    }
+
+    private void FixedUpdate() {
+
+        // NavMesh movement
+        //transform.position = Vector3.SmoothDamp(transform.position, agent.nextPosition, ref velocity, 0.1f);
     }
 
     private void GenerateDayRides() {
@@ -166,7 +179,7 @@ public class CarController : MonoBehaviour
 
             if (collider.TryGetComponent<Passenger>(out var script)) {
                 currentPassenger = script;
-                dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
+                //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
                 dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting, true);
                 //dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
 

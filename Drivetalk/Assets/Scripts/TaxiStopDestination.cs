@@ -8,7 +8,7 @@ public class TaxiStopDestination : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider) {
 
-        if (collider.CompareTag("Car")) {
+        if (collider.CompareTag("CarFrame")) {
 
             Debug.Log("Arrived at taxi stop!");
 

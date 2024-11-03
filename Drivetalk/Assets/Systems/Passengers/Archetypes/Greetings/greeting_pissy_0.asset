@@ -19,6 +19,6 @@ MonoBehaviour:
     statToCheck: 0
   seen: 0
   sentences:
-  - This is the PISSY archetype greeting haha heh heh.
+  - 1085 Westbrook, please.
   nextDialogue: {fileID: 0}
   choices: []

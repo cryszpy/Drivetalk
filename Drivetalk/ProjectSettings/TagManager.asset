@@ -9,6 +9,9 @@ TagManager:
   - Passenger
   - CameraLookAt
   - DialogueManager
+  - CarFrame
+  - DialogueBox
+  - DialogueText
   layers:
   - Default
   - TransparentFX

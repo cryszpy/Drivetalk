@@ -19,6 +19,6 @@ MonoBehaviour:
     statToCheck: 0
   seen: 0
   sentences:
-  - PEE YOU!! And I'll see you later.
+  - See you around.
   nextDialogue: {fileID: 0}
   choices: []

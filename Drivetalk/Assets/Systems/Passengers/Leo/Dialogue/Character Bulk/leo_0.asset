@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: leo_0
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
   sentences:
-  - What up bro
-  - Looks like a clean taxi man
-  - Give props to asher fr fr
+  - ...
+  - Night life's hard huh? (pretend it's night time)
   nextDialogue: {fileID: 0}
   choices:
   - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}

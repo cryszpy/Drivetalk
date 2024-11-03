@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: leo_choice_0
   m_EditorClassIdentifier: 
   dialogueSeen: 0
-  choiceText: omg woah
+  choiceText: You bet.
   nextDialogue: {fileID: 11400000, guid: 8b6b497095a474ba9a26bc4961de9962, type: 2}

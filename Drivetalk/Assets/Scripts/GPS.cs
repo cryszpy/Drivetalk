@@ -6,6 +6,8 @@ using UnityEngine.Splines;
 public class GPS : UIElementButton
 {
 
+    [SerializeField] protected GameObject focusOn;
+
     [Tooltip("Reference to the main Cinemachine camera.")]
     [SerializeField] protected CinemachineCamera cinemachineCam;
     [Tooltip("Reference to the dolly spline component attached to the Cinemachine camera.")]
@@ -27,7 +29,7 @@ public class GPS : UIElementButton
         splineDolly.CameraPosition = 0;
 
         // Focus on this element
-        cinemachineCam.LookAt = gameObject.transform;
+        cinemachineCam.LookAt = focusOn.transform;
 
         // Start moving the camera on the dolly spline track
         StartCoroutine(StartDollyMovement());
@@ -36,11 +38,11 @@ public class GPS : UIElementButton
     }
 
     public virtual IEnumerator StartDollyMovement() {
-        while (splineDolly.CameraPosition < 1 || cinemachineCam.Lens.FieldOfView > 30) {
-            if (cinemachineCam.Lens.FieldOfView > 30) {
+        while (splineDolly.CameraPosition < 1 /* || cinemachineCam.Lens.FieldOfView > 30 */) {
+            /* if (cinemachineCam.Lens.FieldOfView > 30) {
                 toonCamera.fieldOfView -= 0.6f;
                 cinemachineCam.Lens.FieldOfView -= 0.6f;
-            }
+            } */
             if (splineDolly.CameraPosition < 1f) {
                 if (splineDolly.CameraPosition > 0.7f){
                     splineDolly.CameraPosition += 0.01f;
@@ -54,11 +56,11 @@ public class GPS : UIElementButton
     }
 
     public virtual IEnumerator EndDollyMovement() {
-        while (splineDolly.CameraPosition > 0 || cinemachineCam.Lens.FieldOfView < 60) {
-            if (cinemachineCam.Lens.FieldOfView < 60) {
+        while (splineDolly.CameraPosition > 0 /* || cinemachineCam.Lens.FieldOfView < 60 */) {
+            /* if (cinemachineCam.Lens.FieldOfView < 60) {
                 toonCamera.fieldOfView += 0.6f;
                 cinemachineCam.Lens.FieldOfView += 0.6f;
-            }
+            } */
             if (splineDolly.CameraPosition > 0) {
                 if (splineDolly.CameraPosition < 0.3f){
                     splineDolly.CameraPosition -= 0.01f;

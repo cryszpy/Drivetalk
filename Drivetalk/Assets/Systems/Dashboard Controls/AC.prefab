@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4b7b650c47fe0462583e8135dabe5855, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 5779389192286976839}
   - component: {fileID: 8012229046598687119}
   - component: {fileID: 8163540338871795906}
+  - component: {fileID: 2030831108793986311}
   m_Layer: 6
   m_Name: PresetControl
   m_TagString: Untagged
@@ -154,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c554faddc2847cca5b3ee490dcace4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toonCamera: {fileID: 0}
+  dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -174,10 +177,17 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  hovered: 0
+  insideMinigame: 0
+  dialObject: {fileID: 9146612707172334904}
+  cinemachineCam: {fileID: 0}
+  splineDolly: {fileID: 0}
+  spline: {fileID: 0}
+  screenUI: {fileID: 6515743001419153722}
+  cameraLookAt: {fileID: 0}
   rotationMin: 30
   rotationMax: 150
-  dragging: 0
-  dialObject: {fileID: 9146612707172334904}
+  dragging: 1
   coolText: {fileID: 3043131181789219758}
   warmText: {fileID: 6865701557783146785}
   defMaterial: {fileID: 11400000, guid: fbc1f813994d7456ba5810bc0580048b, type: 2}
@@ -187,6 +197,52 @@ MonoBehaviour:
   cutoffWarm: 135
   zeroMin: 75
   zeroMax: 105
+  maxRotSpeed: 300
+  rotSpeed: 0
+--- !u!114 &2030831108793986311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769061128428283019}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e1a8e6a341e435ca6cc4767ab51c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toonCamera: {fileID: 0}
+  dialogueManager: {fileID: 0}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2030831108793986311}
+        m_TargetAssemblyTypeName: RearviewMirror, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  hoveredObject: {fileID: 3540618822522992524}
+  mainCamera: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  hovered: 0
+  insideMinigame: 0
+  focusOn: {fileID: 0}
+  cinemachineCam: {fileID: 0}
+  splineDolly: {fileID: 0}
+  spline: {fileID: 0}
+  screenUI: {fileID: 6515743001419153722}
+  cameraLookAt: {fileID: 0}
+  person: {fileID: 0}
+  backButton: {fileID: 0}
 --- !u!1 &3237105760484247741
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3700279686783135693
 RectTransform:
   m_ObjectHideFlags: 0
@@ -809,7 +865,7 @@ Transform:
   m_GameObject: {fileID: 6958214932287199682}
   serializedVersion: 2
   m_LocalRotation: {x: -0.60876137, y: -0, z: -0, w: 0.7933534}
-  m_LocalPosition: {x: -0.21100044, y: -0.14000005, z: -0.10400009}
+  m_LocalPosition: {x: 0.058, y: 0.3563, z: -0.5824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1020,7 +1076,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4b7b650c47fe0462583e8135dabe5855, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
