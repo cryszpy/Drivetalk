@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: st_food
   m_EditorClassIdentifier: 
   interjectionType: 1
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
   seen: 0
   sentences:
   - yo what's your favorite food?

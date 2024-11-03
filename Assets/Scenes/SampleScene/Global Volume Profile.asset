@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
   m_Name: Global Volume Profile
   m_EditorClassIdentifier: 
-  components:
-  - {fileID: 488820163998358315}
+  components: []
 --- !u!114 &488820163998358315
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -26,8 +25,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010da308ccb164cdfb619fe7286f41ad, type: 3}
   m_Name: ColorPalettePostProcess
   m_EditorClassIdentifier: 
-  active: 1
-  isEnabled:
-    m_OverrideState: 1
-    m_Value: 1
-  shader: {fileID: -6465566751694194690, guid: ebfdad1a6f7904d45b528e0f6c17adb4, type: 3}
