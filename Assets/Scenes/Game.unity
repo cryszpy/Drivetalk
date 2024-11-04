@@ -443,6 +443,7 @@ MonoBehaviour:
   choicesBar: {fileID: 1538061847}
   choicePrefab: {fileID: 1869503689464623647, guid: d333b144158d64c3cb9852c09ab29aaf, type: 3}
   arrived: 0
+  atTaxiStop: 1
   minRides: 4
   maxRides: 7
   currentStop: {fileID: 0}

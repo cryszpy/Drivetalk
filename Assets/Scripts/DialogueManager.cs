@@ -391,6 +391,10 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator WaitBetweenDialogue() {
         Debug.Log("Waiting...");
 
+        if (car.currentPassenger.currentDialogueNum == 0) {
+            car.atTaxiStop = true;
+        }
+
         float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);
         
         yield return new WaitForSeconds(waitTime);

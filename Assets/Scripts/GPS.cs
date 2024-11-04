@@ -17,9 +17,48 @@ public class GPS : UIElementButton
     [SerializeField] protected GameObject screenUI;
 
     [SerializeField] protected GameObject cameraLookAt;
+
+    public override void Update() {
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU && dialogueManager.car.atTaxiStop) {
+            if (hovered) {
+                // If this UI element is clicked—
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // Execute click function
+                    unityEvent.Invoke();
+                }
+            }
+        }
+    }
+
+    public override void FixedUpdate() {
+
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU && dialogueManager.car.atTaxiStop) {
+
+            // Raycast from the UI element to the mouse cursor
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
+            {
+                if (hit.collider.transform == transform) {
+                    // Execute hover function
+                    OnHover();
+                }
+                
+            } 
+            // If cursor is not hovered over element, reset to default state
+            else {
+                DefaultState();
+            }
+            
+        }
+    }
     
     public override void OnClick()
     {
+        dialogueManager.car.atTaxiStop = false;
+
         base.OnClick();
         GameStateManager.SetState(GAMESTATE.MENU);
 

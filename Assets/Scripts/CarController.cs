@@ -31,9 +31,9 @@ public class CarController : MonoBehaviour
 
     [Header("STATS")]
 
-    Vector3 velocity = Vector3.zero;
-
     public bool arrived;
+
+    public bool atTaxiStop = true;
 
     [SerializeField] private int minRides;
     [SerializeField] private int maxRides;
@@ -65,10 +65,6 @@ public class CarController : MonoBehaviour
     public float totalPassengersTracker;
     public float lastPassengerIDTracker;
     public float lastSongPlayedIDTracker;
-
-    private void Awake() {
-        //agent.updatePosition = false;
-    }
 
     private void Start() {
 
@@ -102,12 +98,6 @@ public class CarController : MonoBehaviour
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
         lastSongPlayedIDTracker = LastSongPlayedID;
-    }
-
-    private void FixedUpdate() {
-
-        // NavMesh movement
-        //transform.position = Vector3.SmoothDamp(transform.position, agent.nextPosition, ref velocity, 0.1f);
     }
 
     private void GenerateDayRides() {
