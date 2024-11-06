@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: maxine_1
+  m_EditorClassIdentifier: 
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
+  sentences:
+  - ...
+  - welcome back...
+  - did ya miss us?
+  - actually dont answer that
+  - i uh know we have a lot to talk about
+  - but we should save that for later!
+  - hehe
+  - y'know the town's changed a lot since you've last been here
+  - do you even remember where ardendale avenue is?
+  nextDialogue: {fileID: 0}
+  choices:
+  - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}
+  - {fileID: 11400000, guid: f18dd171d05df4f5aa7efce03eb5d51a, type: 2}
+  - {fileID: 11400000, guid: 608789d6cbf0140e4862d17667a8c164, type: 2}

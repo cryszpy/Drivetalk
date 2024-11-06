@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start() {
         sentences = new Queue<string>();
+        FindReferences();
     }
 
     private void Update() {

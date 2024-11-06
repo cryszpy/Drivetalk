@@ -5,6 +5,7 @@ using UnityEngine.Splines;
 
 public class GPS : UIElementButton
 {
+    [SerializeField] private CarPointer carPointer;
 
     [SerializeField] protected GameObject focusOn;
 

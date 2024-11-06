@@ -73,16 +73,14 @@ public class TaxiStopDestination : MonoBehaviour
             Passenger passenger = passengerList.passengerQueue[0];
 
             // Spawn passenger at stop
-            Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
+            GameObject character = Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
 
             passengerList.passengerQueue.Remove(passenger);
 
-            // MOVE THIS CODE TO DROP OFF PASSENGER FUNCTION
-            /* if (passenger.dialogueLeftToFinish <= 0) {
-                passenger.dialogueLeftToFinish = 0;
-                passengerList.ExhaustPassenger(passenger, PassengerRarity.TIER_ONE);
-                Debug.Log("Dialogue finished, passenger exhausted!");
-            } */
+            car.PickUpPassenger(character);
+
+            // TODO ADD IN PASSENGER AI WALK TO CAR
+
         } else {
             Debug.LogWarning("No passenger in queue!");
         }

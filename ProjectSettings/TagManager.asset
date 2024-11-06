@@ -12,6 +12,7 @@ TagManager:
   - CarFrame
   - DialogueBox
   - DialogueText
+  - CarPointer
   layers:
   - Default
   - TransparentFX
@@ -48,6 +49,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3322970651
+    locked: 0
+  - name: Above Ground
+    uniqueID: 2670172989
     locked: 0
   - name: DiegeticUI
     uniqueID: 3497593781

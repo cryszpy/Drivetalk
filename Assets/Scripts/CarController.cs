@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements.Experimental;
 
 public class CarController : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
+    public CarPointer carPointer;
+
     public DialogueManager dialogueManager;
 
     public List<GameObject> taxiStops = new();
+    public List<GameObject> destinations = new();
 
     [SerializeField] private List<GameObject> passengerSeats;
     [SerializeField] private GameObject shotgun;
@@ -30,6 +33,15 @@ public class CarController : MonoBehaviour
     public GameObject choicePrefab;
 
     [Header("STATS")]
+
+    public List<Marker> allMarkers = new();
+
+    // Current destination marker for pathfinding
+    public Marker currentMarker;
+    public Marker destinationMarker;
+    public GameObject destinationObject;
+
+    public List<Marker> path = new();
 
     public bool arrived;
 
@@ -92,6 +104,11 @@ public class CarController : MonoBehaviour
             FindNearestStop();
         }
 
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU)
+        {
+            agent.SetDestination(destinationObject.transform.position);
+        }
+
         // DEV static variable tracking—REMOVE FOR BUILDS
         ratingTracker = Rating;
         tempTracker = Temperature;
@@ -119,65 +136,41 @@ public class CarController : MonoBehaviour
         }
         
         if (stopDistances.Count != 0) {
-            agent.SetDestination(taxiStops[stopDistances.IndexOf(stopDistances.Min())].transform.position);
+            carPointer.StartDrive(taxiStops[stopDistances.IndexOf(stopDistances.Min())]);
         }
 
         arrived = false;
     }
 
-    public void PickUpPassenger() {
+    public void PickUpPassenger(GameObject passenger) {
 
-        currentPassenger.tag = "PickedUp";
+        if (passenger.TryGetComponent<Passenger>(out var script)) {
 
-        int index = UnityEngine.Random.Range(0, passengerSeats.Count);
-
-        currentRideNum++;
-
-        /* switch (index) {
-            case 0:
-                rearviewMirrorCam.transform.localPosition = new(-1.43f, 1.73f, -0.6f);
-                rearviewMirrorCam.transform.localEulerAngles = new(-180, -18f, -90);
-                rearviewMirrorCam.orthographicSize = 1.74f;
-                break;
-            case 1:
-                rearviewMirrorCam.transform.localPosition = new(-0.56f, 1.73f, -0.6f);
-                rearviewMirrorCam.transform.localEulerAngles = new(-180, -25, -90);
-                rearviewMirrorCam.orthographicSize = 1.74f;
-                break;
-            case 2:
-                rearviewMirrorCam.transform.localPosition = new(1.03f, 1.73f, -0.6f);
-                rearviewMirrorCam.transform.localEulerAngles = new(-180, -25, -90);
-                rearviewMirrorCam.orthographicSize = 1.74f;
-                break;
-        } */
-
-        // Teleports passenger to seat
-        currentPassenger.transform.position = passengerSeats[index].transform.position;
-
-        // Parents passenger to seat
-        currentPassenger.transform.parent = this.transform;
-        Debug.Log("parented");
-
-        // Resets rotation to face forward from seat
-        currentPassenger.transform.localEulerAngles = new(0, 0, 0);
-    }
-
-    private void OnTriggerEnter(Collider collider) {
-
-        if (collider.gameObject.layer == 9 && !collider.gameObject.CompareTag("PickedUp")) {
             Debug.Log("Found passenger!");
+            
+            currentPassenger = script;
+            //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
+            dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting, true);
+            //dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
 
-            if (collider.TryGetComponent<Passenger>(out var script)) {
-                currentPassenger = script;
-                //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
-                dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting, true);
-                //dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
+            currentPassenger.tag = "PickedUp";
 
-                PickUpPassenger();
+            int index = UnityEngine.Random.Range(0, passengerSeats.Count);
 
-            } else {
-                Debug.LogWarning("Could not find Passenger component on this passenger!");
-            }
+            currentRideNum++;
+
+            // Teleports passenger to seat
+            currentPassenger.transform.position = passengerSeats[index].transform.position;
+
+            // Parents passenger to seat
+            currentPassenger.transform.parent = this.transform;
+            Debug.Log("parented");
+
+            // Resets rotation to face forward from seat
+            currentPassenger.transform.localEulerAngles = new(0, 0, 0);
+
+        } else {
+            Debug.LogWarning("Could not find Passenger component on this passenger!");
         }
     }
 }
