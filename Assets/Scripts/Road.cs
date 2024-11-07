@@ -16,7 +16,6 @@ public class Road : MonoBehaviour
     // This is a helper function to connect the markers between adjacent road pieces.
     public void ConnectMarkersToAdjacentRoad(Road adjacentRoad)
     {
-        Debug.Log("b");
         // For corners and intersections which have multiple markers per road
         /* if (isCorner) {
 
@@ -60,7 +59,6 @@ public class Road : MonoBehaviour
     // This helper method finds the closest marker on an adjacent road piece to a given marker.
     private Marker FindClosestMarkerOnAdjacentRoad(Marker currentMarker, Road adjacentRoad)
     {
-        Debug.Log("m");
         Marker closestMarker = null;
         float closestDistance = float.MaxValue;
 

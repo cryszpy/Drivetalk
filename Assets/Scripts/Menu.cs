@@ -21,6 +21,8 @@ public class Menu : MonoBehaviour
     private CameraLookAt cameraLookAt;
     
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject pauseMenuSettings;
 
     [SerializeField] private float transitionTime;
 
@@ -102,11 +104,29 @@ public class Menu : MonoBehaviour
         if (GameStateManager.Gamestate == GAMESTATE.PAUSED) {
             GameStateManager.SetState(GAMESTATE.PLAYING);
             pauseMenu.SetActive(false);
+            pauseMenu.SetActive(false);
+            pauseMenuSettings.SetActive(false);
         } 
         // PAUSE
         else if (GameStateManager.Gamestate == GAMESTATE.PLAYING){
             GameStateManager.SetState(GAMESTATE.PAUSED);
+            pauseScreen.SetActive(true);
             pauseMenu.SetActive(true);
+            pauseMenuSettings.SetActive(false);
+        }
+    }
+
+    public void TogglePauseMenuSettings() {
+
+        // SHOW
+        if (!pauseMenuSettings.activeInHierarchy) {
+            pauseScreen.SetActive(false);
+            pauseMenuSettings.SetActive(true);
+        } 
+        // HIDE
+        else if (pauseMenuSettings.activeInHierarchy) {
+            pauseMenuSettings.SetActive(false);
+            pauseScreen.SetActive(true);
         }
     }
 
@@ -117,6 +137,7 @@ public class Menu : MonoBehaviour
 
     public void PlayButton() {
         StartCoroutine(StartDollyMovement());
+        AudioManager.instance.PlaySoundByName("Engine");
     }
 
     public void QuitButton() {

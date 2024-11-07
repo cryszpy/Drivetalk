@@ -33,15 +33,8 @@ public class CarController : MonoBehaviour
     public GameObject choicePrefab;
 
     [Header("STATS")]
-
-    public List<Marker> allMarkers = new();
-
-    // Current destination marker for pathfinding
-    public Marker currentMarker;
-    public Marker destinationMarker;
+    
     public GameObject destinationObject;
-
-    public List<Marker> path = new();
 
     public bool arrived;
 

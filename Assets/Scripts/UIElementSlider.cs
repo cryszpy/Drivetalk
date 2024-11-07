@@ -155,7 +155,7 @@ public class UIElementSlider : UIElementButton
         Debug.Log("Slider clicked!");  */
     }
 
-    public virtual IEnumerator StartDollyMovement() {
+    /* public virtual IEnumerator StartDollyMovement() {
         while (splineDolly.CameraPosition < 1) {
             splineDolly.CameraPosition += 0.03f;
             yield return new WaitForSeconds(0.01f);
@@ -173,5 +173,5 @@ public class UIElementSlider : UIElementButton
         cinemachineCam.LookAt = cameraLookAt.transform;
         GameStateManager.SetState(GAMESTATE.PLAYING);
         screenUI.SetActive(false);
-    }
+    } */
 }

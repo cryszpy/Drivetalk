@@ -14,7 +14,6 @@ public class RoadManager : MonoBehaviour
     // Connect all roads that are adjacent to each other
     private void ConnectAdjacentRoads()
     {
-        Debug.Log("hi");
         for (int i = 0; i < allRoads.Count; i++)
         {
             Road currentRoad = allRoads[i];

@@ -39,7 +39,6 @@ public class Marker : MonoBehaviour
     // Connect this marker to the closest marker of the next road piece
     public void ConnectToAdjacentMarkers(List<Marker> markersToConnect)
     {
-        Debug.Log("a");
         foreach (var marker in markersToConnect)
         {
             if (!adjacentMarkers.Contains(marker) && marker.OpenForConnections)

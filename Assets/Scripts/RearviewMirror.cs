@@ -7,7 +7,7 @@ public class RearviewMirror : GPS
     public GameObject person;
     public GameObject backButton;
 
-    public override void OnClick()
+    /* public override void OnClick()
     {
         //dialogueManager.EnterRMM();
 
@@ -27,15 +27,15 @@ public class RearviewMirror : GPS
         StartCoroutine(StartDollyMovement());
         
         Debug.Log("Rearview mirror clicked!");
-    }
+    } */
 
-    public void BackButton() {
+    /* public void BackButton() {
         //dialogueManager.ExitRMM();
 
         StartCoroutine(EndDollyMovement());
-    }
+    } */
 
-    public override IEnumerator StartDollyMovement() {
+    /* public override IEnumerator StartDollyMovement() {
         while (splineDolly.CameraPosition < 1 || cinemachineCam.Lens.FieldOfView > 30) {
             if (cinemachineCam.Lens.FieldOfView > 30) {
                 toonCamera.fieldOfView -= 0.6f;
@@ -72,5 +72,5 @@ public class RearviewMirror : GPS
         }
         cinemachineCam.LookAt = cameraLookAt.transform;
         GameStateManager.SetState(GAMESTATE.PLAYING);
-    }
+    } */
 }

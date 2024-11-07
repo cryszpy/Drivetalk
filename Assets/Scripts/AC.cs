@@ -94,7 +94,7 @@ public class AC : UIElementSlider
         CarController.Temperature = (((dialObject.transform.localEulerAngles.y - rotationMin) * newRange) / oldRange) + 0;
     }
 
-    public override IEnumerator StartDollyMovement() {
+    /* public override IEnumerator StartDollyMovement() {
         while (splineDolly.CameraPosition < 1 || cinemachineCam.Lens.FieldOfView > 30) {
             if (cinemachineCam.Lens.FieldOfView > 30) {
                 toonCamera.fieldOfView -= 0.6f;
@@ -134,5 +134,5 @@ public class AC : UIElementSlider
         cinemachineCam.LookAt = cameraLookAt.transform;
         GameStateManager.SetState(GAMESTATE.PLAYING);
         screenUI.SetActive(false);
-    }
+    } */
 }
