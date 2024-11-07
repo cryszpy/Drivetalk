@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSeen: 0
   choiceText: ...
-  nextDialogue: {fileID: 11400000, guid: 0d8332b95f90d4af1b17d7bb66cecf38, type: 2}
+  nextDialogue: {fileID: 11400000, guid: 3cab54256bb09410d99196ef792371a5, type: 2}

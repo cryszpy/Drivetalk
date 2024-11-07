@@ -21,7 +21,7 @@ MonoBehaviour:
   sentences:
   - "anyways! now that you\u2019re back in town, i guess we\u2019ll be seeing each
     other more often"
-  - "it\u2019s been a while since we\u2019ve have the chance to talk like this"
+  - "it\u2019s been a while since we\u2019ve had the chance to talk like this"
   - i have a lot of questions for ya!
   - are you enjoying this playtest?!?!
   nextDialogue: {fileID: 0}
