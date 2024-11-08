@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 147003959625634248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0.25, y: 2, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  adjacentMarkers:
-  - {fileID: 5862388190964601231}
+  adjacentMarkers: []
   openForConnections: 1
   gCost: 0
   hCost: 0
@@ -502,6 +501,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2306384125491155349}
+  - {fileID: 6171995487769859238}
+  - {fileID: 5291663088158557112}
   - {fileID: 2521037381710996943}
   - {fileID: 1930422552792187025}
   - {fileID: 497519813929532219}
@@ -515,6 +516,55 @@ Transform:
   - {fileID: 7770580878866795794}
   m_Father: {fileID: 1824541166749964565}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &3201685358665010340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6171995487769859238}
+  - component: {fileID: 5962623356265296262}
+  m_Layer: 0
+  m_Name: Marker Red (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6171995487769859238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201685358665010340}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 2, z: -0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5659417265301720372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5962623356265296262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201685358665010340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  adjacentMarkers: []
+  openForConnections: 1
+  gCost: 0
+  hCost: 0
 --- !u!1 &3464190535924921968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1144,55 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6819011389550141119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5291663088158557112}
+  - component: {fileID: 124309941682658005}
+  m_Layer: 0
+  m_Name: Marker Red (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5291663088158557112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819011389550141119}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5659417265301720372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &124309941682658005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819011389550141119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  adjacentMarkers: []
+  openForConnections: 1
+  gCost: 0
+  hCost: 0
 --- !u!1 &6894637158787704164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,6 +1476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 2540272513354946645}
+  - {fileID: 5962623356265296262}
+  - {fileID: 124309941682658005}
   isCorner: 0
   centerDivider: {fileID: 0}
   incomingMarkers: []

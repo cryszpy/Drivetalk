@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -42,7 +43,6 @@ public class Road : MonoBehaviour
             {
                 if (marker.OpenForConnections && marker.adjacentMarkers.Count <= 1)
                 {
-                    Debug.Log(marker.adjacentMarkers.Count);
                     // Find the closest marker in the adjacent road piece
                     Marker closestMarker = FindClosestMarkerOnAdjacentRoad(marker, adjacentRoad);
                     if (closestMarker != null)
@@ -75,7 +75,7 @@ public class Road : MonoBehaviour
                 }
             }
         }
-
+        Debug.Log(closestMarker);
         return closestMarker;
     }
 }

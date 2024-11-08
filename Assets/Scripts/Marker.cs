@@ -50,7 +50,7 @@ public class Marker : MonoBehaviour
         }
     }
     
-    /* private void OnDrawGizmos() {
+    private void OnDrawGizmos() {
 
         if (Selection.activeObject == gameObject) {
 
@@ -64,5 +64,5 @@ public class Marker : MonoBehaviour
             }
             Gizmos.color = Color.white;
         }
-    } */
+    }
 }

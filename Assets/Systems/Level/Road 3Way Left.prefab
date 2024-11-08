@@ -452,6 +452,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3064284334806631711}
+  - {fileID: 8282757544593710049}
+  - {fileID: 6785982936830640708}
   - {fileID: 2521037381710996943}
   - {fileID: 1930422552792187025}
   - {fileID: 497519813929532219}
@@ -465,6 +467,55 @@ Transform:
   - {fileID: 7770580878866795794}
   m_Father: {fileID: 1824541166749964565}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2747968134932224625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6785982936830640708}
+  - component: {fileID: 3622518162704464120}
+  m_Layer: 0
+  m_Name: Marker Red (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6785982936830640708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747968134932224625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5659417265301720372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3622518162704464120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747968134932224625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  adjacentMarkers: []
+  openForConnections: 1
+  gCost: 0
+  hCost: 0
 --- !u!1 &3464190535924921968
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +852,7 @@ Transform:
   m_GameObject: {fileID: 5432834543160676271}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0.25, y: 2, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -820,8 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  adjacentMarkers:
-  - {fileID: 5862388190964601231}
+  adjacentMarkers: []
   openForConnections: 1
   gCost: 0
   hCost: 0
@@ -1377,6 +1427,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 7170865218709868804}
+  - {fileID: 4706669633265043502}
+  - {fileID: 3622518162704464120}
   isCorner: 0
   centerDivider: {fileID: 0}
   incomingMarkers: []
@@ -1467,5 +1519,54 @@ MonoBehaviour:
   - {fileID: 1459651410527963062}
   - {fileID: 4975686916997725078}
   openForConnections: 0
+  gCost: 0
+  hCost: 0
+--- !u!1 &8636784141995714467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8282757544593710049}
+  - component: {fileID: 4706669633265043502}
+  m_Layer: 0
+  m_Name: Marker Red (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8282757544593710049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636784141995714467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 2, z: -0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5659417265301720372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4706669633265043502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636784141995714467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  adjacentMarkers: []
+  openForConnections: 1
   gCost: 0
   hCost: 0

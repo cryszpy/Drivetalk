@@ -2154,7 +2154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.29}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -739.99994, y: -394}
+  m_AnchoredPosition: {x: -740, y: -394}
   m_SizeDelta: {x: 2880, y: 360}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &386654514
@@ -4503,7 +4503,7 @@ MonoBehaviour:
   currentSongIndex: 0
   currentColor: {fileID: 0}
   songs:
-  - {fileID: 8300000, guid: 1b4d7c53d07a140fdaa05ec5846c5fb9, type: 3}
+  - {fileID: 8300000, guid: ff2caea576b9a485da9d4097386351bb, type: 3}
   - {fileID: 8300000, guid: 2afac0387cfdd4be4be15903ec4df039, type: 3}
   songColors:
   - {fileID: 2100000, guid: 848250051c7604217a5c00592d8d085e, type: 2}
