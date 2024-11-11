@@ -7,12 +7,8 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
+    [Tooltip("List of all car markers on this road piece.")]
     [SerializeField] protected List<Marker> carMarkers;
-    [SerializeField] protected bool isCorner;
-    public GameObject centerDivider;
-
-    public List<Marker> incomingMarkers;
-    public List<Marker> outgoingMarkers;
 
     // This is a helper function to connect the markers between adjacent road pieces.
     public void ConnectMarkersToAdjacentRoad(Road adjacentRoad)
@@ -75,7 +71,6 @@ public class Road : MonoBehaviour
                 }
             }
         }
-        Debug.Log(closestMarker);
         return closestMarker;
     }
 }

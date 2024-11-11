@@ -10,13 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_0
+  m_Name: maxine_4
   m_EditorClassIdentifier: 
   sentences:
-  - oh it's you.
-  - so you're back in town?
-  - hmmmmmmmmmmm
-  - ...
-  - hmph.
-  nextDialogue: {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}
+  - AWHIFOAIHGLAJGLAKGW
+  nextDialogue: {fileID: 0}
   choices: []

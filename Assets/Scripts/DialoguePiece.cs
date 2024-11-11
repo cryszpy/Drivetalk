@@ -1,40 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InterjectionType {
-    NONE, SMALL_TALK, DASH_REQUEST
-}
-
 [CreateAssetMenu(menuName = "ScriptableObjects/DialoguePiece")]
 public class DialoguePiece : ScriptableObject
 {
-    public InterjectionType interjectionType;
-    public DashRequestRequirement dashRequirement;
-    
-    public bool seen;
 
+    [Tooltip("This dialogue piece's total sentences.")]
     [TextArea(3, 10)]
     public string[] sentences;
 
+    [Tooltip("The next dialogue piece to play after this piece.")]
     public DialoguePiece nextDialogue;
 
+    [Tooltip("Boolean flag; Whether this dialogue piece contains the first mention of the passenger's name.")]
+    public bool firstNameUsage = false;
+
+    [Tooltip("Any choices that must be made after this piece of dialogue ends.")]
     public DialogueChoice[] choices;
-}
-
-[System.Serializable]
-public struct DashRequestRequirement {
-    public DashRequestType reqType;
-
-    public ACSetting acSetting;
-
-    public float statToCheck;
-}
-
-public enum DashRequestType {
-    NONE,
-    AC_SETTING,
-    HORN, 
-    RADIO_VOLUME,
-    RADIO_SONG,
-    CIGARETTE
 }

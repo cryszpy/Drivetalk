@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RoadManager : MonoBehaviour
 {
+    [Tooltip("List of all roads in the game's map.")]
     public List<Road> allRoads; // List of all road pieces in the scene
 
     private void Awake()

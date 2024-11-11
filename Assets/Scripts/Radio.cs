@@ -4,19 +4,31 @@ using UnityEngine.Audio;
 
 public class Radio : MonoBehaviour
 {
+    [Tooltip("Reference to the radio's mesh renderer component.")]
     public MeshRenderer meshRenderer;
 
+    [Tooltip("Reference to the current song's audio clip component.")]
     public AudioClip currentSong;
+
+    [Tooltip("Current song's index number in list of total songs.")]
     [HideInInspector] public int currentSongIndex;
+
+    [Tooltip("Reference to the current song's color material.")]
     public Material currentColor;
 
+    [Tooltip("Array of all radio song audio clip components.")]
     public AudioClip[] songs;
+
+    [Tooltip("Array of all radio song material colors.")]
     public Material[] songColors;
 
+    [Tooltip("Reference to the radio's audio source component.")]
     public AudioSource audioSource;
 
+    [Tooltip("Boolean flag; Checks whether a song is currently playing.")]
     [HideInInspector] public bool isSongPlaying;
 
+    [Tooltip("Timer to track progress through the current radio song.")]
     [HideInInspector] public float songTimer;
 
     void Start() {
@@ -27,6 +39,7 @@ public class Radio : MonoBehaviour
         } else {
             audioSource = gameObject.AddComponent<AudioSource>();
 
+            // Assigns radio song variables (volume, pitch, 2D/3D spatial blend, etc)
             audioSource.playOnAwake = false;
             audioSource.loop = false;
 
@@ -37,11 +50,13 @@ public class Radio : MonoBehaviour
             Debug.LogWarning("Radio audio source component was missing! Added.");
         }
 
+        // If there are songs able to be played—
         if (songs.Length > 0) {
 
             // Chooses a random radio song to start out with
             currentSongIndex = Random.Range(0, songs.Length);
 
+            // Sets the first radio song upon opening the game
             SetRadioSong(currentSongIndex);
 
             Debug.Log("First radio song is: " + currentSong.name);
@@ -74,13 +89,21 @@ public class Radio : MonoBehaviour
     // Increments song number
     public void IncrementSongNumber(int value) {
 
+        // If the incremented song index would be out of the list bounds—
         if (currentSongIndex + value > songs.Length - 1) {
+
+            // Reset to 0
             currentSongIndex = 0;
         } 
+        // If the incremented song index would be under 0 (not in list)
         else if (currentSongIndex + value < 0) {
+
+            // Reset to last song in the songs list
             currentSongIndex = songs.Length - 1;
         }
         else {
+
+            // Increment song number
             currentSongIndex += value;
         }
     }
@@ -88,6 +111,7 @@ public class Radio : MonoBehaviour
     // Starts playing a song on the radio
     public void SetRadioSong(int index) {
 
+        // Sets current radio song and radio color
         currentSongIndex = index;
 
         currentSong = songs[currentSongIndex];

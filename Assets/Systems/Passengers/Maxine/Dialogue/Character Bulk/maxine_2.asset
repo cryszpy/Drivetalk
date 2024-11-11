@@ -12,19 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: maxine_2
   m_EditorClassIdentifier: 
-  interjectionType: 0
-  dashRequirement:
-    reqType: 0
-    acSetting: 0
-    statToCheck: 0
-  seen: 0
   sentences:
   - hey... do you mind turning the heat down a bit?
   - it's getting kinda warm in here
   - i know you just came back but if you want people to come back in this busted
     taxi of yours
   - you're gonna need to pay attention to the comfortability of your passengers!
-  - "y\u2019know most people arent gonna tell u this kinda stuff right?"
-  - thats because a skilled taxi driver doesnt need to be told!
-  nextDialogue: {fileID: 0}
+  - "y\u2019know most people aren't gonna tell u this kinda stuff right?"
+  - that's because a skilled taxi driver doesnt need to be told!
+  nextDialogue: {fileID: 11400000, guid: 5ad7b10915eb241c7ab966016323c409, type: 2}
   choices: []

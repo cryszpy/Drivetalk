@@ -237,25 +237,15 @@ MonoBehaviour:
   rarity: 1
   id: 4
   passengerName: Maxine
+  hiddenName: Maxine
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   requirements: []
   requirementMet: 0
   textCPS: 0.05
-  choiceNotifSolidTime: 2
-  choiceNotifFlashTime: 1.5
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
-  interjectionChance: 0.95
-  interjectionPreferenceThreshold: 0.01
-  dashRequestTime: 10
-  dashRequestTickRate: 2
-  interjections: []
-  currentDialogueNum: 0
-  dialogueLeftToFinish: 2
+  hasStartedRideDialogue: 0
   dialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
-  - {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}
-  - {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
-  - {fileID: 11400000, guid: 5ad7b10915eb241c7ab966016323c409, type: 2}
-  - {fileID: 11400000, guid: 8ccaf4178beec4168aa382e3701ce2cb, type: 2}
+  - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}

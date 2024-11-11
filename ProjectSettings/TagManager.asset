@@ -13,6 +13,7 @@ TagManager:
   - DialogueBox
   - DialogueText
   - CarPointer
+  - NameBox
   layers:
   - Default
   - TransparentFX

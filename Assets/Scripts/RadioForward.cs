@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class RadioForward : UIElementButton
 {
+    [Tooltip("Reference to the car's radio.")]
     public Radio radio;
 
     public override void Update() {
+
+        // If button is hovered over—
         if (hovered) {
             // If this UI element is clicked—
             if (Input.GetMouseButtonDown(0))
@@ -36,30 +39,31 @@ public class RadioForward : UIElementButton
         }
     }
 
+    // Function to be executed when button is clicked
     public override void OnClick()
     {
         base.OnClick();
 
+        // Skips to the next radio song
         SkipRadioSong();
 
         Debug.Log("Radio song skipped!");
     }
 
-    public override void OnHover()
-    {
-        base.OnHover();
-    }
-
+    // Skips to the next radio song
     public void SkipRadioSong() {
 
         // Reset song progress tracker
         radio.isSongPlaying = false;
         radio.songTimer = 0;
 
+        // Stops current song
         radio.audioSource.Stop();
 
+        // Increments song number
         radio.IncrementSongNumber(1);
         
+        // Sets current radio song to incremented index number
         radio.SetRadioSong(radio.currentSongIndex);
     }
 }

@@ -9,29 +9,37 @@ public class CarPointer : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
+    [Tooltip("List of all taxi stops in the game.")]
     public List<GameObject> taxiStops = new();
-    public List<GameObject> destinations = new();
 
+    [Tooltip("The car pointer's Rigidbody component.")]
     [SerializeField] private Rigidbody rb;
 
+    [Tooltip("The car pointer's Navigation Mesh AI agent component.")]
     public NavMeshAgent agent;
+
+    [Tooltip("Reference to the current taxi stop.")]
+    public GameObject currentStop;
 
     [Header("STATS")]
 
+    [Tooltip("List of all road markers on the game's map.")]
     public List<Marker> allMarkers = new();
 
-    // Current destination marker for pathfinding
+    [Tooltip("Reference to the currently tracked road marker for navigation purposes.")]
     public Marker currentMarker;
+
+    [Tooltip("Reference to the destination target's closest road marker.")]
     public Marker destinationMarker;
+
+    [Tooltip("Reference to the destination target object.")]
     public GameObject destinationObject;
 
+    [Tooltip("The current car navigation route's path to the destination.")]
     public List<Marker> path = new();
 
+    [Tooltip("Boolean flag; Checks if the car pointer has arrived at the destination.")]
     public bool arrived;
-
-    public bool atTaxiStop = true;
-
-    public GameObject currentStop;
 
     private void Start() {
 
@@ -41,14 +49,18 @@ public class CarPointer : MonoBehaviour
 
     private void Update() {
 
+        // If the car pointer has calculated a route, and the game is not in a menu or paused—
         if (path != null && path.Count > 0 && (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU))
         {
+            // Move the car pointer along the route
             MoveAlongPath();
         }
     }
 
+    // Calculate the closest route through the road layout to the destination passed in
     public void StartDrive(GameObject destination) {
 
+        // Set the car pointer's destination
         destinationObject = destination;
         
         // Find the closest marker to the car's starting position
@@ -67,9 +79,10 @@ public class CarPointer : MonoBehaviour
         }
     }
 
-    // Move the car along the path
+    // Move the car pointer along the path
     private void MoveAlongPath()
     {
+        // If the route has ended, return from function and do nothing
         if (path.Count == 0) return;
 
         // Move towards the next marker in the path
@@ -77,9 +90,6 @@ public class CarPointer : MonoBehaviour
 
         // Move the car towards the position of the next marker
         agent.SetDestination(nextMarker.transform.position);
-        //transform.position = Vector3.MoveTowards(transform.position, nextMarker.Position, agent.speed * Time.deltaTime);
-
-        //Debug.Log(Vector3.Distance(transform.position, nextMarker.Position));
 
         // If the car reaches the next marker, remove it from the path
         if (Vector3.Distance(transform.position, nextMarker.Position) < 4f)
@@ -92,14 +102,17 @@ public class CarPointer : MonoBehaviour
     // Find the closest marker to the car's current position
     private Marker FindClosestMarker()
     {
+        // Set temporary variables
         Marker closestMarker = null;
         float closestDistance = float.MaxValue;
 
-        // Iterate through all markers to find the closest one in the right lane
+        // Iterate through all markers to find the closest one
         foreach (var marker in allMarkers)
         {
-            // Only consider markers that are in the right lane
+            // Calculates the distance between current marker and iterated marker
             float distance = Vector3.Distance(transform.position, marker.Position);
+
+            // If the marker's distance is lower than the previously calculated distance, set it to this distance
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -107,31 +120,37 @@ public class CarPointer : MonoBehaviour
             }
         }
 
+        // Returns the marker with the shortest distance to the current marker
         return closestMarker;
     }
 
-    // Find the destination marker based on gameplay (for example, using a target object in the scene)
+    // Finds the closest marker to the set destination
     private Marker FindDestinationMarker()
     {
-        // For example, find a destination marker based on a GameObject or tag
+        // If the destination has been set—
         if (destinationObject != null)
         {
+            // Find the closest marker to the destination
             return FindClosestMarkerToObject(destinationObject);
         }
 
-        return null;  // In case no destination was found (could also use a default marker)
+        return null;  // In case no destination was found
     }
 
-    // Helper function to find the closest marker to a specific GameObject (e.g., the destination)
+    // Finds the closest marker to a specific GameObject (e.g., the destination)
     private Marker FindClosestMarkerToObject(GameObject target)
     {
+        // Set temporary variables
         Marker closestMarker = null;
         float closestDistance = float.MaxValue;
 
         // Iterate through all markers to find the closest one to the target GameObject
         foreach (var marker in allMarkers)
         {
+            // Calculates the distance between current marker and iterated marker
             float distance = Vector3.Distance(target.transform.position, marker.Position);
+
+            // If the marker's distance is lower than the previously calculated distance, set it to this distance
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -139,9 +158,11 @@ public class CarPointer : MonoBehaviour
             }
         }
 
+        // Returns the marker with the shortest distance to the current marker
         return closestMarker;
     }
 
+    // Helper debug tools to visualize navigation's shortest calculated path
     private void OnDrawGizmos()
     {
         // Visualize the path using Gizmos
@@ -153,20 +174,5 @@ public class CarPointer : MonoBehaviour
                 Gizmos.DrawLine(path[i].Position, path[i + 1].Position);
             }
         }
-    }
-
-    private void FindNearestStop() {
-        List<float> stopDistances = new();
-
-        foreach (var stop in taxiStops) {
-            float distance = Vector3.Distance(stop.transform.position, rb.position);
-            stopDistances.Add(distance);
-        }
-        
-        if (stopDistances.Count != 0) {
-            agent.SetDestination(taxiStops[stopDistances.IndexOf(stopDistances.Min())].transform.position);
-        }
-
-        arrived = false;
     }
 }

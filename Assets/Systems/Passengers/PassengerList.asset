@@ -18,10 +18,11 @@ MonoBehaviour:
   - 0.9
   - 1
   passengerQueue: []
-  storyPassengers: []
-  exhaustedStory: []
-  tierOnePassengers:
+  storyPassengers:
   - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
+  - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
+  exhaustedStory: []
+  tierOnePassengers: []
   exhaustedTierOne: []
   tierTwoPassengers: []
   exhaustedTierTwo: []
