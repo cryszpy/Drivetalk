@@ -30,6 +30,9 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the name box text element.")]
     public TMP_Text nameBoxText;
 
+    [Tooltip("Reference to the transcript log object.")]
+    public TranscriptLog transcriptLog;
+
     /* public TMP_Text RMM_dialogueText;
     public GameObject RMM_dialogueBox; */
 
@@ -231,6 +234,15 @@ public class DialogueManager : MonoBehaviour
         if (dialogueAnimator == null) {
             dialogueAnimator = dash_dialogueBox.GetComponent<Animator>();
             Debug.LogWarning("Dialogue box Animator component was null! Reassigned.");
+        }
+
+        if (transcriptLog == null) {
+            if (GameObject.FindGameObjectWithTag("TranscriptLog").TryGetComponent<TranscriptLog>(out var script)) {
+                transcriptLog = script;
+                Debug.LogWarning("Transcript log TranscriptLog component was null! Reassigned.");
+            } else {
+                Debug.LogError("Could not find transcript log TranscriptLog component!");
+            }
         }
     }
     
@@ -452,9 +464,10 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     private IEnumerator TypeSentence(string sentence) {
 
-        // PUT TRANSCRIPT LOG FUNCTIONALITY HERE
-
         Debug.Log(sentence);
+
+        transcriptLog.LogText(sentence, car.currentPassenger.passengerName);
+
         //RMM_dialogueText.text = "";
 
         // Initializes empty text to start typing

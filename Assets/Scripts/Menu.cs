@@ -39,6 +39,9 @@ public class Menu : MonoBehaviour
     [Tooltip("Reference to the pause menu settings buttons.")]
     [SerializeField] private GameObject pauseMenuSettings;
 
+    [Tooltip("Reference to the transcript log object.")]
+    [SerializeField] private GameObject transcriptScreen;
+
     [Tooltip("Reference to the transition time for going back to the main menu.")]
     [SerializeField] private float transitionTime;
 
@@ -155,6 +158,7 @@ public class Menu : MonoBehaviour
             pauseMenu.SetActive(false);
             pauseScreen.SetActive(false);
             pauseMenuSettings.SetActive(false);
+            transcriptScreen.SetActive(false);
         } 
         // PAUSE
         else if (GameStateManager.Gamestate == GAMESTATE.PLAYING){
@@ -166,6 +170,7 @@ public class Menu : MonoBehaviour
             pauseScreen.SetActive(true);
             pauseMenu.SetActive(true);
             pauseMenuSettings.SetActive(false);
+            transcriptScreen.SetActive(false);
         }
     }
 
@@ -176,9 +181,28 @@ public class Menu : MonoBehaviour
         if (!pauseMenuSettings.activeInHierarchy) {
             pauseScreen.SetActive(false);
             pauseMenuSettings.SetActive(true);
+            transcriptScreen.SetActive(false);
         } 
         // HIDE
         else if (pauseMenuSettings.activeInHierarchy) {
+            pauseMenuSettings.SetActive(false);
+            pauseScreen.SetActive(true);
+            transcriptScreen.SetActive(false);
+        }
+    }
+
+    // Toggles transcript log screen
+    public void ToggleTranscriptLog() {
+
+        // SHOW
+        if (!transcriptScreen.activeInHierarchy) {
+            transcriptScreen.SetActive(true);
+            pauseScreen.SetActive(false);
+            pauseMenuSettings.SetActive(false);
+        } 
+        // HIDE
+        else if (transcriptScreen.activeInHierarchy) {
+            transcriptScreen.SetActive(false);
             pauseMenuSettings.SetActive(false);
             pauseScreen.SetActive(true);
         }

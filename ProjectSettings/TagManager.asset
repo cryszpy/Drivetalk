@@ -14,6 +14,7 @@ TagManager:
   - DialogueText
   - CarPointer
   - NameBox
+  - TranscriptLog
   layers:
   - Default
   - TransparentFX
