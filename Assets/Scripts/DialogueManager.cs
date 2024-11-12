@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,12 +45,17 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the current dialogue piece.")]
     public DialoguePiece currentDialogue;
 
+    [Tooltip("The current sentence from the current dialogue piece.")]
+    private string currentSentence;
+
     [Tooltip("Reference to the dialogue piece directly before the most recent choices branch.")]
     private DialoguePiece preChoiceDialogue;
 
     [Tooltip("List of all choice buttons in a choice branch.")]
     [SerializeField] private List<GameObject> choiceButtonsList;
 
+    [Tooltip("Reference to the skip dialogue indicator image.")]
+    [SerializeField] private GameObject skipIndicator;
     /* public GameObject choiceNotif;
 
     [SerializeField] private RearviewMirror rearviewMirror; */
@@ -59,8 +65,15 @@ public class DialogueManager : MonoBehaviour
     /* [SerializeField] private float choicesNotifSolid;
     [SerializeField] private float choicesNotifFlashing; */
 
+    [Tooltip("Boolean flag; Checks if a sentence is being typed out.")]
+    public bool typingSentence = false;
+
     [Tooltip("Boolean flag; Checks if the current dialogue piece is a choice branch.")]
     public bool playingChoices = false;
+
+    [Tooltip("Static boolean flag; Checks whether automatic dialogue playing is enabled.")]
+    private static bool autoDialogue;
+    public bool AutoDialogue { get => autoDialogue; set => autoDialogue = value;}
 
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
@@ -78,6 +91,21 @@ public class DialogueManager : MonoBehaviour
 
         // Assigns any missing script references
         FindReferences();
+
+        // Hides the skip indicator
+        skipIndicator.SetActive(false);
+
+        // Disables automatic dialogue as the default option
+        AutoDialogue = false;
+    }
+
+    private void Update() {
+        if (typingSentence && !AutoDialogue && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && currentSentence != null) {
+                dash_dialogueText.text = currentSentence;
+                typingSentence = false;
+            }
+        }
     }
 
     /* private void Update() {
@@ -234,6 +262,11 @@ public class DialogueManager : MonoBehaviour
         if (dialogueAnimator == null) {
             dialogueAnimator = dash_dialogueBox.GetComponent<Animator>();
             Debug.LogWarning("Dialogue box Animator component was null! Reassigned.");
+        }
+
+        if (skipIndicator == null) {
+            skipIndicator = GameObject.FindGameObjectWithTag("SkipIndicator");
+            Debug.LogWarning("Skip indicator GameObject was null! Reassigned.");
         }
 
         if (transcriptLog == null) {
@@ -464,6 +497,10 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     private IEnumerator TypeSentence(string sentence) {
 
+        currentSentence = sentence;
+
+        skipIndicator.SetActive(false);
+
         Debug.Log(sentence);
 
         transcriptLog.LogText(sentence, car.currentPassenger.passengerName);
@@ -473,22 +510,59 @@ public class DialogueManager : MonoBehaviour
         // Initializes empty text to start typing
         dash_dialogueText.text = "";
 
+        // Indicates that a sentence is being typed out
+        typingSentence = true;
+
         // For every character in the sentence
         foreach (char letter in sentence.ToCharArray()) {
 
-            // Types the character and adds it to the current sentence display
-            dash_dialogueText.text += letter;
-            //RMM_dialogueText.text += letter;
+            if (typingSentence) {
 
-            // Waits for the typing speed time
-            yield return new WaitForSeconds(car.currentPassenger.textCPS);
+                // Types the character and adds it to the current sentence display
+                dash_dialogueText.text += letter;
+                //RMM_dialogueText.text += letter;
+
+                // Waits for the typing speed time
+                yield return new WaitForSeconds(car.currentPassenger.textCPS);
+
+            } else {
+                Debug.Log("Skipped typing!");
+                break;
+            }
         }
 
-        // Waits for the passenger's hold-dialogue-on-screen time
-        yield return new WaitForSeconds(car.currentPassenger.holdTime);
+        typingSentence = false;
 
-        // Displays next sentence if available
+        if (AutoDialogue) {
+
+            // Waits for the passenger's hold-dialogue-on-screen time
+            yield return new WaitForSeconds(car.currentPassenger.holdTime);
+
+            // Displays next sentence if available
+            DisplayNextSentence();
+        } else {
+            StartCoroutine(WaitForSkip(KeyCode.Mouse0, sentence));
+        }
+    }
+
+    // If automatic dialogue is turned off, waits until player manually progresses dialogue
+    public IEnumerator WaitForSkip(KeyCode key, string sentence) {
+        Debug.Log("Starting to wait for skip!");
+
+        skipIndicator.SetActive(true);
+
+        bool done = false;
+        while (!done) {
+            if (Input.GetKeyDown(key) && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
+                done = true;
+            }
+            yield return 0;
+        }
+
+        // Run after player skips
+        dash_dialogueText.text = sentence;
         DisplayNextSentence();
+        yield return null;
     }
 
     // Starts the first ride dialogue

@@ -15,6 +15,7 @@ TagManager:
   - CarPointer
   - NameBox
   - TranscriptLog
+  - SkipIndicator
   layers:
   - Default
   - TransparentFX
