@@ -19,16 +19,8 @@ public class Destination : MonoBehaviour
                 // Set the car's script reference to the script pulled from collision
                 car = script;
 
-                // Set the car's current stop to this stop
-                car.currentStop = gameObject;
-
-                car.arrived = true; // TODO: only set this when trip summary is over and it's time to get back to driving
-
-                // If the car has a passenger—
-                if (car.currentPassenger){
-
-                    // Drops the current passenger off
-                    DropOffPassenger();
+                if (car.currentPassenger == null && !car.carPointer.finishedDialogue) {
+                    car.arrived = true;
                 }
 
             } else {
@@ -36,6 +28,34 @@ public class Destination : MonoBehaviour
             }
 
             // PUT TRIP SUMMARY CODE HERE? MAYBE?
+        }
+    }
+
+    private void OnTriggerStay (Collider collider) {
+
+        // If the car has been collided with—
+        if (collider.CompareTag("CarFrame") && !car.dialogueManager.triggerDropoff) {
+
+            if (car) {
+                if (car.carPointer.finishedDialogue && car.currentPassenger) {
+
+                    car.dialogueManager.triggerDropoff = true;
+
+                    car.carPointer.destinationRadius.setBlock = false;
+
+                    // Set the car's current stop to this stop
+                    car.currentStop = gameObject;
+
+                    car.arrived = true; // TODO: only set this when trip summary is over and it's time to get back to driving
+
+                    // If the car has a passenger—
+                    if (car.currentPassenger){
+
+                        // Drops the current passenger off
+                        DropOffPassenger();
+                    }
+                }
+            }
         }
     }
 

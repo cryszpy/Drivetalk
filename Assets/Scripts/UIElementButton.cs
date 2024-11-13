@@ -36,10 +36,7 @@ public class UIElementButton : MonoBehaviour
             mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
         }
-        if (!dialogueManager) {
-            dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-            Debug.LogWarning("Dialogue manager not assigned! Reassigned.");
-        }
+        dialogueManager = GameStateManager.dialogueManager;
     }
 
     public virtual void Update() {

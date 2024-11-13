@@ -16,12 +16,12 @@ public class AudioManager : MonoBehaviour
     void Awake() {
 
         // Singleton pattern
-        if (instance != null) {
+        /* if (instance != null) {
             Destroy(gameObject);
         } else {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
+        } */
 
         // Loops through each sound in the array
         foreach (Sound s in sounds) {

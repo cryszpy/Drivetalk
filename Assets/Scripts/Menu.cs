@@ -6,6 +6,9 @@ using UnityEngine.Splines;
 
 public class Menu : MonoBehaviour
 {
+    [Tooltip("Reference to the global audio manager.")]
+    [SerializeField] private AudioManager audioManager;
+
     [Tooltip("Reference to the list of all passengers in the game.")]
     public PassengerList passengerList;
 
@@ -68,6 +71,18 @@ public class Menu : MonoBehaviour
             // Sets the camera focal point script reference
             cameraLookAt = script;
         }
+
+        // Ensure upon reloading of the scene that singleton pattern references are assigned
+        GameStateManager.dialogueManager.FindReferences();
+
+        // Hide menu screens on game start
+        pauseMenu.SetActive(false);
+        pauseScreen.SetActive(false);
+        pauseMenuSettings.SetActive(false);
+        transcriptScreen.SetActive(false);
+
+        // Hides the skip indicator
+        GameStateManager.dialogueManager.skipIndicator.SetActive(false);
 
         Debug.Log("OPENED GAME!");
     }
@@ -218,7 +233,7 @@ public class Menu : MonoBehaviour
     public void PlayButton() {
         passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
         StartCoroutine(StartDollyMovement());
-        AudioManager.instance.PlaySoundByName("Engine");
+        audioManager.PlaySoundByName("Engine");
     }
 
     // Quits the game (called from button script assignment)

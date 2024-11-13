@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public enum DialogueMode {
@@ -15,6 +16,9 @@ public class DialogueManager : MonoBehaviour
     [Header("SCRIPT REFERENCES")]
 
     /* public DialogueMode mode; */
+
+    [Tooltip("Reference to the car pointer's script component.")]
+    public CarPointer carPointer;
     
     [Tooltip("Reference to the car's script component.")]
     public CarController car;
@@ -40,7 +44,7 @@ public class DialogueManager : MonoBehaviour
     //[SerializeField] private Animator choiceNotifAnimator;
 
     [Tooltip("Queued list of all sentences to say from current dialogue piece.")]
-    public Queue<string> sentences;
+    public Queue<string> sentences = new();
 
     [Tooltip("Reference to the current dialogue piece.")]
     public DialoguePiece currentDialogue;
@@ -55,7 +59,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private List<GameObject> choiceButtonsList;
 
     [Tooltip("Reference to the skip dialogue indicator image.")]
-    [SerializeField] private GameObject skipIndicator;
+    public GameObject skipIndicator;
+
+    public Toggle autoDialogueToggle;
     /* public GameObject choiceNotif;
 
     [SerializeField] private RearviewMirror rearviewMirror; */
@@ -72,8 +78,9 @@ public class DialogueManager : MonoBehaviour
     public bool playingChoices = false;
 
     [Tooltip("Static boolean flag; Checks whether automatic dialogue playing is enabled.")]
-    private static bool autoDialogue;
-    public bool AutoDialogue { get => autoDialogue; set => autoDialogue = value;}
+    public bool autoDialogue = false;
+
+    public bool triggerDropoff = false;
 
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
@@ -84,23 +91,8 @@ public class DialogueManager : MonoBehaviour
     public float dashTicker;
     public DashRequestRequirement currentDashReq; */
 
-    private void Start() {
-
-        // Initializes sentences queue
-        sentences = new Queue<string>();
-
-        // Assigns any missing script references
-        FindReferences();
-
-        // Hides the skip indicator
-        skipIndicator.SetActive(false);
-
-        // Disables automatic dialogue as the default option
-        AutoDialogue = false;
-    }
-
     private void Update() {
-        if (typingSentence && !AutoDialogue && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
+        if (typingSentence && !autoDialogue && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
             if (Input.GetKeyDown(KeyCode.Mouse0) && currentSentence != null) {
                 dash_dialogueText.text = currentSentence;
                 typingSentence = false;
@@ -230,53 +222,53 @@ public class DialogueManager : MonoBehaviour
     } */
     
     // Assigns any missing script references
-    private void FindReferences() {
+    public void FindReferences() {
 
-        if (car == null) {
-            if (GameObject.FindGameObjectWithTag("Car").TryGetComponent<CarController>(out var script)) {
-                car = script;
-                Debug.LogWarning("CarController component was null! Reassigned.");
+        if (!car) {
+            if (GameObject.FindGameObjectWithTag("Car").TryGetComponent<CarController>(out var carScript)) {
+                car = carScript;
+                carPointer = carScript.carPointer;
             } else {
                 Debug.LogError("Could not find CarController component!");
             }
         }
 
-        if (dash_dialogueText == null) {
-            if (GameObject.FindGameObjectWithTag("DialogueText").TryGetComponent<TMP_Text>(out var script)) {
-                dash_dialogueText = script;
-                Debug.LogWarning("Dialogue text TMP_Text component was null! Reassigned.");
+        if (!dash_dialogueText) {
+            if (GameObject.FindGameObjectWithTag("DialogueText").TryGetComponent<TMP_Text>(out var dialogueTextScript)) {
+                dash_dialogueText = dialogueTextScript;
             } else {
                 Debug.LogError("Could not find dialogue text TMP_Text component!");
             }
         }
 
-        if (dash_dialogueBox == null) {
+        if (!dash_dialogueBox) {
             dash_dialogueBox = GameObject.FindGameObjectWithTag("DialogueBox");
-            Debug.LogWarning("Dash dialogue box GameObject was null! Reassigned.");
         }
 
-        if (nameBoxText == null) {
+        if (!nameBoxText) {
             nameBoxText = GameObject.FindGameObjectWithTag("NameBox").GetComponentInChildren<TMP_Text>();
         }
 
-        if (dialogueAnimator == null) {
+        if (!dialogueAnimator) {
             dialogueAnimator = dash_dialogueBox.GetComponent<Animator>();
-            Debug.LogWarning("Dialogue box Animator component was null! Reassigned.");
         }
 
-        if (skipIndicator == null) {
+        if (!skipIndicator) {
             skipIndicator = GameObject.FindGameObjectWithTag("SkipIndicator");
-            Debug.LogWarning("Skip indicator GameObject was null! Reassigned.");
         }
 
-        if (transcriptLog == null) {
-            if (GameObject.FindGameObjectWithTag("TranscriptLog").TryGetComponent<TranscriptLog>(out var script)) {
-                transcriptLog = script;
-                Debug.LogWarning("Transcript log TranscriptLog component was null! Reassigned.");
-            } else {
-                Debug.LogError("Could not find transcript log TranscriptLog component!");
-            }
+        if (!transcriptLog) {
+            transcriptLog = GameObject.FindGameObjectWithTag("MainCanvas").GetComponentInChildren<TranscriptLog>();
         }
+
+        if (!autoDialogueToggle) {
+            autoDialogueToggle = GameObject.FindGameObjectWithTag("AutoDialogueToggle").GetComponent<Toggle>();
+            autoDialogueToggle.onValueChanged.AddListener(delegate { SetAutoDialogue(autoDialogueToggle.isOn); } );
+        }
+    }
+
+    public void SetAutoDialogue(bool value) {
+        autoDialogue = value;
     }
     
     // Starts a piece of dialogue
@@ -289,7 +281,6 @@ public class DialogueManager : MonoBehaviour
         int index = car.currentPassenger.dialogue.IndexOf(dialogue);
 
         int nameIndex = car.currentPassenger.dialogue.FindIndex(x => x.firstNameUsage == true);
-        Debug.Log(nameIndex);
 
         // Check whether this dialogue piece is before the passenger reveals their name or not
         bool nameCheck = index <= nameIndex;
@@ -412,7 +403,7 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
             // Dropoff dialogue
-            else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute) {
+            else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute && carPointer.finishedDialogue) {
 
                 // Starts the passenger's dropoff dialogue
                 DropoffDialogue();
@@ -533,7 +524,7 @@ public class DialogueManager : MonoBehaviour
 
         typingSentence = false;
 
-        if (AutoDialogue) {
+        if (autoDialogue) {
 
             // Waits for the passenger's hold-dialogue-on-screen time
             yield return new WaitForSeconds(car.currentPassenger.holdTime);
@@ -586,6 +577,11 @@ public class DialogueManager : MonoBehaviour
     public void DropoffDialogue() {
         Debug.Log("Dropped off passenger, and finished current dialogue piece!");
 
+        // Hide skip indicator if on
+        if (skipIndicator.activeInHierarchy) {
+            skipIndicator.SetActive(false);
+        }
+
         // Hide dialogue box UI
         dialogueAnimator.SetBool("Play", false);
 
@@ -605,40 +601,51 @@ public class DialogueManager : MonoBehaviour
 
         // Clear current passenger
         car.currentPassenger = null;
+
+        // Reset destination dropoff boolean check
+        triggerDropoff = false;
+
+        // Reset finished dialogue boolean check
+        carPointer.finishedDialogue = false;
     }
 
     // Ends dialogue and starts wait before next sentence group
     public void EndDialogue() {
         Debug.Log("Ended current ride dialogue!");
 
+        // Indicate the end of the ride dialogue
+        carPointer.finishedDialogue = true;
+
+        // If driving around aimlessly, start driving towards destination
+        if (!car.atTaxiStop) {
+            carPointer.SwitchToFinalDestination();
+        }
+
+        // Hide skip indicator if on
+        if (skipIndicator.activeInHierarchy) {
+            skipIndicator.SetActive(false);
+        }
+
         // Hide dialogue box UI
         dialogueAnimator.SetBool("Play", false);
 
         // Clear current dialogue
         currentDialogue = null;
-        
-        // SET SPEECH BUBBLE TO FADE AWAY
-
-        // Starts waiting
-        //StartCoroutine(WaitBetweenDialogue());
     }
 
     // Waits in between dialogue blocks
     private IEnumerator WaitBetweenDialogue() {
         Debug.Log("Waiting for next dialogue piece!");
 
+        // Hide skip indicator if on
+        if (skipIndicator.activeInHierarchy) {
+            skipIndicator.SetActive(false);
+        }
+
         // Plays the "hide dialogue UI box" animation
         dialogueAnimator.SetBool("Play", false);
 
-        //currentDialogue = null;
-        
-        // SET SPEECH BUBBLE TO FADE AWAY
-
         Debug.Log("Waiting...");
-
-        /* if (car.currentPassenger.currentRideNum == 0) {
-            car.atTaxiStop = true;
-        } */
 
         // Generates a random amount of time to wait from minimum and maximum possible wait times for the current passenger
         float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);

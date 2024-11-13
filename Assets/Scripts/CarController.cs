@@ -109,14 +109,7 @@ public class CarController : MonoBehaviour
         rearviewMirrorCam.projectionMatrix = mat; */
 
         // If dialogue manager is null, reassign it
-        if (dialogueManager == null) {
-            if (GameObject.FindGameObjectWithTag("DialogueManager").TryGetComponent<DialogueManager>(out var script)) {
-                dialogueManager = script;
-                Debug.LogWarning("Dialogue manager was not assigned! Reassigned.");
-            } else {
-                Debug.LogError("Could not find dialogue manager!");
-            }
-        }
+        dialogueManager = GameStateManager.dialogueManager;
 
         // If the day hasn't been started, generate random number of rides for today
         if (totalRideNum <= 0){

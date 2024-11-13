@@ -16,6 +16,12 @@ TagManager:
   - NameBox
   - TranscriptLog
   - SkipIndicator
+  - Destination
+  - DestinationRadius
+  - Block
+  - MainCanvas
+  - AutoDialogueToggle
+  - AudioManager
   layers:
   - Default
   - TransparentFX

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   openForConnections: 1
@@ -202,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 2972317962390968173}
   - {fileID: 2870421230441732106}
@@ -253,7 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 5862388190964601231}
   openForConnections: 1
@@ -411,7 +408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 5862388190964601231}
   openForConnections: 1
@@ -461,7 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   - {fileID: 3573227546049335129}
@@ -515,7 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 5250211017454140901}
   - {fileID: 8265541389520245506}
@@ -568,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 3438109441543801528}
   - {fileID: 2972317962390968173}
@@ -665,7 +658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 3438109441543801528}
   - {fileID: 2870421230441732106}
@@ -716,7 +708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 3573227546049335129}
   openForConnections: 1
@@ -766,7 +757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 3573227546049335129}
   openForConnections: 1
@@ -924,7 +914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   openForConnections: 1
@@ -974,7 +963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   openForConnections: 1
@@ -1024,7 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   - {fileID: 5862388190964601231}
@@ -1077,7 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 8557986294919766056}
   - {fileID: 3048284073907529215}
@@ -1454,7 +1440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   openForConnections: 1
@@ -1493,6 +1478,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7300035484046103559}
   - {fileID: 6292849471830796897}
   - {fileID: 5659417265301720372}
   m_Father: {fileID: 0}
@@ -1587,10 +1573,6 @@ MonoBehaviour:
   - {fileID: 3438109441543801528}
   - {fileID: 2972317962390968173}
   - {fileID: 2870421230441732106}
-  isCorner: 0
-  centerDivider: {fileID: 0}
-  incomingMarkers: []
-  outgoingMarkers: []
 --- !u!1 &7771417083249730246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,3 +1828,69 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8987382231414317564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7300035484046103559}
+  - component: {fileID: 4800088953638099606}
+  - component: {fileID: 4161346247669995982}
+  m_Layer: 0
+  m_Name: Block
+  m_TagString: Block
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7300035484046103559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987382231414317564}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1824541166749964565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4800088953638099606
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987382231414317564}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: -5, z: 0}
+--- !u!114 &4161346247669995982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987382231414317564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ceb0555136c6407f85ba4b88d0cde70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers: []
   openForConnections: 1
   gCost: 0
@@ -93,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   openForConnections: 1
@@ -251,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 5862388190964601231}
   openForConnections: 1
@@ -409,7 +406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   - {fileID: 3573227546049335129}
@@ -462,7 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 5250211017454140901}
   - {fileID: 8824386174298603868}
@@ -560,11 +555,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers: []
   openForConnections: 1
   gCost: 0
   hCost: 0
+--- !u!1 &3407284315847240197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3013870936472815834}
+  - component: {fileID: 6926749957677832672}
+  - component: {fileID: 2407752855429435992}
+  m_Layer: 0
+  m_Name: Block
+  m_TagString: Block
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3013870936472815834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407284315847240197}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1824541166749964565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6926749957677832672
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407284315847240197}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: -5, z: 0}
+--- !u!114 &2407752855429435992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407284315847240197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ceb0555136c6407f85ba4b88d0cde70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3464190535924921968
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 3573227546049335129}
   openForConnections: 1
@@ -767,7 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   openForConnections: 1
@@ -817,7 +875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   openForConnections: 1
@@ -867,7 +924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers:
   - {fileID: 4975686916997725078}
   - {fileID: 5862388190964601231}
@@ -919,7 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 8824386174298603868}
   - {fileID: 8557986294919766056}
@@ -1188,7 +1243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   adjacentMarkers: []
   openForConnections: 1
   gCost: 0
@@ -1345,7 +1399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   openForConnections: 1
@@ -1384,6 +1437,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3013870936472815834}
   - {fileID: 6292849471830796897}
   - {fileID: 5659417265301720372}
   m_Father: {fileID: 0}
@@ -1478,10 +1532,6 @@ MonoBehaviour:
   - {fileID: 2540272513354946645}
   - {fileID: 5962623356265296262}
   - {fileID: 124309941682658005}
-  isCorner: 0
-  centerDivider: {fileID: 0}
-  incomingMarkers: []
-  outgoingMarkers: []
 --- !u!1 &8526818454880150302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2860ea9a30ed8427e89742add48225a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   adjacentMarkers:
   - {fileID: 1459651410527963062}
   - {fileID: 4975686916997725078}

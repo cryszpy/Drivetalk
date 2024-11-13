@@ -9,14 +9,10 @@ public class CarPointer : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
-    [Tooltip("List of all taxi stops in the game.")]
-    public List<GameObject> taxiStops = new();
-
-    [Tooltip("The car pointer's Rigidbody component.")]
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private CarController car;
 
     [Tooltip("The car pointer's Navigation Mesh AI agent component.")]
-    public NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
 
     [Tooltip("Reference to the current taxi stop.")]
     public GameObject currentStop;
@@ -35,11 +31,22 @@ public class CarPointer : MonoBehaviour
     [Tooltip("Reference to the destination target object.")]
     public GameObject destinationObject;
 
+    public DestinationRadius destinationRadius;
+
+    [Tooltip("Reference to the last saved block that the car has been to.")]
+    public GameObject savedBlock;
+
+    [Tooltip("List of currently detected block markers to avoid.")]
+    public List<GameObject> currentBlocksList;
+
     [Tooltip("The current car navigation route's path to the destination.")]
     public List<Marker> path = new();
 
-    [Tooltip("Boolean flag; Checks if the car pointer has arrived at the destination.")]
-    public bool arrived;
+    [Tooltip("Reference to the saved destination set before destination is switched due to unfinished dialogue. SET DYNAMICALLY")]
+    public GameObject savedDestination;
+
+    [Tooltip("Boolean flag; Checks whether dialogue has finished or not.")]
+    public bool finishedDialogue;
 
     private void Start() {
 
@@ -49,11 +56,25 @@ public class CarPointer : MonoBehaviour
 
     private void Update() {
 
-        // If the car pointer has calculated a route, and the game is not in a menu or paused—
-        if (path != null && path.Count > 0 && (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU))
-        {
-            // Move the car pointer along the route
-            MoveAlongPath();
+        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+
+            // If the car pointer has calculated a route, and the game is not in a menu or paused—
+            if (path != null && path.Count > 0)
+            {
+                // Move the car pointer along the route
+                MoveAlongPath();
+            }
+        }
+    }
+
+    public void SwitchToFinalDestination() {
+        
+        if (destinationObject != savedDestination) {
+            Debug.Log("Finished dialogue, driving to actual destination now!");
+
+            destinationObject = savedDestination;
+
+            StartDrive(destinationObject);
         }
     }
 
@@ -62,6 +83,11 @@ public class CarPointer : MonoBehaviour
 
         // Set the car pointer's destination
         destinationObject = destination;
+
+        if (destinationObject.CompareTag("Destination")) {
+            destinationRadius = destinationObject.GetComponentInChildren<DestinationRadius>();
+            Debug.Log("Assigned destination radius!");
+        }
         
         // Find the closest marker to the car's starting position
         currentMarker = FindClosestMarker();

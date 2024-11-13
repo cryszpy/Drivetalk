@@ -36,6 +36,11 @@ public class GPSDestination : MonoBehaviour
         // If the car still has rides left in the day—
         if (car.currentRideNum < car.totalRideNum) {
 
+            // If already inside destination radius, allow rerouting
+            if (carPointer.destinationRadius) {
+                carPointer.destinationRadius.setBlock = false;
+            }
+
             // Routes the car pointer (and thus the car) to the selected destination
             carPointer.StartDrive(destinationObject);
 

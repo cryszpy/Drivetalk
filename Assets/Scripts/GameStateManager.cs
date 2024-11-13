@@ -33,6 +33,10 @@ public class GameStateManager : MonoBehaviour
     // Debug tracker for the game's current state
     public GAMESTATE gamestateTracker;
 
+    public static DialogueManager dialogueManager;
+
+    public static AudioManager audioManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +45,8 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             instance = this;
+            dialogueManager = GetComponent<DialogueManager>();
+            audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
             DontDestroyOnLoad(gameObject);
         }
     }
