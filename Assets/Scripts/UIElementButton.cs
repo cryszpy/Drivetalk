@@ -42,7 +42,7 @@ public class UIElementButton : MonoBehaviour
     public virtual void Update() {
 
         // If the game's state is not in a menu or main menu—
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If the button is currently hovered over—
             if (hovered) {
@@ -59,7 +59,7 @@ public class UIElementButton : MonoBehaviour
 
     public virtual void FixedUpdate() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);

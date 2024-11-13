@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7edc98f924c1f4a41999099c871d988a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca80d0afffec14664b904b84f0aec04f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8543147145726775329}
   - component: {fileID: 9063711376122243}
   m_Layer: 9
-  m_Name: Maxine
+  m_Name: Daniel
   m_TagString: Passenger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,17 +235,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 0
-  id: 4
-  passengerName: Maxine
-  hiddenName: Maxine
+  id: 6
+  passengerName: Daniel
+  hiddenName: ???
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   requirements: []
   requirementMet: 0
-  textCPS: 0.05
+  textCPS: 0.08
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
   hasStartedRideDialogue: 0
   dialogue:
-  - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
-  - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}
+  - {fileID: 11400000, guid: 7096b599fc8fb488e97a204fef65c2a9, type: 2}

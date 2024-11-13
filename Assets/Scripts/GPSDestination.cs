@@ -33,6 +33,9 @@ public class GPSDestination : MonoBehaviour
     // Sets the map upon clicking a map location
     public void SetGPS() {
 
+        // Sets car's boolean flag to no longer be at a taxi stop
+        car.atTaxiStop = false;
+
         // If the car still has rides left in the day—
         if (car.currentRideNum < car.totalRideNum) {
 

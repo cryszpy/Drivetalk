@@ -61,6 +61,7 @@ public class Marker : MonoBehaviour
         }
     }
     
+    #if UNITY_EDITOR
     // Debug helper tools to visualize marker connections
     private void OnDrawGizmos() {
 
@@ -77,4 +78,5 @@ public class Marker : MonoBehaviour
             Gizmos.color = Color.white;
         }
     }
+    #endif
 }

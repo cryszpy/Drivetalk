@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_choice_post_4
+  m_Name: daniel_0
   m_EditorClassIdentifier: 
   sentences:
-  - Oh well, the devs certainly think it's useful anyhow.
-  - I'll let you be then.
-  nextDialogue: {fileID: 0}
+  - Hey.
+  - You happen to know any good burger places in downtown Prustee?
+  - ...
+  nextDialogue: {fileID: 11400000, guid: 58d6e3ef7f8cc4129b3d7c410f30d4ce, type: 2}
   firstNameUsage: 0
   choices: []

@@ -53,7 +53,7 @@ public class UIElementSlider : UIElementButton
     public override void Update() {
         
         // If the game's state is not in menu or main menu—
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If this slider is being hovered over—
             if (hovered) {
@@ -94,7 +94,7 @@ public class UIElementSlider : UIElementButton
 
     public override void FixedUpdate() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);

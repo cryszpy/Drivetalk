@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_choice_post_4
+  m_Name: daniel_1
   m_EditorClassIdentifier: 
   sentences:
-  - Oh well, the devs certainly think it's useful anyhow.
-  - I'll let you be then.
+  - Ah, who am I kidding.
+  - Most people in this town never been outside anyways.
+  - ...
   nextDialogue: {fileID: 0}
   firstNameUsage: 0
   choices: []

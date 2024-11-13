@@ -27,7 +27,7 @@ public class GPS : UIElementButton
     public override void Update() {
 
         // If the game isn't in a menu or paused, and the car is at a taxi stop—
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU && dialogueManager.car.atTaxiStop) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop) {
 
             // If the GPS is hovered over—
             if (hovered) {
@@ -45,7 +45,7 @@ public class GPS : UIElementButton
     public override void FixedUpdate() {
 
         // If the game is not in a menu or in the main menu, and the car is at a taxi stop—
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU && dialogueManager.car.atTaxiStop) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -71,8 +71,6 @@ public class GPS : UIElementButton
     // Function to be executed when the button is clicked
     public override void OnClick()
     {
-        // Sets car's boolean flag to no longer be at a taxi stop
-        dialogueManager.car.atTaxiStop = false;
 
         base.OnClick();
 
@@ -119,6 +117,10 @@ public class GPS : UIElementButton
 
         // Activate the map when the camera is done moving
         screenUI.SetActive(true);
+    }
+
+    public void GPSBackButton() {
+        StartCoroutine(EndDollyMovement());
     }
 
     public virtual IEnumerator EndDollyMovement() {

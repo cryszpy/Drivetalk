@@ -128,24 +128,6 @@ public class Menu : MonoBehaviour
         GameStateManager.SetState(GAMESTATE.PLAYING);
     }
 
-    // Goes back into main menu
-    /* private IEnumerator EndDollyMovement() {
-        Debug.Log("Ending game!");
-
-        inMainMenu = true;
-
-        while (splineDolly.CameraPosition > 0) {
-            if (cameraLookAt.cameraTargetDivider < 100) {
-                cameraLookAt.cameraTargetDivider += 5;
-            }
-            splineDolly.CameraPosition -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //cinemachineCam.LookAt = null;
-        GameStateManager.SetState(GAMESTATE.MAINMENU);
-        mainMenuUI.SetActive(true);
-    } */
-
     // Fades screen to black when quitting to main menu
     private IEnumerator FadeToBlack() {
         //transitionScreen.SetActive(true);
