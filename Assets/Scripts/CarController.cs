@@ -125,7 +125,7 @@ public class CarController : MonoBehaviour
         }
 
         // If the game isn't in a menu or paused—
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU)
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING)
         {
             // Drive to the current destination
             agent.SetDestination(destinationObject.transform.position);
@@ -155,7 +155,7 @@ public class CarController : MonoBehaviour
     }
 
     // Finds the nearest taxi stop to the car's current location
-    private void FindNearestStop() {
+    public void FindNearestStop() {
 
         // New list of the distances between all taxi stops and the car
         List<float> stopDistances = new();

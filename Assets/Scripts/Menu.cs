@@ -216,6 +216,8 @@ public class Menu : MonoBehaviour
         passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
         StartCoroutine(StartDollyMovement());
         audioManager.PlaySoundByName("Engine");
+        
+        GameStateManager.dialogueManager.car.FindNearestStop();
     }
 
     // Quits the game (called from button script assignment)

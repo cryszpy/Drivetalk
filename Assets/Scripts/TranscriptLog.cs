@@ -7,9 +7,11 @@ public class TranscriptLog : MonoBehaviour
 
     private List<GameObject> logItems = new();
 
+    [SerializeField] private int maxLogItems;
+
     public void LogText(string text, string name) {
 
-        if (logItems.Count == 10) {
+        if (logItems.Count == maxLogItems) {
             GameObject tempItem = logItems[0];
             Destroy(tempItem);
             logItems.Remove(tempItem);
