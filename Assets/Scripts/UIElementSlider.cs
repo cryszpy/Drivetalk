@@ -133,7 +133,7 @@ public class UIElementSlider : UIElementButton
         mousePosDelta = Input.mousePosition - mousePreviousPos;
 
         // Get the mouse's difference in position applied to the slider's desired rotation axis
-        rotation = Vector3.Dot(mousePosDelta, Camera.main.transform.up);
+        rotation = Vector3.Dot(mousePosDelta, Camera.main.transform.right);
 
         float currentRot = dialObject.transform.localEulerAngles.y;
         float newRot = currentRot + rotation;

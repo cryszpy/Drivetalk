@@ -21,13 +21,17 @@ public class CameraLookAt : MonoBehaviour
         if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
 
             // Gets the mouse position
-            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceZ));
+            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y / 2, distanceZ));
 
             // Calculates a target position in between the dashboard focus point, and the cursor's active position
             Vector3 cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * cameraOrigin.position) / cameraTargetDivider;
 
+            float clamp = Mathf.Clamp(cameraTargetPosition.y, 1.5f, 2f);
+
+            Vector3 clampedPosition = new(cameraTargetPosition.x, clamp, cameraTargetPosition.z);
+
             // Aims the camera at the target position
-            transform.position = cameraTargetPosition;
+            transform.position = clampedPosition;
         }
     }
 }

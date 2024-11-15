@@ -105,13 +105,13 @@ public class Menu : MonoBehaviour
         mainMenuUI.SetActive(false);
 
         // While the camera hasn't finished moving along dolly path—
-        while (splineDolly.CameraPosition < 1) {
+        while (splineDolly.CameraPosition > 0) {
 
             // Moves the camera and dilates camera zoom parameter
             if (cameraLookAt.cameraTargetDivider > 10) {
-                cameraLookAt.cameraTargetDivider -= 5;
+                cameraLookAt.cameraTargetDivider -= 5f;
             }
-            splineDolly.CameraPosition += 0.01f;
+            splineDolly.CameraPosition -= 0.01f;
 
             // Waits between movements
             yield return new WaitForSeconds(0.01f);
