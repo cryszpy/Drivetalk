@@ -245,6 +245,7 @@ MonoBehaviour:
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
+  waitAfterRouteTime: 1
   hasStartedRideDialogue: 0
   dialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}

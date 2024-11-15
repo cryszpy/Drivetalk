@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GPSDestination : MonoBehaviour
@@ -33,6 +34,11 @@ public class GPSDestination : MonoBehaviour
     // Sets the map upon clicking a map location
     public void SetGPS() {
 
+        GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
+
+        // Re-enable dialogue continue button
+        gps.continueButton.SetActive(true);
+
         // Sets car's boolean flag to no longer be at a taxi stop
         car.atTaxiStop = false;
 
@@ -41,11 +47,14 @@ public class GPSDestination : MonoBehaviour
 
             // If already inside destination radius, allow rerouting
             if (carPointer.destinationRadius) {
-                carPointer.destinationRadius.setBlock = false;
+                carPointer.setInitialBlock = false;
             }
 
             // Routes the car pointer (and thus the car) to the selected destination
             carPointer.StartDrive(destinationObject);
+
+            // Start waiting until the passenger talks
+            GameStateManager.EOnDestinationSet?.Invoke();
 
             // Moves the camera back out of map view
             StartCoroutine(gps.EndDollyMovement());

@@ -13,6 +13,7 @@ public enum DialogueMode {
 
 public class DialogueManager : MonoBehaviour
 {
+    
     [Header("SCRIPT REFERENCES")]
 
     /* public DialogueMode mode; */
@@ -38,6 +39,8 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the transcript log object.")]
     public TranscriptLog transcriptLog;
 
+    [Tooltip("Reference to the continue button element.")]
+    public GameObject continueButton;
     /* public TMP_Text RMM_dialogueText;
     public GameObject RMM_dialogueBox; */
 
@@ -80,7 +83,11 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Static boolean flag; Checks whether automatic dialogue playing is enabled.")]
     public bool autoDialogue = false;
 
-    public bool triggerDropoff = false;
+    [Tooltip("Boolean flag; Checks if the dialogue is waiting for a manual skip.")]
+    private bool waitForSkip = false;
+
+    [Tooltip("Boolean flag; Checks whether the passenger is waiting for the player to select a destination.")]
+    public bool waitForRouting = false;
 
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
@@ -91,13 +98,16 @@ public class DialogueManager : MonoBehaviour
     public float dashTicker;
     public DashRequestRequirement currentDashReq; */
 
-    private void Update() {
-        if (typingSentence && !autoDialogue && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && currentSentence != null) {
-                dash_dialogueText.text = currentSentence;
-                typingSentence = false;
-            }
-        }
+    private void OnEnable() {
+        GameStateManager.EOnRideFinish += EndDialogue;
+        GameStateManager.EOnDialogueGroupFinish += DialogueGroupWait;
+        GameStateManager.EOnDestinationSet += TalkAfterRouting;
+    }
+
+    private void OnDisable() {
+        GameStateManager.EOnRideFinish -= EndDialogue;
+        GameStateManager.EOnDialogueGroupFinish -= DialogueGroupWait;
+        GameStateManager.EOnDestinationSet -= TalkAfterRouting;
     }
 
     /* private void Update() {
@@ -220,6 +230,30 @@ public class DialogueManager : MonoBehaviour
             car.choicesBar.SetActive(false);
         }
     } */
+
+    private void Update() {
+
+        if (waitForRouting) {
+            // TODO: Add silly passenger quips about not moving
+        }
+    }
+
+    public void ContinueButton() {
+
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+
+            // Skip typing on click
+            if (currentSentence != null && typingSentence && !autoDialogue) {
+                dash_dialogueText.text = currentSentence;
+                typingSentence = false;
+            } 
+            // If sentence is typed out, play next sentence on click
+            else if (waitForSkip) {
+                waitForSkip = false;
+                DisplayNextSentence();
+            }
+        }
+    }
     
     // Assigns any missing script references
     public void FindReferences() {
@@ -239,6 +273,15 @@ public class DialogueManager : MonoBehaviour
             } else {
                 Debug.LogError("Could not find dialogue text TMP_Text component!");
             }
+        }
+
+        if (!continueButton) {
+            continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
+            if (continueButton.TryGetComponent<Button>(out var button)) {
+                button.onClick.AddListener(ContinueButton);
+                Debug.Log("Assigned continueButton onClick event!");
+            }
+            Debug.Log("DialogueManager continueButton is null! Reassigned.");
         }
 
         if (!dash_dialogueBox) {
@@ -269,6 +312,24 @@ public class DialogueManager : MonoBehaviour
 
     public void SetAutoDialogue(bool value) {
         autoDialogue = value;
+    }
+
+    public void TalkAfterRouting() {
+        StartCoroutine(WaitAfterRouting());
+    }
+
+    private IEnumerator WaitAfterRouting() {
+
+        // Wait for the passenger-specific time to start talking
+        yield return new WaitForSeconds(car.currentPassenger.waitAfterRouteTime);
+
+        Debug.Log("Started talking after setting destination!");
+
+        // Set the passenger to have started the main ride dialogue
+        car.currentPassenger.hasStartedRideDialogue = true;
+
+        // Starts the main ride dialogue
+        StartRideDialogue();
     }
     
     // Starts a piece of dialogue
@@ -309,11 +370,6 @@ public class DialogueManager : MonoBehaviour
         // Clears any previous sentences before starting a new one
         sentences.Clear();
 
-        /* if (!isInterjection && car.currentPassenger.dialogue.Contains(dialogue)) {
-            car.currentPassenger.currentDialogueNum++;
-            car.currentPassenger.dialogueLeftToFinish--;
-        } */
-
         // Remove existing buttons
         if (choiceButtonsList.Count > 0) {
 
@@ -327,11 +383,6 @@ public class DialogueManager : MonoBehaviour
             // Clears choice buttons list
             choiceButtonsList.Clear();
         }
-        
-        /* foreach (GameObject button in choiceButtonsList) {
-            choiceButtonsList.Remove(button);
-            //button.SetActive(false);
-        } */
 
         // For every sentence in the current dialogue piece—
         foreach (string sentence in dialogue.sentences) {
@@ -382,24 +433,30 @@ public class DialogueManager : MonoBehaviour
                 preChoiceDialogue = null;
 
                 // Waits, then plays the next dialogue piece
-                StartCoroutine(WaitBetweenDialogue());
+                GameStateManager.EOnDialogueGroupFinish?.Invoke();
                 return;
             }
             // If the passenger has said greeting, but not started main ride dialogue—
             else if (!car.currentPassenger.hasStartedRideDialogue) {
 
-                // Set the passenger to have started the main ride dialogue
-                car.currentPassenger.hasStartedRideDialogue = true;
+                // TODO: Add dependence on selecting a GPS destination
+                waitForRouting = true;
 
-                // Starts the main ride dialogue
-                StartRideDialogue();
+                // Hide skip indicator if on
+                if (skipIndicator.activeInHierarchy) {
+                    skipIndicator.SetActive(false);
+                }
+
+                // Plays the "hide dialogue UI box" animation
+                dialogueAnimator.SetBool("Play", false);
+
                 return;
             }
             // Go to next regular dialogue piece if no choices
             else if (currentDialogue.nextDialogue) {
 
                 // Waits, then plays the next dialogue piece
-                StartCoroutine(WaitBetweenDialogue());
+                GameStateManager.EOnDialogueGroupFinish?.Invoke();
                 return;
             }
             // Dropoff dialogue
@@ -413,7 +470,7 @@ public class DialogueManager : MonoBehaviour
             else if (currentDialogue.choices.Length == 0) {
 
                 // Ends the ride's dialogue
-                EndDialogue();
+                GameStateManager.EOnRideFinish?.Invoke();
                 return;
             }
         }
@@ -422,7 +479,7 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
 
         // Stops any extra sentence coroutines that may be activated
-        StopAllCoroutines();
+        //StopAllCoroutines();
 
         // Starts typing the queued sentence
         StartCoroutine(TypeSentence(sentence));
@@ -430,6 +487,9 @@ public class DialogueManager : MonoBehaviour
 
     // Shows the choices at a choice branch
     public void ShowChoices() {
+
+        // Disables continue button
+        continueButton.SetActive(false);
 
         // Remove existing buttons
         if (choiceButtonsList.Count > 0) {
@@ -478,6 +538,9 @@ public class DialogueManager : MonoBehaviour
 
         // Switches from the "playing choices" state
         playingChoices = false;
+
+        // Enables the continue button
+        continueButton.SetActive(true);
 
         // If choice response exists, play it
         if (choice.nextDialogue != null) {
@@ -532,35 +595,20 @@ public class DialogueManager : MonoBehaviour
             // Displays next sentence if available
             DisplayNextSentence();
         } else {
-            StartCoroutine(WaitForSkip(KeyCode.Mouse0, sentence));
+
+            // Switches continue button functionality in ContinueButton()
+            waitForSkip = true;
+
+            // Enables the skip indicator
+            skipIndicator.SetActive(true);
         }
-    }
-
-    // If automatic dialogue is turned off, waits until player manually progresses dialogue
-    public IEnumerator WaitForSkip(KeyCode key, string sentence) {
-        Debug.Log("Starting to wait for skip!");
-
-        skipIndicator.SetActive(true);
-
-        bool done = false;
-        while (!done) {
-            if (Input.GetKeyDown(key) && GameStateManager.Gamestate != GAMESTATE.MAINMENU && GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.PAUSED) {
-                done = true;
-            }
-            yield return 0;
-        }
-
-        // Run after player skips
-        dash_dialogueText.text = sentence;
-        DisplayNextSentence();
-        yield return null;
     }
 
     // Starts the first ride dialogue
     public void StartRideDialogue() {
         Debug.Log("Greeting finished, moving onto general ride dialogue.");
 
-        // Plays the "show dialogue UI" animation
+        // Plays the "hide dialogue UI" animation
         dialogueAnimator.SetBool("Play", false);
 
         // Clears the current dialogue piece
@@ -575,7 +623,7 @@ public class DialogueManager : MonoBehaviour
 
     // Dropoff goodbye salute dialogue and dropoff of passenger
     public void DropoffDialogue() {
-        Debug.Log("Dropped off passenger, and finished current dialogue piece!");
+        Debug.Log("Finished dropoff dialogue piece!");
 
         // Hide skip indicator if on
         if (skipIndicator.activeInHierarchy) {
@@ -587,8 +635,6 @@ public class DialogueManager : MonoBehaviour
 
         // Clear current dialogue
         currentDialogue = null;
-        
-        // TODO: SET SPEECH BUBBLE TO FADE AWAY
 
         // Unparent passenger from car
         car.currentPassenger.transform.parent = null;
@@ -602,11 +648,22 @@ public class DialogueManager : MonoBehaviour
         // Clear current passenger
         car.currentPassenger = null;
 
-        // Reset destination dropoff boolean check
-        triggerDropoff = false;
-
         // Reset finished dialogue boolean check
         carPointer.finishedDialogue = false;
+
+        // If the player has completed the last ride of the day—
+        if (car.currentRideNum >= car.totalRideNum) {
+
+            Debug.Log("Completed day's shift!");
+            // TODO: Put after-day summary here!
+
+        } else {
+
+            // Route the car to the nearest taxi stop to pick up another passenger
+            if (!car.currentPassenger) {
+                car.FindNearestStop();
+            }
+        }
     }
 
     // Ends dialogue and starts wait before next sentence group
@@ -617,7 +674,7 @@ public class DialogueManager : MonoBehaviour
         carPointer.finishedDialogue = true;
 
         // If driving around aimlessly, start driving towards destination
-        if (!car.atTaxiStop) {
+        if (!car.atTaxiStop && car.carPointer.destinationObject.CompareTag("Block")) {
             carPointer.SwitchToFinalDestination();
         }
 
@@ -633,6 +690,11 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = null;
     }
 
+    public void DialogueGroupWait() {
+        StopAllCoroutines();
+        StartCoroutine(WaitBetweenDialogue());
+    }
+
     // Waits in between dialogue blocks
     private IEnumerator WaitBetweenDialogue() {
         Debug.Log("Waiting for next dialogue piece!");
@@ -644,8 +706,6 @@ public class DialogueManager : MonoBehaviour
 
         // Plays the "hide dialogue UI box" animation
         dialogueAnimator.SetBool("Play", false);
-
-        Debug.Log("Waiting...");
 
         // Generates a random amount of time to wait from minimum and maximum possible wait times for the current passenger
         float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);

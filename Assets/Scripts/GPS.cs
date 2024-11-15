@@ -21,13 +21,16 @@ public class GPS : UIElementButton
     [Tooltip("Reference to the map UI.")]
     [SerializeField] protected GameObject screenUI;
 
+    [Tooltip("Reference to the dialogue continue button.")]
+    public GameObject continueButton;
+
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
 
     public override void Update() {
 
         // If the game isn't in a menu or paused, and the car is at a taxi stop—
-        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop && dialogueManager.waitForRouting) {
 
             // If the GPS is hovered over—
             if (hovered) {
@@ -45,7 +48,7 @@ public class GPS : UIElementButton
     public override void FixedUpdate() {
 
         // If the game is not in a menu or in the main menu, and the car is at a taxi stop—
-        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop && dialogueManager.waitForRouting) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -71,6 +74,8 @@ public class GPS : UIElementButton
     // Function to be executed when the button is clicked
     public override void OnClick()
     {
+        // Disable dialogue continue button
+        continueButton.SetActive(false);
 
         base.OnClick();
 
@@ -126,11 +131,7 @@ public class GPS : UIElementButton
     public virtual IEnumerator EndDollyMovement() {
 
         // While the camera has not finished moving back along spline track—
-        while (splineDolly.CameraPosition > 0 /* || cinemachineCam.Lens.FieldOfView < 60 */) {
-            /* if (cinemachineCam.Lens.FieldOfView < 60) {
-                toonCamera.fieldOfView += 0.6f;
-                cinemachineCam.Lens.FieldOfView += 0.6f;
-            } */
+        while (splineDolly.CameraPosition > 0) {
 
             // If the camera isn't finished moving back along the spline track, move it along at different rates
             if (splineDolly.CameraPosition > 0) {
@@ -153,5 +154,10 @@ public class GPS : UIElementButton
 
         // Disable map UI
         screenUI.SetActive(false);
+
+        // Enable dialogue continue button if disabled
+        if (!continueButton.activeInHierarchy) {
+            continueButton.SetActive(true);
+        }
     }
 }

@@ -22,7 +22,7 @@ public class TaxiStopDestination : MonoBehaviour
                 // Set the car reference to the accessed script
                 car = script;
             } else {
-                Debug.LogWarning("Could not find CarController script on car!");
+                Debug.LogError("Could not find CarController script on car!");
             }
             
             // If the car does not have a current passenger—

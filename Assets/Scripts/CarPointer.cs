@@ -14,9 +14,6 @@ public class CarPointer : MonoBehaviour
     [Tooltip("The car pointer's Navigation Mesh AI agent component.")]
     [SerializeField] private NavMeshAgent agent;
 
-    [Tooltip("Reference to the current taxi stop.")]
-    public GameObject currentStop;
-
     [Header("STATS")]
 
     [Tooltip("List of all road markers on the game's map.")]
@@ -48,6 +45,8 @@ public class CarPointer : MonoBehaviour
     [Tooltip("Boolean flag; Checks whether dialogue has finished or not.")]
     public bool finishedDialogue;
 
+    public bool setInitialBlock = false;
+
     private void Start() {
 
         // Find the closest marker to the car's starting position
@@ -56,7 +55,7 @@ public class CarPointer : MonoBehaviour
 
     private void Update() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If the car pointer has calculated a route, and the game is not in a menu or paused—
             if (path != null && path.Count > 0)
@@ -67,6 +66,7 @@ public class CarPointer : MonoBehaviour
         }
     }
 
+    // Routes the car to the passenger's actual destination if dialogue has finished
     public void SwitchToFinalDestination() {
         
         if (destinationObject != savedDestination) {
@@ -92,7 +92,7 @@ public class CarPointer : MonoBehaviour
         // Find the closest marker to the car's starting position
         currentMarker = FindClosestMarker();
 
-        // You can set the destination marker manually or dynamically based on gameplay
+        // Find the closest marker to the destination position
         destinationMarker = FindDestinationMarker();
 
         // Find the path using A* pathfinding
@@ -188,6 +188,7 @@ public class CarPointer : MonoBehaviour
         return closestMarker;
     }
 
+    #if UNITY_EDITOR
     // Helper debug tools to visualize navigation's shortest calculated path
     private void OnDrawGizmos()
     {
@@ -201,4 +202,5 @@ public class CarPointer : MonoBehaviour
             }
         }
     }
+    #endif
 }

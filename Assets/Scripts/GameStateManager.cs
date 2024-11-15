@@ -33,6 +33,12 @@ public class GameStateManager : MonoBehaviour
     // Debug tracker for the game's current state
     public GAMESTATE gamestateTracker;
 
+    public delegate void GlobalEvent();
+    public static GlobalEvent EOnRideFinish;
+    public static GlobalEvent EOnDialogueGroupFinish;
+    public static GlobalEvent EOnDestinationSet;
+    public static GlobalEvent EOnPassengerDropoff;
+
     public static DialogueManager dialogueManager;
 
     public static AudioManager audioManager;

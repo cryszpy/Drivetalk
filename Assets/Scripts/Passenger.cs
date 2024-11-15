@@ -46,16 +46,14 @@ public class Passenger : MonoBehaviour
     [Tooltip("The amount of time this passenger will have each sentence held on-screen for.")]
     public float holdTime;
 
+    [Tooltip("The amount of time this passenger waits to begin talking after selecting a destination.")]
+    public float waitAfterRouteTime;
+
     [Tooltip("Boolean to check if the passenger has started ride dialogue.")]
     public bool hasStartedRideDialogue = false;
 
     [Tooltip("List of all dialogue beats for this passenger, in order.")]
     public List<DialoguePiece> dialogue;
-
-    private void Start() {
-        hasStartedRideDialogue = false;
-        //dialogueLeftToFinish = dialogue.Count;
-    }
 }
 
 [Tooltip("Enum describing passenger spawn requirement types.")]

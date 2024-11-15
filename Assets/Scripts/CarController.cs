@@ -47,8 +47,8 @@ public class CarController : MonoBehaviour
 
     [Header("STATS")]
 
-    [Tooltip("Boolean flag; Checks whether the car has arrived at its destination or not.")]
-    public bool arrived;
+    [Tooltip("Boolean flag; Checks whether the car has completed a ride or not.")]
+    public bool rideDone = false;
 
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
     public bool atTaxiStop = true;
@@ -101,6 +101,14 @@ public class CarController : MonoBehaviour
     public float lastPassengerIDTracker;
     public float lastSongPlayedIDTracker;
 
+    private void OnEnable() {
+        GameStateManager.EOnPassengerDropoff += DropOffPassenger;
+    }
+
+    private void OnDisable() {
+        GameStateManager.EOnPassengerDropoff -= DropOffPassenger;
+    }
+
     private void Start() {
 
         // Flip camera projection horizontally (for accurate mirror effect)
@@ -118,11 +126,6 @@ public class CarController : MonoBehaviour
     }
 
     private void Update() {
-
-        // If car has arrived and successfully dropped off passenger, reroute to the nearest taxi stop
-        if (arrived && currentPassenger == null) {
-            FindNearestStop();
-        }
 
         // If the game isn't in a menu or paused—
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING)
@@ -177,7 +180,7 @@ public class CarController : MonoBehaviour
             carPointer.StartDrive(taxiStops[stopDistances.IndexOf(stopDistances.Min())]);
         }
 
-        arrived = false;
+        rideDone = false;
     }
 
     // Picks up a passenger when arriving at a taxi stop
@@ -230,7 +233,6 @@ public class CarController : MonoBehaviour
 
             // Parents passenger to seat
             currentPassenger.transform.parent = this.transform;
-            Debug.Log("parented");
 
             // Resets rotation to face forward from seat
             currentPassenger.transform.localEulerAngles = new(0, 0, 0);
@@ -238,5 +240,20 @@ public class CarController : MonoBehaviour
         } else {
             Debug.LogWarning("Could not find Passenger component on this passenger!");
         }
+    }
+
+    // Drops off a passenger when arriving at a destination and dialogue is finished
+    public void DropOffPassenger() {
+
+        Debug.Log("Arrived at destination!");
+
+        // Reset initial block routing trigger
+        carPointer.setInitialBlock = false;
+
+        // Set the car's current stop to this stop
+        currentStop = carPointer.destinationObject;
+
+        // Drops off the current passenger
+        dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
     }
 }

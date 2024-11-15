@@ -5,10 +5,30 @@ using UnityEngine;
 public class BlockRadius : MonoBehaviour
 {
     [Tooltip("Reference to the car's script component.")]
+    private CarController car;
+
+    [Tooltip("Reference to the car pointer script.")]
     private CarPointer carPointer;
 
-    private void Start() {
-        carPointer = GameObject.FindGameObjectWithTag("CarPointer").GetComponent<CarPointer>();
+    [Tooltip("Boolean flag; Checks whether the car is in this radius.")]
+    private bool inBlockRadius;
+
+    private void Update() {
+
+        // If car and pointer are assigned, and car is in this radius—
+        if (car && carPointer && inBlockRadius) {
+
+            // If ride has not finished dialogue, the car is routed to a destination, and that destination is this block—
+            if (!carPointer.finishedDialogue && carPointer.destinationObject != null && carPointer.destinationObject == gameObject) {
+                Debug.Log("Reached temporary block destination!");
+
+                // Save this block as the car's previous block destination
+                carPointer.savedBlock = gameObject;
+
+                // Choose a new random block to drive to while dialogue is not finished
+                GetRandomBlock();
+            }
+        }
     }
 
     // This function runs on contact with colliders
@@ -25,26 +45,29 @@ public class BlockRadius : MonoBehaviour
         // If the car pointer has been collided with—
         if (collider.CompareTag("CarFrame")) {
 
-            /* // If the car pointer's script can be accessed
-            if (collider.transform.parent.TryGetComponent<CarPointer>(out var script)) {
+            // If the car pointer's script can be accessed
+            if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
 
                 // Set the car pointer's script reference to the script pulled from collision
-                carPointer = script;
+                car = script;
 
-                destinationRadius = carPointer.destinationObject.GetComponentInChildren<DestinationRadius>();
+                carPointer = car.carPointer;
 
             } else {
-                Debug.LogWarning("Could not find CarController script on car!");
+                Debug.LogError("Could not find CarController script on car!");
                 return;
-            } */
-
-            if (!carPointer.finishedDialogue && carPointer.destinationObject != null && carPointer.destinationObject == gameObject) {
-                Debug.Log("Reached temporary block destination!");
-
-                carPointer.savedBlock = gameObject;
-
-                GetRandomBlock();
             }
+
+            inBlockRadius = true;
+        }
+    }
+
+    // This function runs when a collider stops colliding with this
+    private void OnTriggerExit (Collider collider) {
+
+        // If the car leaves the radius, set the boolean flag to false
+        if (collider.CompareTag("CarFrame")) {
+            inBlockRadius = false;
         }
     }
 

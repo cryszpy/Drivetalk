@@ -1100,6 +1100,7 @@ MonoBehaviour:
   dash_dialogueBox: {fileID: 225461040}
   nameBoxText: {fileID: 707101797}
   transcriptLog: {fileID: 1950187948}
+  continueButton: {fileID: 0}
   currentDialogue: {fileID: 0}
   choiceButtonsList: []
   skipIndicator: {fileID: 8412348786198986530}
@@ -1107,7 +1108,7 @@ MonoBehaviour:
   typingSentence: 0
   playingChoices: 0
   autoDialogue: 0
-  triggerDropoff: 0
+  waitForRouting: 0
 --- !u!1 &192307632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1966496589025087364, guid: da53ee831edce426281b3008712ecc92, type: 3}
@@ -1282,7 +1283,7 @@ MonoBehaviour:
   choicePrefab: {fileID: 1869503689464623647, guid: d333b144158d64c3cb9852c09ab29aaf, type: 3}
   destinationObject: {fileID: 203519312}
   currentStop: {fileID: 0}
-  arrived: 0
+  rideDone: 0
   atTaxiStop: 1
   minRides: 4
   maxRides: 7
@@ -1647,6 +1648,7 @@ MonoBehaviour:
   splineDolly: {fileID: 1793819362}
   spline: {fileID: 0}
   screenUI: {fileID: 0}
+  continueButton: {fileID: 0}
   cameraLookAt: {fileID: 769080902}
   person: {fileID: 0}
   backButton: {fileID: 1003644267}
@@ -2028,7 +2030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 192.39062, y: -450.00217}
+  m_AnchoredPosition: {x: 192.39062, y: -449.99786}
   m_SizeDelta: {x: 211.4, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &387044757
@@ -3810,6 +3812,7 @@ MonoBehaviour:
   splineDolly: {fileID: 1793819362}
   spline: {fileID: 0}
   screenUI: {fileID: 0}
+  continueButton: {fileID: 0}
   cameraLookAt: {fileID: 769080902}
   person: {fileID: 0}
   backButton: {fileID: 0}
@@ -5118,6 +5121,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818288283}
   m_CullTransparentMesh: 1
+--- !u!1 &819939634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3769446868658228318, guid: eeb0ab2f13ced42c199a83b4de424c8e, type: 3}
+  m_PrefabInstance: {fileID: 8412348786198986529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &823112730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5989,6 +5997,7 @@ MonoBehaviour:
   splineDolly: {fileID: 1793819362}
   spline: {fileID: 1702153121}
   screenUI: {fileID: 741628947}
+  continueButton: {fileID: 819939634}
   cameraLookAt: {fileID: 769080902}
 --- !u!1 &907994937
 GameObject:
@@ -15983,8 +15992,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 261394895}
   m_HandleRect: {fileID: 261394894}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9999961
+  m_Value: 1
+  m_Size: 0.9999952
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16450,7 +16459,7 @@ Transform:
   m_GameObject: {fileID: 1947440943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: -0.14999998, z: 3.111}
+  m_LocalPosition: {x: -0.75, y: -0.27, z: 3.111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17841,7 +17850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6778045385944514286, guid: 05550068fa5464c9692e9f7bb93eb569, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -740
+      value: -740.00006
       objectReference: {fileID: 0}
     - target: {fileID: 9195747118212140054, guid: 05550068fa5464c9692e9f7bb93eb569, type: 3}
       propertyPath: m_Name

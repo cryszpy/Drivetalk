@@ -13,22 +13,36 @@ public class DestinationRadius : MonoBehaviour
     [Tooltip("List of all block markers within this radius. SET DYNAMICALLY")]
     public List<GameObject> blocksList = new();
 
-    public bool setBlock = false;
+    [Tooltip("Boolean flag; Checks whether the car is inside this radius.")]
+    public bool inDestinationRadius = false; 
+
+    private void Update() {
+
+        // If the car reference is assigned, and the car is inside this radius—
+        if (car && inDestinationRadius) {
+
+            // If the ride hasn't finished dialogue, the car has a passenger, the car is not awaiting
+            // a passenger, this radius belongs to the car's current destination, and the car hasn't been rerouted yet, then reroute
+            // the car to the nearest block marker
+            if (!car.carPointer.finishedDialogue && car.currentPassenger && !carPointer.setInitialBlock && !car.atTaxiStop && carPointer.destinationRadius == this) {
+                
+                carPointer.setInitialBlock = true;
+
+                Debug.Log("Dialogue not finished, rerouted car!");
+
+                // Save the car's final destination before rerouting
+                if (carPointer.destinationObject.CompareTag("Destination")) {
+                    carPointer.savedDestination = carPointer.destinationObject;
+                }
+
+                // Reroute the car
+                GetRandomBlock();
+            }
+        }
+    }
 
     // This function runs on contact with colliders
     private void OnTriggerEnter(Collider collider) {
-
-        /* if (collider.CompareTag("Block") && !blocksList.Contains(collider.gameObject)) {
-            Debug.Log(collider.gameObject.name);
-            blocksList.Add(collider.gameObject);
-
-            if (collider.gameObject.TryGetComponent<BlockRadius>(out var script)) {
-                Debug.Log("bro");
-                script.destinationRadius = this;
-            } else {
-                Debug.LogError("Could not find BlockRadius script component on this Block!");
-            }
-        } */
         
         // If the car pointer has been collided with—
         if (collider.CompareTag("CarFrame")) {
@@ -45,26 +59,17 @@ public class DestinationRadius : MonoBehaviour
                 Debug.LogWarning("Could not find CarController script on car!");
                 return;
             }
+
+            inDestinationRadius = true;
         }
     }
 
-    private void OnTriggerStay(Collider collider) {
+    // This function runs when a collider stops colliding with this
+    private void OnTriggerExit (Collider collider) {
 
-        // If the car pointer has been collided with—
-        if (collider.CompareTag("CarFrame") && car && carPointer) {
-
-            if (!carPointer.finishedDialogue && car.currentPassenger != null && !setBlock && !car.atTaxiStop && carPointer.destinationRadius == this) {
-
-                setBlock = true;
-
-                Debug.Log("Dialogue not finished, rerouted car!");
-
-                if (carPointer.destinationObject.CompareTag("Destination")) {
-                    carPointer.savedDestination = carPointer.destinationObject;
-                }
-
-                GetRandomBlock();
-            }
+        // If the car leaves the radius, set the boolean flag to false
+        if (collider.CompareTag("CarFrame")) {
+            inDestinationRadius = false;
         }
     }
 

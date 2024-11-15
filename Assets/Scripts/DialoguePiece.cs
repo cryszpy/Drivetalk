@@ -12,6 +12,9 @@ public class DialoguePiece : ScriptableObject
     [Tooltip("The next dialogue piece to play after this piece.")]
     public DialoguePiece nextDialogue;
 
+    [Tooltip("Boolean flag; Checks whether this piece of dialogue is a first-line greeting.")]
+    public bool greeting = false;
+
     [Tooltip("Boolean flag; Whether this dialogue piece contains the first mention of the passenger's name.")]
     public bool firstNameUsage = false;
 
