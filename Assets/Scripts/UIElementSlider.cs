@@ -8,17 +8,22 @@ public class UIElementSlider : UIElementButton
 {
     [Header("SCRIPT REFERENCES")]
 
+    [Tooltip("Reference to the slider's physical object.")]
     [SerializeField] protected GameObject dialObject;
 
-    [Tooltip("Reference to the main Cinemachine camera.")]
+    [Tooltip("Unused.")]
     [SerializeField] protected CinemachineCamera cinemachineCam;
 
-    [Tooltip("Reference to the dolly spline component attached to the Cinemachine camera.")]
+    [Tooltip("Unused.")]
     [SerializeField] protected CinemachineSplineDolly splineDolly;
+
+    [Tooltip("Unused.")]
     [SerializeField] protected SplineContainer spline;
 
+    [Tooltip("Unused.")]
     [SerializeField] protected GameObject screenUI;
 
+    [Tooltip("Unused.")]
     [SerializeField] protected GameObject cameraLookAt;
 
     [Header("STATS")]
@@ -28,8 +33,13 @@ public class UIElementSlider : UIElementButton
     [Tooltip("Maximum angle in degrees that this slider / dial can rotate.")]
     [SerializeField] protected float rotationMax;
 
+    [Tooltip("The mouse cursor's previous position, set dynamically in-script.")]
     protected Vector3 mousePreviousPos = Vector3.zero;
+
+    [Tooltip("The difference between mouse positions, set dynamically in-script.")]
     protected Vector3 mousePosDelta = Vector3.zero;
+
+    [Tooltip("Rotation value of this slider.")]
     protected float rotation;
 
     [Tooltip("Whether the slider is actively being dragged.")]
@@ -42,8 +52,10 @@ public class UIElementSlider : UIElementButton
 
     public override void Update() {
         
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        // If the game's state is not in menu or main menu—
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
+            // If this slider is being hovered over—
             if (hovered) {
 
                 /* // Start minigame
@@ -82,7 +94,7 @@ public class UIElementSlider : UIElementButton
 
     public override void FixedUpdate() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -117,6 +129,7 @@ public class UIElementSlider : UIElementButton
             dragging = false;
         }
 
+        // Calculates the difference between the current mouse's position and mouse's previous position
         mousePosDelta = Input.mousePosition - mousePreviousPos;
 
         // Get the mouse's difference in position applied to the slider's desired rotation axis
@@ -134,6 +147,7 @@ public class UIElementSlider : UIElementButton
         //Debug.Log("Slider turned!");
     }
 
+    // Function to be executed when slider is clicked
     public override void OnClick()
     {
         dragging = true;
@@ -155,7 +169,7 @@ public class UIElementSlider : UIElementButton
         Debug.Log("Slider clicked!");  */
     }
 
-    public virtual IEnumerator StartDollyMovement() {
+    /* public virtual IEnumerator StartDollyMovement() {
         while (splineDolly.CameraPosition < 1) {
             splineDolly.CameraPosition += 0.03f;
             yield return new WaitForSeconds(0.01f);
@@ -173,5 +187,5 @@ public class UIElementSlider : UIElementButton
         cinemachineCam.LookAt = cameraLookAt.transform;
         GameStateManager.SetState(GAMESTATE.PLAYING);
         screenUI.SetActive(false);
-    }
+    } */
 }

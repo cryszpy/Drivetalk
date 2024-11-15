@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/PassengerArchetype")]
 public class PassengerArchetype : ScriptableObject
 {
+    [Tooltip("Pickup greeting dialogue piece for this archetype.")]
     public DialoguePiece pickupGreeting;
+
+    [Tooltip("Dropoff salute dialogue piece for this archetype.")]
     public DialoguePiece dropoffSalute;
-    public DialoguePiece acResponse;
-    public DialoguePiece songResponse;
-    public DialoguePiece songVolumeResponse;
 }

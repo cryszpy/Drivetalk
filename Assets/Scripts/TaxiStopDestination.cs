@@ -2,36 +2,68 @@ using UnityEngine;
 
 public class TaxiStopDestination : MonoBehaviour
 {
+    [Tooltip("Reference to the list of all passengers.")]
     public PassengerList passengerList;
 
+    [Tooltip("Reference to the car.")]
     private CarController car;
 
+    // Triggers on collision with an object
     private void OnTriggerEnter(Collider collider) {
 
+        // If the collided object is the car—
         if (collider.CompareTag("CarFrame")) {
 
             Debug.Log("Arrived at taxi stop!");
 
+            // If the car's script is accessible—
             if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
+
+                // Set the car reference to the accessed script
                 car = script;
             } else {
                 Debug.LogWarning("Could not find CarController script on car!");
             }
             
+            // If the car does not have a current passenger—
             if (!car.currentPassenger) {
+
+                // Generate a passenger.
                 GeneratePassenger();
             }
         }
     }
 
+    // Generate a passenger
     private void GeneratePassenger() {
 
-        float rand = Random.value;
+        /* float rand = Random.value;
 
-        GetPassengerProbability(rand, passengerList.rarityProbabilities);
+        GetPassengerProbability(rand, passengerList.rarityProbabilities); */
+
+        // Make sure there are passengers to pick up
+        if (passengerList.storyPassengers.Count > 0) {
+
+            // Get the next passenger in the queue
+            Passenger passenger = passengerList.storyPassengers[0];
+
+            // Spawn passenger at stop
+            GameObject character = Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
+
+            // Exhaust / remove passenger from the queue
+            passengerList.ExhaustPassenger(passenger, PassengerRarity.STORY);
+
+            // Pick up passenger in the car
+            car.PickUpPassenger(character);
+
+            // TODO ADD IN PASSENGER AI WALK TO CAR
+
+        } else {
+            Debug.LogWarning("No story passengers left!");
+        }
     }
 
-    private void GetPassengerProbability(float value, float[] probTable) {
+    /* private void GetPassengerProbability(float value, float[] probTable) {
         
         if (value <= probTable[0]) {
             if (passengerList.tierOnePassengers.Count > 0) {
@@ -73,18 +105,16 @@ public class TaxiStopDestination : MonoBehaviour
             Passenger passenger = passengerList.passengerQueue[0];
 
             // Spawn passenger at stop
-            Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
+            GameObject character = Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
 
             passengerList.passengerQueue.Remove(passenger);
 
-            // MOVE THIS CODE TO DROP OFF PASSENGER FUNCTION
-            /* if (passenger.dialogueLeftToFinish <= 0) {
-                passenger.dialogueLeftToFinish = 0;
-                passengerList.ExhaustPassenger(passenger, PassengerRarity.TIER_ONE);
-                Debug.Log("Dialogue finished, passenger exhausted!");
-            } */
+            car.PickUpPassenger(character);
+
+            // TODO ADD IN PASSENGER AI WALK TO CAR
+
         } else {
             Debug.LogWarning("No passenger in queue!");
         }
-    }
+    } */
 }

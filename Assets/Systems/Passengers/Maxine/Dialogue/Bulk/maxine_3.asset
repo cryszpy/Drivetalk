@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: maxine_3
+  m_EditorClassIdentifier: 
+  interjectionType: 0
+  dashRequirement:
+    reqType: 0
+    acSetting: 0
+    statToCheck: 0
+  seen: 0
+  sentences:
+  - "anyways! now that you\u2019re back in town, i guess we\u2019ll be seeing each
+    other more often"
+  - "it\u2019s been a while since we\u2019ve had the chance to talk like this"
+  - i have a lot of questions for ya!
+  - are you enjoying this playtest?!?!
+  nextDialogue: {fileID: 0}
+  choices:
+  - {fileID: 11400000, guid: 0c5a2c41fea1049f3a6cb6b24718f37f, type: 2}
+  - {fileID: 11400000, guid: 27ac4f8e425f54e56a19d517a080a142, type: 2}
+  - {fileID: 11400000, guid: 9c530fb4999504d10bde8db353968b93, type: 2}

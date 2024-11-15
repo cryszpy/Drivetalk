@@ -8,11 +8,17 @@ public class GameStateManager : MonoBehaviour
 {
     private static GameStateManager instance;
 
+    [Tooltip("The game's current gamestate.")]
     private static GAMESTATE gamestate;
     public static GAMESTATE Gamestate { get => gamestate; }
 
+    // Sets the game's state
     public static void SetState(GAMESTATE newState) {
+
+        // Set's the game's state
         gamestate = newState;
+
+        // Freezes the game's time depending on which state the game is switched to
         Time.timeScale = gamestate switch
         {
             GAMESTATE.MAINMENU => 1,
@@ -24,7 +30,12 @@ public class GameStateManager : MonoBehaviour
         };
     }
 
+    // Debug tracker for the game's current state
     public GAMESTATE gamestateTracker;
+
+    public static DialogueManager dialogueManager;
+
+    public static AudioManager audioManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +45,8 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             instance = this;
+            dialogueManager = GetComponent<DialogueManager>();
+            audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
             DontDestroyOnLoad(gameObject);
         }
     }

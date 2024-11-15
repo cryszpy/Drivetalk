@@ -8,10 +8,13 @@ public class UIElementButton : MonoBehaviour
 
     [Header("SCRIPT REFERENCES")]
 
+    [Tooltip("Reference to the toon shader camera.")]
     [SerializeField] protected Camera toonCamera;
 
+    [Tooltip("Reference to the dialogue manager.")]
     [SerializeField] protected DialogueManager dialogueManager;
 
+    [Tooltip("New on-click function event.")]
     public UnityEvent unityEvent = new();
 
     [Tooltip("Version of GameObject to appear when hovered over.")]
@@ -20,26 +23,30 @@ public class UIElementButton : MonoBehaviour
     [Tooltip("Reference to main camera.")]
     public Camera mainCamera;
 
+    [Tooltip("This button's layer mask. Selected layers will be the *only* layers raycasted on.")]
     [SerializeField] protected LayerMask layerMask;
 
+    [Tooltip("Boolean flag; Checks whether this button is hovered over.")]
     [SerializeField] protected bool hovered;
 
-    [SerializeField] protected bool insideMinigame = false;
-
     public virtual void Start() {
+
+        // Assigns references to any missing script references
         if (!mainCamera) {
             mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
         }
-        if (!dialogueManager) {
-            dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
-            Debug.LogWarning("Dialogue manager not assigned! Reassigned.");
-        }
+        dialogueManager = GameStateManager.dialogueManager;
     }
 
     public virtual void Update() {
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+
+        // If the game's state is not in a menu or main menu—
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+
+            // If the button is currently hovered over—
             if (hovered) {
+
                 // If this UI element is clicked—
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -52,7 +59,7 @@ public class UIElementButton : MonoBehaviour
 
     public virtual void FixedUpdate() {
 
-        if (GameStateManager.Gamestate != GAMESTATE.MENU && GameStateManager.Gamestate != GAMESTATE.MAINMENU) {
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // Raycast from the UI element to the mouse cursor
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -74,6 +81,7 @@ public class UIElementButton : MonoBehaviour
         }
     }
 
+    // Function to be executed when button is clicked
     public virtual void OnClick() {
         // Disable hovered version of GameObject
         if (hoveredObject.activeSelf) {
@@ -81,6 +89,7 @@ public class UIElementButton : MonoBehaviour
         }
     }
 
+    // Function to be executed when button is hovered over
     public virtual void OnHover() {
         hovered = true;
         // Enable hovered version of GameObject
@@ -89,6 +98,7 @@ public class UIElementButton : MonoBehaviour
         }
     }
 
+    // Default state of the button
     public virtual void DefaultState() {
         hovered = false;
         // Disable hovered version of GameObject

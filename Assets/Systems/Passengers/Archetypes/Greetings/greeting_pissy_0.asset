@@ -19,6 +19,6 @@ MonoBehaviour:
     statToCheck: 0
   seen: 0
   sentences:
-  - 1085 Westbrook, please.
+  - take me to 1876 ardendale avenue please!
   nextDialogue: {fileID: 0}
   choices: []

@@ -72,7 +72,7 @@ public class PassengerList : ScriptableObject
     public bool CheckRequirements(PassengerRequirement requirement) {
         return requirement.reqType switch
         {
-            PassengerRequirementType.HAS_DRIVEN_PASSENGER => CarController.passengersDrivenList.Contains(requirement.passengerReq),
+            PassengerRequirementType.HAS_DRIVEN_PASSENGER => CarController.PassengersDrivenIDs.Contains(requirement.passengerReq.id),
             PassengerRequirementType.LAST_PASSENGER_DRIVEN => CarController.LastPassengerID == requirement.passengerReq.id,
             PassengerRequirementType.SONG_IS_PLAYING => CarController.LastSongPlayedID == requirement.statToCheck,
             PassengerRequirementType.TOTAL_PASSENGERS_DRIVEN => CarController.TotalPassengersDriven == requirement.statToCheck,
@@ -116,6 +116,20 @@ public class PassengerList : ScriptableObject
                 swapFrom.Remove(passenger);
             }
         }
+    }
+
+    public void ResetListInOrder(List<Passenger> exhaustedList, List<Passenger> list) {
+
+        // Move all remaining list characters to exhausted list
+        if (list.Count > 0) {
+            foreach (Passenger passenger in list.ToArray()) {
+                exhaustedList.Add(passenger);
+                list.Remove(passenger);
+            }
+        }
+
+        // Swap exhausted list and regular list
+        ResetPassengerList(exhaustedList, list);
     }
 
     public void ResetAllPassengers() {
