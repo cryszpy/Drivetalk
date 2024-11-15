@@ -1,0 +1,3 @@
+Reference variables search window will show all ScriptableVariable types instead of just matching types
+
+ScriptableVariables save based on name, so two variables with the same name will cause issues.
