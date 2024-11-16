@@ -63,6 +63,9 @@ TagManager:
   - name: Ground
     uniqueID: 3322970651
     locked: 0
+  - name: Foliage
+    uniqueID: 4268384805
+    locked: 0
   - name: Above Ground
     uniqueID: 2670172989
     locked: 0
