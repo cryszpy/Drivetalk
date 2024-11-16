@@ -57,7 +57,7 @@ public class GPSDestination : MonoBehaviour
             GameStateManager.EOnDestinationSet?.Invoke();
 
             // Moves the camera back out of map view
-            StartCoroutine(gps.EndDollyMovement());
+            //StartCoroutine(gps.EndDollyMovement());
         }
     }
 }

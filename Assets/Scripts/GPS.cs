@@ -16,7 +16,7 @@ public class GPS : UIElementButton
     [SerializeField] protected CinemachineSplineDolly splineDolly;
 
     [Tooltip("Reference to the spline dolly track to switch the camera to when the GPS is clicked.")]
-    [SerializeField] protected SplineContainer spline;
+    [SerializeField] protected CinemachineRotationComposer rotationComposer;
 
     [Tooltip("Reference to the map UI.")]
     [SerializeField] protected GameObject screenUI;
@@ -26,6 +26,14 @@ public class GPS : UIElementButton
 
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
+
+    private void OnEnable() {
+        GameStateManager.EOnDestinationSet += StartDampingReset;
+    }
+
+    private void OnDisable() {
+        GameStateManager.EOnDestinationSet -= StartDampingReset;
+    }
 
     public override void Update() {
 
@@ -83,16 +91,22 @@ public class GPS : UIElementButton
         GameStateManager.SetState(GAMESTATE.MENU);
 
         // Switches the camera's spline dolly track
-        splineDolly.Spline = spline;
+        //splineDolly.Spline = spline;
 
         // Reset camera position on spline dolly
-        splineDolly.CameraPosition = 0;
+        //splineDolly.CameraPosition = 0;
+
+        // Enables smooth rotation
+        rotationComposer.Damping = new Vector2(1, 1);
 
         // Focus on this element
         cinemachineCam.LookAt = focusOn.transform;
 
+        // Activate the map when the camera is done moving
+        screenUI.SetActive(true);
+
         // Start moving the camera on the dolly spline track
-        StartCoroutine(StartDollyMovement());
+        //StartCoroutine(StartDollyMovement());
         
         Debug.Log("GPS clicked!");
     }
@@ -131,7 +145,7 @@ public class GPS : UIElementButton
     public virtual IEnumerator EndDollyMovement() {
 
         // While the camera has not finished moving back along spline track—
-        while (splineDolly.CameraPosition > 0) {
+        /* while (splineDolly.CameraPosition > 0) {
 
             // If the camera isn't finished moving back along the spline track, move it along at different rates
             if (splineDolly.CameraPosition > 0) {
@@ -144,7 +158,7 @@ public class GPS : UIElementButton
 
             // Wait in between moving
             yield return new WaitForSeconds(0.005f);
-        }
+        } */
 
         // Reset camera focal point
         cinemachineCam.LookAt = cameraLookAt.transform;
@@ -159,5 +173,21 @@ public class GPS : UIElementButton
         if (!continueButton.activeInHierarchy) {
             continueButton.SetActive(true);
         }
+
+        // Disables smooth rotation
+        float damp = 1;
+
+        while (damp > 0) {
+            rotationComposer.Damping = new(damp, damp);
+            damp -= 0.03f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        rotationComposer.Damping = new(0, 0);
+    }
+
+    private void StartDampingReset() {
+        StartCoroutine(EndDollyMovement());
     }
 }
