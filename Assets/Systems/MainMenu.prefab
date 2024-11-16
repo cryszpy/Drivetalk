@@ -862,8 +862,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: drivetalk
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f0216864e3ca644c8c1bd66fd2fa525, type: 2}
-  m_sharedMaterial: {fileID: -5836911010000439259, guid: 8f0216864e3ca644c8c1bd66fd2fa525, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9eaff9e495fa44309bb0360307bcf745, type: 2}
+  m_sharedMaterial: {fileID: -5836911010000439259, guid: 9eaff9e495fa44309bb0360307bcf745, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
