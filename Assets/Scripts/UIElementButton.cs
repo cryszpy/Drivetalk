@@ -23,11 +23,18 @@ public class UIElementButton : MonoBehaviour
     [Tooltip("Reference to main camera.")]
     public Camera mainCamera;
 
+    [Header("STATS")]
+
     [Tooltip("This button's layer mask. Selected layers will be the *only* layers raycasted on.")]
     [SerializeField] protected LayerMask layerMask;
 
     [Tooltip("Boolean flag; Checks whether this button is hovered over.")]
     [SerializeField] protected bool hovered;
+
+    [Tooltip("The layer number for the default state of the object.")]
+    [SerializeField] protected int regularLayer;
+    [Tooltip("The layer number for the hovered state of the object.")]
+    [SerializeField] protected int hoveredLayer;
 
     public virtual void Start() {
 
@@ -83,6 +90,7 @@ public class UIElementButton : MonoBehaviour
 
     // Function to be executed when button is clicked
     public virtual void OnClick() {
+        gameObject.layer = regularLayer;
         // Disable hovered version of GameObject
         if (hoveredObject.activeSelf) {
             hoveredObject.SetActive(false);
@@ -91,15 +99,17 @@ public class UIElementButton : MonoBehaviour
 
     // Function to be executed when button is hovered over
     public virtual void OnHover() {
+        gameObject.layer = hoveredLayer;
         hovered = true;
         // Enable hovered version of GameObject
-        if (!hoveredObject.activeSelf) {
+        /* if (!hoveredObject.activeSelf) {
             hoveredObject.SetActive(true);
-        }
+        } */
     }
 
     // Default state of the button
     public virtual void DefaultState() {
+        gameObject.layer = regularLayer;
         hovered = false;
         // Disable hovered version of GameObject
         if (hoveredObject.activeSelf) {

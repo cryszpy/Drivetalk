@@ -97,14 +97,13 @@ GameObject:
   - component: {fileID: 5779389192286976839}
   - component: {fileID: 8012229046598687119}
   - component: {fileID: 8163540338871795906}
-  - component: {fileID: 2030831108793986311}
   m_Layer: 6
   m_Name: PresetControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5779389192286976839
 Transform:
   m_ObjectHideFlags: 0
@@ -176,9 +175,10 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   hovered: 0
-  insideMinigame: 0
+  regularLayer: 6
+  hoveredLayer: 10
   dialObject: {fileID: 9146612707172334904}
   cinemachineCam: {fileID: 0}
   splineDolly: {fileID: 0}
@@ -199,50 +199,6 @@ MonoBehaviour:
   zeroMax: 105
   maxRotSpeed: 300
   rotSpeed: 0
---- !u!114 &2030831108793986311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769061128428283019}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e1a8e6a341e435ca6cc4767ab51c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toonCamera: {fileID: 0}
-  dialogueManager: {fileID: 0}
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2030831108793986311}
-        m_TargetAssemblyTypeName: RearviewMirror, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  hoveredObject: {fileID: 3540618822522992524}
-  mainCamera: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  hovered: 0
-  insideMinigame: 0
-  focusOn: {fileID: 0}
-  cinemachineCam: {fileID: 0}
-  splineDolly: {fileID: 0}
-  spline: {fileID: 0}
-  screenUI: {fileID: 6515743001419153722}
-  cameraLookAt: {fileID: 0}
-  person: {fileID: 0}
-  backButton: {fileID: 0}
 --- !u!1 &3237105760484247741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +977,8 @@ GameObject:
   - component: {fileID: 8736959044181522048}
   - component: {fileID: 5847588673450890379}
   - component: {fileID: 3410755486981301271}
+  - component: {fileID: 7082276246474296044}
+  - component: {fileID: 767679985645254037}
   m_Layer: 6
   m_Name: Knob
   m_TagString: Untagged
@@ -1098,3 +1056,83 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &7082276246474296044
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146612707172334904}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &767679985645254037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146612707172334904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c554faddc2847cca5b3ee490dcace4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toonCamera: {fileID: 0}
+  dialogueManager: {fileID: 0}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 767679985645254037}
+        m_TargetAssemblyTypeName: UIElementSlider, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  hoveredObject: {fileID: 3540618822522992524}
+  mainCamera: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1088
+  hovered: 0
+  regularLayer: 6
+  hoveredLayer: 10
+  dialObject: {fileID: 9146612707172334904}
+  cinemachineCam: {fileID: 0}
+  splineDolly: {fileID: 0}
+  spline: {fileID: 0}
+  screenUI: {fileID: 6515743001419153722}
+  cameraLookAt: {fileID: 0}
+  rotationMin: 30
+  rotationMax: 150
+  dragging: 1
+  coolText: {fileID: 3043131181789219758}
+  warmText: {fileID: 6865701557783146785}
+  defMaterial: {fileID: 11400000, guid: fbc1f813994d7456ba5810bc0580048b, type: 2}
+  coolMaterial: {fileID: 11400000, guid: c329b647f7b5d4d989e801225341111c, type: 2}
+  warmMaterial: {fileID: 11400000, guid: 9c9ed48be30b94dd7976206378d046e7, type: 2}
+  cutoffCool: 45
+  cutoffWarm: 135
+  zeroMin: 75
+  zeroMax: 105
+  maxRotSpeed: 300
+  rotSpeed: 0

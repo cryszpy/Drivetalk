@@ -1,6 +1,8 @@
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
 
@@ -133,7 +135,7 @@ public class UIElementSlider : UIElementButton
         mousePosDelta = Input.mousePosition - mousePreviousPos;
 
         // Get the mouse's difference in position applied to the slider's desired rotation axis
-        rotation = Vector3.Dot(mousePosDelta, Camera.main.transform.right);
+        rotation = Vector3.Dot(mousePosDelta, new Vector3(1, 0, 0));
 
         float currentRot = dialObject.transform.localEulerAngles.y;
         float newRot = currentRot + rotation;
