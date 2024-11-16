@@ -117,13 +117,6 @@ public class UIElementSlider : UIElementButton
         }
     }
 
-    /* public virtual void StartDrag() {
-        if (hoveredObject.activeSelf) {
-            hoveredObject.SetActive(false);
-        }
-        dragging = true;
-    } */
-
     public virtual void Drag() {
 
         // Check whether the player has stopped dragging slider
@@ -145,8 +138,6 @@ public class UIElementSlider : UIElementButton
 
         // Apply change in rotation based on mouse cursor movement
         dialObject.transform.localEulerAngles = new Vector3(dialObject.transform.localEulerAngles.x, newRot, dialObject.transform.localEulerAngles.z);
-
-        //Debug.Log("Slider turned!");
     }
 
     // Function to be executed when slider is clicked
