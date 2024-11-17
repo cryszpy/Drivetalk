@@ -97,7 +97,7 @@ public class GPS : UIElementButton
         //splineDolly.CameraPosition = 0;
 
         // Enables smooth rotation
-        rotationComposer.Damping = new Vector2(1, 1);
+        rotationComposer.Damping = new(1, 1);
 
         // Focus on this element
         cinemachineCam.LookAt = focusOn.transform;

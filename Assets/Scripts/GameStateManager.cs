@@ -38,6 +38,8 @@ public class GameStateManager : MonoBehaviour
     public static GlobalEvent EOnDialogueGroupFinish;
     public static GlobalEvent EOnDestinationSet;
     public static GlobalEvent EOnPassengerDropoff;
+    public static GlobalEvent EOnLeftWindow;
+    public static GlobalEvent EOnRightWindow;
 
     public static DialogueManager dialogueManager;
 
