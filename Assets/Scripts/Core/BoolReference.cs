@@ -1,2 +1,2 @@
 [System.Serializable]
-public class BoolReference : DynamicReference<bool> { }
+public class BoolReference : DynamicReference<bool, BoolVariable> { }
