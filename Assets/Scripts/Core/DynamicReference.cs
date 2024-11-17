@@ -1,10 +1,13 @@
-﻿[System.Serializable]
-public abstract class DynamicReference<T>
+﻿// Empty base class because Custom PropertyDrawers don't support multi-parameter generic classes.
+public abstract class DynamicReferenceBase { }
+
+[System.Serializable]
+public abstract class DynamicReference<T, SO> : DynamicReferenceBase where SO : ScriptableVariable<T>
 {
     public bool _useReference = true;
 
     public T _varValue;
-    public ScriptableVariable<T> _refValue;
+    public SO _refValue;
 
     public T Value
     {
