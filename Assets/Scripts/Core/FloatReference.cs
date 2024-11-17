@@ -1,2 +1,2 @@
 [System.Serializable]
-public class FloatReference : DynamicReference<float> { }
+public class FloatReference : DynamicReference<float, FloatVariable> { }
