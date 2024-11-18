@@ -239,6 +239,7 @@ MonoBehaviour:
   passengerName: Daniel
   hiddenName: ???
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
+  animator: {fileID: 2486925453300218498}
   requirements: []
   requirementMet: 0
   requestedDestinationIDs: 01000000
@@ -246,6 +247,8 @@ MonoBehaviour:
   waitTimeMin: 1
   waitTimeMax: 2
   holdTime: 2
+  minSwitchTime: 2.5
+  maxSwitchTime: 4
   waitAfterRouteTime: 2
   hasStartedRideDialogue: 0
   dialogue:

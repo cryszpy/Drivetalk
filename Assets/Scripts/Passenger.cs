@@ -13,6 +13,10 @@ public struct PassengerRequirement {
     public float statToCheck;
 }
 
+public enum PassengerExpression {
+    DEFAULT, SIDE_DEFAULT, POUTY, CLOSE_EYED_SMILE, SPEAK
+}
+
 public class Passenger : MonoBehaviour
 {
 
@@ -31,6 +35,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("This passenger's generic response archetype.")]
     public PassengerArchetype archetype;
 
+    [Tooltip("This passenger's Animator component.")]
+    public Animator animator;
+
     [Tooltip("Any requirements for this passenger to have a chance of showing up.")]
     public List<PassengerRequirement> requirements;
     [Tooltip("Whether this passenger's spawn requirements have been met.")]
@@ -48,6 +55,10 @@ public class Passenger : MonoBehaviour
     public float waitTimeMax;
     [Tooltip("The amount of time this passenger will have each sentence held on-screen for.")]
     public float holdTime;
+    [Tooltip("The minimum possible time that this passenger waits to switch from default to side expression views.")]
+    public float minSwitchTime;
+    [Tooltip("The maximum possible time that this passenger waits to switch from default to side expression views.")]
+    public float maxSwitchTime;
 
     [Tooltip("The amount of time this passenger waits to begin talking after selecting a destination.")]
     public float waitAfterRouteTime;

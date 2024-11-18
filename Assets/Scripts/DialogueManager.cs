@@ -89,6 +89,12 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Boolean flag; Checks whether the passenger is waiting for the player to select a destination.")]
     public bool waitForRouting = false;
 
+    public PassengerExpression currentExpression;
+
+    public float expressionTimer = 0;
+    public float expressionTime;
+    public bool expressionTimerRunning = false;
+
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
 
@@ -235,6 +241,28 @@ public class DialogueManager : MonoBehaviour
 
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
+        }
+
+        // Switch default expressions
+        if (expressionTimerRunning) {
+            expressionTimer += Time.deltaTime;
+
+            if (expressionTimer > UnityEngine.Random.Range(car.currentPassenger.minSwitchTime, car.currentPassenger.maxSwitchTime) && !typingSentence) {
+                expressionTimerRunning = false;
+                expressionTimer = 0;
+
+                float rand = UnityEngine.Random.value;
+                if (rand < 0.5f) {
+                    SwitchExpression(PassengerExpression.DEFAULT);
+                } else {
+                    expressionTimerRunning = true;
+                }
+            } else if (typingSentence) {
+                expressionTimerRunning = false;
+                expressionTimer = 0;
+            }
+        } else {
+            expressionTimer = 0;
         }
     }
 
@@ -567,6 +595,9 @@ public class DialogueManager : MonoBehaviour
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
+        currentExpression = PassengerExpression.SPEAK;
+        car.currentPassenger.animator.SetTrigger("Speak");
+
         // For every character in the sentence
         foreach (char letter in sentence.ToCharArray()) {
 
@@ -586,6 +617,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         typingSentence = false;
+
+        SwitchExpression(currentDialogue.expression);
 
         if (autoDialogue) {
 
@@ -735,6 +768,34 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Already interjected once this break, or this is the pickup dialogue greeting!");
             StartDialogue(car.currentPassenger.dialogue[car.currentPassenger.currentDialogueNum], false);
         } */
+    }
+
+    public void SwitchExpression(PassengerExpression expression) {
+
+        currentExpression = expression;
+
+        switch (expression) {
+            case PassengerExpression.DEFAULT:
+                expressionTimerRunning = true;
+                car.currentPassenger.animator.SetTrigger("Default");
+                break;
+            case PassengerExpression.SIDE_DEFAULT:
+                expressionTimerRunning = true;
+                car.currentPassenger.animator.SetTrigger("SideDefault");
+                break;
+            case PassengerExpression.POUTY:
+                expressionTimerRunning = false;
+                car.currentPassenger.animator.SetTrigger("Pouty");
+                break;
+            case PassengerExpression.CLOSE_EYED_SMILE:
+                expressionTimerRunning = false;
+                car.currentPassenger.animator.SetTrigger("CE_Smile");
+                break;
+            default:
+                expressionTimerRunning = true;
+                car.currentPassenger.animator.SetTrigger("Default");
+                break;
+        }
     }
 
     /* private void Interject() {
