@@ -213,6 +213,8 @@ public class CarController : MonoBehaviour
                 passengersDrivenRideNumTracker[index]++;
             }
 
+            GameStateManager.EOnPassengerPickup?.Invoke();
+
             //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
 
             // Start the passenger's pickup greeting if they have one

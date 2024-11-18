@@ -1,10 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEngine.UI;
 
 public class GPS : UIElementButton
 {
+
+    [Tooltip("Reference to the car.")]
+    [SerializeField] private CarController car;
 
     [Tooltip("Reference to the object to look at when the GPS is clicked.")]
     [SerializeField] protected GameObject focusOn;
@@ -27,12 +32,64 @@ public class GPS : UIElementButton
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
 
+    [SerializeField] private Color unlockedColor;
+    [SerializeField] private Color lockedColor;
+
+    [SerializeField] private List<GameObject> gpsButtons;
+
     private void OnEnable() {
         GameStateManager.EOnDestinationSet += StartDampingReset;
+        GameStateManager.EOnPassengerPickup += CachePassengerDest;
     }
 
     private void OnDisable() {
         GameStateManager.EOnDestinationSet -= StartDampingReset;
+        GameStateManager.EOnPassengerPickup -= CachePassengerDest;
+    }
+
+    private void CachePassengerDest() {
+
+        // Gets the index number of the current passenger
+        int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
+
+        // Gets the passenger's requested destination ID based on the current ride number
+        int selectedDestID = car.currentPassenger.requestedDestinationIDs[CarController.PassengersDrivenRideNum[index] - 1];
+        Debug.Log(selectedDestID);
+
+        // Gets the selected button corresponding to the requested destination
+        GameObject selectedButton = gpsButtons.Find(x => x.GetComponent<GPSDestination>().destinationID == selectedDestID);
+
+        // Iterates through all buttons and turns them off except for the selected button
+        foreach (GameObject button in gpsButtons) {
+
+            if (button != selectedButton) {
+
+                if (button.gameObject.TryGetComponent<Image>(out var image)) {
+                    image.color = lockedColor;
+                } else {
+                    Debug.LogError("Couldn't find Image component on button!");
+                }
+
+                if (button.gameObject.TryGetComponent<Button>(out var script)) {
+                    script.enabled = false;
+                } else {
+                    Debug.LogError("Couldn't find Button component on button!");
+                }
+            } else {
+
+                if (button.gameObject.TryGetComponent<Image>(out var image)) {
+                    image.color = unlockedColor;
+                } else {
+                    Debug.LogError("Couldn't find Image component on button!");
+                }
+
+                if (button.gameObject.TryGetComponent<Button>(out var script)) {
+                    script.enabled = true;
+                } else {
+                    Debug.LogError("Couldn't find Button component on button!");
+                }
+            }
+        }
     }
 
     public override void Update() {

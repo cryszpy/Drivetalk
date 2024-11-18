@@ -32,7 +32,6 @@ public class PlayerInfo : MonoBehaviour
     }
 
     private bool switchView = false;
-    private bool decreasing = false;
 
     private void OnEnable() {
         GameStateManager.EOnLeftWindow += ViewLeftWindow;

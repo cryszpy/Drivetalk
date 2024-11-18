@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Destination : MonoBehaviour
 {
+    [Tooltip("This destination's ID number.")]
+    public int id;
+    
     [Tooltip("Reference to the car's script component.")]
     private CarController car;
 

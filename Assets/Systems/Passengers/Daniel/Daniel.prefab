@@ -241,6 +241,7 @@ MonoBehaviour:
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   requirements: []
   requirementMet: 0
+  requestedDestinationIDs: 01000000
   textCPS: 0.08
   waitTimeMin: 1
   waitTimeMax: 2

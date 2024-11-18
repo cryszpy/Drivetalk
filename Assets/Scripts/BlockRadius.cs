@@ -40,6 +40,8 @@ public class BlockRadius : MonoBehaviour
             } else {
                 Debug.LogError("Could not find DestinationRadius script on destination object!");
             }
+
+            GameStateManager.EOnBlockRadiusDetection?.Invoke();
         }
         
         // If the car pointer has been collided with—
@@ -68,6 +70,11 @@ public class BlockRadius : MonoBehaviour
         // If the car leaves the radius, set the boolean flag to false
         if (collider.CompareTag("CarFrame")) {
             inBlockRadius = false;
+
+            if (carPointer) {
+                carPointer.currentBlocksList.Remove(gameObject);
+                //carPointer.CurrentBlocksListRemove(gameObject);
+            }
         }
     }
 

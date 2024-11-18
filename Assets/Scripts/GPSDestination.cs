@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GPSDestination : MonoBehaviour
 {
+    [Tooltip("The ID number of the destination linked to this button.")]
+    public int destinationID;
 
     [Tooltip("Reference to this map location's real-city destination.")]
     [SerializeField] private GameObject destinationObject;

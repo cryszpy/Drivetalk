@@ -5,6 +5,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class NoDupeList<T> : List<T> {
+    public void AddItem(T item) {
+        if (!Contains(item)) {
+            Add(item);
+        }
+    }
+}
+
 public class CarPointer : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
@@ -34,7 +43,7 @@ public class CarPointer : MonoBehaviour
     public GameObject savedBlock;
 
     [Tooltip("List of currently detected block markers to avoid.")]
-    public List<GameObject> currentBlocksList;
+    public List<GameObject> currentBlocksList = new();
 
     [Tooltip("The current car navigation route's path to the destination.")]
     public List<Marker> path = new();

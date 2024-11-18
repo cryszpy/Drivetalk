@@ -36,6 +36,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("Whether this passenger's spawn requirements have been met.")]
     public bool requirementMet;
 
+    [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
+    public List<int> requestedDestinationIDs;
+
     [Tooltip("The rate at which this passenger types out dialogue text. (lower values are faster)")]
     public float textCPS;
 
