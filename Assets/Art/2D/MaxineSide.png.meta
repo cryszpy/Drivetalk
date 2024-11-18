@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83862fdef9975c645a9ce4496bb54c4f
+guid: d66a070ea0e4c1546be4ba1ea66c1e90
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,216 +93,181 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Max_0
+      name: MaxineSide_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1800
-        width: 600
-        height: 900
+        y: 902
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18f8c0a07385c7048819653b03deca11
-      internalID: -406477054
+      spriteID: e79b1b7b13a958a4cbc3bc0b14114355
+      internalID: 2064176042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_1
+      name: MaxineSide_1
       rect:
         serializedVersion: 2
-        x: 600
-        y: 1800
-        width: 600
-        height: 900
+        x: 602
+        y: 902
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 862ac05ded5f29c4c9e1938506724ceb
-      internalID: 1281721466
+      spriteID: 533687947e8ebd9469aec7da9b4d09d3
+      internalID: 1185053969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_2
+      name: MaxineSide_2
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 1800
-        width: 600
-        height: 900
+        x: 1204
+        y: 902
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fd7c5f72adc9444ebe09ec7174a0b22
-      internalID: -1485836261
+      spriteID: 10de574daa82d734b8c49d6d7fc64833
+      internalID: -65008953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_3
+      name: MaxineSide_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 900
-        width: 600
-        height: 900
+        x: 1806
+        y: 902
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66840379b53ad6a4282cb8771f98cafd
-      internalID: -1227360986
+      spriteID: a33f93ed84c480541859a99438f320c1
+      internalID: -1471765932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_4
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 900
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47f98a5ce64654b4ab41df6a8fdd5551
-      internalID: 1720323232
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Max_5
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 900
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14701589c4dc73742936ce9b3eefab89
-      internalID: -1118712464
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Max_6
+      name: MaxineSide_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
-        height: 900
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f810c38a6c60e74ba0c5428301a5b0d
-      internalID: 2021347337
+      spriteID: ce7ecfe1f6bf0fc41ab40cab10af13e2
+      internalID: -411215777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_7
+      name: MaxineSide_5
       rect:
         serializedVersion: 2
-        x: 665
-        y: 898
-        width: 417
-        height: 2
+        x: 602
+        y: 0
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80eee0bf70b2727438371fe40a35192d
-      internalID: -785845888
+      spriteID: de33ff7b16b67124b860a2d76c6ca74c
+      internalID: -2089213151
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Max_8
+      name: MaxineSide_6
       rect:
         serializedVersion: 2
-        x: 1265
-        y: 898
-        width: 417
-        height: 2
+        x: 1204
+        y: 0
+        width: 602
+        height: 902
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1fcee5582682ab458af50b951160a19
-      internalID: -295232989
+      spriteID: a9612e0e558d1cd449e79838c0189605
+      internalID: -1294978801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaxineSide_7
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 0
+        width: 602
+        height: 902
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40dd9090be4f62e4cbe9bd3ca5c68ec5
+      internalID: -723712391
       vertices: []
       indices: 
       edges: []
@@ -311,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: aa247e87f4a40a346839d211aa47aae4
+    spriteID: 5ef63941a8f363c4f8af2b75b98068bb
     internalID: 0
     vertices: []
     indices: 
@@ -321,16 +286,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Max_0: -406477054
-      Max_1: 1281721466
-      Max_2: -1485836261
-      Max_3: -1227360986
-      Max_4: 1720323232
-      Max_5: -1118712464
-      Max_6: 2021347337
-      Max_7: -785845888
-      Max_8: -295232989
-      Max_9: -84077325
+      MaxineSide_0: 2064176042
+      MaxineSide_1: 1185053969
+      MaxineSide_2: -65008953
+      MaxineSide_3: -1471765932
+      MaxineSide_4: -411215777
+      MaxineSide_5: -2089213151
+      MaxineSide_6: -1294978801
+      MaxineSide_7: -723712391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

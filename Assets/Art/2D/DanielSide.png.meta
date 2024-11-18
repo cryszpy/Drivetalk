@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c58235cf59877a4a8634b64ff4a24a9
+guid: 3946f6c1f4c799d4a8f66338fc85440d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Daniel2_0
+      name: DanielSide_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 240c08963e1cd1d408899fa8582873b4
-      internalID: 1624075044
+      spriteID: ef249d314e0960041ae23e48ead1be31
+      internalID: 11212881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_1
+      name: DanielSide_1
       rect:
         serializedVersion: 2
         x: 602
@@ -134,14 +134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96dd0164f7ff6a545b82dad788e9b2cf
-      internalID: 561308707
+      spriteID: 7fe862bf0b193dc4f9ced640b47b70eb
+      internalID: -702026069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_2
+      name: DanielSide_2
       rect:
         serializedVersion: 2
         x: 1204
@@ -156,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b404d4a80009004d97d520bbbae8e2f
-      internalID: 520624967
+      spriteID: be57cf15bb71bc746861b53a346f4685
+      internalID: -1141726183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_3
+      name: DanielSide_3
       rect:
         serializedVersion: 2
         x: 1806
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33ff926149785b546b07f55b7c208894
-      internalID: 451112474
+      spriteID: d6bce5784f246d243b2d093c31b22350
+      internalID: -850273807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_4
+      name: DanielSide_4
       rect:
         serializedVersion: 2
         x: 0
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73278e7987b5690478037e3e245f326b
-      internalID: 348865298
+      spriteID: e24804ffa71e65f40b304d78a246842c
+      internalID: 1563790902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_5
+      name: DanielSide_5
       rect:
         serializedVersion: 2
         x: 602
@@ -222,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4a9bdd89377cb4458a3647f200a0a63
-      internalID: 1162751600
+      spriteID: 78a6bef3075dec04a94856066fb307b7
+      internalID: -1369764409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_6
+      name: DanielSide_6
       rect:
         serializedVersion: 2
         x: 1204
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4849046e1878be848b4f425bc455ae1d
-      internalID: -508142535
+      spriteID: 6d8e9352416ccf8478ef138a525274c8
+      internalID: 1577988260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Daniel2_7
+      name: DanielSide_7
       rect:
         serializedVersion: 2
         x: 1806
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70b88137b44028944a6c98b1ef44f6c5
-      internalID: 1872086170
+      spriteID: 388c68ffc54ea5149b7e02b5cf7d4995
+      internalID: 1988815026
       vertices: []
       indices: 
       edges: []
@@ -276,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2013fd5b9c2b59441a6ff5d644250c48
+    spriteID: 6f0957001d63a5342926a6b5b96cee84
     internalID: 0
     vertices: []
     indices: 
@@ -286,14 +286,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Daniel2_0: 1624075044
-      Daniel2_1: 561308707
-      Daniel2_2: 520624967
-      Daniel2_3: 451112474
-      Daniel2_4: 348865298
-      Daniel2_5: 1162751600
-      Daniel2_6: -508142535
-      Daniel2_7: 1872086170
+      DanielSide_0: 11212881
+      DanielSide_1: -702026069
+      DanielSide_2: -1141726183
+      DanielSide_3: -850273807
+      DanielSide_4: 1563790902
+      DanielSide_5: -1369764409
+      DanielSide_6: 1577988260
+      DanielSide_7: 1988815026
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
