@@ -1498,6 +1498,10 @@ MonoBehaviour:
   playingChoices: 0
   autoDialogue: 0
   waitForRouting: 0
+  currentExpression: 0
+  expressionTimer: 0
+  expressionTime: 0
+  expressionTimerRunning: 0
 --- !u!1 &192307632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1966496589025087364, guid: da53ee831edce426281b3008712ecc92, type: 3}

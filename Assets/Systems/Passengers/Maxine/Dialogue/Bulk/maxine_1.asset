@@ -23,6 +23,9 @@ MonoBehaviour:
   - y'know the town's changed a lot since you've last been here
   - do you even remember where ardendale avenue is?
   nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
+  greeting: 0
+  firstNameUsage: 0
+  expression: 0
   choices:
   - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}
   - {fileID: 11400000, guid: f18dd171d05df4f5aa7efce03eb5d51a, type: 2}
