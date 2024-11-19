@@ -21,4 +21,8 @@ MonoBehaviour:
   - "y\u2019know most people aren't gonna tell u this kinda stuff right?"
   - that's because a skilled taxi driver doesnt need to be told!
   nextDialogue: {fileID: 11400000, guid: 5ad7b10915eb241c7ab966016323c409, type: 2}
+  greeting: 0
+  firstNameUsage: 0
+  expression: 1
+  preExpression: 7
   choices: []

@@ -17,5 +17,8 @@ MonoBehaviour:
   - Most people in this town never been outside anyways.
   - ...
   nextDialogue: {fileID: 0}
+  greeting: 0
   firstNameUsage: 0
+  expression: 1
+  preExpression: 0
   choices: []

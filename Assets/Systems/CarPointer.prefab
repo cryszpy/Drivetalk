@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPointer: {fileID: 869945482564533188}
-  currentBlocksList: []
 --- !u!1 &878202312605450734
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +140,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 15
+  m_Speed: 20
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -165,21 +164,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae4174af29ca43b2a1cf39b035f9478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taxiStops: []
-  rb: {fileID: 5238970180842581590}
+  car: {fileID: 0}
   agent: {fileID: 8630995589073869104}
-  currentStop: {fileID: 0}
   allMarkers: []
-  allBlocks: []
   currentMarker: {fileID: 0}
   destinationMarker: {fileID: 0}
   destinationObject: {fileID: 0}
   destinationRadius: {fileID: 0}
   savedBlock: {fileID: 0}
+  currentBlocksList: []
   path: []
-  arrived: 0
   savedDestination: {fileID: 0}
   finishedDialogue: 0
+  setInitialBlock: 0
 --- !u!1 &7681991582630019422
 GameObject:
   m_ObjectHideFlags: 0

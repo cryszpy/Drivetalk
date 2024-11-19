@@ -21,6 +21,9 @@ public class DialoguePiece : ScriptableObject
     [Tooltip("What expression the passenger should have during this dialogue piece.")]
     public PassengerExpression expression;
 
+    [Tooltip("What expression the passenger will make before they start speaking. (Default = none)")]
+    public PassengerExpression preExpression;
+
     [Tooltip("Any choices that must be made after this piece of dialogue ends.")]
     public DialogueChoice[] choices;
 }

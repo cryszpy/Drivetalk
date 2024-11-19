@@ -244,7 +244,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Switch default expressions
-        if (expressionTimerRunning) {
+        if (expressionTimerRunning && car.currentPassenger) {
             expressionTimer += Time.deltaTime;
 
             if (expressionTimer > UnityEngine.Random.Range(car.currentPassenger.minSwitchTime, car.currentPassenger.maxSwitchTime) && !typingSentence) {
@@ -419,7 +419,6 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
-        // Displays the next sentence
         DisplayNextSentence();
     }
 
@@ -595,8 +594,10 @@ public class DialogueManager : MonoBehaviour
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
-        currentExpression = PassengerExpression.SPEAK;
-        car.currentPassenger.animator.SetTrigger("Speak");
+        if (sentence != "...") {
+            currentExpression = PassengerExpression.SPEAK;
+            car.currentPassenger.animator.SetTrigger("Speak");
+        }
 
         // For every character in the sentence
         foreach (char letter in sentence.ToCharArray()) {
@@ -746,8 +747,13 @@ public class DialogueManager : MonoBehaviour
         // Waits for the generated amount of time
         yield return new WaitForSeconds(waitTime);
 
-        // Starts the next piece of dialogue
-        StartDialogue(currentDialogue.nextDialogue);
+        if (currentDialogue.nextDialogue.preExpression == PassengerExpression.NONE) {
+
+            // Starts the next piece of dialogue
+            StartDialogue(currentDialogue.nextDialogue);
+        } else {
+            SwitchExpression(currentDialogue.nextDialogue.preExpression);
+        }
 
         // If an interjection hasn't already played, and passenger narrative dialogue isn't exhausted—
         /* if (!interjected && !(car.currentPassenger.dialogueLeftToFinish == car.currentPassenger.dialogue.Count)) {
@@ -789,7 +795,15 @@ public class DialogueManager : MonoBehaviour
                 break;
             case PassengerExpression.CLOSE_EYED_SMILE:
                 expressionTimerRunning = false;
-                car.currentPassenger.animator.SetTrigger("CE_Smile");
+                car.currentPassenger.animator.SetTrigger("CESmile");
+                break;
+            case PassengerExpression.LAUGH_HEARTY:
+                expressionTimerRunning = false;
+                car.currentPassenger.animator.SetTrigger("LaughHearty");
+                break;
+            case PassengerExpression.LAUGH_FLOWY:
+                expressionTimerRunning = false;
+                car.currentPassenger.animator.SetTrigger("LaughFlowy");
                 break;
             default:
                 expressionTimerRunning = true;

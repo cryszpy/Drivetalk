@@ -1265,6 +1265,10 @@ MonoBehaviour:
   playingChoices: 0
   autoDialogue: 0
   waitForRouting: 0
+  currentExpression: 0
+  expressionTimer: 0
+  expressionTime: 0
+  expressionTimerRunning: 0
 --- !u!1 &181257955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1613,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 15
+  m_Speed: 20
   m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -18695,7 +18699,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 261394894}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999636
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

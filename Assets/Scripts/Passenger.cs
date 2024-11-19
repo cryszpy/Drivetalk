@@ -14,7 +14,7 @@ public struct PassengerRequirement {
 }
 
 public enum PassengerExpression {
-    DEFAULT, SIDE_DEFAULT, POUTY, CLOSE_EYED_SMILE, SPEAK
+    NONE, DEFAULT, SIDE_DEFAULT, POUTY, CLOSE_EYED_SMILE, SPEAK, LAUGH_HEARTY, LAUGH_FLOWY
 }
 
 public class Passenger : MonoBehaviour

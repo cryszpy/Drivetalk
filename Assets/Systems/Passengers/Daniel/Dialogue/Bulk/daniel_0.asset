@@ -17,5 +17,8 @@ MonoBehaviour:
   - You happen to know any good burger places in downtown Prustee?
   - ...
   nextDialogue: {fileID: 11400000, guid: 58d6e3ef7f8cc4129b3d7c410f30d4ce, type: 2}
+  greeting: 0
   firstNameUsage: 0
+  expression: 1
+  preExpression: 0
   choices: []
