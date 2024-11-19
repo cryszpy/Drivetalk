@@ -92,7 +92,6 @@ public class DialogueManager : MonoBehaviour
     public PassengerExpression currentExpression;
 
     public float expressionTimer = 0;
-    public float expressionTime;
     public bool expressionTimerRunning = false;
 
     /* public bool timerPaused = false;
@@ -589,7 +588,8 @@ public class DialogueManager : MonoBehaviour
         //RMM_dialogueText.text = "";
 
         // Initializes empty text to start typing
-        dash_dialogueText.text = "";
+        dash_dialogueText.text = sentence;
+        dash_dialogueText.maxVisibleCharacters = 0;
 
         // Indicates that a sentence is being typed out
         typingSentence = true;
@@ -605,7 +605,7 @@ public class DialogueManager : MonoBehaviour
             if (typingSentence) {
 
                 // Types the character and adds it to the current sentence display
-                dash_dialogueText.text += letter;
+                dash_dialogueText.maxVisibleCharacters++;
                 //RMM_dialogueText.text += letter;
 
                 // Waits for the typing speed time
