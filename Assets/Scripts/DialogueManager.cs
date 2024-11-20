@@ -271,7 +271,7 @@ public class DialogueManager : MonoBehaviour
 
             // Skip typing on click
             if (currentSentence != null && typingSentence && !autoDialogue) {
-                dash_dialogueText.text = currentSentence;
+                dash_dialogueText.maxVisibleCharacters = dash_dialogueText.text.Length;
                 typingSentence = false;
             } 
             // If sentence is typed out, play next sentence on click
