@@ -17,7 +17,8 @@ public class DialogueManager : MonoBehaviour
     [Header("SCRIPT REFERENCES")]
 
     /* public DialogueMode mode; */
-
+    public List<DashboardRequest> dashRequests = new();
+    
     [Tooltip("Reference to the car pointer's script component.")]
     public CarPointer carPointer;
     
@@ -56,7 +57,7 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
 
     [Tooltip("Reference to the dialogue piece directly before the most recent choices branch.")]
-    private DialoguePiece preChoiceDialogue;
+    public DialoguePiece preChoiceDialogue;
 
     [Tooltip("List of all choice buttons in a choice branch.")]
     [SerializeField] private List<GameObject> choiceButtonsList;
@@ -99,7 +100,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool interjected = false;
     private float dashRequestTimer = 0;
-    public bool dashRequestRunning = false;
+    
     public float dashTicker;
     public DashRequestRequirement currentDashReq; */
 
@@ -251,6 +252,7 @@ public class DialogueManager : MonoBehaviour
                 expressionTimer = 0;
 
                 float rand = UnityEngine.Random.value;
+
                 if (rand < 0.5f) {
                     SwitchExpression(PassengerExpression.DEFAULT);
                 } else {
@@ -262,6 +264,83 @@ public class DialogueManager : MonoBehaviour
             }
         } else {
             expressionTimer = 0;
+        }
+
+        // Dash request timer
+        if (dashRequests.Count > 0) {
+
+            // For every dashboard request—
+            foreach (var request in dashRequests) {
+
+                // Check to see if it has been satisfied
+                if (CheckDashRequirements(request)) {
+
+                    // If it has, increase its added value to comfortability over time until it hits max
+                    request.value += Time.deltaTime;
+                } 
+                // If it hasn't, decrease its added value to comfortability over time until it hits 0
+                else {
+                    request.value -= Time.deltaTime;
+                }
+
+                // Prevent dashboard request values from going infinitely
+                if (request.value <= request.min) {
+                    request.value = request.min;
+                } else if (request.value >= request.max) {
+                    request.value = request.max;
+                }
+            }
+        }
+    }
+
+    public bool CheckDashRequirements(DashboardRequest request) {
+
+        switch (request.control) {
+
+            case DashboardControl.AC:
+            
+                switch (request.floatCheckType) {
+
+                    case FloatCheckType.LESSER:
+                        if (CarController.Temperature < request.floatValue) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    case FloatCheckType.GREATER:
+                        if (CarController.Temperature > request.floatValue) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                }
+                return false;
+            case DashboardControl.RADIO_SONG:
+                if (CarController.CurrentRadioChannel == request.floatValue) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case DashboardControl.RADIO_VOLUME:
+                if (CarController.RadioVolume == request.floatValue) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case DashboardControl.HAZARDS:
+                return false;
+            case DashboardControl.WIPERS:
+                return false;
+            case DashboardControl.HORN:
+                return false;
+            case DashboardControl.DEFOG:
+                return false;
+            case DashboardControl.HEADLIGHTS:
+                return false;
+            case DashboardControl.WINDOWS:
+                return false;
+            default:
+                return false;
         }
     }
 
@@ -423,10 +502,6 @@ public class DialogueManager : MonoBehaviour
 
     // Displays the next sentence
     public void DisplayNextSentence() {
-
-        /* if (dashRequestRunning) {
-            return;
-        } */
         
         // If there aren't any sentences to display (reached the end of this dialogue piece)
         if (sentences.Count <= 0) {
@@ -497,6 +572,34 @@ public class DialogueManager : MonoBehaviour
 
                 // Ends the ride's dialogue
                 GameStateManager.EOnRideFinish?.Invoke();
+                return;
+            }
+        } 
+        // If this dialogue piece has a dashboard request to play—
+        else if (currentDialogue.request.control != DashboardControl.NONE && !dashRequests.Contains(currentDialogue.request)) {
+
+            // Reset response boolean
+            currentDialogue.request.hasResponded = false;
+
+            // Add the request to the list of active requests
+            dashRequests.Add(currentDialogue.request);
+            Debug.Log("Started dashboard request of type: " + currentDialogue.request.control);
+
+            if (CheckDashRequirements(currentDialogue.request)) {
+
+                dialogueAnimator.SetBool("Play", false);
+
+                currentDialogue.request.hasResponded = true;
+                preChoiceDialogue = currentDialogue;
+                currentDialogue = currentDialogue.request.preCompletedResponse;
+
+                if (currentDialogue.preExpression == PassengerExpression.NONE) {
+
+                    // Starts the pre-completed request response
+                    StartDialogue(currentDialogue);
+                } else {
+                    SwitchExpression(currentDialogue.preExpression);
+                }
                 return;
             }
         }
@@ -747,14 +850,33 @@ public class DialogueManager : MonoBehaviour
         // Waits for the generated amount of time
         yield return new WaitForSeconds(waitTime);
 
-        if (currentDialogue.nextDialogue.preExpression == PassengerExpression.NONE) {
+        // Set completed dash request response as current dialogue, save previous dialogue to continue after
+        if (dashRequests.Count > 0 && CheckDashRequirements(dashRequests[^1]) && !dashRequests[^1].hasResponded) {
+            dashRequests[^1].hasResponded = true;
+            preChoiceDialogue = currentDialogue;
+            currentDialogue = dashRequests[^1].completedResponse;
 
-            // Starts the next piece of dialogue
-            StartDialogue(currentDialogue.nextDialogue);
-        } else {
-            SwitchExpression(currentDialogue.nextDialogue.preExpression);
+            if (currentDialogue.preExpression == PassengerExpression.NONE) {
+
+                // Starts the completed request response
+                StartDialogue(currentDialogue);
+            } else {
+                SwitchExpression(currentDialogue.preExpression);
+            }
+            yield break;
         }
 
+        if (currentDialogue.nextDialogue) {
+            if (currentDialogue.nextDialogue.preExpression == PassengerExpression.NONE) {
+                // Starts the next piece of dialogue
+                StartDialogue(currentDialogue.nextDialogue);
+            } else {
+                SwitchExpression(currentDialogue.nextDialogue.preExpression);
+            }
+        } else {
+            DisplayNextSentence();
+        }
+        
         // If an interjection hasn't already played, and passenger narrative dialogue isn't exhausted—
         /* if (!interjected && !(car.currentPassenger.dialogueLeftToFinish == car.currentPassenger.dialogue.Count)) {
 

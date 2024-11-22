@@ -89,9 +89,13 @@ public class CarController : MonoBehaviour
     private static int lastPassengerID;
     public static int LastPassengerID { get => lastPassengerID; set => lastPassengerID = value; }
 
-    [Tooltip("The most recent played song's ID number.")]
-    private static int lastSongPlayedID;
-    public static int LastSongPlayedID { get => lastSongPlayedID; set => lastSongPlayedID = value; }
+    [Tooltip("The ID of the currently played radio channel.")]
+    private static int currentRadioChannel;
+    public static int CurrentRadioChannel { get => currentRadioChannel; set => currentRadioChannel = value; }
+
+    [Tooltip("The current volume of the radio.")]
+    private static float radioVolume;
+    public static float RadioVolume { get => radioVolume; set => radioVolume = value;}
 
     [Header("STATIC VARIABLE TRACKERS")]
 
@@ -99,7 +103,7 @@ public class CarController : MonoBehaviour
     public float tempTracker;
     public float totalPassengersTracker;
     public float lastPassengerIDTracker;
-    public float lastSongPlayedIDTracker;
+    public float currentRadioChannelTracker;
 
     private void OnEnable() {
         GameStateManager.EOnPassengerDropoff += DropOffPassenger;
@@ -139,7 +143,7 @@ public class CarController : MonoBehaviour
         tempTracker = Temperature;
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
-        lastSongPlayedIDTracker = LastSongPlayedID;
+        currentRadioChannelTracker = CurrentRadioChannel;
     }
 
     // Generates the day's rides
@@ -248,6 +252,9 @@ public class CarController : MonoBehaviour
     public void DropOffPassenger() {
 
         Debug.Log("Arrived at destination!");
+
+        // Clears all previous dashboard requests
+        dialogueManager.dashRequests.Clear();
 
         // Reset initial block routing trigger
         carPointer.setInitialBlock = false;

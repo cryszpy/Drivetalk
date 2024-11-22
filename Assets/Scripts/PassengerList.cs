@@ -74,7 +74,7 @@ public class PassengerList : ScriptableObject
         {
             PassengerRequirementType.HAS_DRIVEN_PASSENGER => CarController.PassengersDrivenIDs.Contains(requirement.passengerReq.id),
             PassengerRequirementType.LAST_PASSENGER_DRIVEN => CarController.LastPassengerID == requirement.passengerReq.id,
-            PassengerRequirementType.SONG_IS_PLAYING => CarController.LastSongPlayedID == requirement.statToCheck,
+            PassengerRequirementType.SONG_IS_PLAYING => CarController.CurrentRadioChannel == requirement.statToCheck,
             PassengerRequirementType.TOTAL_PASSENGERS_DRIVEN => CarController.TotalPassengersDriven == requirement.statToCheck,
             PassengerRequirementType.DAY_NUM => false,
             PassengerRequirementType.RATING_SCORE_EQUALS => CarController.Rating == requirement.statToCheck,

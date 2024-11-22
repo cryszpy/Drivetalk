@@ -1482,6 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fccfd1c0b3d4786a68256826ed2039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashRequests: []
   carPointer: {fileID: 109818932}
   car: {fileID: 252045954}
   dialogueAnimator: {fileID: 225461044}
@@ -1491,6 +1492,7 @@ MonoBehaviour:
   transcriptLog: {fileID: 1950187948}
   continueButton: {fileID: 0}
   currentDialogue: {fileID: 0}
+  preChoiceDialogue: {fileID: 0}
   choiceButtonsList: []
   skipIndicator: {fileID: 8412348786198986530}
   autoDialogueToggle: {fileID: 0}
@@ -1500,8 +1502,8 @@ MonoBehaviour:
   waitForRouting: 0
   currentExpression: 0
   expressionTimer: 0
-  expressionTime: 0
   expressionTimerRunning: 0
+  dashRequestRunning: 0
 --- !u!1 &192307632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1966496589025087364, guid: da53ee831edce426281b3008712ecc92, type: 3}
@@ -1748,7 +1750,7 @@ MonoBehaviour:
   tempTracker: 0
   totalPassengersTracker: 0
   lastPassengerIDTracker: 0
-  lastSongPlayedIDTracker: 0
+  currentRadioChannelTracker: 0
 --- !u!195 &252045955
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2627,7 +2629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 192.39062, y: -449.99933}
+  m_AnchoredPosition: {x: 192.39062, y: -449.99805}
   m_SizeDelta: {x: 211.4, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &387044757
@@ -18520,8 +18522,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 261394895}
   m_HandleRect: {fileID: 261394894}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9999977
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_2
+  m_Name: maxine_ac_done_0
   m_EditorClassIdentifier: 
   sentences:
-  - i know you just came back but if you want people to come back in this busted
-    taxi of yours
-  - you're gonna need to pay attention to the comfortability of your passengers!
-  - "y\u2019know most people aren't gonna tell u this kinda stuff right?"
-  - that's because a skilled taxi driver doesnt need to be told!
-  nextDialogue: {fileID: 11400000, guid: 5ad7b10915eb241c7ab966016323c409, type: 2}
+  - Mm.
+  - Nice and warm, just how I remember it.
+  nextDialogue: {fileID: 0}
   request:
     control: 0
     value: 5
@@ -32,5 +29,5 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
   firstNameUsage: 0
   expression: 1
-  preExpression: 7
+  preExpression: 4
   choices: []

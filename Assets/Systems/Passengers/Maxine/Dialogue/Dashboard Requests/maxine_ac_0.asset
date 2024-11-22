@@ -10,26 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_0
+  m_Name: maxine_ac_0
   m_EditorClassIdentifier: 
   sentences:
-  - oh it's you.
-  - so you're back in town?
-  - hmmmmmmmmmmm
-  - ...
-  - hmph.
-  nextDialogue: {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}
+  - hey... do you mind turning the heat down a bit?
+  - it's getting kinda warm in here
+  nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
   request:
-    control: 0
-    value: 5
+    control: 1
+    value: 10
     min: 0
-    max: 0
+    max: 10
     requestTimer: 0
-    floatCheckType: 0
+    floatCheckType: 2
     boolValue: 0
-    floatValue: 0
+    floatValue: 0.5
     hasResponded: 0
-    completedResponse: {fileID: 0}
+    completedResponse: {fileID: 11400000, guid: 3c2f1eab4707f486b9a72d23306f9a9e, type: 2}
+    preCompletedResponse: {fileID: 11400000, guid: 50a9cbce0196242fcae048dc73489226, type: 2}
   firstNameUsage: 0
   expression: 1
   preExpression: 0
