@@ -26,7 +26,7 @@ public class CameraLookAt : MonoBehaviour
             // Calculates a target position in between the dashboard focus point, and the cursor's active position
             Vector3 cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * cameraOrigin.position) / cameraTargetDivider;
 
-            float clamp = Mathf.Clamp(cameraTargetPosition.y, 1.5f, 2f);
+            float clamp = Mathf.Clamp(cameraTargetPosition.y, 1.7f, 2f);
 
             Vector3 clampedPosition = new(cameraTargetPosition.x, clamp, cameraTargetPosition.z);
 

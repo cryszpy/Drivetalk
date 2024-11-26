@@ -13,6 +13,7 @@ public class PlayerInfo : MonoBehaviour
 
     [SerializeField] private CarController car;
 
+    [SerializeField] private GameObject windowLookAt;
     [SerializeField] private GameObject mainCameraLookAt;
     [SerializeField] private GameObject leftCameraLookAt;
     [SerializeField] private GameObject rightCameraLookAt;
@@ -50,7 +51,7 @@ public class PlayerInfo : MonoBehaviour
             switch (switchView) {
 
                 case false:
-                    if (Input.GetKey(KeyCode.A)) {
+                    /* if (Input.GetKey(KeyCode.A)) {
                         switchView = true;
 
                         GameStateManager.EOnLeftWindow?.Invoke();
@@ -60,14 +61,78 @@ public class PlayerInfo : MonoBehaviour
 
                         GameStateManager.EOnRightWindow?.Invoke();
                     }
-                    break;
-                case true:
-                    if (cinemachineCam.LookAt != mainCameraLookAt && (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))) {
-                        ResetView();
+                    break; */
+                    if (Input.GetMouseButton(1)) {
+                        switchView = true;
+
+                        IncreaseView();
                     }
                     break;
+                case true:
+                    /* if (cinemachineCam.LookAt != mainCameraLookAt && (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))) {
+                        ResetView();
+                    }
+                    break; */
+                    if (Input.GetMouseButtonUp(1)) {
+                        ResetLookAt();
+                    }
+                    break;
+            } 
+        }
+    }
+
+    private void IncreaseView() {
+        rotationComposer.Damping = new(0.5f, 0.5f);
+        windowLookAt.SetActive(true);
+        cinemachineCam.LookAt = windowLookAt.transform;
+        mainCameraLookAt.SetActive(false);
+        
+        //StartCoroutine(IncreaseLookAt());
+    }
+
+    /* private IEnumerator IncreaseLookAt() {
+        while (camLookAt.cameraTargetDivider > 2) {
+            camLookAt.cameraTargetDivider -= 0.5f;
+            yield return new WaitForSeconds(0.02f);
+        }
+        camLookAt.cameraTargetDivider = 2;
+    } */
+
+    private void ResetLookAt() {
+        mainCameraLookAt.SetActive(true);
+        cinemachineCam.LookAt = mainCameraLookAt.transform;
+        windowLookAt.SetActive(false);
+        StartCoroutine(DecreaseLookAt());
+        //StartCoroutine(DecreaseLookAt());
+    }
+
+    private IEnumerator DecreaseLookAt() {
+        
+        // Disables smooth rotation
+        float damp = 0.5f;
+
+        while (damp > 0 && rotationComposer.Damping.x > 0 && rotationComposer.Damping.y > 0) {
+            if (switchView) {
+                rotationComposer.Damping = new(damp, damp);
+                damp -= 0.02f;
+
+                yield return new WaitForSeconds(0.02f);
+            } else {
+                break;
             }
         }
+        switchView = false;
+        /* while (camLookAt.cameraTargetDivider < 10) {
+            if (camLookAt.cameraTargetDivider > 6) {
+                camLookAt.cameraTargetDivider += 0.25f;
+                yield return new WaitForSeconds(0.01f);
+            } else {
+                camLookAt.cameraTargetDivider += 0.125f;
+                yield return new WaitForSeconds(0.001f);
+            }
+        }
+        camLookAt.cameraTargetDivider = 10;
+        switchView = false; */
     }
 
     private void ResetView() {

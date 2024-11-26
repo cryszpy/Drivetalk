@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: maxine_ac_0
   m_EditorClassIdentifier: 
   sentences:
-  - hey... do you mind turning the heat down a bit?
-  - it's getting kinda warm in here
+  - hey... do you mind turning the heat up a bit?
+  - it's getting kinda cold in here
   nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
   request:
     control: 1

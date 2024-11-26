@@ -43,7 +43,7 @@ public class Radio : MonoBehaviour
             audioSource.playOnAwake = false;
             audioSource.loop = false;
 
-            audioSource.volume = 1f;
+            audioSource.volume = 0f;
             audioSource.pitch = 1f;
             audioSource.spatialBlend = 0.75f;
 

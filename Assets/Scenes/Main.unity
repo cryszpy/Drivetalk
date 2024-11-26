@@ -1249,6 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fccfd1c0b3d4786a68256826ed2039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashRequests: []
   carPointer: {fileID: 109818932}
   car: {fileID: 252045954}
   dialogueAnimator: {fileID: 225461044}
@@ -1258,6 +1259,7 @@ MonoBehaviour:
   transcriptLog: {fileID: 1950187948}
   continueButton: {fileID: 0}
   currentDialogue: {fileID: 0}
+  preChoiceDialogue: {fileID: 0}
   choiceButtonsList: []
   skipIndicator: {fileID: 8412348786198986530}
   autoDialogueToggle: {fileID: 0}
@@ -1267,7 +1269,6 @@ MonoBehaviour:
   waitForRouting: 0
   currentExpression: 0
   expressionTimer: 0
-  expressionTime: 0
   expressionTimerRunning: 0
 --- !u!1 &181257955
 GameObject:
@@ -1602,7 +1603,7 @@ MonoBehaviour:
   tempTracker: 0
   totalPassengersTracker: 0
   lastPassengerIDTracker: 0
-  lastSongPlayedIDTracker: 0
+  currentRadioChannelTracker: 0
 --- !u!195 &252045955
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4436,7 +4437,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -12040,6 +12041,7 @@ Transform:
   - {fileID: 330585546}
   - {fileID: 1102832959}
   - {fileID: 769080904}
+  - {fileID: 1481078080}
   - {fileID: 1012859190}
   - {fileID: 1787479063}
   - {fileID: 1947440944}
@@ -15691,11 +15693,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currencyUI: {fileID: 32572836}
   car: {fileID: 252045954}
+  windowLookAt: {fileID: 1481078079}
   mainCameraLookAt: {fileID: 769080902}
   leftCameraLookAt: {fileID: 1003584417}
   rightCameraLookAt: {fileID: 1754315096}
   cinemachineCam: {fileID: 1793819360}
   rotationComposer: {fileID: 1793819361}
+--- !u!1 &1481078079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1481078080}
+  - component: {fileID: 1481078081}
+  m_Layer: 0
+  m_Name: WindowLookAt
+  m_TagString: CameraLookAt
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1481078080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481078079}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4449768, y: 0.44299996, z: 1.8972931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050934115}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1481078081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481078079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1665dc45b8bdb4ea3bdeac54546ba379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 330585545}
+  cameraOrigin: {fileID: 1012859190}
+  cameraTargetDivider: 2
+  distanceZ: 2
 --- !u!1001 &1492001548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16724,7 +16775,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 68a089e572c2f41e5ac180f76baef5e4, type: 3}
     mixerGroup: {fileID: -3645944861826002065, guid: d7148047a9a3e4c2fb74b5778e58b8d4, type: 2}
-    volume: 0.5
+    volume: 0
     pitch: 1
     stereoPan: 0
     spatialBlend: 0.75
@@ -16737,7 +16788,7 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 2a2672bbeeadb43e39cfb71d84a16e27, type: 3}
     mixerGroup: {fileID: -3645944861826002065, guid: d7148047a9a3e4c2fb74b5778e58b8d4, type: 2}
-    volume: 0.5
+    volume: 0
     pitch: 1
     stereoPan: 0
     spatialBlend: 0.75
