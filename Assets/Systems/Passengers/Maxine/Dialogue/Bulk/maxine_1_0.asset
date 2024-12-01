@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: maxine_1_0
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: "wait\u2026"
+    expression: 1
+    startingExpression: 0
+  - sentence: "hmmm\u2026"
+    expression: 1
+    startingExpression: 0
+  - sentence: "is that- is that really you? you\u2019re back in town? i can\u2019t
+      believe it!"
+    expression: 1
+    startingExpression: 0
+  - sentence: "y\u2019know old man mcgee said something about you being back in town,
+      but i didn\u2019t believe him. "
+    expression: 1
+    startingExpression: 6
+  - sentence: "maybe because i was expecting a phone call from you at the very least\u2026"
+    expression: 3
+    startingExpression: 0
+  - sentence: ...
+    expression: 3
+    startingExpression: 0
+  - sentence: "well, i guess i can\u2019t stay mad at you forever."
+    expression: 1
+    startingExpression: 4
+  - sentence: with that being said, welcome back!
+    expression: 1
+    startingExpression: 0
+  - sentence: "y\u2019know, it\u2019s almost been a full year since you\u2019ve left.
+      the town\u2019s changed a lot since you\u2019ve been gone."
+    expression: 1
+    startingExpression: 0
+  - sentence: "although it seems like you\u2019ve changed a lot too!"
+    expression: 1
+    startingExpression: 0
+  - sentence: "like the fact that you\u2019re a taxi driver now\u2026 "
+    expression: 1
+    startingExpression: 0
+  - sentence: "i\u2019m not too surprised though, you\u2019ve always loved to drive."
+    expression: 1
+    startingExpression: 0
+  - sentence: "it\u2019s kind of nostalgic isn\u2019t it? remember the time when
+      you first got your license?"
+    expression: 1
+    startingExpression: 4
+  nextDialogue: {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}
+  request:
+    control: 0
+    value: 5
+    min: 0
+    max: 0
+    requestTimer: 0
+    floatCheckType: 0
+    boolValue: 0
+    floatValue: 0
+    hasResponded: 0
+    completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
+  firstNameUsage: 0
+  fallbackExpression: 1
+  choices:
+  - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}
+  - {fileID: 11400000, guid: f18dd171d05df4f5aa7efce03eb5d51a, type: 2}
+  - {fileID: 11400000, guid: 608789d6cbf0140e4862d17667a8c164, type: 2}

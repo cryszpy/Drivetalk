@@ -23,6 +23,11 @@ public class AC : UIElementSlider
     [SerializeField] private float maxRotSpeed;
     [SerializeField] private float rotSpeed;
 
+    public override void Start() {
+        base.Start();
+        CarController.Temperature = 0.5f;
+    }
+
     /* public override void Update()
     {
         base.Update();

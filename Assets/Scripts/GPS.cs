@@ -142,6 +142,9 @@ public class GPS : UIElementButton
         // Disable dialogue continue button
         continueButton.SetActive(false);
 
+        // Hide GPS indicator
+        GameStateManager.dialogueManager.gpsIndicator.SetActive(false);
+
         base.OnClick();
 
         // Switches game's state to be in a menu
@@ -197,6 +200,9 @@ public class GPS : UIElementButton
 
     public void GPSBackButton() {
         StartCoroutine(EndDollyMovement());
+
+        // Show GPS indicator
+        GameStateManager.dialogueManager.gpsIndicator.SetActive(true);
     }
 
     public virtual IEnumerator EndDollyMovement() {

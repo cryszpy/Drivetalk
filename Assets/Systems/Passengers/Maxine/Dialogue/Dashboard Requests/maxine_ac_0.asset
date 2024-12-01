@@ -12,23 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: maxine_ac_0
   m_EditorClassIdentifier: 
-  sentences:
-  - hey... do you mind turning the heat up a bit?
-  - it's getting kinda cold in here
-  nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
+  lines:
+  - sentence: "hey do you mind turning the heat down? it\u2019s getting kind of warm
+      in here. blast the ac!"
+    expression: 1
+    startingExpression: 0
+  nextDialogue: {fileID: 11400000, guid: 1a1f7e676ec6a4e58b3683c4e5db2e92, type: 2}
   request:
     control: 1
     value: 10
     min: 0
     max: 10
     requestTimer: 0
-    floatCheckType: 2
+    floatCheckType: 1
     boolValue: 0
     floatValue: 0.5
-    hasResponded: 0
+    hasResponded: 1
     completedResponse: {fileID: 11400000, guid: 3c2f1eab4707f486b9a72d23306f9a9e, type: 2}
     preCompletedResponse: {fileID: 11400000, guid: 50a9cbce0196242fcae048dc73489226, type: 2}
   firstNameUsage: 0
-  expression: 1
-  preExpression: 0
+  fallbackExpression: 1
   choices: []

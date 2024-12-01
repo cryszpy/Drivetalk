@@ -66,8 +66,8 @@ public class Passenger : MonoBehaviour
     [Tooltip("Boolean to check if the passenger has started ride dialogue.")]
     public bool hasStartedRideDialogue = false;
 
-    [Tooltip("List of all dialogue beats for this passenger, in order.")]
-    public List<DialoguePiece> dialogue;
+    [Tooltip("List of all ride dialogue for this passenger, in order.")]
+    public List<DialoguePiece> ridesDialogue;
 }
 
 [Tooltip("Enum describing passenger spawn requirement types.")]

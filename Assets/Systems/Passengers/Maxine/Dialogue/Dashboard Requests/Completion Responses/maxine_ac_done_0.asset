@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: maxine_ac_done_0
   m_EditorClassIdentifier: 
-  sentences:
-  - Mm.
-  - Nice and warm, just how I remember it.
+  lines:
+  - sentence: "ahh, that\u2019s so much better. thank you! cold really is the way
+      to go!"
+    expression: 1
+    startingExpression: 0
   nextDialogue: {fileID: 0}
   request:
     control: 0
@@ -27,7 +29,7 @@ MonoBehaviour:
     floatValue: 0
     hasResponded: 0
     completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  expression: 1
-  preExpression: 4
+  fallbackExpression: 1
   choices: []

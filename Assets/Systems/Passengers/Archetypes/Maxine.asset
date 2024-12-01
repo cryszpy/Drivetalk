@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c016cdd296b9645b7a44a128932c3a26, type: 3}
-  m_Name: Pissy
+  m_Name: Maxine
   m_EditorClassIdentifier: 
   pickupGreeting: {fileID: 11400000, guid: e828904fa97174b20a11f616543c37f7, type: 2}
   dropoffSalute: {fileID: 11400000, guid: 9d8a0575db6884a2187c7784b395a801, type: 2}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,13 +33,22 @@ public class DashboardRequest {
     public DialoguePiece preCompletedResponse;
 }
 
+[System.Serializable]
+public struct DialogueLine {
+
+    [TextArea(3, 10)]
+    public string sentence;
+    public PassengerExpression expression;
+    public PassengerExpression startingExpression;
+}
+
+
 [CreateAssetMenu(menuName = "ScriptableObjects/DialoguePiece")]
 public class DialoguePiece : ScriptableObject
 {
 
     [Tooltip("This dialogue piece's total sentences.")]
-    [TextArea(3, 10)]
-    public string[] sentences;
+    public DialogueLine[] lines;
 
     [Tooltip("The next dialogue piece to play after this piece.")]
     public DialoguePiece nextDialogue;
@@ -50,10 +60,7 @@ public class DialoguePiece : ScriptableObject
     public bool firstNameUsage = false;
 
     [Tooltip("What expression the passenger should have during this dialogue piece.")]
-    public PassengerExpression expression;
-
-    [Tooltip("What expression the passenger will make before they start speaking. (Default = none)")]
-    public PassengerExpression preExpression;
+    public PassengerExpression fallbackExpression = PassengerExpression.DEFAULT;
 
     [Tooltip("Any choices that must be made after this piece of dialogue ends.")]
     public DialogueChoice[] choices;

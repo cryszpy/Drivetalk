@@ -12,6 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
   m_Name: maxine_choice_3
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
-  choiceText: Yes I love it!
-  nextDialogue: {fileID: 11400000, guid: 99cd3802a57eb41469860dc3894b5694, type: 2}
+  lines:
+  - sentence: "oh? you do? haha! i\u2019m glad to see you didn\u2019t completely
+      forget about us."
+    expression: 1
+    startingExpression: 0
+  - sentence: "i did live right next to you though, so it\u2019d be pretty hard to
+      forget."
+    expression: 1
+    startingExpression: 7
+  nextDialogue: {fileID: 0}
+  request:
+    control: 0
+    value: 5
+    min: 0
+    max: 0
+    requestTimer: 0
+    floatCheckType: 0
+    boolValue: 0
+    floatValue: 0
+    hasResponded: 0
+    completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
+  firstNameUsage: 0
+  fallbackExpression: 1
+  choices: []
+  choiceText: How could I forget?

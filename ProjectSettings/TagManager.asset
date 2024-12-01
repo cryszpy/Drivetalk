@@ -23,6 +23,7 @@ TagManager:
   - AutoDialogueToggle
   - AudioManager
   - ContinueButton
+  - GPSIndicator
   layers:
   - Default
   - TransparentFX

@@ -10,13 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: daniel_0
+  m_Name: maxine_1_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: what up brother.
+  - sentence: "for a whole month you\u2019d show up at my door and drive the two
+      of us aimlessly around town."
     expression: 1
+    startingExpression: 4
+  - sentence: "it\u2019s not polite to play with a girl\u2019s heart like that y\u2019know? "
+    expression: 3
     startingExpression: 0
-  nextDialogue: {fileID: 11400000, guid: 58d6e3ef7f8cc4129b3d7c410f30d4ce, type: 2}
+  - sentence: "if you didn\u2019t know my mom as a kid she definitely would\u2019ve
+      killed you. haha!"
+    expression: 1
+    startingExpression: 7
+  nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
   request:
     control: 0
     value: 5

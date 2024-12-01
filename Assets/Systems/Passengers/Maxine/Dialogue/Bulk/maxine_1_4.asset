@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: daniel_0
+  m_Name: maxine_1_4
   m_EditorClassIdentifier: 
   lines:
-  - sentence: what up brother.
+  - sentence: dont forget, a truly skilled taxi driver always keeps the comfortability
+      of their passengers in mind! got it?
     expression: 1
     startingExpression: 0
-  nextDialogue: {fileID: 11400000, guid: 58d6e3ef7f8cc4129b3d7c410f30d4ce, type: 2}
+  nextDialogue: {fileID: 11400000, guid: ab949d651c2ce416c93a4679b42793c9, type: 2}
   request:
     control: 0
     value: 5
@@ -31,4 +32,7 @@ MonoBehaviour:
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: 1
-  choices: []
+  choices:
+  - {fileID: 11400000, guid: 24db595d0d1b14e80a779b661387baa9, type: 2}
+  - {fileID: 11400000, guid: 01581da67b53441f486c61351be8f119, type: 2}
+  - {fileID: 11400000, guid: 01751ed0349004fa690c18b04b62ae46, type: 2}

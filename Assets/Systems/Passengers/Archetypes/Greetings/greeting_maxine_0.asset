@@ -10,13 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
-  m_Name: maxine_4
+  m_Name: greeting_maxine_0
   m_EditorClassIdentifier: 
-  sentences:
-  - AWHIFOAIHGLAJGLAKGW
+  lines:
+  - sentence: take me to 270 ardendale please!
+    expression: 1
+    startingExpression: 0
   nextDialogue: {fileID: 0}
-  greeting: 0
+  request:
+    control: 0
+    value: 5
+    min: 0
+    max: 0
+    requestTimer: 0
+    floatCheckType: 0
+    boolValue: 0
+    floatValue: 0
+    hasResponded: 0
+    completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  expression: 1
-  preExpression: 0
+  fallbackExpression: 1
   choices: []

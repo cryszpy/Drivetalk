@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
   m_Name: maxine_ac_pdone_0
   m_EditorClassIdentifier: 
-  sentences:
-  - Oh perfect!
-  - I see you've remembered how I like things.
+  lines:
+  - sentence: "thanks for keeping the car cool by the way! y\u2019know that i\u2019ve
+      always been allergic to the heat right? cold is the way to go!"
+    expression: 1
+    startingExpression: 0
   nextDialogue: {fileID: 0}
   request:
     control: 0
@@ -29,6 +31,5 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  expression: 1
-  preExpression: 4
+  fallbackExpression: 1
   choices: []

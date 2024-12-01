@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
   m_Name: maxine_choice_1
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
-  choiceText: Nope.
-  nextDialogue: {fileID: 11400000, guid: 0d8332b95f90d4af1b17d7bb66cecf38, type: 2}
+  lines:
+  - sentence: "don\u2019t get shy now you liar, i know you remember."
+    expression: 3
+    startingExpression: 0
+  nextDialogue: {fileID: 0}
+  request:
+    control: 0
+    value: 5
+    min: 0
+    max: 0
+    requestTimer: 0
+    floatCheckType: 0
+    boolValue: 0
+    floatValue: 0
+    hasResponded: 0
+    completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
+  firstNameUsage: 0
+  fallbackExpression: 1
+  choices: []
+  choiceText: I don't.

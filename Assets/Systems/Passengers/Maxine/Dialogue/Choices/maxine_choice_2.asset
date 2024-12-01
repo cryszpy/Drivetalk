@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
   m_Name: maxine_choice_2
   m_EditorClassIdentifier: 
-  dialogueSeen: 0
+  lines:
+  - sentence: "your silence speaks volumes dom! i know you\u2019re embarrassed."
+    expression: 3
+    startingExpression: 0
+  nextDialogue: {fileID: 0}
+  request:
+    control: 0
+    value: 5
+    min: 0
+    max: 0
+    requestTimer: 0
+    floatCheckType: 0
+    boolValue: 0
+    floatValue: 0
+    hasResponded: 0
+    completedResponse: {fileID: 0}
+    preCompletedResponse: {fileID: 0}
+  firstNameUsage: 0
+  fallbackExpression: 1
+  choices: []
   choiceText: ...
-  nextDialogue: {fileID: 11400000, guid: 3cab54256bb09410d99196ef792371a5, type: 2}
