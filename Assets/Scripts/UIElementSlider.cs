@@ -13,21 +13,6 @@ public class UIElementSlider : UIElementButton
     [Tooltip("Reference to the slider's physical object.")]
     [SerializeField] protected GameObject dialObject;
 
-    [Tooltip("Unused.")]
-    [SerializeField] protected CinemachineCamera cinemachineCam;
-
-    [Tooltip("Unused.")]
-    [SerializeField] protected CinemachineSplineDolly splineDolly;
-
-    [Tooltip("Unused.")]
-    [SerializeField] protected SplineContainer spline;
-
-    [Tooltip("Unused.")]
-    [SerializeField] protected GameObject screenUI;
-
-    [Tooltip("Unused.")]
-    [SerializeField] protected GameObject cameraLookAt;
-
     [Header("STATS")]
     
     [Tooltip("Minimum angle in degrees that this slider / dial can rotate.")]

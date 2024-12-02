@@ -48,7 +48,7 @@ public class GameStateManager : MonoBehaviour
     public static AudioManager audioManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         // Singleton pattern
         if (instance != null) {

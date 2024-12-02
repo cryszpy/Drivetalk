@@ -8,9 +8,6 @@ public class UIElementButton : MonoBehaviour
 
     [Header("SCRIPT REFERENCES")]
 
-    [Tooltip("Reference to the toon shader camera.")]
-    [SerializeField] protected Camera toonCamera;
-
     [Tooltip("Reference to the dialogue manager.")]
     [SerializeField] protected DialogueManager dialogueManager;
 
