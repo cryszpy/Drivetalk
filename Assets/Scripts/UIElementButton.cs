@@ -14,9 +14,6 @@ public class UIElementButton : MonoBehaviour
     [Tooltip("New on-click function event.")]
     public UnityEvent unityEvent = new();
 
-    [Tooltip("Version of GameObject to appear when hovered over.")]
-    public GameObject hoveredObject;
-
     [Tooltip("Reference to main camera.")]
     public Camera mainCamera;
 
@@ -88,10 +85,6 @@ public class UIElementButton : MonoBehaviour
     // Function to be executed when button is clicked
     public virtual void OnClick() {
         gameObject.layer = regularLayer;
-        // Disable hovered version of GameObject
-        if (hoveredObject.activeSelf) {
-            hoveredObject.SetActive(false);
-        }
     }
 
     // Function to be executed when button is hovered over
@@ -108,10 +101,6 @@ public class UIElementButton : MonoBehaviour
     public virtual void DefaultState() {
         gameObject.layer = regularLayer;
         hovered = false;
-        // Disable hovered version of GameObject
-        if (hoveredObject.activeSelf) {
-            hoveredObject.SetActive(false);
-        }
     }
 
 }

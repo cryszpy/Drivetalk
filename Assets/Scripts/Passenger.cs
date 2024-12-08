@@ -32,6 +32,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("What this passenger's name shows up before they reveal it.")]
     public string hiddenName;
 
+    [Tooltip("Whether this passenger's name has been revealed yet or not.")]
+    public bool nameRevealed = false;
+
     [Tooltip("This passenger's generic response archetype.")]
     public PassengerArchetype archetype;
 

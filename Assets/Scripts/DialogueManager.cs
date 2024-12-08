@@ -246,6 +246,23 @@ public class DialogueManager : MonoBehaviour
     private void Update() {
         bruh = lines.ToList();
 
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+
+                // Skip typing on click
+                if (currentLine.sentence != null && typingSentence && !autoDialogue) {
+                    dash_dialogueText.maxVisibleCharacters = dash_dialogueText.text.Length;
+                    typingSentence = false;
+                } 
+                // If sentence is typed out, play next sentence on click
+                else if (waitForSkip) {
+                    waitForSkip = false;
+                    DisplayNextSentence();
+                }
+            }
+        }
+
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
         }
@@ -353,7 +370,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueButton() {
 
-        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+        /* if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // Skip typing on click
             if (currentLine.sentence != null && typingSentence && !autoDialogue) {
@@ -365,7 +382,7 @@ public class DialogueManager : MonoBehaviour
                 waitForSkip = false;
                 DisplayNextSentence();
             }
-        }
+        } */
     }
     
     // Assigns any missing script references
@@ -467,8 +484,10 @@ public class DialogueManager : MonoBehaviour
         if (dialogue.firstNameUsage) {
             nameBoxText.text = car.currentPassenger.passengerName;
             Debug.Log("Set passenger name: " + car.currentPassenger.passengerName);
+            car.currentPassenger.nameRevealed = true;
         } else if (nameCheck || nameIndex < 0) {
             nameBoxText.text = car.currentPassenger.hiddenName;
+            car.currentPassenger.nameRevealed = false;
         }
 
         // Hides the "show dialogue" animation
@@ -732,7 +751,11 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log(line.sentence);
 
-        transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
+        if (car.currentPassenger.nameRevealed) {
+            transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
+        } else {
+            transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
+        }
 
         // Plays the "show dialogue UI" animation
         dialogueAnimator.SetBool("Play", true);
