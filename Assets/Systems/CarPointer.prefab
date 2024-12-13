@@ -177,6 +177,10 @@ MonoBehaviour:
   savedDestination: {fileID: 0}
   finishedDialogue: 0
   setInitialBlock: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  intersections: []
 --- !u!1 &7681991582630019422
 GameObject:
   m_ObjectHideFlags: 0

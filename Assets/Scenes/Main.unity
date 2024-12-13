@@ -795,6 +795,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1947440944}
     m_Modifications:
     - target: {fileID: 45494355510777793, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
+    - target: {fileID: 45494355510777793, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 330585545}
@@ -806,6 +810,10 @@ PrefabInstance:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 166813861}
+    - target: {fileID: 4039862015117090939, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
     - target: {fileID: 4039862015117090939, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: mainCamera
       value: 
@@ -1301,6 +1309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e1a8e6a341e435ca6cc4767ab51c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -1324,6 +1334,9 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 0
   hoveredLayer: 0
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   car: {fileID: 0}
   focusOn: {fileID: 0}
   cinemachineCam: {fileID: 0}
@@ -1564,7 +1577,6 @@ MonoBehaviour:
   choicePrefab: {fileID: 1869503689464623647, guid: d333b144158d64c3cb9852c09ab29aaf, type: 3}
   destinationObject: {fileID: 203519312}
   currentStop: {fileID: 0}
-  rideDone: 0
   atTaxiStop: 1
   minRides: 4
   maxRides: 7
@@ -2288,7 +2300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 192.39062, y: -450.00385}
+  m_AnchoredPosition: {x: 192.39062, y: -449.9969}
   m_SizeDelta: {x: 211.4, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &387044757
@@ -3748,6 +3760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e1a8e6a341e435ca6cc4767ab51c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -3771,6 +3785,9 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 0
   hoveredLayer: 0
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   car: {fileID: 0}
   focusOn: {fileID: 0}
   cinemachineCam: {fileID: 0}
@@ -5203,6 +5220,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1947440944}
     m_Modifications:
     - target: {fileID: 409750311585343788, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
+    - target: {fileID: 409750311585343788, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 330585545}
@@ -5214,6 +5235,10 @@ PrefabInstance:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 166813861}
+    - target: {fileID: 2244159429040236885, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
     - target: {fileID: 2244159429040236885, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
       propertyPath: mainCamera
       value: 
@@ -5243,6 +5268,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
+--- !u!114 &884364186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2244159429040236885, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
+  m_PrefabInstance: {fileID: 884364185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab84b0b6700e42fd8eab95399a677cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896639952
 GameObject:
   m_ObjectHideFlags: 0
@@ -14848,6 +14884,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 252045954}
     - target: {fileID: 3565283297507695072, guid: cdeceac689ad545049b4419e0c41edd7, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
+    - target: {fileID: 3565283297507695072, guid: cdeceac689ad545049b4419e0c41edd7, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 330585545}
@@ -15697,7 +15737,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 261394895}
   m_HandleRect: {fileID: 261394894}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15962,6 +16002,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7134505315327544891, guid: fa1fcde4763794ab5b713d8c132bbcd7, type: 3}
   m_PrefabInstance: {fileID: 1875276894}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1877710900
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1947440944}
+    m_Modifications:
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.593
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993408646696354797, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
+    - target: {fileID: 5993408646696354797, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 5993408646696354797, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 166813861}
+    - target: {fileID: 6072940920395319003, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+      propertyPath: m_Name
+      value: Turn Signal
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+--- !u!4 &1877710901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3968581963186043503, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+  m_PrefabInstance: {fileID: 1877710900}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877710902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5993408646696354797, guid: 6f2c70ef978a24bca854111d1245b6a4, type: 3}
+  m_PrefabInstance: {fileID: 1877710900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26619075c76d04f8faff111a8d32b868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1891794596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16460,6 +16585,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 196657897}
+  - {fileID: 1877710901}
   - {fileID: 928151503}
   - {fileID: 1949992538}
   - {fileID: 626873400}
@@ -17521,9 +17647,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1947440944}
     m_Modifications:
     - target: {fileID: 767679985645254037, guid: 316413835b2c24133897a2eb0a4d8336, type: 3}
+      propertyPath: carPointer
+      value: 
+      objectReference: {fileID: 109818932}
+    - target: {fileID: 767679985645254037, guid: 316413835b2c24133897a2eb0a4d8336, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 767679985645254037, guid: 316413835b2c24133897a2eb0a4d8336, type: 3}
       propertyPath: dialogueManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 166813861}
     - target: {fileID: 962399082134120858, guid: 316413835b2c24133897a2eb0a4d8336, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -75
@@ -17629,6 +17763,14 @@ PrefabInstance:
       propertyPath: car
       value: 
       objectReference: {fileID: 252045954}
+    - target: {fileID: 869945482564533188, guid: bb8bd89342c734fd78e6468cf1d9f8e6, type: 3}
+      propertyPath: wheel
+      value: 
+      objectReference: {fileID: 884364186}
+    - target: {fileID: 869945482564533188, guid: bb8bd89342c734fd78e6468cf1d9f8e6, type: 3}
+      propertyPath: turnSignal
+      value: 
+      objectReference: {fileID: 1877710902}
     - target: {fileID: 878202312605450734, guid: bb8bd89342c734fd78e6468cf1d9f8e6, type: 3}
       propertyPath: m_Name
       value: CarPointer

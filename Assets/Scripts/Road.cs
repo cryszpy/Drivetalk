@@ -10,6 +10,9 @@ public class Road : MonoBehaviour
     [Tooltip("List of all car markers on this road piece.")]
     [SerializeField] protected List<Marker> carMarkers;
 
+    public List<GameObject> adjacentRoads = new();
+    public List<float> dotProducts = new();
+
     // This is a helper function to connect the markers between adjacent road pieces.
     public void ConnectMarkersToAdjacentRoad(Road adjacentRoad)
     {

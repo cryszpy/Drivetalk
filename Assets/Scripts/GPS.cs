@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.UI;
 
-public class GPS : UIElementButton
+public class GPS : UIElementSlider
 {
 
     [Tooltip("Reference to the car.")]
@@ -107,6 +107,14 @@ public class GPS : UIElementButton
                     unityEvent.Invoke();
                 }
             }
+
+            if (dragging) {
+                gameObject.layer = hoveredLayer;
+                Drag();
+            }
+
+            // Updates mouse position every frame
+            mousePreviousPos = Input.mousePosition;
         }
     }
 
@@ -121,18 +129,31 @@ public class GPS : UIElementButton
             // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
             {
-                if (hit.collider.transform == transform) {
+                // If the raycast has hit this button—
+                if (hit.collider.gameObject == gameObject) {
 
-                    // Execute hover function
-                    OnHover();
+                    // If there isn't any other button being hovered—
+                    if (carPointer.hoveredButton == null) {
+
+                        // Set this button to be hovered
+                        carPointer.hoveredButton = gameObject;
+                    }
+
+                    // If this button is the only button being hovered—
+                    if (carPointer.hoveredButton == gameObject) {
+
+                        // Trigger OnHover effects
+                        OnHover();
+                    }
+                    
+                } else {
+                    DefaultState();
                 }
-                
             } 
             // If cursor is not hovered over element, reset to default state
             else {
                 DefaultState();
             }
-            
         }
     }
     
@@ -206,6 +227,12 @@ public class GPS : UIElementButton
     }
 
     public virtual IEnumerator EndDollyMovement() {
+
+        DefaultState();
+
+        if (carPointer.hoveredButton == gameObject) {
+            carPointer.hoveredButton = null;
+        }
 
         // While the camera has not finished moving back along spline track—
         /* while (splineDolly.CameraPosition > 0) {

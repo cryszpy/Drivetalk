@@ -53,7 +53,7 @@ public class GPSDestination : MonoBehaviour
             }
 
             // Routes the car pointer (and thus the car) to the selected destination
-            carPointer.StartDrive(destinationObject);
+            carPointer.SwitchDirection();
 
             // Start waiting until the passenger talks
             GameStateManager.EOnDestinationSet?.Invoke();

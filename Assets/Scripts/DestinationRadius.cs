@@ -24,7 +24,7 @@ public class DestinationRadius : MonoBehaviour
             // If the ride hasn't finished dialogue, the car has a passenger, the car is not awaiting
             // a passenger, this radius belongs to the car's current destination, and the car hasn't been rerouted yet, then reroute
             // the car to the nearest block marker
-            if (!car.carPointer.finishedDialogue && car.currentPassenger && !carPointer.setInitialBlock && !car.atTaxiStop && carPointer.destinationRadius.gameObject == gameObject) {
+            /* if (!car.carPointer.finishedDialogue && car.currentPassenger && !carPointer.setInitialBlock && !car.atTaxiStop && carPointer.destinationRadius.gameObject == gameObject) {
                 
                 carPointer.setInitialBlock = true;
 
@@ -37,7 +37,7 @@ public class DestinationRadius : MonoBehaviour
 
                 // Reroute the car
                 GetRandomBlock();
-            }
+            } */
         }
     }
 

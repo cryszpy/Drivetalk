@@ -47,9 +47,6 @@ public class CarController : MonoBehaviour
 
     [Header("STATS")]
 
-    [Tooltip("Boolean flag; Checks whether the car has completed a ride or not.")]
-    public bool rideDone = false;
-
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
     public bool atTaxiStop = true;
 
@@ -183,8 +180,6 @@ public class CarController : MonoBehaviour
             // Route the car to the nearest taxi stop
             carPointer.StartDrive(taxiStops[stopDistances.IndexOf(stopDistances.Min())]);
         }
-
-        rideDone = false;
     }
 
     // Picks up a passenger when arriving at a taxi stop

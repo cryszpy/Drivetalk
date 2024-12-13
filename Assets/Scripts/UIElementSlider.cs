@@ -5,15 +5,38 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
 
-public class UIElementSlider : UIElementButton
+public class UIElementSlider : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
+
+    public CarPointer carPointer;
 
     [Tooltip("Reference to the slider's physical object.")]
     [SerializeField] protected GameObject dialObject;
 
+    [Tooltip("Reference to the dialogue manager.")]
+    [SerializeField] protected DialogueManager dialogueManager;
+
+    [Tooltip("New on-click function event.")]
+    public UnityEvent unityEvent = new();
+
+    [Tooltip("Reference to main camera.")]
+    public Camera mainCamera;
+
     [Header("STATS")]
+
+    [Tooltip("This button's layer mask. Selected layers will be the *only* layers raycasted on.")]
+    [SerializeField] protected LayerMask layerMask;
+
+    [Tooltip("Boolean flag; Checks whether this button is hovered over.")]
+    public bool hovered;
+
+    [Tooltip("The layer number for the default state of the object.")]
+    [SerializeField] protected int regularLayer;
+    [Tooltip("The layer number for the hovered state of the object.")]
+    [SerializeField] protected int hoveredLayer;
     
     [Tooltip("Minimum angle in degrees that this slider / dial can rotate.")]
     [SerializeField] protected float rotationMin;
@@ -30,20 +53,33 @@ public class UIElementSlider : UIElementButton
     protected float rotation;
 
     [Tooltip("Whether the slider is actively being dragged.")]
-    [SerializeField] protected bool dragging;
+    public bool dragging;
 
-    public override void Start() {
-        base.Start();
+    public virtual void Start() {
+        
+        // Assigns references to any missing script references
+        if (!mainCamera) {
+            mainCamera = Camera.main;
+            Debug.LogWarning("Main camera not assigned! Reassigned.");
+        }
+        dialogueManager = GameStateManager.dialogueManager;
+
         dragging = false;
+
+        if (!carPointer) {
+            carPointer = GameObject.FindGameObjectWithTag("CarPointer").GetComponent<CarPointer>();
+            Debug.Log("CarPointer component null! Reassigned.");
+        }
     }
 
-    public override void Update() {
+    public virtual void Update() {
         
         // If the game's state is not in menu or main menu—
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If this slider is being hovered over—
             if (hovered) {
+                OnHover();
 
                 /* // Start minigame
                 if (Input.GetMouseButtonDown(0) && dialogueManager.dashRequestRunning)
@@ -59,10 +95,8 @@ public class UIElementSlider : UIElementButton
                     dragging = false;
                 } */
 
-                if (Input.GetMouseButton(0)) {
+                if (Input.GetMouseButtonDown(0)) {
                     unityEvent.Invoke();
-                } else {
-                    dragging = false;
                 }
             }
 
@@ -71,6 +105,7 @@ public class UIElementSlider : UIElementButton
                 Drag();
             } */
             if (dragging) {
+                gameObject.layer = hoveredLayer;
                 Drag();
             }
 
@@ -79,7 +114,7 @@ public class UIElementSlider : UIElementButton
         }
     }
 
-    public override void FixedUpdate() {
+    public virtual void FixedUpdate() {
 
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
@@ -87,12 +122,34 @@ public class UIElementSlider : UIElementButton
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, layerMask))
             {
-                if (hit.collider.transform == transform && !Input.GetMouseButtonUp(0)) {
-                    // Execute hover function
-                    OnHover();
+
+                // If the raycast has hit this button—
+                if (hit.collider.gameObject == gameObject) {
+
+                    // If there isn't any other button being hovered—
+                    if (carPointer.hoveredButton == null) {
+
+                        // Set this button to be hovered
+                        carPointer.hoveredButton = gameObject;
+                    }
+
+                    // If this button is the only button being hovered—
+                    if (carPointer.hoveredButton == gameObject) {
+
+                        // Trigger OnHover effects
+                        OnHover();
+                    }
+                    
+                } else {
+                    DefaultState();
                 }
+
+                // If cursor is over button, hovered == true
+                // if cursor is not over button, hovered == false
+                // BUT if cursor is over button, and button is held down, hovered == true
+                // if button is clicked or held down, dragging = true, otherwise false
                 
             } 
             // If cursor is not hovered over element, reset to default state
@@ -106,30 +163,36 @@ public class UIElementSlider : UIElementButton
 
         // Check whether the player has stopped dragging slider
         if (Input.GetMouseButtonUp(0)) {
-            dragging = false;
+            if (carPointer.hoveredButton == gameObject) {
+                carPointer.hoveredButton = null;
+                hovered = false;
+                dragging = false;
+            }
         }
 
-        // Calculates the difference between the current mouse's position and mouse's previous position
-        mousePosDelta = Input.mousePosition - mousePreviousPos;
+        if (dialObject) {
+            // Calculates the difference between the current mouse's position and mouse's previous position
+            mousePosDelta = Input.mousePosition - mousePreviousPos;
 
-        // Get the mouse's difference in position applied to the slider's desired rotation axis
-        rotation = Vector3.Dot(mousePosDelta, new Vector3(1, 0, 0));
+            // Get the mouse's difference in position applied to the slider's desired rotation axis
+            rotation = Vector3.Dot(mousePosDelta, new Vector3(1, 0, 0));
 
-        float currentRot = dialObject.transform.localEulerAngles.y;
-        float newRot = currentRot + rotation;
+            float currentRot = dialObject.transform.localEulerAngles.y;
+            float newRot = currentRot + rotation;
 
-        // Limit slider rotation to be between a certain minimum and maximum degree angle
-        newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
+            // Limit slider rotation to be between a certain minimum and maximum degree angle
+            newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
 
-        // Apply change in rotation based on mouse cursor movement
-        dialObject.transform.localEulerAngles = new Vector3(dialObject.transform.localEulerAngles.x, newRot, dialObject.transform.localEulerAngles.z);
+            // Apply change in rotation based on mouse cursor movement
+            dialObject.transform.localEulerAngles = new Vector3(dialObject.transform.localEulerAngles.x, newRot, dialObject.transform.localEulerAngles.z);
+        }
     }
 
     // Function to be executed when slider is clicked
-    public override void OnClick()
+    public virtual void OnClick()
     {
         dragging = true;
-        base.OnClick();
+        gameObject.layer = regularLayer;
 
         /* GameStateManager.SetState(GAMESTATE.MENU);
 
@@ -147,23 +210,24 @@ public class UIElementSlider : UIElementButton
         Debug.Log("Slider clicked!");  */
     }
 
-    /* public virtual IEnumerator StartDollyMovement() {
-        while (splineDolly.CameraPosition < 1) {
-            splineDolly.CameraPosition += 0.03f;
-            yield return new WaitForSeconds(0.01f);
-        }
-        screenUI.SetActive(true);
-        insideMinigame = true;
+    // Function to be executed when button is hovered over
+    public virtual void OnHover() {
+        gameObject.layer = hoveredLayer;
+        hovered = true;
+        // Enable hovered version of GameObject
+        /* if (!hoveredObject.activeSelf) {
+            hoveredObject.SetActive(true);
+        } */
     }
 
-    public virtual IEnumerator EndDollyMovement() {
-        insideMinigame = false;
-        while (splineDolly.CameraPosition > 0) {
-            splineDolly.CameraPosition -= 0.03f;
-            yield return new WaitForSeconds(0.01f);
+    public virtual void DefaultState()
+    {
+        gameObject.layer = regularLayer;
+        hovered = false;
+
+        // If this button isn't being held down or hovered, but is still set as the hovered button, reset
+        if (!dragging && carPointer.hoveredButton == gameObject) {
+            carPointer.hoveredButton = null;
         }
-        cinemachineCam.LookAt = cameraLookAt.transform;
-        GameStateManager.SetState(GAMESTATE.PLAYING);
-        screenUI.SetActive(false);
-    } */
+    }
 }

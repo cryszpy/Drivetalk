@@ -1,24 +1,10 @@
 using System;
 using UnityEngine;
 
-public class RadioBackward : UIElementButton
+public class RadioBackward : UIElementSlider
 {
     [Tooltip("Reference to the car's radio.")]
     public Radio radio;
-
-    public override void Update() {
-
-        // If the button is hovered over—
-        if (hovered) {
-
-            // If this UI element is clicked—
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Execute click function
-                unityEvent.Invoke();
-            }
-        }
-    }
 
     public override void FixedUpdate() {
 
@@ -28,11 +14,26 @@ public class RadioBackward : UIElementButton
         // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
         {
-            if (hit.collider.transform == transform) {
-                // Execute hover function
-                OnHover();
+            // If the raycast has hit this button—
+            if (hit.collider.gameObject == gameObject) {
+
+                // If there isn't any other button being hovered—
+                if (carPointer.hoveredButton == null) {
+
+                    // Set this button to be hovered
+                    carPointer.hoveredButton = gameObject;
+                }
+
+                // If this button is the only button being hovered—
+                if (carPointer.hoveredButton == gameObject) {
+
+                    // Trigger OnHover effects
+                    OnHover();
+                }
+                
+            } else {
+                DefaultState();
             }
-            
         } 
         // If cursor is not hovered over element, reset to default state
         else {

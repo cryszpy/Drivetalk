@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 2244159429040236885}
   m_Layer: 7
   m_Name: Wheel
-  m_TagString: Untagged
+  m_TagString: Wheel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,7 +254,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -298,10 +298,12 @@ MonoBehaviour:
   rotationMin: 0
   rotationMax: 180
   dragging: 0
+  coll: {fileID: 4452112943091532961}
   cutoffLeft: 30
   cutoffRight: 150
   straightCutoffLeft: 70
   straightCutoffRight: 110
+  carPointer: {fileID: 0}
 --- !u!1 &5635200560546518556
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +364,7 @@ Transform:
   m_GameObject: {fileID: 8414731513207482580}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.01}
+  m_LocalPosition: {x: -0, y: -0, z: 0.747}
   m_LocalScale: {x: 0.05, y: 1, z: 0.36}
   m_ConstrainProportionsScale: 0
   m_Children: []

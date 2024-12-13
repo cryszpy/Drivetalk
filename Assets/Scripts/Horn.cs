@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Horn : UIElementButton
+public class Horn : UIElementSlider
 {
     public AudioManager audioManager;
     // Function to be executed when the button is clicked
@@ -9,11 +9,5 @@ public class Horn : UIElementButton
         base.OnClick();
         audioManager.PlaySoundByName("Horn");
         Debug.Log("Horn pressed!");
-    }
-
-    // Function to be executed when the button is hovered
-    public override void OnHover()
-    {
-        base.OnHover();
     }
 }

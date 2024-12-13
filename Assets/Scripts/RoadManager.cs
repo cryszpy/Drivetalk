@@ -30,6 +30,7 @@ public class RoadManager : MonoBehaviour
                 if (AreRoadsAdjacent(currentRoad, adjacentRoad))
                 {
                     currentRoad.ConnectMarkersToAdjacentRoad(adjacentRoad); // Connect markers between adjacent roads
+                    currentRoad.adjacentRoads.Add(adjacentRoad.gameObject);
                 }
             }
         }
