@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator dialogueAnimator;
 
     [Tooltip("Reference to the dialogue text element.")]
-    public TMP_Text dash_dialogueText;
+    public TMP_Text currentDialogueText;
 
     [Tooltip("Reference to the dialogue UI box object.")]
     public GameObject dash_dialogueBox;
@@ -50,6 +50,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject RMM_dialogueBox; */
 
     //[SerializeField] private Animator choiceNotifAnimator;
+
+    [SerializeField] private GameObject dialoguePivot;
+
+    [SerializeField] private GameObject dialogueElement;
 
     [Tooltip("Queued list of all sentences to say from current dialogue piece.")]
     public Queue<DialogueLine> lines = new();
@@ -252,7 +256,7 @@ public class DialogueManager : MonoBehaviour
 
                 // Skip typing on click
                 if (currentLine.sentence != null && typingSentence && !autoDialogue) {
-                    dash_dialogueText.maxVisibleCharacters = dash_dialogueText.text.Length;
+                    currentDialogueText.maxVisibleCharacters = currentDialogueText.text.Length;
                     typingSentence = false;
                 } 
                 // If sentence is typed out, play next sentence on click
@@ -397,13 +401,13 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (!dash_dialogueText) {
+        /* if (!currentDialogueText) {
             if (GameObject.FindGameObjectWithTag("DialogueText").TryGetComponent<TMP_Text>(out var dialogueTextScript)) {
-                dash_dialogueText = dialogueTextScript;
+                currentDialogueText = dialogueTextScript;
             } else {
                 Debug.LogError("Could not find dialogue text TMP_Text component!");
             }
-        }
+        } */
 
         if (!continueButton) {
             continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
@@ -441,6 +445,7 @@ public class DialogueManager : MonoBehaviour
         if (!autoDialogueToggle) {
             autoDialogueToggle = GameObject.FindGameObjectWithTag("AutoDialogueToggle").GetComponent<Toggle>();
             autoDialogueToggle.onValueChanged.AddListener(delegate { SetAutoDialogue(autoDialogueToggle.isOn); } );
+            autoDialogue = true;
         }
     }
 
@@ -491,7 +496,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Hides the "show dialogue" animation
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // If the dialogue played is the start of a new dialogue block, reset the interjection limit
         /* if (car.currentPassenger.dialogue.Contains(dialogue)) {
@@ -538,7 +543,7 @@ public class DialogueManager : MonoBehaviour
 
             // If there are choices attached to this dialogue piece—
             if (currentDialogue.choices.Length > 0) {
-                Debug.Log("1");
+                //Debug.Log("1");
 
                 // Set boolean flag to currently playing a choice branch
                 playingChoices = true;
@@ -557,7 +562,7 @@ public class DialogueManager : MonoBehaviour
             }
             // If just coming out of a post-choice dialogue, and pre-choice dialogue has more to say—
             else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue) {
-                Debug.Log("2");
+                //Debug.Log("2");
                 // Set current dialogue piece to the pre-choice branch dialogue piece
                 currentDialogue = preChoiceDialogue;
 
@@ -570,7 +575,7 @@ public class DialogueManager : MonoBehaviour
             }
             // If the passenger has said greeting, but not started main ride dialogue—
             else if (!car.currentPassenger.hasStartedRideDialogue) {
-                Debug.Log("3");
+                //Debug.Log("3");
                 // TODO: Add dependence on selecting a GPS destination
                 waitForRouting = true;
 
@@ -585,27 +590,27 @@ public class DialogueManager : MonoBehaviour
                 }
 
                 // Plays the "hide dialogue UI box" animation
-                dialogueAnimator.SetBool("Play", false);
+                //dialogueAnimator.SetBool("Play", false);
 
                 return;
             }
             // Go to next regular dialogue piece if no choices
             else if (currentDialogue.nextDialogue) {
-                Debug.Log("4");
+                //Debug.Log("4");
                 // Waits, then plays the next dialogue piece
                 GameStateManager.EOnDialogueGroupFinish?.Invoke();
                 return;
             }
             // Dropoff dialogue
             else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute && carPointer.finishedDialogue) {
-                Debug.Log("5");
+                //Debug.Log("5");
                 // Starts the passenger's dropoff dialogue
                 DropoffDialogue();
                 return;
             }
             // End dialogue if no choices and nothing else to say
             else if (currentDialogue.choices.Length == 0) {
-                Debug.Log("6");
+                //Debug.Log("6");
                 // Ends the ride's dialogue
                 GameStateManager.EOnRideFinish?.Invoke();
                 return;
@@ -624,7 +629,7 @@ public class DialogueManager : MonoBehaviour
             if (CheckDashRequirements(currentDialogue.request)) {
                 Debug.Log("Dashboard request has been pre-completed!");
 
-                dialogueAnimator.SetBool("Play", false);
+                //dialogueAnimator.SetBool("Play", false);
 
                 currentDialogue.request.hasResponded = true;
                 preChoiceDialogue = currentDialogue;
@@ -647,7 +652,7 @@ public class DialogueManager : MonoBehaviour
 
             // Hide skip indicator and dialogue box
             skipIndicator.SetActive(false);
-            dialogueAnimator.SetBool("Play", false);
+            //dialogueAnimator.SetBool("Play", false);
 
             // Switch expression to starting expression of the next line
             SwitchExpression(lines.First().startingExpression);
@@ -738,6 +743,17 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     public IEnumerator TypeSentence(DialogueLine line) {
 
+        GameObject dLine = Instantiate(dialogueElement, dialoguePivot.transform);
+
+        DialogueUIElement dScript = null;
+
+        if (dLine.TryGetComponent<DialogueUIElement>(out var script)) {
+            dScript = script;
+            currentDialogueText = script.elementText;
+        } else {
+            Debug.LogError("Could not find DialogueUIElement component on this dialogue element!");
+        }
+
         currentLine.sentence = line.sentence;
         currentLine.expression = line.expression;
         currentLine.startingExpression = line.startingExpression;
@@ -758,13 +774,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Plays the "show dialogue UI" animation
-        dialogueAnimator.SetBool("Play", true);
+        //dialogueAnimator.SetBool("Play", true);
 
         //RMM_dialogueText.text = "";
 
         // Initializes empty text to start typing
-        dash_dialogueText.text = line.sentence;
-        dash_dialogueText.maxVisibleCharacters = 0;
+        currentDialogueText.text = line.sentence;
+        currentDialogueText.maxVisibleCharacters = 0;
 
         // Indicates that a sentence is being typed out
         typingSentence = true;
@@ -778,8 +794,12 @@ public class DialogueManager : MonoBehaviour
 
             if (typingSentence) {
 
+                if (currentDialogueText.maxVisibleCharacters > 40) {
+
+                }
+
                 // Types the character and adds it to the current sentence display
-                dash_dialogueText.maxVisibleCharacters++;
+                currentDialogueText.maxVisibleCharacters++;
                 //RMM_dialogueText.text += letter;
 
                 // Waits for the typing speed time
@@ -792,6 +812,10 @@ public class DialogueManager : MonoBehaviour
         }
 
         typingSentence = false;
+
+        if (dScript) {
+            dScript.finished = true;
+        }
 
         // Switches expression after done talking
         if (line.expression != PassengerExpression.NONE) {

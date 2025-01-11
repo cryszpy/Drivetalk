@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PixelizeFeature
   m_EditorClassIdentifier: 
   m_Active: 1
-  injectionPoint: 450
+  injectionPoint: 550
   fetchColorBuffer: 1
   requirements: 0
   passMaterial: {fileID: 2100000, guid: e0f965cb5b05f4f8fabf62e0e59849bf, type: 2}

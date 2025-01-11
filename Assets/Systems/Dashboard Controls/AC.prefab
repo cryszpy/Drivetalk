@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5695336778504835580}
   - component: {fileID: 8787147112144582531}
   - component: {fileID: 20006769585362312}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: radio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,6 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c554faddc2847cca5b3ee490dcace4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 9146612707172334904}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -306,7 +308,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hoveredObject: {fileID: 3540618822522992524}
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
@@ -314,7 +315,6 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
-  dialObject: {fileID: 9146612707172334904}
   rotationMin: 30
   rotationMax: 150
   dragging: 1
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 4151771940264696103}
   - component: {fileID: 8023566917876322287}
   - component: {fileID: 3043131181789219758}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: COOL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 5521957529864104695}
   - component: {fileID: 4391327483818765796}
   - component: {fileID: 5690195134149355816}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: OFF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 1302378712493450144}
   - component: {fileID: 742181772509898720}
   - component: {fileID: 5258949258264141344}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +941,7 @@ GameObject:
   - component: {fileID: 7401725054434685185}
   - component: {fileID: 628552408759988201}
   - component: {fileID: 4749067246779959930}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: ac
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 3496451470068921043}
   - component: {fileID: 1763906059824342637}
   - component: {fileID: 6865701557783146785}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: WARM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 7924362072227174596}
   - component: {fileID: 4583310194046100911}
   - component: {fileID: 2392277794175616224}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: horn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 4556289558992015971}
   - component: {fileID: 4061258669619331747}
   - component: {fileID: 8175990319394631399}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: glovebox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,6 +1633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c554faddc2847cca5b3ee490dcace4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 9146612707172334904}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -1649,7 +1651,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hoveredObject: {fileID: 3540618822522992524}
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
@@ -1657,7 +1658,6 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
-  dialObject: {fileID: 9146612707172334904}
   rotationMin: 30
   rotationMax: 150
   dragging: 1

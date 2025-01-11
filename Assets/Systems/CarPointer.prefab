@@ -175,12 +175,20 @@ MonoBehaviour:
   currentBlocksList: []
   path: []
   savedDestination: {fileID: 0}
+  trackedIntersection: {fileID: 0}
+  turnSignal: {fileID: 0}
+  wheel: {fileID: 0}
+  hoveredButton: {fileID: 0}
   finishedDialogue: 0
   setInitialBlock: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 2048
-  intersections: []
+  currentSteeringDirection: 0
+  inIntersection: 0
+  calculatedDirections: 0
+  backupSteeringDirection: 0
+  validDirections: 
 --- !u!1 &7681991582630019422
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 7681991582630019422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
