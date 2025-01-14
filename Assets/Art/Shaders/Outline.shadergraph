@@ -2432,7 +2432,7 @@
     "m_ObjectId": "71eb1864fe8b46cf8221b4653683978a",
     "m_Title": "Down Border",
     "m_Position": {
-        "x": -950.0,
+        "x": -950.5,
         "y": 1352.0
     }
 }
@@ -4917,7 +4917,7 @@
     "m_ObjectId": "e99c65e3c7834af4b9cd0943b4bce2b8",
     "m_Title": "Right Border",
     "m_Position": {
-        "x": -943.0,
+        "x": -943.5,
         "y": 395.0
     }
 }

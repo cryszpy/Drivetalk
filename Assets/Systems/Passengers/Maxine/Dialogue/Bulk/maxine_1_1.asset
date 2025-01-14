@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: maxine_1_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "for a whole month you\u2019d show up at my door and drive the two
-      of us aimlessly around town."
+  - sentence: for a whole month you'd show up at my door and drive the two of us
+      aimlessly around town.
     expression: 1
     startingExpression: 4
-  - sentence: "it\u2019s not polite to play with a girl\u2019s heart like that y\u2019know? "
+  - sentence: 'it''s not polite to play with a girl''s heart like that y''know? '
     expression: 3
     startingExpression: 0
-  - sentence: "if you didn\u2019t know my mom as a kid she definitely would\u2019ve
-      killed you. haha!"
+  - sentence: if you didn't know my mom as a kid she definitely would've killed you.
+      haha!
     expression: 1
     startingExpression: 7
   nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}

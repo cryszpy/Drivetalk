@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: maxine_choice_0
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "haha! it was like i was seeing a whole different side of you! i\u2019d
-      never seen you giddy like that before."
+  - sentence: haha! it was like i was seeing a whole different side of you! i'd never
+      seen you giddy like that before.
     expression: 1
     startingExpression: 6
   nextDialogue: {fileID: 0}

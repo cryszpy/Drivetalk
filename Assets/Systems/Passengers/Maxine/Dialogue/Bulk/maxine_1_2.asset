@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: maxine_1_2
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "this really does remind me of the old times though. we haven\u2019t
-      had the chance to talk like this in a while."
+  - sentence: this really does remind me of the old times though. we haven't had
+      the chance to talk like this in a while.
     expression: 1
     startingExpression: 0
-  - sentence: "it\u2019s nice."
+  - sentence: it's nice.
     expression: 1
     startingExpression: 4
-  - sentence: "we\u2019d always talk about our dreams, hopes, and aspirations for
-      the future during those drives."
+  - sentence: we'd always talk about our dreams, hopes, and aspirations for the future
+      during those drives.
     expression: 1
     startingExpression: 0
-  - sentence: "maybe it\u2019s just me but it seemed like the walls surrounding you
-      seemed to lower back then."
+  - sentence: maybe it's just me but it seemed like the walls surrounding you seemed
+      to lower back then.
     expression: 1
     startingExpression: 0
   - sentence: whenever you were driving you always seemed like a different person.

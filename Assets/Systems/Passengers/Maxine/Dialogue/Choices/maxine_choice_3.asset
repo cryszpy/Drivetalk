@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: maxine_choice_3
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "oh? you do? haha! i\u2019m glad to see you didn\u2019t completely
-      forget about us."
+  - sentence: oh? you do? haha! i'm glad to see you didn't completely forget about
+      us.
     expression: 1
     startingExpression: 0
-  - sentence: "i did live right next to you though, so it\u2019d be pretty hard to
-      forget."
+  - sentence: i did live right next to you though, so it'd be pretty hard to forget.
     expression: 1
     startingExpression: 7
   nextDialogue: {fileID: 0}

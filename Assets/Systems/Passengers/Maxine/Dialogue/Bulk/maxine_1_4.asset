@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: maxine_1_4
   m_EditorClassIdentifier: 
   lines:
-  - sentence: dont forget, a truly skilled taxi driver always keeps the comfortability
+  - sentence: don't forget, a truly skilled taxi driver always keeps the comfortability
       of their passengers in mind! got it?
     expression: 1
     startingExpression: 0

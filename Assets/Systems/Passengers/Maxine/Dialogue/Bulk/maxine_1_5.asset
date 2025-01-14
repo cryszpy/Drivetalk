@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: maxine_1_5
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "it\u2019s a harsh world out there for you taxi drivers! lots of competition
-      y\u2019know?"
+  - sentence: it's a harsh world out there for you taxi drivers! lots of competition
+      y'know?
     expression: 1
     startingExpression: 0
-  - sentence: "well\u2026 there\u2019s not much competition around here but you don\u2019t
+  - sentence: "well\u2026 there's not much competition around here but you don't
       want the townsfolk hating you do you?"
     expression: 1
     startingExpression: 7
-  - sentence: "you\u2019d rather be the first choice than the last resort!"
+  - sentence: you'd rather be the first choice than the last resort!
     expression: 1
     startingExpression: 0
   nextDialogue: {fileID: 11400000, guid: f3ff3b113bee14631b5b977d9cccf953, type: 2}

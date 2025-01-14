@@ -23,8 +23,8 @@ MonoBehaviour:
       it."
     expression: 1
     startingExpression: 0
-  - sentence: "although, i guess it has been a while hasn\u2019t it? not long enough
-      to forget where i live though\u2026"
+  - sentence: "although, i guess it has been a while hasn't it? not long enough to
+      forget where i live though\u2026"
     expression: 1
     startingExpression: 0
   nextDialogue: {fileID: 0}

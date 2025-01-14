@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: maxine_1_6
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "anyways, we\u2019re getting close to home huh? "
+  - sentence: 'anyways, we''re getting close to home huh? '
     expression: 1
     startingExpression: 4
   nextDialogue: {fileID: 0}

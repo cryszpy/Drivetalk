@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: maxine_choice_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "don\u2019t get shy now you liar, i know you remember."
+  - sentence: don't get shy now you liar, i know you remember.
     expression: 3
     startingExpression: 0
   nextDialogue: {fileID: 0}
