@@ -12,6 +12,9 @@ public class TurnSignal : UIElementSlider
     [SerializeField] private float straightCutoffLeft;
     [SerializeField] private float straightCutoffRight;
 
+    [SerializeField] private GameObject leftSignal;
+    [SerializeField] private GameObject rightSignal;
+
     public override void Update()
     {
         base.Update();
@@ -62,6 +65,10 @@ public class TurnSignal : UIElementSlider
             if (newRot > cutoffLeft && newRot < cutoffRight) {
                 if (carPointer.currentSteeringDirection != SteeringDirection.FORWARD && carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
                     carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
+
+                    leftSignal.SetActive(false);
+                    rightSignal.SetActive(false);
+
                     carPointer.SwitchDirection();
                     Debug.Log("Signaled none!");
                 }
@@ -70,6 +77,10 @@ public class TurnSignal : UIElementSlider
             else if (newRot < cutoffLeft) {
                 if (carPointer.currentSteeringDirection != SteeringDirection.LEFT && carPointer.validDirections.Contains(SteeringDirection.LEFT)) {
                     carPointer.currentSteeringDirection = SteeringDirection.LEFT;
+
+                    leftSignal.SetActive(true);
+                    rightSignal.SetActive(false);
+
                     carPointer.SwitchDirection();
                     Debug.Log("Signaled left!");
                 }
@@ -78,6 +89,10 @@ public class TurnSignal : UIElementSlider
             else if (newRot > cutoffRight) {
                 if (carPointer.currentSteeringDirection != SteeringDirection.RIGHT && carPointer.validDirections.Contains(SteeringDirection.RIGHT)) {
                     carPointer.currentSteeringDirection = SteeringDirection.RIGHT;
+
+                    leftSignal.SetActive(false);
+                    rightSignal.SetActive(true);
+
                     carPointer.SwitchDirection();
                     Debug.Log("Signaled right!");
                 }
@@ -94,6 +109,7 @@ public class TurnSignal : UIElementSlider
 
         switch (direction) {
             case SteeringDirection.LEFT:
+
                 if (zValue < 5) {
                     while (zValue < 5) {
                         zValue += 1;
@@ -111,6 +127,7 @@ public class TurnSignal : UIElementSlider
                 }
                 break;
             case SteeringDirection.RIGHT:
+
                 if (zValue > 80) {
                     while (zValue > 80) {
                         zValue -= 1;
@@ -128,6 +145,11 @@ public class TurnSignal : UIElementSlider
                 }
                 break;
             case SteeringDirection.FORWARD:
+
+                // Reset turn signals
+                leftSignal.SetActive(false);
+                rightSignal.SetActive(false);
+            
                 if (zValue > 45) {
                     while (zValue > 45) {
                         zValue -= 1f;
