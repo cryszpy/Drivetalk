@@ -39,13 +39,16 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the prefab for a UI choice button.")]
     public GameObject choicePrefab;
 
-    [Tooltip("Reference to the car's current destination.")]
-    public GameObject destinationObject;
-
     [Tooltip("Reference to the car's current taxi stop destination.")]
     public GameObject currentStop;
 
+    public Material setMaterial;
+    public Material unsetMaterial;
+
     [Header("STATS")]
+
+    [Tooltip("Boolean flag; Checks whether the passenger has arrived at destination or not.")]
+    public bool arrivedAtDest = false;
 
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
     public bool atTaxiStop = true;
@@ -132,7 +135,9 @@ public class CarController : MonoBehaviour
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING)
         {
             // Drive to the current destination
-            agent.SetDestination(destinationObject.transform.position);
+            agent.SetDestination(carPointer.pointer.transform.position);
+
+            
         }
 
         // DEV static variable tracking—REMOVE FOR BUILDS
@@ -195,6 +200,7 @@ public class CarController : MonoBehaviour
 
             // Tell the car it has arrived at a taxi stop
             atTaxiStop = true;
+            arrivedAtDest = false;
             
             // Add passenger to total driven passengers list if they are a new passenger
             if (!PassengersDrivenIDs.Contains(currentPassenger.id)) {
@@ -245,8 +251,13 @@ public class CarController : MonoBehaviour
 
     // Drops off a passenger when arriving at a destination and dialogue is finished
     public void DropOffPassenger() {
-
         Debug.Log("Arrived at destination!");
+
+        // Switches car pathfinding target to destination
+        carPointer.StartDrive(carPointer.destinationObject);
+
+        // Resets the destination highlight material
+        carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
 
         // Clears all previous dashboard requests
         dialogueManager.dashRequests.Clear();

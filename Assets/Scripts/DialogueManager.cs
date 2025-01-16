@@ -75,6 +75,8 @@ public class DialogueManager : MonoBehaviour
 
     public Toggle autoDialogueToggle;
 
+    public GameObject currentElement;
+
     public List<DialogueLine> bruh = new();
     /* public GameObject choiceNotif;
 
@@ -250,7 +252,7 @@ public class DialogueManager : MonoBehaviour
     private void Update() {
         bruh = lines.ToList();
 
-        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+        /* if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             if (Input.GetKeyDown(KeyCode.Space)) {
 
@@ -265,7 +267,7 @@ public class DialogueManager : MonoBehaviour
                     DisplayNextSentence();
                 }
             }
-        }
+        } */
 
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
@@ -409,22 +411,22 @@ public class DialogueManager : MonoBehaviour
             }
         } */
 
-        if (!continueButton) {
+        /* if (!continueButton) {
             continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
             if (continueButton.TryGetComponent<Button>(out var button)) {
                 button.onClick.AddListener(ContinueButton);
                 Debug.Log("Assigned continueButton onClick event!");
             }
             Debug.Log("DialogueManager continueButton is null! Reassigned.");
-        }
+        } */
 
-        if (!dash_dialogueBox) {
+        /* if (!dash_dialogueBox) {
             dash_dialogueBox = GameObject.FindGameObjectWithTag("DialogueBox");
         }
 
         if (!nameBoxText) {
             nameBoxText = GameObject.FindGameObjectWithTag("NameBox").GetComponentInChildren<TMP_Text>();
-        }
+        } */
 
         if (!gpsIndicator) {
             gpsIndicator = GameObject.FindGameObjectWithTag("GPSIndicator");
@@ -473,27 +475,10 @@ public class DialogueManager : MonoBehaviour
     
     // Starts a piece of dialogue
     public void StartDialogue(DialoguePiece dialogue) {
+        Debug.Log("started dialogue");
 
         // Assigns any missing script references
         FindReferences();
-
-        // Get this dialogue piece's index in passenger's dialogue list
-        int index = car.currentPassenger.ridesDialogue.IndexOf(dialogue);
-
-        int nameIndex = car.currentPassenger.ridesDialogue.FindIndex(x => x.firstNameUsage == true);
-
-        // Check whether this dialogue piece is before the passenger reveals their name or not
-        bool nameCheck = index <= nameIndex;
-
-        // If the passenger has/not revealed their name, set UI accordingly
-        if (dialogue.firstNameUsage) {
-            nameBoxText.text = car.currentPassenger.passengerName;
-            Debug.Log("Set passenger name: " + car.currentPassenger.passengerName);
-            car.currentPassenger.nameRevealed = true;
-        } else if (nameCheck || nameIndex < 0) {
-            nameBoxText.text = car.currentPassenger.hiddenName;
-            car.currentPassenger.nameRevealed = false;
-        }
 
         // Hides the "show dialogue" animation
         //dialogueAnimator.SetBool("Play", false);
@@ -537,137 +522,142 @@ public class DialogueManager : MonoBehaviour
 
     // Displays the next sentence
     public void DisplayNextSentence() {
-        
-        // If there aren't any sentences to display (reached the end of this dialogue piece)
-        if (lines.Count <= 0) {
 
-            // If there are choices attached to this dialogue piece—
-            if (currentDialogue.choices.Length > 0) {
-                //Debug.Log("1");
+        if (currentDialogue) {
 
-                // Set boolean flag to currently playing a choice branch
-                playingChoices = true;
+            // If there aren't any sentences to display (reached the end of this dialogue piece)
+            if (lines.Count <= 0) {
 
-                // Set the previous non-choice dialogue piece to jump back to after choices
-                preChoiceDialogue = currentDialogue;
+                // If there are choices attached to this dialogue piece—
+                if (currentDialogue.choices.Length > 0) {
+                    //Debug.Log("1");
 
-                /* if (mode == DialogueMode.RMM) {
+                    // Set boolean flag to currently playing a choice branch
+                    playingChoices = true;
+
+                    // Set the previous non-choice dialogue piece to jump back to after choices
+                    preChoiceDialogue = currentDialogue;
+
+                    /* if (mode == DialogueMode.RMM) {
+                        ShowChoices();
+                    } */
+
+                    // Show choices
                     ShowChoices();
-                } */
-
-                // Show choices
-                ShowChoices();
-                
-                return;
-            }
-            // If just coming out of a post-choice dialogue, and pre-choice dialogue has more to say—
-            else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue) {
-                //Debug.Log("2");
-                // Set current dialogue piece to the pre-choice branch dialogue piece
-                currentDialogue = preChoiceDialogue;
-
-                // Clear the pre-choice branch dialogue piece variable
-                preChoiceDialogue = null;
-
-                // Waits, then plays the next dialogue piece
-                GameStateManager.EOnDialogueGroupFinish?.Invoke();
-                return;
-            }
-            // If the passenger has said greeting, but not started main ride dialogue—
-            else if (!car.currentPassenger.hasStartedRideDialogue) {
-                //Debug.Log("3");
-                // TODO: Add dependence on selecting a GPS destination
-                waitForRouting = true;
-
-                // Show GPS indicator
-                if (!gpsIndicator.activeInHierarchy) {
-                    gpsIndicator.SetActive(true);
-                }
-
-                // Hide skip indicator if on
-                if (skipIndicator.activeInHierarchy) {
-                    skipIndicator.SetActive(false);
-                }
-
-                // Plays the "hide dialogue UI box" animation
-                //dialogueAnimator.SetBool("Play", false);
-
-                return;
-            }
-            // Go to next regular dialogue piece if no choices
-            else if (currentDialogue.nextDialogue) {
-                //Debug.Log("4");
-                // Waits, then plays the next dialogue piece
-                GameStateManager.EOnDialogueGroupFinish?.Invoke();
-                return;
-            }
-            // Dropoff dialogue
-            else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute && carPointer.finishedDialogue) {
-                //Debug.Log("5");
-                // Starts the passenger's dropoff dialogue
-                DropoffDialogue();
-                return;
-            }
-            // End dialogue if no choices and nothing else to say
-            else if (currentDialogue.choices.Length == 0) {
-                //Debug.Log("6");
-                // Ends the ride's dialogue
-                GameStateManager.EOnRideFinish?.Invoke();
-                return;
-            }
-        } 
-        // If this dialogue piece has a dashboard request to play—
-        else if (currentDialogue.request.control != DashboardControl.NONE && !dashRequests.Contains(currentDialogue.request)) {
-
-            // Reset response boolean
-            currentDialogue.request.hasResponded = false;
-
-            // Add the request to the list of active requests
-            dashRequests.Add(currentDialogue.request);
-            Debug.Log("Started dashboard request of type: " + currentDialogue.request.control);
-
-            if (CheckDashRequirements(currentDialogue.request)) {
-                Debug.Log("Dashboard request has been pre-completed!");
-
-                //dialogueAnimator.SetBool("Play", false);
-
-                currentDialogue.request.hasResponded = true;
-                preChoiceDialogue = currentDialogue;
-                currentDialogue = currentDialogue.request.preCompletedResponse;
-
-                if (currentDialogue.lines[0].startingExpression != PassengerExpression.NONE) {
-
-                    SwitchExpression(currentDialogue.lines[0].startingExpression);
-                } else {
                     
-                    // Starts the pre-completed request response
-                    StartDialogue(currentDialogue);
+                    return;
                 }
+                // If just coming out of a post-choice dialogue, and pre-choice dialogue has more to say—
+                else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue) {
+                    //Debug.Log("2");
+                    // Set current dialogue piece to the pre-choice branch dialogue piece
+                    currentDialogue = preChoiceDialogue;
+
+                    // Clear the pre-choice branch dialogue piece variable
+                    preChoiceDialogue = null;
+
+                    // Waits, then plays the next dialogue piece
+                    GameStateManager.EOnDialogueGroupFinish?.Invoke();
+                    return;
+                }
+                // If the passenger has said greeting, but not started main ride dialogue—
+                else if (!car.currentPassenger.hasStartedRideDialogue) {
+                    //Debug.Log("3");
+                    // TODO: Add dependence on selecting a GPS destination
+                    waitForRouting = true;
+
+                    // Show GPS indicator
+                    if (!gpsIndicator.activeInHierarchy) {
+                        gpsIndicator.SetActive(true);
+                    }
+
+                    // Hide skip indicator if on
+                    if (skipIndicator.activeInHierarchy) {
+                        skipIndicator.SetActive(false);
+                    }
+
+                    // Plays the "hide dialogue UI box" animation
+                    //dialogueAnimator.SetBool("Play", false);
+
+                    return;
+                }
+                // Go to next regular dialogue piece if no choices
+                else if (currentDialogue.nextDialogue) {
+                    //Debug.Log("4");
+                    // Waits, then plays the next dialogue piece
+                    GameStateManager.EOnDialogueGroupFinish?.Invoke();
+                    return;
+                }
+                // Dropoff dialogue
+                else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute) {
+                    Debug.Log("5");
+                    // Starts the passenger's dropoff dialogue
+                    DropoffDialogue();
+                    return;
+                }
+                // End dialogue if no choices and nothing else to say
+                else if (currentDialogue.choices.Length == 0) {
+                    //Debug.Log("6");
+                    // Ends the ride's dialogue
+                    GameStateManager.EOnRideFinish?.Invoke();
+                    return;
+                }
+            } 
+            // If this dialogue piece has a dashboard request to play—
+            else if (currentDialogue.request.control != DashboardControl.NONE && !dashRequests.Contains(currentDialogue.request)) {
+
+                // Reset response boolean
+                currentDialogue.request.hasResponded = false;
+
+                // Add the request to the list of active requests
+                dashRequests.Add(currentDialogue.request);
+                Debug.Log("Started dashboard request of type: " + currentDialogue.request.control);
+
+                if (CheckDashRequirements(currentDialogue.request)) {
+                    Debug.Log("Dashboard request has been pre-completed!");
+
+                    //dialogueAnimator.SetBool("Play", false);
+
+                    currentDialogue.request.hasResponded = true;
+                    preChoiceDialogue = currentDialogue;
+                    currentDialogue = currentDialogue.request.preCompletedResponse;
+
+                    if (currentDialogue.lines[0].startingExpression != PassengerExpression.NONE) {
+
+                        SwitchExpression(currentDialogue.lines[0].startingExpression);
+                    } else {
+                        
+                        // Starts the pre-completed request response
+                        StartDialogue(currentDialogue);
+                    }
+                    return;
+                }
+            }
+
+            // Start passenger starting expression before talking
+            if (!startingExpressionDone && lines.First().startingExpression != PassengerExpression.NONE) {
+
+                // Hide skip indicator and dialogue box
+                skipIndicator.SetActive(false);
+                //dialogueAnimator.SetBool("Play", false);
+
+                // Switch expression to starting expression of the next line
+                SwitchExpression(lines.First().startingExpression);
                 return;
             }
+            startingExpressionDone = false;
+
+            // Removes previously said sentence from sentences queue
+            DialogueLine line = lines.Dequeue();
+
+            // Stops any extra sentence coroutines that may be activated
+            //StopAllCoroutines();
+
+            // Starts typing the queued sentence
+            StartCoroutine(TypeSentence(line));
+        } else {
+            EndDialogue();
         }
-
-        // Start passenger starting expression before talking
-        if (!startingExpressionDone && lines.First().startingExpression != PassengerExpression.NONE) {
-
-            // Hide skip indicator and dialogue box
-            skipIndicator.SetActive(false);
-            //dialogueAnimator.SetBool("Play", false);
-
-            // Switch expression to starting expression of the next line
-            SwitchExpression(lines.First().startingExpression);
-            return;
-        }
-        startingExpressionDone = false;
-
-        // Removes previously said sentence from sentences queue
-        DialogueLine line = lines.Dequeue();
-
-        // Stops any extra sentence coroutines that may be activated
-        //StopAllCoroutines();
-
-        // Starts typing the queued sentence
-        StartCoroutine(TypeSentence(line));
     }
 
     // Shows the choices at a choice branch
@@ -743,11 +733,11 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     public IEnumerator TypeSentence(DialogueLine line) {
 
-        GameObject dLine = Instantiate(dialogueElement, dialoguePivot.transform);
+        currentElement = Instantiate(dialogueElement, dialoguePivot.transform);
 
         DialogueUIElement dScript = null;
 
-        if (dLine.TryGetComponent<DialogueUIElement>(out var script)) {
+        if (currentElement.TryGetComponent<DialogueUIElement>(out var script)) {
             dScript = script;
             currentDialogueText = script.elementText;
         } else {
@@ -765,22 +755,45 @@ public class DialogueManager : MonoBehaviour
 
         skipIndicator.SetActive(false);
 
-        Debug.Log(line.sentence);
-
         if (car.currentPassenger.nameRevealed) {
             transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
         } else {
             transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
         }
 
-        // Plays the "show dialogue UI" animation
-        //dialogueAnimator.SetBool("Play", true);
+        string message = null;
 
-        //RMM_dialogueText.text = "";
+        // Get this dialogue piece's index in passenger's dialogue list
+        int index = car.currentPassenger.ridesDialogue.IndexOf(currentDialogue);
 
-        // Initializes empty text to start typing
-        currentDialogueText.text = line.sentence;
-        currentDialogueText.maxVisibleCharacters = 0;
+        int nameIndex = car.currentPassenger.ridesDialogue.FindIndex(x => x.firstNameUsage == true);
+
+        // Check whether this dialogue piece is before the passenger reveals their name or not
+        bool nameCheck = index <= nameIndex;
+
+        string name = null;
+
+        // If the passenger has/not revealed their name, set UI accordingly
+        if (currentDialogue.firstNameUsage) {
+            name = car.currentPassenger.passengerName;
+            Debug.Log("Set passenger name: " + car.currentPassenger.passengerName);
+            car.currentPassenger.nameRevealed = true;
+        } else if (nameCheck || nameIndex < 0) {
+            name = car.currentPassenger.hiddenName;
+            car.currentPassenger.nameRevealed = false;
+        }
+
+        // Separate everything but the name
+        string concat = ": " + line.sentence;
+
+        // String together message including name
+        message = name + concat;
+
+        Debug.Log(message);
+
+        // Initializes empty text as full message to start typing
+        currentDialogueText.text = message;
+        currentDialogueText.maxVisibleCharacters = name.Length;
 
         // Indicates that a sentence is being typed out
         typingSentence = true;
@@ -789,14 +802,10 @@ public class DialogueManager : MonoBehaviour
             car.currentPassenger.animator.SetTrigger("Speak");
         }
 
-        // For every character in the sentence
-        foreach (char letter in line.sentence.ToCharArray()) {
+        // For every character in ONLY THE MESSAGE WITHOUT THE NAME
+        foreach (char letter in concat.ToCharArray()) {
 
             if (typingSentence) {
-
-                if (currentDialogueText.maxVisibleCharacters > 40) {
-
-                }
 
                 // Types the character and adds it to the current sentence display
                 currentDialogueText.maxVisibleCharacters++;
@@ -871,7 +880,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Hide dialogue box UI
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // Clear current dialogue
         currentDialogue = null;
@@ -914,7 +923,7 @@ public class DialogueManager : MonoBehaviour
         carPointer.finishedDialogue = true;
 
         // If driving around aimlessly, start driving towards destination
-        if (!car.atTaxiStop && car.carPointer.destinationObject.CompareTag("Block")) {
+        if (!car.atTaxiStop && car.carPointer.pathfindingTarget.CompareTag("Block")) {
             carPointer.SwitchToFinalDestination();
         }
 
@@ -927,6 +936,22 @@ public class DialogueManager : MonoBehaviour
         dialogueAnimator.SetBool("Play", false);
 
         // Clear current dialogue
+        currentDialogue = null;
+    }
+
+    public void ResetDialogue() {
+        Debug.Log("Reset dialogue!");
+
+        typingSentence = false;
+        StopAllCoroutines();
+
+        carPointer.finishedDialogue = true;
+
+        // Hide dialogue box UI
+        dialogueAnimator.SetBool("Play", false);
+
+        lines.Clear();
+
         currentDialogue = null;
     }
 
@@ -1017,7 +1042,6 @@ public class DialogueManager : MonoBehaviour
                 car.currentPassenger.animator.SetTrigger("Pouty");
                 break;
             case PassengerExpression.CLOSE_EYED_SMILE:
-                Debug.Log("YAYY");
                 expressionTimerRunning = false;
                 car.currentPassenger.animator.SetTrigger("CESmile");
                 break;

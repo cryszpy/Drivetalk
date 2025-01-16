@@ -12,18 +12,19 @@ public class Destination : MonoBehaviour
     [Tooltip("Boolean flag; Checks if the car is inside this radius.")]
     [SerializeField] private bool inRadius = false;
 
-    private bool droppedOff = false;
-
     private void Update() {
 
         // If the car reference is not null, and the car is inside this destination—
-        if (car && inRadius && !droppedOff) {
+        if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.gameObject) {
 
             // Stop looping of this function
-            droppedOff = true;
+            car.arrivedAtDest = true;
 
             // If this destination is the car's intended destination, dialogue has finished, and the passenger exists—
-            if (car.carPointer.destinationObject == transform.parent.gameObject && car.carPointer.finishedDialogue && car.currentPassenger) {
+            if (car.currentPassenger) {
+
+                GameStateManager.dialogueManager.ResetDialogue();
+                Destroy(GameStateManager.dialogueManager.currentElement);
 
                 GameStateManager.EOnPassengerDropoff?.Invoke();
             }
@@ -57,7 +58,23 @@ public class Destination : MonoBehaviour
 
         if (collider.CompareTag("CarFrame")) {
             inRadius = false;
-            droppedOff = false;
+            Debug.Log(car.arrivedAtDest);
+            
+            if (car.arrivedAtDest) {
+                Debug.Log("did it");
+                car.arrivedAtDest = false;
+
+                // Re-raycast for directions
+                car.carPointer.GetValidDirections();
+
+                // Reset steering direction to forward if possible
+                if (car.carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
+                    car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
+                    car.carPointer.turnSignal.hovered = false;
+                    car.carPointer.turnSignal.dragging = false;
+                    StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection));
+                }
+            }
         }
     }
 }

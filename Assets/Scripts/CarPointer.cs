@@ -27,7 +27,13 @@ public class CarPointer : MonoBehaviour
     [Tooltip("Reference to the destination target's closest road marker.")]
     public Marker destinationMarker;
 
-    [Tooltip("Reference to the destination target object.")]
+    [Tooltip("The pointer that the car should target for pathfinding.")]
+    public GameObject pointer;
+
+    [Tooltip("Reference to the current pathfinding target road.")]
+    public GameObject pathfindingTarget;
+
+    [Tooltip("The current passenger's requested destination.")]
     public GameObject destinationObject;
 
     public DestinationRadius destinationRadius;
@@ -46,7 +52,7 @@ public class CarPointer : MonoBehaviour
 
     public Road trackedIntersection;
 
-    [SerializeField] private TurnSignal turnSignal;
+    public TurnSignal turnSignal;
     public Wheel wheel;
 
     [Header("STATS")]
@@ -96,7 +102,7 @@ public class CarPointer : MonoBehaviour
             }
 
             // If the car has not calculated valid directions, and it is not at a taxi stop (it's driving) and there is a passenger to give a ride to–
-            if (!calculatedDirections && !car.atTaxiStop && car.currentPassenger) {
+            if (!calculatedDirections && !car.atTaxiStop && car.currentPassenger && !car.arrivedAtDest) {
 
                 // Calculate valid directions and steer towards one
                 SwitchDirection();
@@ -107,12 +113,12 @@ public class CarPointer : MonoBehaviour
     // Routes the car to the passenger's actual destination if dialogue has finished
     public void SwitchToFinalDestination() {
         
-        if (destinationObject != savedDestination) {
+        if (pathfindingTarget != savedDestination) {
             Debug.Log("Finished dialogue, driving to actual destination now!");
 
-            destinationObject = savedDestination;
+            pathfindingTarget = savedDestination;
 
-            StartDrive(destinationObject);
+            StartDrive(pathfindingTarget);
         }
     }
 
@@ -120,10 +126,10 @@ public class CarPointer : MonoBehaviour
     public void StartDrive(GameObject destination) {
 
         // Set the car pointer's destination
-        destinationObject = destination;
+        pathfindingTarget = destination;
 
-        if (destinationObject.CompareTag("Destination")) {
-            destinationRadius = destinationObject.GetComponentInChildren<DestinationRadius>();
+        if (pathfindingTarget.CompareTag("Destination")) {
+            destinationRadius = pathfindingTarget.GetComponentInChildren<DestinationRadius>();
             Debug.Log("Assigned destination radius!");
         }
         
@@ -143,7 +149,7 @@ public class CarPointer : MonoBehaviour
         }
     }
 
-    public Vector3 SnapDirection(Vector3 direction) {
+    private Vector3 SnapDirection(Vector3 direction) {
 
         // List of Vector3 components
         List<float> vals = new()
@@ -191,8 +197,6 @@ public class CarPointer : MonoBehaviour
 
     public void GetValidDirections() {
         validDirections.Clear();
-
-        //Debug.Log(transform.TransformDirection(Vector3.forward) + " | " + SnapDirection(transform.TransformDirection(Vector3.forward)));
 
         Vector3 forward = SnapDirection(transform.TransformDirection(Vector3.forward));
         Vector3 left = SnapDirection(transform.TransformDirection(Vector3.left));
@@ -359,10 +363,10 @@ public class CarPointer : MonoBehaviour
     private Marker FindDestinationMarker()
     {
         // If the destination has been set—
-        if (destinationObject != null)
+        if (pathfindingTarget != null)
         {
             // Find the closest marker to the destination
-            return FindClosestMarkerToObject(destinationObject);
+            return FindClosestMarkerToObject(pathfindingTarget);
         }
 
         return null;  // In case no destination was found

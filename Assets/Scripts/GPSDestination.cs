@@ -44,8 +44,14 @@ public class GPSDestination : MonoBehaviour
         // Sets car's boolean flag to no longer be at a taxi stop
         car.atTaxiStop = false;
 
+        // Highlights the destination's color (temporary)
+        destinationObject.GetComponent<MeshRenderer>().material = car.setMaterial;
+
         // If the car still has rides left in the day—
         if (car.currentRideNum < car.totalRideNum) {
+
+            // Sets the passenger destination object
+            carPointer.destinationObject = destinationObject;
 
             // If already inside destination radius, allow rerouting
             if (carPointer.destinationRadius) {

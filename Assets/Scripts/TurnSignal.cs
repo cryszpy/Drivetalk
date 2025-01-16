@@ -19,9 +19,12 @@ public class TurnSignal : UIElementSlider
     {
         base.Update();
 
+        // If car is not in intersection or at a taxi stop (is driving), then allow player to use turn signal
         if (!carPointer.inIntersection && !carPointer.car.atTaxiStop) {
             coll.enabled = true;
-        } else if (coll.enabled == true) {
+        } 
+        // If car is at an intersection or a taxi stop, AND the collider is enabled, select a steering direction
+        else if (coll.enabled == true) {
             coll.enabled = false;
             StartCoroutine(SignalClick(carPointer.currentSteeringDirection));
         }
@@ -109,6 +112,8 @@ public class TurnSignal : UIElementSlider
 
         switch (direction) {
             case SteeringDirection.LEFT:
+                leftSignal.SetActive(true);
+                rightSignal.SetActive(false);
 
                 if (zValue < 5) {
                     while (zValue < 5) {
@@ -127,6 +132,8 @@ public class TurnSignal : UIElementSlider
                 }
                 break;
             case SteeringDirection.RIGHT:
+                leftSignal.SetActive(false);
+                rightSignal.SetActive(true);
 
                 if (zValue > 80) {
                     while (zValue > 80) {

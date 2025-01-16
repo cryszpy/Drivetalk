@@ -169,6 +169,8 @@ MonoBehaviour:
   allMarkers: []
   currentMarker: {fileID: 0}
   destinationMarker: {fileID: 0}
+  pointer: {fileID: 7681991582630019422}
+  pathfindingTarget: {fileID: 0}
   destinationObject: {fileID: 0}
   destinationRadius: {fileID: 0}
   savedBlock: {fileID: 0}
