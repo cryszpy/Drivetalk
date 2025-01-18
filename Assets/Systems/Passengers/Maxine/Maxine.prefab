@@ -251,6 +251,7 @@ MonoBehaviour:
   id: 4
   passengerName: Maxine
   hiddenName: Maxine
+  nameRevealed: 0
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   animator: {fileID: 2486925453300218498}
   requirements: []
@@ -259,7 +260,7 @@ MonoBehaviour:
   textCPS: 0.05
   waitTimeMin: 1
   waitTimeMax: 2
-  holdTime: 2
+  holdTime: 3.5
   minSwitchTime: 1.5
   maxSwitchTime: 3.5
   waitAfterRouteTime: 1

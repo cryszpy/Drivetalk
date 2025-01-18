@@ -64,26 +64,26 @@ public class GPS : UIElementSlider
 
             if (button != selectedButton) {
 
-                if (button.gameObject.TryGetComponent<Image>(out var image)) {
+                if (button.TryGetComponent<Image>(out var image)) {
                     image.color = lockedColor;
                 } else {
                     Debug.LogError("Couldn't find Image component on button!");
                 }
 
-                if (button.gameObject.TryGetComponent<Button>(out var script)) {
+                if (button.TryGetComponent<Button>(out var script)) {
                     script.enabled = false;
                 } else {
                     Debug.LogError("Couldn't find Button component on button!");
                 }
             } else {
 
-                if (button.gameObject.TryGetComponent<Image>(out var image)) {
+                if (button.TryGetComponent<Image>(out var image)) {
                     image.color = unlockedColor;
                 } else {
                     Debug.LogError("Couldn't find Image component on button!");
                 }
 
-                if (button.gameObject.TryGetComponent<Button>(out var script)) {
+                if (button.TryGetComponent<Button>(out var script)) {
                     script.enabled = true;
                 } else {
                     Debug.LogError("Couldn't find Button component on button!");

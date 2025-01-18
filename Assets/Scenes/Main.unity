@@ -422,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577274797501552625, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -450.00012
+      value: -450.0028
       objectReference: {fileID: 0}
     - target: {fileID: 2676117460214297604, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4308,6 +4308,8 @@ MonoBehaviour:
   expressionTimer: 0
   expressionTimerRunning: 0
   startingExpressionDone: 0
+  maxDialogueBlocks: 5
+  nextDialogueBlockCooldown: 2
 --- !u!114 &1665081493
 MonoBehaviour:
   m_ObjectHideFlags: 0

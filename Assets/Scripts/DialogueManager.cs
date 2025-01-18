@@ -107,6 +107,12 @@ public class DialogueManager : MonoBehaviour
 
     public bool startingExpressionDone = false;
 
+    public int maxDialogueBlocks;
+
+    public float nextDialogueBlockCooldown;
+
+    private Queue<GameObject> activeDialogueBlocks = new();
+
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
 
@@ -522,6 +528,7 @@ public class DialogueManager : MonoBehaviour
 
     // Displays the next sentence
     public void DisplayNextSentence() {
+        Debug.Log("DisplayNextSentence");
 
         if (currentDialogue) {
 
@@ -530,7 +537,7 @@ public class DialogueManager : MonoBehaviour
 
                 // If there are choices attached to this dialogue piece—
                 if (currentDialogue.choices.Length > 0) {
-                    //Debug.Log("1");
+                    Debug.Log("1");
 
                     // Set boolean flag to currently playing a choice branch
                     playingChoices = true;
@@ -549,7 +556,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 // If just coming out of a post-choice dialogue, and pre-choice dialogue has more to say—
                 else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue) {
-                    //Debug.Log("2");
+                    Debug.Log("2");
                     // Set current dialogue piece to the pre-choice branch dialogue piece
                     currentDialogue = preChoiceDialogue;
 
@@ -562,7 +569,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 // If the passenger has said greeting, but not started main ride dialogue—
                 else if (!car.currentPassenger.hasStartedRideDialogue) {
-                    //Debug.Log("3");
+                    Debug.Log("3");
                     // TODO: Add dependence on selecting a GPS destination
                     waitForRouting = true;
 
@@ -583,7 +590,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 // Go to next regular dialogue piece if no choices
                 else if (currentDialogue.nextDialogue) {
-                    //Debug.Log("4");
+                    Debug.Log("4");
                     // Waits, then plays the next dialogue piece
                     GameStateManager.EOnDialogueGroupFinish?.Invoke();
                     return;
@@ -597,7 +604,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 // End dialogue if no choices and nothing else to say
                 else if (currentDialogue.choices.Length == 0) {
-                    //Debug.Log("6");
+                    Debug.Log("6");
                     // Ends the ride's dialogue
                     GameStateManager.EOnRideFinish?.Invoke();
                     return;
@@ -733,7 +740,19 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     public IEnumerator TypeSentence(DialogueLine line) {
 
-        currentElement = Instantiate(dialogueElement, dialoguePivot.transform);
+        if (activeDialogueBlocks.Count >= maxDialogueBlocks) {
+            GameObject deadBlock = activeDialogueBlocks.Dequeue();
+
+            if (deadBlock.TryGetComponent<DialogueUIElement>(out var deadScript)) {
+                deadScript.animator.SetTrigger("Out"); // Starts destruction of dialogue block
+            }
+        }
+
+        if (dialogueElement.TryGetComponent<DialogueUIElement>(out var blockScript)) {
+            currentElement = (GameObject)blockScript.Create(dialogueElement, dialoguePivot.transform, car);
+        }
+
+        activeDialogueBlocks.Append(currentElement);
 
         DialogueUIElement dScript = null;
 
@@ -755,6 +774,7 @@ public class DialogueManager : MonoBehaviour
 
         skipIndicator.SetActive(false);
 
+        // Log appropriate name to transcript
         if (car.currentPassenger.nameRevealed) {
             transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
         } else {
@@ -838,11 +858,8 @@ public class DialogueManager : MonoBehaviour
 
         if (autoDialogue) {
 
-            // Waits for the passenger's hold-dialogue-on-screen time
-            yield return new WaitForSeconds(car.currentPassenger.holdTime);
-
-            // Displays next sentence if available
-            DisplayNextSentence();
+            // Starts countdown to fade dialogue away
+            StartCoroutine(WaitBeforeNextSentence());
         } else {
 
             // Switches continue button functionality in ContinueButton()
@@ -851,6 +868,15 @@ public class DialogueManager : MonoBehaviour
             // Enables the skip indicator
             skipIndicator.SetActive(true);
         }
+    }
+
+    private IEnumerator WaitBeforeNextSentence() {
+
+        // Waits for the passenger's hold-dialogue-on-screen time
+        yield return new WaitForSeconds(nextDialogueBlockCooldown);
+
+        // Displays next sentence if available
+        DisplayNextSentence();
     }
 
     // Starts the first ride dialogue

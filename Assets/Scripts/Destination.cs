@@ -25,6 +25,7 @@ public class Destination : MonoBehaviour
 
                 GameStateManager.dialogueManager.ResetDialogue();
                 Destroy(GameStateManager.dialogueManager.currentElement);
+                Debug.Log("Destroyed");
 
                 GameStateManager.EOnPassengerDropoff?.Invoke();
             }
