@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public class Intersection : Road
+public class Corner : Road
 {
     private CarPointer carPointer;
 
@@ -19,7 +19,6 @@ public class Intersection : Road
 
                 // Set the car pointer's script reference to the script pulled from collision
                 carPointer = script.carPointer;
-                carPointer.inIntersection = true;
 
                 if (carPointer.wheel) {
                     StartCoroutine(carPointer.wheel.TurnWheel(carPointer.currentSteeringDirection));
@@ -46,7 +45,6 @@ public class Intersection : Road
                     StartCoroutine(carPointer.wheel.TurnWheel(SteeringDirection.FORWARD));
                 }
 
-                carPointer.inIntersection = false;
                 carPointer.calculatedDirections = false;
             }
         }

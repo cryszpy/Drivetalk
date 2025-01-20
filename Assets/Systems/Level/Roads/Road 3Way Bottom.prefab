@@ -522,7 +522,6 @@ GameObject:
   - component: {fileID: 1712479393804374568}
   - component: {fileID: 2336287913998671245}
   - component: {fileID: 542928066477631815}
-  - component: {fileID: 7807304448855802980}
   m_Layer: 0
   m_Name: Tetris5
   m_TagString: Untagged
@@ -600,27 +599,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7807304448855802980
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055930901494401170}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.01, y: 0.01, z: 0.00049999985}
-  m_Center: {x: 0.0002174615, y: -0.000004163012, z: 0.0000024312903}
 --- !u!1 &3464190535924921968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1027,7 @@ GameObject:
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7381628960797759289
 Transform:
   m_ObjectHideFlags: 0
@@ -1665,8 +1643,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824541166749964565}
-  - component: {fileID: 7916563750292522740}
   - component: {fileID: 1945521590483856726}
+  - component: {fileID: 7916563750292522740}
   m_Layer: 11
   m_Name: Road 3Way Bottom
   m_TagString: Untagged
@@ -1696,25 +1674,6 @@ Transform:
   - {fileID: 4236867925386090513}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7916563750292522740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7247080473360366342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c93a9aefd854766a15c0fa1e21885d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carMarkers:
-  - {fileID: 7320916276990742007}
-  - {fileID: 5514060529381279880}
-  - {fileID: 1558235710928089858}
-  adjacentRoads: []
-  dotProducts: []
-  carPointer: {fileID: 0}
 --- !u!65 &1945521590483856726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1734,8 +1693,26 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 1.4, y: 1.4, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7916563750292522740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247080473360366342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c93a9aefd854766a15c0fa1e21885d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carMarkers:
+  - {fileID: 7320916276990742007}
+  - {fileID: 5514060529381279880}
+  - {fileID: 1558235710928089858}
+  adjacentRoads: []
+  dotProducts: []
 --- !u!1 &8129529648778099833
 GameObject:
   m_ObjectHideFlags: 0

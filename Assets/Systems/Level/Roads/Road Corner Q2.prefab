@@ -598,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1824541166749964565}
   - component: {fileID: 88544551606652394}
-  - component: {fileID: 2124613992631889685}
+  - component: {fileID: 1725996037378672403}
   m_Layer: 11
   m_Name: Road Corner Q2
   m_TagString: Untagged
@@ -644,9 +644,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
+  m_Size: {x: 1.4, y: 1.4, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2124613992631889685
+--- !u!114 &1725996037378672403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7247080473360366342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c93a9aefd854766a15c0fa1e21885d, type: 3}
+  m_Script: {fileID: 11500000, guid: cdb8091216f65443ea2e49284f30e0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   carMarkers:
@@ -664,7 +664,6 @@ MonoBehaviour:
   - {fileID: 6651098697687266226}
   adjacentRoads: []
   dotProducts: []
-  carPointer: {fileID: 0}
 --- !u!1001 &2282046722753334808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,37 +719,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d57b05e4d113449682b2eeeebca44b5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5177762300544075486}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d57b05e4d113449682b2eeeebca44b5, type: 3}
---- !u!1 &1398962205122343753 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2d57b05e4d113449682b2eeeebca44b5, type: 3}
-  m_PrefabInstance: {fileID: 2282046722753334808}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5177762300544075486
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398962205122343753}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.009999998, y: 0.009999999, z: 0.00050798117}
-  m_Center: {x: 0.00030335435, y: 0.0000027609053, z: -0.0000036092963}
 --- !u!4 &1738895343991646707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d57b05e4d113449682b2eeeebca44b5, type: 3}

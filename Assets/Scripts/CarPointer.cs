@@ -107,6 +107,12 @@ public class CarPointer : MonoBehaviour
                 // Calculate valid directions and steer towards one
                 SwitchDirection();
             }
+
+            if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
+                agent.speed = 0;
+            } else if (agent.speed != car.agent.speed) {
+                agent.speed = car.agent.speed;
+            }
         }
     }
 
