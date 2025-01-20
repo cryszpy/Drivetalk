@@ -234,7 +234,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -573,6 +573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e14c856314324565a0e05eedc51f2b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -589,7 +591,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hoveredObject: {fileID: 1600603489492948686}
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
@@ -597,6 +598,9 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   radio: {fileID: 6988894942412411670}
 --- !u!1 &8050747702164229746
 GameObject:
@@ -720,6 +724,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3974c1c5c1d57457d89ba9e2b5bc1a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -736,7 +742,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hoveredObject: {fileID: 8160948420359421188}
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
@@ -744,6 +749,9 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   radio: {fileID: 6988894942412411670}
 --- !u!1 &8160948420359421188
 GameObject:

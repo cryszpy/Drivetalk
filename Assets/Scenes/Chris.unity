@@ -9425,10 +9425,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4710668710510089912, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
-      propertyPath: m_Volume
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4926317086499224466, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10275,13 +10271,15 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 124070079}
   - {fileID: 1400441794}
   - {fileID: 166813859}
   - {fileID: 1574461899}
-  - {fileID: 124070079}
-  - {fileID: 410087041}
+  - {fileID: 1688418657}
   - {fileID: 832575519}
+  - {fileID: 410087041}
   - {fileID: 1183728006}
+  - {fileID: 254099155}
   - {fileID: 2896031843572707131}
   - {fileID: 2992284672251928929}
   - {fileID: 1370447172297295350}
@@ -10295,6 +10293,4 @@ SceneRoots:
   - {fileID: 1188288517}
   - {fileID: 151522920}
   - {fileID: 1541011964}
-  - {fileID: 254099155}
-  - {fileID: 1688418657}
   - {fileID: 1075060407}
