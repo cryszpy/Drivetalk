@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 186199018}
   - component: {fileID: 186199017}
   m_Layer: 0
-  m_Name: MaxineLaugh_0
+  m_Name: McGee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ Animator:
   m_GameObject: {fileID: 186199016}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 59dabecfc11860f4f842db9d68ab2ca4, type: 2}
+  m_Controller: {fileID: 9100000, guid: d0e571f2da29cfa47916934cb92dc087, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -313,7 +313,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -731480892, guid: 5bede83ae39e3fd4fac59751e078399a, type: 3}
+  m_Sprite: {fileID: -194182386, guid: 08c554250e62bac43bf3cedea7808d12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

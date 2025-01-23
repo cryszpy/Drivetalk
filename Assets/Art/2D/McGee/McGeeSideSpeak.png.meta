@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 186ed2b63f2b15642969019551b2b03c
+guid: d089dca106164f741a5e4cdbb7104894
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,32 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -127,7 +101,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1800
+        y: 900
         width: 600
         height: 900
       alignment: 0
@@ -138,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b449181302d2a124198e54e2e76bb982
-      internalID: 1100419956
+      spriteID: 2d76c41ee8519f140bf0f7bd442caa39
+      internalID: -791743408
       vertices: []
       indices: 
       edges: []
@@ -149,7 +123,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 600
-        y: 1800
+        y: 900
         width: 600
         height: 900
       alignment: 0
@@ -160,8 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c0d1905ba7f01c45b1bf6a1c39d3f43
-      internalID: -2030275410
+      spriteID: fac93d146ef28f74e95bc871b49dab62
+      internalID: -1515909736
       vertices: []
       indices: 
       edges: []
@@ -170,7 +144,7 @@ TextureImporter:
       name: McGeeSideSpeak_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1200
         y: 900
         width: 600
         height: 900
@@ -182,8 +156,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86a90d36d736aeb47894c78f3d90cf4d
-      internalID: -151453459
+      spriteID: ddf56fde5af8e52439bc702596262088
+      internalID: -216705254
       vertices: []
       indices: 
       edges: []
@@ -192,28 +166,6 @@ TextureImporter:
       name: McGeeSideSpeak_3
       rect:
         serializedVersion: 2
-        x: 600
-        y: 900
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe875923d20ab2446a63d082555e7511
-      internalID: -232529403
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: McGeeSideSpeak_4
-      rect:
-        serializedVersion: 2
         x: 0
         y: 0
         width: 600
@@ -226,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45593dbc6b8a3ad4d9be82b956e3779f
-      internalID: 890271758
+      spriteID: f0495b5d087305e4c88efbcc52031458
+      internalID: 1882437194
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: McGeeSideSpeak_5
+      name: McGeeSideSpeak_4
       rect:
         serializedVersion: 2
         x: 600
@@ -248,8 +200,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3abcb005fb378c4dba982611c01f0a1
-      internalID: 67646659
+      spriteID: 9fbf9816f7c7891458ef28b802a424c7
+      internalID: -173801589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: McGeeSideSpeak_5
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 600
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a57da30aca6a246b11707516b1d505
+      internalID: 1645727090
       vertices: []
       indices: 
       edges: []
@@ -258,7 +232,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5683613232040544b84eaf4ad8f51869
+    spriteID: 2699c5985a164bc4f8185d82ebe4467f
     internalID: 0
     vertices: []
     indices: 
@@ -268,12 +242,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      McGeeSideSpeak_0: 1100419956
-      McGeeSideSpeak_1: -2030275410
-      McGeeSideSpeak_2: -151453459
-      McGeeSideSpeak_3: -232529403
-      McGeeSideSpeak_4: 890271758
-      McGeeSideSpeak_5: 67646659
+      McGeeSideSpeak_0: -791743408
+      McGeeSideSpeak_1: -1515909736
+      McGeeSideSpeak_2: -216705254
+      McGeeSideSpeak_3: 1882437194
+      McGeeSideSpeak_4: -173801589
+      McGeeSideSpeak_5: 1645727090
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
