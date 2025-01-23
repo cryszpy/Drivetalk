@@ -13,10 +13,6 @@ public struct PassengerRequirement {
     public float statToCheck;
 }
 
-public enum PassengerExpression {
-    NONE, DEFAULT, SIDE_DEFAULT, POUTY, CLOSE_EYED_SMILE, SPEAK, LAUGH_HEARTY, LAUGH_FLOWY
-}
-
 public class Passenger : MonoBehaviour
 {
 
@@ -37,6 +33,9 @@ public class Passenger : MonoBehaviour
 
     [Tooltip("This passenger's generic response archetype.")]
     public PassengerArchetype archetype;
+
+    [Tooltip("This passenger's possible expressions.")]
+    public List<PassengerExpression> expressions = new();
 
     [Tooltip("This passenger's Animator component.")]
     public Animator animator;

@@ -15,15 +15,15 @@ MonoBehaviour:
   lines:
   - sentence: for a whole month you'd show up at my door and drive the two of us
       aimlessly around town.
-    expression: 1
-    startingExpression: 4
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
   - sentence: 'it''s not polite to play with a girl''s heart like that y''know? '
-    expression: 3
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: if you didn't know my mom as a kid she definitely would've killed you.
       haha!
-    expression: 1
-    startingExpression: 7
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
   nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
   request:
     control: 0
@@ -38,5 +38,5 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

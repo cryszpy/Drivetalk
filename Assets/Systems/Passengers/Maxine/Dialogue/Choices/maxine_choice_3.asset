@@ -15,11 +15,11 @@ MonoBehaviour:
   lines:
   - sentence: oh? you do? haha! i'm glad to see you didn't completely forget about
       us.
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: i did live right next to you though, so it'd be pretty hard to forget.
-    expression: 1
-    startingExpression: 7
+    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+    startingExpression: {fileID: 0}
   nextDialogue: {fileID: 0}
   request:
     control: 0
@@ -34,6 +34,6 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
   choiceText: How could I forget?

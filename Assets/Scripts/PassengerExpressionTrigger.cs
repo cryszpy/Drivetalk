@@ -7,7 +7,7 @@ public class PassengerExpressionTrigger : MonoBehaviour
     // Called when the passenger's pre-expression animation is finished
     private void Trigger() {
         
-        if (GameStateManager.dialogueManager.lines.Count > 0) {
+        if (GameStateManager.dialogueManager.lines.Count > 0 && !GameStateManager.dialogueManager.typingSentence) {
 
             // Reset starting expression status
             GameStateManager.dialogueManager.startingExpressionDone = true;
@@ -15,8 +15,10 @@ public class PassengerExpressionTrigger : MonoBehaviour
             // Switch back to regular expression
             GameStateManager.dialogueManager.SwitchExpression(GameStateManager.dialogueManager.lines.First().expression);
 
-            // Resume talking
-            GameStateManager.dialogueManager.DisplayNextSentence();
+            // Resume talking if this is triggered as the pre-expression only
+            if (GameStateManager.dialogueManager.currentLine.expression == GameStateManager.dialogueManager.car.currentPassenger.expressions[0])
+                GameStateManager.dialogueManager.DisplayNextSentence();
+
             //StartCoroutine(GameStateManager.dialogueManager.TypeSentence(GameStateManager.dialogueManager.currentLine));
         } else if (GameStateManager.dialogueManager.currentDialogue && GameStateManager.dialogueManager.preChoiceDialogue) {
 

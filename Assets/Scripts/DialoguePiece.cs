@@ -60,7 +60,7 @@ public class DialoguePiece : ScriptableObject
     public bool firstNameUsage = false;
 
     [Tooltip("What expression the passenger should have during this dialogue piece.")]
-    public PassengerExpression fallbackExpression = PassengerExpression.DEFAULT;
+    public PassengerExpression fallbackExpression;
 
     [Tooltip("Any choices that must be made after this piece of dialogue ends.")]
     public DialogueChoice[] choices;

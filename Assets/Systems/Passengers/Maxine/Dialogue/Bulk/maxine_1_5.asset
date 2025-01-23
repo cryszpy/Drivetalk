@@ -15,15 +15,15 @@ MonoBehaviour:
   lines:
   - sentence: it's a harsh world out there for you taxi drivers! lots of competition
       y'know?
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: "well\u2026 there's not much competition around here but you don't
       want the townsfolk hating you do you?"
-    expression: 1
-    startingExpression: 7
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: you'd rather be the first choice than the last resort!
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
   nextDialogue: {fileID: 11400000, guid: f3ff3b113bee14631b5b977d9cccf953, type: 2}
   request:
     control: 0
@@ -38,5 +38,5 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

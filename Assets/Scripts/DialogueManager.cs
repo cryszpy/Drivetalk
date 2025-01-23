@@ -134,146 +134,8 @@ public class DialogueManager : MonoBehaviour
         GameStateManager.EOnDestinationSet -= TalkAfterRouting;
     }
 
-    /* private void Update() {
-
-        // Enables and disables all RMM dialogue UI stuff
-        if (mode == DialogueMode.RMM && currentDialogue && !playingChoices) {
-            rearviewMirror.backButton.SetActive(true);
-            RMM_dialogueBox.SetActive(true);
-            dash_dialogueBox.SetActive(false);
-        } else if (mode == DialogueMode.DASH && currentDialogue && !playingChoices) {
-            RMM_dialogueBox.SetActive(false);
-            dash_dialogueBox.SetActive(true);
-        } else {
-            RMM_dialogueBox.SetActive(false);
-            dash_dialogueBox.SetActive(false);
-        }
-
-        // Choice notification timer
-        if (!timerPaused && playingChoices && mode != DialogueMode.RMM) {
-            choiceNotifTimer += Time.deltaTime;
-            choiceNotif.SetActive(true);
-
-            // Auto-pick "..." option
-            if(choiceNotifTimer > (car.currentPassenger.choiceNotifSolidTime + car.currentPassenger.choiceNotifFlashTime)) {
-                playingChoices = false;
-                timerPaused = false;
-                //Debug.Log("Done" + choiceNotifTimer);
-                choiceNotifAnimator.SetBool("Flash", false);
-                choiceNotifTimer = 0;
-                StartDialogue(currentDialogue.choices[^1].nextDialogue, false);
-            } 
-            // Switch to flashing
-            else if (choiceNotifTimer > car.currentPassenger.choiceNotifSolidTime) {
-                //Debug.Log("Flashing" + choiceNotifTimer);
-                choiceNotifAnimator.SetBool("Flash", true);
-            } 
-            // Enable and set to solid
-            else if (choiceNotif.activeInHierarchy && choiceNotifTimer <= car.currentPassenger.choiceNotifSolidTime) {
-                //Debug.Log("Solid" + choiceNotifTimer);
-                choiceNotifAnimator.SetBool("Flash", false);
-            }
-        }
-
-        // Dash request timer
-        if (dashRequestRunning) {
-            dashRequestTimer += Time.deltaTime;
-
-            // If the player follows the dash request
-            if (CheckDashRequirements(currentDashReq)) {
-
-                // Disables continued running of dash request
-                dashRequestRunning = false;
-                // PLUS AFFINITY
-                Debug.Log("GAINED AFFINITY AT: " + dashTicker + "s");
-
-                if (currentDialogue == null) {
-                    // play dash control response archetype
-                }
-            }
-
-            // Every x seconds, lose 1 affinity
-            if (dashRequestTimer >= dashTicker) {
-                // MINUS AFFINITY
-                Debug.Log("LOST AFFINITY AT: " + dashTicker + "s");
-                dashTicker += car.currentPassenger.dashRequestTickRate;
-            }
-
-            // Disables dash request when timer reaches limit
-            if (dashRequestTimer > car.currentPassenger.dashRequestTime) {
-                dashRequestRunning = false;
-                dashRequestTimer = 0;
-            }
-        }
-    } */
-
-    // Checks for dash request requirements
-    /* public bool CheckDashRequirements(DashRequestRequirement requirement) {
-        return requirement.reqType switch
-        {
-            DashRequestType.AC_SETTING => CarController.Temperature == requirement.acSetting,
-            DashRequestType.HORN => false,
-            DashRequestType.RADIO_VOLUME => false,
-            DashRequestType.RADIO_SONG => CarController.LastSongPlayedID == requirement.statToCheck,
-            DashRequestType.CIGARETTE => false,
-            _ => false,
-        };
-    } */
-
-    /* // Entering rearview mirror mode
-    public void EnterRMM() {
-
-        // Sets the mode
-        mode = DialogueMode.RMM;
-
-        // Pauses choice notification timer (so it doesn't count down)
-        timerPaused = true;
-
-        // Enables back button
-        rearviewMirror.backButton.SetActive(true);
-
-        // Enables choice notification
-        choiceNotif.SetActive(false);
-    } */
-
-    /* // Exiting rearview mirror mode
-    public void ExitRMM() {
-
-        // Sets the mode
-        mode = DialogueMode.DASH;
-
-        // Resumes choice notification timer (so it counts down)
-        timerPaused = false;
-
-        // Disables back button
-        rearviewMirror.backButton.SetActive(false);
-
-        // If choices are playing, enable choice notification and disable choices
-        if (playingChoices) {
-            choiceNotif.SetActive(true);
-            car.choicesBar.SetActive(false);
-        }
-    } */
-
     private void Update() {
         bruh = lines.ToList();
-
-        /* if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
-
-            if (Input.GetKeyDown(KeyCode.Space)) {
-
-                // Skip typing on click
-                if (currentLine.sentence != null && typingSentence && !autoDialogue) {
-                    currentDialogueText.maxVisibleCharacters = currentDialogueText.text.Length;
-                    typingSentence = false;
-                } 
-                // If sentence is typed out, play next sentence on click
-                else if (waitForSkip) {
-                    waitForSkip = false;
-                    DisplayNextSentence();
-                }
-            }
-        } */
 
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
@@ -290,7 +152,7 @@ public class DialogueManager : MonoBehaviour
                 float rand = UnityEngine.Random.value;
 
                 if (rand < 0.5f) {
-                    SwitchExpression(PassengerExpression.DEFAULT);
+                    SwitchExpression(car.currentPassenger.expressions[0]);
                 } else {
                     expressionTimerRunning = true;
                 }
@@ -378,23 +240,6 @@ public class DialogueManager : MonoBehaviour
             default:
                 return false;
         }
-    }
-
-    public void ContinueButton() {
-
-        /* if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
-
-            // Skip typing on click
-            if (currentLine.sentence != null && typingSentence && !autoDialogue) {
-                dash_dialogueText.maxVisibleCharacters = dash_dialogueText.text.Length;
-                typingSentence = false;
-            } 
-            // If sentence is typed out, play next sentence on click
-            else if (waitForSkip) {
-                waitForSkip = false;
-                DisplayNextSentence();
-            }
-        } */
     }
     
     // Assigns any missing script references
@@ -636,7 +481,7 @@ public class DialogueManager : MonoBehaviour
                     preChoiceDialogue = currentDialogue;
                     currentDialogue = currentDialogue.request.preCompletedResponse;
 
-                    if (currentDialogue.lines[0].startingExpression != PassengerExpression.NONE) {
+                    if (currentDialogue.lines[0].startingExpression != null) {
 
                         SwitchExpression(currentDialogue.lines[0].startingExpression);
                     } else {
@@ -649,11 +494,12 @@ public class DialogueManager : MonoBehaviour
             }
 
             if (!car.currentPassenger) {
+                Debug.Log("your mom");
                 return;
             }
 
             // Start passenger starting expression before talking
-            if (!startingExpressionDone && lines.First().startingExpression != PassengerExpression.NONE) {
+            if (!startingExpressionDone && lines.First().startingExpression != null) {
 
                 // Hide skip indicator and dialogue box
                 //skipIndicator.SetActive(false);
@@ -779,7 +625,7 @@ public class DialogueManager : MonoBehaviour
         currentLine.startingExpression = line.startingExpression;
 
         // Set appropriate expression before talking
-        if (currentLine.expression != PassengerExpression.NONE) {
+        if (currentLine.expression != null) {
             SwitchExpression(currentLine.expression);
         }
 
@@ -858,16 +704,18 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Switches expression after done talking
-        if (line.expression != PassengerExpression.NONE) {
+        if (line.expression != null) {
             SwitchExpression(line.expression);
-        } else if (currentDialogue.fallbackExpression != PassengerExpression.NONE) {
+        } else if (currentDialogue.fallbackExpression != null) {
             SwitchExpression(currentDialogue.fallbackExpression);
         } else {
-            SwitchExpression(PassengerExpression.DEFAULT);
+
+            // Switch to first expression in list
+            SwitchExpression(car.currentPassenger.expressions[0]);
             Debug.LogWarning("Passenger line does not have an expression or a starting expression!");
         }
 
-        if (autoDialogue) {
+        if (autoDialogue && !startingExpressionDone) {
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
@@ -1021,7 +869,7 @@ public class DialogueManager : MonoBehaviour
             preChoiceDialogue = currentDialogue;
             currentDialogue = dashRequests[^1].completedResponse;
 
-            if (currentLine.startingExpression != PassengerExpression.NONE) {
+            if (currentLine.startingExpression != null) {
 
                 SwitchExpression(currentLine.startingExpression);
             } else {
@@ -1065,36 +913,40 @@ public class DialogueManager : MonoBehaviour
 
     public void SwitchExpression(PassengerExpression expression) {
 
-        switch (expression) {
-            case PassengerExpression.DEFAULT:
-                expressionTimerRunning = true;
-                car.currentPassenger.animator.SetTrigger("Default");
-                break;
-            case PassengerExpression.SIDE_DEFAULT:
-                expressionTimerRunning = true;
-                car.currentPassenger.animator.SetTrigger("SideDefault");
-                break;
-            case PassengerExpression.POUTY:
-                expressionTimerRunning = false;
-                car.currentPassenger.animator.SetTrigger("Pouty");
-                break;
-            case PassengerExpression.CLOSE_EYED_SMILE:
-                expressionTimerRunning = false;
-                car.currentPassenger.animator.SetTrigger("CESmile");
-                break;
-            case PassengerExpression.LAUGH_HEARTY:
-                expressionTimerRunning = false;
-                car.currentPassenger.animator.SetTrigger("LaughHearty");
-                break;
-            case PassengerExpression.LAUGH_FLOWY:
-                expressionTimerRunning = false;
-                car.currentPassenger.animator.SetTrigger("LaughFlowy");
-                break;
-            default:
-                expressionTimerRunning = true;
-                car.currentPassenger.animator.SetTrigger("Default");
-                break;
-        }
+        expressionTimerRunning = expression.runExpressionTimer switch
+        {
+            true => true,
+            false => false
+        };
+        /* case PassengerExpression.DEFAULT:
+            expressionTimerRunning = true;
+            car.currentPassenger.animator.SetTrigger("Default");
+            break;
+        case PassengerExpression.SIDE_DEFAULT:
+            expressionTimerRunning = true;
+            car.currentPassenger.animator.SetTrigger("SideDefault");
+            break;
+        case PassengerExpression.POUTY:
+            expressionTimerRunning = false;
+            car.currentPassenger.animator.SetTrigger("Pouty");
+            break;
+        case PassengerExpression.CLOSE_EYED_SMILE:
+            expressionTimerRunning = false;
+            car.currentPassenger.animator.SetTrigger("CESmile");
+            break;
+        case PassengerExpression.LAUGH_HEARTY:
+            expressionTimerRunning = false;
+            car.currentPassenger.animator.SetTrigger("LaughHearty");
+            break;
+        case PassengerExpression.LAUGH_FLOWY:
+            expressionTimerRunning = false;
+            car.currentPassenger.animator.SetTrigger("LaughFlowy");
+            break;
+        default:
+            expressionTimerRunning = true;
+            car.currentPassenger.animator.SetTrigger("Default");
+            break; */
+        car.currentPassenger.animator.SetTrigger(expression.animatorTrigger.ToString());
     }
 
     /* private void Interject() {

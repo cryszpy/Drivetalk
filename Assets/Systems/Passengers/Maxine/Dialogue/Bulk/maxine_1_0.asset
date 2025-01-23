@@ -14,47 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - sentence: "wait\u2026"
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: "hmmm\u2026"
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: is that- is that really you? you're back in town? i can't believe it!
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
   - sentence: 'y''know old man mcgee said something about you being back in town,
       but i didn''t believe him. '
-    expression: 1
-    startingExpression: 6
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
   - sentence: "maybe because i was expecting a phone call from you at the very least\u2026"
-    expression: 3
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: ...
-    expression: 3
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: well, i guess i can't stay mad at you forever.
-    expression: 1
-    startingExpression: 4
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
   - sentence: with that being said, welcome back!
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: y'know, it's almost been a full year since you've left. the town's
       changed a lot since you've been gone.
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: although it seems like you've changed a lot too!
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: "like the fact that you're a taxi driver now\u2026 "
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: i'm not too surprised though, you've always loved to drive.
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   - sentence: it's kind of nostalgic isn't it? remember the time when you first got
       your license?
-    expression: 1
-    startingExpression: 4
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
   nextDialogue: {fileID: 11400000, guid: f9e70cbe771ca466e8cbe45410774fb4, type: 2}
   request:
     control: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices:
   - {fileID: 11400000, guid: d311ef1cff99e46c8bf026c64529883b, type: 2}
   - {fileID: 11400000, guid: f18dd171d05df4f5aa7efce03eb5d51a, type: 2}

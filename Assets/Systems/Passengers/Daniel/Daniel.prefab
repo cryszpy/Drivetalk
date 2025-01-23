@@ -248,10 +248,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 0
-  id: 6
+  id: 3
   passengerName: Daniel
   hiddenName: ???
+  nameRevealed: 0
   archetype: {fileID: 11400000, guid: 34e4cbca7db514987a9e2913ad32441d, type: 2}
+  expressions: []
   animator: {fileID: 2486925453300218498}
   requirements: []
   requirementMet: 0

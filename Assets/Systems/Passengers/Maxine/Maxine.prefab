@@ -248,11 +248,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 0
-  id: 4
+  id: 1
   passengerName: Maxine
   hiddenName: Maxine
   nameRevealed: 0
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
+  expressions:
+  - {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+  - {fileID: 11400000, guid: 5b970ecc9433b46cbb517ef13f76f105, type: 2}
+  - {fileID: 11400000, guid: 4c6c541eadb6142c2b7c1c1585b7cf3f, type: 2}
+  - {fileID: 11400000, guid: c865754ecf5764f3884878881c23a9d7, type: 2}
+  - {fileID: 11400000, guid: ecb5dc767b904451c90a2e36e2b8c0df, type: 2}
+  - {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+  - {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
+  - {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
+  - {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
   animator: {fileID: 2486925453300218498}
   requirements: []
   requirementMet: 0

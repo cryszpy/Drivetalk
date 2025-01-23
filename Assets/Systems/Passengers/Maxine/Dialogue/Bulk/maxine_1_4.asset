@@ -15,8 +15,8 @@ MonoBehaviour:
   lines:
   - sentence: don't forget, a truly skilled taxi driver always keeps the comfortability
       of their passengers in mind! got it?
-    expression: 1
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   nextDialogue: {fileID: 11400000, guid: ab949d651c2ce416c93a4679b42793c9, type: 2}
   request:
     control: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices:
   - {fileID: 11400000, guid: 24db595d0d1b14e80a779b661387baa9, type: 2}
   - {fileID: 11400000, guid: 01581da67b53441f486c61351be8f119, type: 2}

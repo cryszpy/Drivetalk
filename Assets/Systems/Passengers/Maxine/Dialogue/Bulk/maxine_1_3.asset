@@ -15,8 +15,8 @@ MonoBehaviour:
   lines:
   - sentence: 'okay mr. taxi man, i know it''s been a while but do you remember how
       to get to my place? '
-    expression: 1
-    startingExpression: 7
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
   nextDialogue: {fileID: 11400000, guid: 60a240b55574a4cafbdc89d0690187f2, type: 2}
   request:
     control: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices:
   - {fileID: 11400000, guid: 0c5a2c41fea1049f3a6cb6b24718f37f, type: 2}
   - {fileID: 11400000, guid: 27ac4f8e425f54e56a19d517a080a142, type: 2}

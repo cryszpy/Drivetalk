@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - sentence: your silence speaks volumes dom! i know you're embarrassed.
-    expression: 3
-    startingExpression: 0
+    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+    startingExpression: {fileID: 0}
   nextDialogue: {fileID: 0}
   request:
     control: 0
@@ -30,6 +30,6 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
   choiceText: ...

@@ -15,8 +15,8 @@ MonoBehaviour:
   lines:
   - sentence: haha! it was like i was seeing a whole different side of you! i'd never
       seen you giddy like that before.
-    expression: 1
-    startingExpression: 6
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
   nextDialogue: {fileID: 0}
   request:
     control: 0
@@ -31,6 +31,6 @@ MonoBehaviour:
     completedResponse: {fileID: 0}
     preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
-  fallbackExpression: 1
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
   choiceText: Of course I do.
