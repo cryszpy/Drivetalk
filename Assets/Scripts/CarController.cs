@@ -201,6 +201,8 @@ public class CarController : MonoBehaviour
             // Tell the car it has arrived at a taxi stop
             atTaxiStop = true;
             arrivedAtDest = false;
+
+            Debug.Log(PassengersDrivenIDs);
             
             // Add passenger to total driven passengers list if they are a new passenger
             if (!PassengersDrivenIDs.Contains(currentPassenger.id)) {
@@ -213,6 +215,7 @@ public class CarController : MonoBehaviour
             // Otherwise, increment their ride numbder
             else {
                 int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
+                Debug.LogWarning(index);
                 PassengersDrivenRideNum[index]++;
 
                 passengersDrivenRideNumTracker[index]++;

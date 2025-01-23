@@ -26,8 +26,8 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the car's script component.")]
     public CarController car;
 
-    [Tooltip("Reference to the dialogue box's Animator component.")]
-    [SerializeField] private Animator dialogueAnimator;
+    /* [Tooltip("Reference to the dialogue box's Animator component.")]
+    [SerializeField] private Animator dialogueAnimator; */
 
     [Tooltip("Reference to the dialogue text element.")]
     public TMP_Text currentDialogueText;
@@ -70,8 +70,8 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("List of all choice buttons in a choice branch.")]
     [SerializeField] private List<GameObject> choiceButtonsList;
 
-    [Tooltip("Reference to the skip dialogue indicator image.")]
-    public GameObject skipIndicator;
+    /* [Tooltip("Reference to the skip dialogue indicator image.")]
+    public GameObject skipIndicator; */
 
     public Toggle autoDialogueToggle;
 
@@ -399,6 +399,7 @@ public class DialogueManager : MonoBehaviour
     
     // Assigns any missing script references
     public void FindReferences() {
+        StopAllCoroutines();
 
         if (!car) {
             if (GameObject.FindGameObjectWithTag("Car").TryGetComponent<CarController>(out var carScript)) {
@@ -407,6 +408,11 @@ public class DialogueManager : MonoBehaviour
             } else {
                 Debug.LogError("Could not find CarController component!");
             }
+        }
+
+        if (!dialoguePivot) {
+            dialoguePivot = GameObject.FindGameObjectWithTag("DialoguePivot");
+            Debug.LogWarning("DialoguePivot is null! Reassigned.");
         }
 
         /* if (!currentDialogueText) {
@@ -437,14 +443,15 @@ public class DialogueManager : MonoBehaviour
         if (!gpsIndicator) {
             gpsIndicator = GameObject.FindGameObjectWithTag("GPSIndicator");
         }
+        gpsIndicator.SetActive(false);
 
-        if (!dialogueAnimator) {
+        /* if (!dialogueAnimator) {
             dialogueAnimator = dash_dialogueBox.GetComponent<Animator>();
-        }
+        } */
 
-        if (!skipIndicator) {
+        /* if (!skipIndicator) {
             skipIndicator = GameObject.FindGameObjectWithTag("SkipIndicator");
-        }
+        } */
 
         if (!transcriptLog) {
             transcriptLog = GameObject.FindGameObjectWithTag("MainCanvas").GetComponentInChildren<TranscriptLog>();
@@ -579,9 +586,9 @@ public class DialogueManager : MonoBehaviour
                     }
 
                     // Hide skip indicator if on
-                    if (skipIndicator.activeInHierarchy) {
+                    /* if (skipIndicator.activeInHierarchy) {
                         skipIndicator.SetActive(false);
-                    }
+                    } */
 
                     // Plays the "hide dialogue UI box" animation
                     //dialogueAnimator.SetBool("Play", false);
@@ -641,11 +648,15 @@ public class DialogueManager : MonoBehaviour
                 }
             }
 
+            if (!car.currentPassenger) {
+                return;
+            }
+
             // Start passenger starting expression before talking
             if (!startingExpressionDone && lines.First().startingExpression != PassengerExpression.NONE) {
 
                 // Hide skip indicator and dialogue box
-                skipIndicator.SetActive(false);
+                //skipIndicator.SetActive(false);
                 //dialogueAnimator.SetBool("Play", false);
 
                 // Switch expression to starting expression of the next line
@@ -687,10 +698,10 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Hides the "show dialogue box" animation
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // Hides the skip indicator
-        skipIndicator.SetActive(false);
+        //skipIndicator.SetActive(false);
 
         // Enables the choices bar in preparation for displaying choice buttons
         car.choicesBar.SetActive(true);
@@ -772,7 +783,7 @@ public class DialogueManager : MonoBehaviour
             SwitchExpression(currentLine.expression);
         }
 
-        skipIndicator.SetActive(false);
+        //skipIndicator.SetActive(false);
 
         // Log appropriate name to transcript
         if (car.currentPassenger.nameRevealed) {
@@ -866,7 +877,7 @@ public class DialogueManager : MonoBehaviour
             waitForSkip = true;
 
             // Enables the skip indicator
-            skipIndicator.SetActive(true);
+            //skipIndicator.SetActive(true);
         }
     }
 
@@ -884,7 +895,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Greeting finished, moving onto general ride dialogue.");
 
         // Plays the "hide dialogue UI" animation
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // Clears the current dialogue piece
         currentDialogue = null;
@@ -901,9 +912,9 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Finished dropoff dialogue piece!");
 
         // Hide skip indicator if on
-        if (skipIndicator.activeInHierarchy) {
+        /* if (skipIndicator.activeInHierarchy) {
             skipIndicator.SetActive(false);
-        }
+        } */
 
         // Hide dialogue box UI
         //dialogueAnimator.SetBool("Play", false);
@@ -954,12 +965,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Hide skip indicator if on
-        if (skipIndicator.activeInHierarchy) {
+        /* if (skipIndicator.activeInHierarchy) {
             skipIndicator.SetActive(false);
-        }
+        } */
 
         // Hide dialogue box UI
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // Clear current dialogue
         currentDialogue = null;
@@ -974,7 +985,7 @@ public class DialogueManager : MonoBehaviour
         carPointer.finishedDialogue = true;
 
         // Hide dialogue box UI
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         lines.Clear();
 
@@ -991,12 +1002,12 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Waiting for next dialogue piece!");
 
         // Hide skip indicator if on
-        if (skipIndicator.activeInHierarchy) {
+        /* if (skipIndicator.activeInHierarchy) {
             skipIndicator.SetActive(false);
-        }
+        } */
 
         // Plays the "hide dialogue UI box" animation
-        dialogueAnimator.SetBool("Play", false);
+        //dialogueAnimator.SetBool("Play", false);
 
         // Generates a random amount of time to wait from minimum and maximum possible wait times for the current passenger
         float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);

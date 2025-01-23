@@ -82,7 +82,7 @@ public class Menu : MonoBehaviour
         transcriptScreen.SetActive(false);
 
         // Hides the skip indicator
-        GameStateManager.dialogueManager.skipIndicator.SetActive(false);
+        //GameStateManager.dialogueManager.skipIndicator.SetActive(false);
 
         Debug.Log("OPENED GAME!");
     }
@@ -208,7 +208,19 @@ public class Menu : MonoBehaviour
     // Loads the main menu (called from button script assignment)
     public void LoadMainMenu() {
         TogglePauseMenu();
+        ResetStats();
         StartCoroutine(FadeToBlack());
+    }
+
+    public void ResetStats() {
+        CarController.Rating = 0;
+        CarController.Temperature = 0.5f;
+        CarController.PassengersDrivenIDs.Clear();
+        CarController.PassengersDrivenRideNum.Clear();
+        CarController.TotalPassengersDriven = 0;
+        CarController.LastPassengerID = 0;
+        CarController.CurrentRadioChannel = 0;
+        CarController.RadioVolume = 0;
     }
 
     // Play button functionality (called from button script assignment)

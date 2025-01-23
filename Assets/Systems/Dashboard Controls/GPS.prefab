@@ -290,7 +290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7430555962180807232
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1444,7 +1444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc92c307d63e4e879d22fd6693c8b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toonCamera: {fileID: 0}
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -1461,7 +1462,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hoveredObject: {fileID: 6932567314021717432}
   mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
@@ -1469,6 +1469,9 @@ MonoBehaviour:
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   car: {fileID: 0}
   focusOn: {fileID: 2742857396084417389}
   cinemachineCam: {fileID: 0}

@@ -9201,7 +9201,7 @@ GameObject:
   - component: {fileID: 5932331333130242374}
   m_Layer: 5
   m_Name: DialoguePivot
-  m_TagString: Untagged
+  m_TagString: DialoguePivot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
