@@ -253,7 +253,13 @@ MonoBehaviour:
   hiddenName: ???
   nameRevealed: 0
   archetype: {fileID: 11400000, guid: 34e4cbca7db514987a9e2913ad32441d, type: 2}
-  expressions: []
+  expressions:
+  - {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+  - {fileID: 11400000, guid: 460e5575c97cd4ed29400671c7812c05, type: 2}
+  - {fileID: 11400000, guid: da943bfaf443b4e83ba5da7536f49233, type: 2}
+  - {fileID: 11400000, guid: 8fba82cc4ed2e46cfae16dfb7bcbadf1, type: 2}
+  - {fileID: 11400000, guid: ba2d24060b4f04f8c9f782b252fe7c4a, type: 2}
+  - {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
   animator: {fileID: 2486925453300218498}
   requirements: []
   requirementMet: 0

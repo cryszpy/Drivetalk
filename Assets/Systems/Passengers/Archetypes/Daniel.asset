@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Daniel
   m_EditorClassIdentifier: 
   pickupGreeting: {fileID: 11400000, guid: 0ce919b6a8cee4119b6ccd0288d56d63, type: 2}
-  dropoffSalute: {fileID: 11400000, guid: 9d8a0575db6884a2187c7784b395a801, type: 2}
+  dropoffSalute: {fileID: 11400000, guid: aecdc11d2618442e28db58152a48421b, type: 2}

@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: Maxine
   m_EditorClassIdentifier: 
   pickupGreeting: {fileID: 11400000, guid: e828904fa97174b20a11f616543c37f7, type: 2}
-  dropoffSalute: {fileID: 11400000, guid: 9d8a0575db6884a2187c7784b395a801, type: 2}
-  acResponse: {fileID: 0}
-  songResponse: {fileID: 0}
-  songVolumeResponse: {fileID: 0}
+  dropoffSalute: {fileID: 11400000, guid: 488f5397f16754ec3a269734ff4eccc4, type: 2}
