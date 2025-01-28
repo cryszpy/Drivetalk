@@ -10,4 +10,6 @@ public class PassengerExpression : ScriptableObject
     public string animatorTrigger;
 
     public bool runExpressionTimer = false;
+
+    public bool allowedAsDefault = false;
 }

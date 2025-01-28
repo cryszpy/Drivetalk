@@ -838,6 +838,8 @@ public class DialogueManager : MonoBehaviour
         lines.Clear();
 
         currentDialogue = null;
+        preChoiceDialogue = null;
+        
     }
 
     public void DialogueGroupWait() {

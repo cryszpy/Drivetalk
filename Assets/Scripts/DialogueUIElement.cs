@@ -31,7 +31,6 @@ public class DialogueUIElement : MonoBehaviour
     }
 
     public void DestroyElement() {
-
         Destroy(gameObject);
     }
 

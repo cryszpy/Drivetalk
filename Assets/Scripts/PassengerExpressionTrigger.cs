@@ -8,6 +8,7 @@ public class PassengerExpressionTrigger : MonoBehaviour
     private void Trigger() {
         
         if (GameStateManager.dialogueManager.lines.Count > 0 && !GameStateManager.dialogueManager.typingSentence) {
+            Debug.Log("your mom");
 
             // Reset starting expression status
             GameStateManager.dialogueManager.startingExpressionDone = true;
@@ -15,10 +16,13 @@ public class PassengerExpressionTrigger : MonoBehaviour
             // Switch back to regular expression
             GameStateManager.dialogueManager.SwitchExpression(GameStateManager.dialogueManager.lines.First().expression);
 
-            // Resume talking if this is triggered as the pre-expression only
-            if (GameStateManager.dialogueManager.currentLine.expression == GameStateManager.dialogueManager.car.currentPassenger.expressions[0])
-                GameStateManager.dialogueManager.DisplayNextSentence();
+            Debug.Log(GameStateManager.dialogueManager.currentLine.expression);
 
+            // Resume talking if this is triggered as the pre-expression only
+            if (GameStateManager.dialogueManager.currentLine.expression.allowedAsDefault) {
+                Debug.Log("yuh");
+                GameStateManager.dialogueManager.DisplayNextSentence();
+            }
             //StartCoroutine(GameStateManager.dialogueManager.TypeSentence(GameStateManager.dialogueManager.currentLine));
         } else if (GameStateManager.dialogueManager.currentDialogue && GameStateManager.dialogueManager.preChoiceDialogue) {
 

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorTrigger: Pouty
   runExpressionTimer: 0
+  allowedAsDefault: 1

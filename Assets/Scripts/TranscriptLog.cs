@@ -5,6 +5,8 @@ public class TranscriptLog : MonoBehaviour
 {
     [SerializeField] private GameObject textTemplate;
 
+    [SerializeField] private GameObject dialoguePivot;
+
     private List<GameObject> logItems = new();
 
     [SerializeField] private int maxLogItems;
@@ -17,11 +19,11 @@ public class TranscriptLog : MonoBehaviour
             logItems.Remove(tempItem);
         }
 
-        GameObject newText = Instantiate(textTemplate) as GameObject;
+        GameObject newText = Instantiate(textTemplate, dialoguePivot.transform) as GameObject;
         newText.SetActive(true);
 
-        newText.GetComponent<TranscriptLogItem>().SetText(text, name);
-        newText.transform.SetParent(textTemplate.transform.parent, false);
+        newText.GetComponent<TranscriptElement>().SetText(text, name);
+        //newText.transform.SetParent(textTemplate.transform.parent, false);
 
         logItems.Add(newText);
     }

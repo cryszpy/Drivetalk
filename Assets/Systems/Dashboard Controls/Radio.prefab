@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 7932101201496070961}
   - component: {fileID: 7240256105132336923}
   - component: {fileID: 6988894942412411670}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Radio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
