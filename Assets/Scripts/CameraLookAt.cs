@@ -8,6 +8,8 @@ public class CameraLookAt : MonoBehaviour
     [Tooltip("Reference to the main point of focus on the dashboard.")]
     [SerializeField] private Transform cameraOrigin;
 
+    [SerializeField] private GameObject lookLimit;
+
     [Tooltip("A float that sets how loose the camera's cursor-follow is. Higher values = looser")]
     [Range(2, 100)] public float cameraTargetDivider;
 
@@ -23,6 +25,8 @@ public class CameraLookAt : MonoBehaviour
             // Gets the mouse position
             Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y / 2, distanceZ));
 
+            //Debug.Log(mainCamera.ScreenToWorldPoint(Input.mousePosition) + " : " + mousePosition);
+
             // Calculates a target position in between the dashboard focus point, and the cursor's active position
             Vector3 cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * cameraOrigin.position) / cameraTargetDivider;
 
@@ -30,8 +34,12 @@ public class CameraLookAt : MonoBehaviour
 
             Vector3 clampedPosition = new(cameraTargetPosition.x, clamp, cameraTargetPosition.z);
 
+            //Debug.Log((clampedPosition.z - lookLimit.transform.position.z));
+
             // Aims the camera at the target position
-            transform.position = clampedPosition;
+            if ((clampedPosition.z - lookLimit.transform.position.z) > 0) {
+                transform.position = clampedPosition;
+            }
         }
     }
 }
