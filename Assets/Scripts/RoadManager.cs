@@ -36,11 +36,11 @@ public class RoadManager : MonoBehaviour
         }
     }
 
-    // Check if two roads are adjacent (you can adjust this logic based on your needs)
+    // Check if two roads are adjacent
     private bool AreRoadsAdjacent(Road roadA, Road roadB)
     {
         // Simple proximity check: distance between the centers of the roads
-        float distanceThreshold = 20f; // Adjust the threshold as needed
+        float distanceThreshold = 20f;
         float distance = Vector3.Distance(roadA.transform.position, roadB.transform.position);
         //Debug.Log(distance + " | " + roadA.transform.position + " | " + roadB.transform.position);
 
