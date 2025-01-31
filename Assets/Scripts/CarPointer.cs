@@ -45,10 +45,7 @@ public class CarPointer : MonoBehaviour
     public List<GameObject> currentBlocksList = new();
 
     [Tooltip("The current car navigation route's path to the destination.")]
-    private List<Marker> path = new();
-
-    private List<Marker> gpsPathRef = new();
-    public List<Transform> gpsPath = new();
+    public List<Marker> path = new();
 
     [Tooltip("Reference to the saved destination set before destination is switched due to unfinished dialogue. SET DYNAMICALLY")]
     public GameObject savedDestination;
@@ -57,8 +54,6 @@ public class CarPointer : MonoBehaviour
 
     public TurnSignal turnSignal;
     public Wheel wheel;
-
-    public LineController lc;
 
     [Header("STATS")]
 
@@ -70,7 +65,6 @@ public class CarPointer : MonoBehaviour
     public bool setInitialBlock = false;
 
     public LayerMask layerMask;
-    public LayerMask gpsMask;
 
     public SteeringDirection currentSteeringDirection;
 
@@ -149,54 +143,12 @@ public class CarPointer : MonoBehaviour
         currentMarker = FindClosestMarker();
 
         // Find the closest marker to the destination position
-        destinationMarker = FindDestinationMarker(destination);
+        destinationMarker = FindDestinationMarker();
 
         // Find the path using A* pathfinding
         if (currentMarker != null && destinationMarker != null)
         {
             path = Pathfinding.FindPath(currentMarker, destinationMarker);
-        } 
-        else {
-            Debug.LogError("Either currentMarker or destinationMarker are null!");
-        }
-    }
-
-    // Calculate the closest route through the road layout to the destination passed in
-    public void SetGPSPath(GameObject destination) {
-
-        // Reset both GPS path lists
-        gpsPathRef.Clear();
-        gpsPath.Clear();
-        
-        // Find the closest marker to the car's starting position
-        Marker closestMarker = FindClosestMarker();
-
-        // Find the closest marker to the destination position
-        Marker destMarker = FindDestinationMarker(destination);
-
-        // Find the path using A* pathfinding
-        if (closestMarker != null && destMarker != null)
-        {
-            // Grabs actual road markers for the quickest way to the passenger's destination
-            gpsPathRef = Pathfinding.FindPath(closestMarker, destMarker);
-
-            // For each road marker in previously grabbed path—
-            foreach (Marker point in gpsPathRef) {
-
-                // Raycast into the sky
-                if (Physics.Raycast(point.transform.position, Vector3.up, out RaycastHit hit, 1000, gpsMask)) {
-                    
-                    // If the raycast hits a *new* GPS tile—
-                    if (!gpsPath.Contains(hit.collider.gameObject.transform)) {
-                        
-                        // Adds hit gps path marker to the current path
-                        gpsPath.Add(hit.collider.gameObject.transform);
-                    }
-                }
-            }
-
-            // Add calculated gps path to line renderer
-            lc.SetUpLine(gpsPath.ToArray());
         } 
         else {
             Debug.LogError("Either currentMarker or destinationMarker are null!");
@@ -414,13 +366,13 @@ public class CarPointer : MonoBehaviour
     }
 
     // Finds the closest marker to the set destination
-    private Marker FindDestinationMarker(GameObject target)
+    private Marker FindDestinationMarker()
     {
         // If the destination has been set—
-        if (target != null)
+        if (pathfindingTarget != null)
         {
             // Find the closest marker to the destination
-            return FindClosestMarkerToObject(target);
+            return FindClosestMarkerToObject(pathfindingTarget);
         }
 
         return null;  // In case no destination was found
@@ -462,15 +414,6 @@ public class CarPointer : MonoBehaviour
             for (int i = 0; i < path.Count - 1; i++)
             {
                 Gizmos.DrawLine(path[i].Position, path[i + 1].Position);
-            }
-        }
-
-        if (gpsPathRef != null && gpsPathRef.Count > 0)
-        {
-            Gizmos.color = Color.magenta;
-            for (int i = 0; i < gpsPathRef.Count - 1; i++)
-            {
-                Gizmos.DrawLine(gpsPathRef[i].Position, gpsPathRef[i + 1].Position);
             }
         }
     }

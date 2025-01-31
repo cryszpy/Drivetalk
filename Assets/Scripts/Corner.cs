@@ -46,11 +46,6 @@ public class Corner : Road
                 }
 
                 carPointer.calculatedDirections = false;
-
-                // Recalculate GPS route in case player missed a turn
-                if (carPointer.destinationObject) {
-                    carPointer.SetGPSPath(carPointer.destinationObject);
-                }
             }
         }
     }
