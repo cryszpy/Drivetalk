@@ -27,8 +27,6 @@ TagManager:
   - TurnSignal
   - Wheel
   - DialoguePivot
-  - GPSMarker
-  - RaycastCamera
   layers:
   - Default
   - TransparentFX
@@ -42,8 +40,8 @@ TagManager:
   - Passenger
   - Outline
   - Intersections
-  - GPSMarker
-  - PlayerCannotSee
+  - 
+  - 
   - 
   - 
   - 

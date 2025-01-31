@@ -23,7 +23,7 @@ public class UIElementSlider : MonoBehaviour
     public UnityEvent unityEvent = new();
 
     [Tooltip("Reference to main camera.")]
-    protected Camera mainCamera;
+    public Camera mainCamera;
 
     [Header("STATS")]
 
@@ -59,7 +59,7 @@ public class UIElementSlider : MonoBehaviour
         
         // Assigns references to any missing script references
         if (!mainCamera) {
-            mainCamera = Camera.main; //GameObject.FindGameObjectWithTag("RaycastCamera").GetComponent<Camera>();
+            mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
         }
         dialogueManager = GameStateManager.dialogueManager;

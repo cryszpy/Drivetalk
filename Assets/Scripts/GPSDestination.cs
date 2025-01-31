@@ -61,9 +61,6 @@ public class GPSDestination : MonoBehaviour
             // Routes the car pointer (and thus the car) to the selected destination
             carPointer.SwitchDirection();
 
-            // Calculates shortest path to destination for GPS
-            carPointer.SetGPSPath(destinationObject);
-
             // Start waiting until the passenger talks
             GameStateManager.EOnDestinationSet?.Invoke();
 
