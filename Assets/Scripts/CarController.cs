@@ -259,6 +259,10 @@ public class CarController : MonoBehaviour
         // Switches car pathfinding target to destination
         carPointer.StartDrive(carPointer.destinationObject);
 
+        // Reset line renderer
+        carPointer.ResetLineRenderer();
+        carPointer.lc.SetUpLine(carPointer.gpsPath.ToArray());
+
         // Resets the destination highlight material
         carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
 

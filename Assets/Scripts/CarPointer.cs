@@ -165,8 +165,7 @@ public class CarPointer : MonoBehaviour
     public void SetGPSPath(GameObject destination) {
 
         // Reset both GPS path lists
-        gpsPathRef.Clear();
-        gpsPath.Clear();
+        ResetLineRenderer();
         
         // Find the closest marker to the car's starting position
         Marker closestMarker = FindClosestMarker();
@@ -183,7 +182,7 @@ public class CarPointer : MonoBehaviour
             // For each road marker in previously grabbed path—
             foreach (Marker point in gpsPathRef) {
 
-                // Raycast into the sky
+                // Raycast into the ground
                 if (Physics.Raycast(point.transform.position, Vector3.down, out RaycastHit hit, 1000, gpsMask)) {
                     
                     // If the raycast hits a *new* GPS tile—
@@ -201,6 +200,11 @@ public class CarPointer : MonoBehaviour
         else {
             Debug.LogError("Either currentMarker or destinationMarker are null!");
         }
+    }
+
+    public void ResetLineRenderer() {
+        gpsPathRef.Clear();
+        gpsPath.Clear();
     }
 
     private Vector3 SnapDirection(Vector3 direction) {

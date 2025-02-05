@@ -49,8 +49,8 @@ public class Intersection : Road
                 carPointer.inIntersection = false;
                 carPointer.calculatedDirections = false;
 
-                // Recalculate GPS route in case player missed a turn
-                if (carPointer.destinationObject) {
+                // Recalculate GPS route in case player missed a turn unless car doesn't have a passenger
+                if (carPointer.destinationObject && carPointer.car.currentPassenger) {
                     carPointer.SetGPSPath(carPointer.destinationObject);
                 }
             }
