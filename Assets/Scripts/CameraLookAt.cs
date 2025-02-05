@@ -36,10 +36,12 @@ public class CameraLookAt : MonoBehaviour
 
             //Debug.Log((clampedPosition.z - lookLimit.transform.position.z));
 
+            transform.position = clampedPosition;
+
             // Aims the camera at the target position
-            if ((clampedPosition.z - lookLimit.transform.position.z) > 0) {
+            /* if ((clampedPosition.z - lookLimit.transform.position.z) > 0) {
                 transform.position = clampedPosition;
-            }
+            } */
         }
     }
 }

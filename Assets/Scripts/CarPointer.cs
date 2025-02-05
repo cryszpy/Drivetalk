@@ -45,9 +45,9 @@ public class CarPointer : MonoBehaviour
     public List<GameObject> currentBlocksList = new();
 
     [Tooltip("The current car navigation route's path to the destination.")]
-    private List<Marker> path = new();
+    public List<Marker> path = new();
 
-    private List<Marker> gpsPathRef = new();
+    public List<Marker> gpsPathRef = new();
     public List<Transform> gpsPath = new();
 
     [Tooltip("Reference to the saved destination set before destination is switched due to unfinished dialogue. SET DYNAMICALLY")]
@@ -184,7 +184,7 @@ public class CarPointer : MonoBehaviour
             foreach (Marker point in gpsPathRef) {
 
                 // Raycast into the sky
-                if (Physics.Raycast(point.transform.position, Vector3.up, out RaycastHit hit, 1000, gpsMask)) {
+                if (Physics.Raycast(point.transform.position, Vector3.down, out RaycastHit hit, 1000, gpsMask)) {
                     
                     // If the raycast hits a *new* GPS tile—
                     if (!gpsPath.Contains(hit.collider.gameObject.transform)) {

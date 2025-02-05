@@ -111,7 +111,8 @@ public class DialogueManager : MonoBehaviour
 
     public float nextDialogueBlockCooldown;
 
-    private Queue<GameObject> activeDialogueBlocks = new();
+    public Queue<GameObject> activeDialogueBlocks = new();
+    public List<GameObject> activeDialogueTracker = new();
 
     /* public bool timerPaused = false;
     public float choiceNotifTimer = 0;
@@ -136,6 +137,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Update() {
         bruh = lines.ToList();
+
+        activeDialogueTracker = activeDialogueBlocks.ToList();
 
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
@@ -607,9 +610,10 @@ public class DialogueManager : MonoBehaviour
 
         if (dialogueElement.TryGetComponent<DialogueUIElement>(out var blockScript)) {
             currentElement = (GameObject)blockScript.Create(dialogueElement, dialoguePivot.transform, car);
+            currentElement.transform.SetAsFirstSibling();
         }
 
-        activeDialogueBlocks.Append(currentElement);
+        activeDialogueBlocks.Enqueue(currentElement);
 
         DialogueUIElement dScript = null;
 

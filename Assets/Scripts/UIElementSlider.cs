@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UIElementSlider : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class UIElementSlider : MonoBehaviour
     public UnityEvent unityEvent = new();
 
     [Tooltip("Reference to main camera.")]
-    protected Camera mainCamera;
+    public Camera mainCamera;
 
     [Header("STATS")]
 
@@ -115,6 +116,10 @@ public class UIElementSlider : MonoBehaviour
     }
 
     public virtual void FixedUpdate() {
+        OutlineRaycast();
+    }
+
+    public virtual void OutlineRaycast() {
 
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
@@ -122,30 +127,9 @@ public class UIElementSlider : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, layerMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 10f, layerMask)) 
             {
-
-                // If the raycast has hit this button—
-                if (hit.collider.gameObject == gameObject) {
-
-                    // If there isn't any other button being hovered—
-                    if (carPointer.hoveredButton == null) {
-
-                        // Set this button to be hovered
-                        carPointer.hoveredButton = gameObject;
-                    }
-
-                    // If this button is the only button being hovered—
-                    if (carPointer.hoveredButton == gameObject) {
-
-                        // Trigger OnHover effects
-                        OnHover();
-                    }
-                    
-                } else {
-                    DefaultState();
-                }
-
+                RaycastCheck(hit);
                 // If cursor is over button, hovered == true
                 // if cursor is not over button, hovered == false
                 // BUT if cursor is over button, and button is held down, hovered == true
@@ -156,6 +140,30 @@ public class UIElementSlider : MonoBehaviour
             else {
                 DefaultState();
             }
+        }
+    }
+
+    public virtual void RaycastCheck(RaycastHit hit) {
+
+        // If the raycast has hit this button—
+        if (hit.collider.gameObject == gameObject) {
+
+            // If there isn't any other button being hovered—
+            if (carPointer.hoveredButton == null) {
+
+                // Set this button to be hovered
+                carPointer.hoveredButton = gameObject;
+            }
+
+            // If this button is the only button being hovered—
+            if (carPointer.hoveredButton == gameObject) {
+
+                // Trigger OnHover effects
+                OnHover();
+            }
+            
+        } else {
+            DefaultState();
         }
     }
 

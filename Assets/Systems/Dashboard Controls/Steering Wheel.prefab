@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42bd143648d604128846eebbd3b55f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 0}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -139,13 +141,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 1088
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
+  rotationMin: 0
+  rotationMax: 0
+  dragging: 0
   audioManager: {fileID: 0}
 --- !u!1 &2990901060950681201
 GameObject:
@@ -271,6 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab84b0b6700e42fd8eab95399a677cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 2990901060950681201}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -287,14 +293,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 1088
   hovered: 0
   regularLayer: 6
   hoveredLayer: 10
-  dialObject: {fileID: 2990901060950681201}
   rotationMin: 0
   rotationMax: 180
   dragging: 0
@@ -303,7 +307,6 @@ MonoBehaviour:
   cutoffRight: 150
   straightCutoffLeft: 70
   straightCutoffRight: 110
-  carPointer: {fileID: 0}
 --- !u!1 &5635200560546518556
 GameObject:
   m_ObjectHideFlags: 0

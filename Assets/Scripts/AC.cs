@@ -28,26 +28,6 @@ public class AC : UIElementSlider
         CarController.Temperature = 0.5f;
     }
 
-    /* public override void Update()
-    {
-        base.Update();
-
-        if (insideMinigame) {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
-                insideMinigame = false;
-                Debug.Log("LANDED");
-
-                StartCoroutine(EndDollyMovement());
-            }
-
-            if (rotSpeed < maxRotSpeed) {
-                rotSpeed++;
-            }
-
-            dialObject.transform.Rotate(Vector3.up, rotSpeed * Time.deltaTime);
-        }
-    } */
-
     public override void Drag()
     {
         // Check whether the player has stopped dragging slider
@@ -98,46 +78,4 @@ public class AC : UIElementSlider
         float newRange = 1 - 0;
         CarController.Temperature = (((dialObject.transform.localEulerAngles.y - rotationMin) * newRange) / oldRange) + 0;
     }
-
-    /* public override IEnumerator StartDollyMovement() {
-        while (splineDolly.CameraPosition < 1 || cinemachineCam.Lens.FieldOfView > 30) {
-            if (cinemachineCam.Lens.FieldOfView > 30) {
-                toonCamera.fieldOfView -= 0.6f;
-                cinemachineCam.Lens.FieldOfView -= 0.6f;
-            }
-            if (splineDolly.CameraPosition < 1f) {
-                if (splineDolly.CameraPosition > 0.7f){
-                    splineDolly.CameraPosition += 0.01f;
-                } else {
-                    splineDolly.CameraPosition += 0.02f;
-                }
-            }
-            yield return new WaitForSeconds(0.005f);
-        }
-        screenUI.SetActive(true);
-
-        dialObject.transform.localEulerAngles = new(dialObject.transform.localEulerAngles.x, rotationMin, dialObject.transform.localEulerAngles.z);
-        insideMinigame = true;
-    }
-
-    public override IEnumerator EndDollyMovement() {
-        insideMinigame = false;
-        while (splineDolly.CameraPosition > 0 || cinemachineCam.Lens.FieldOfView < 60) {
-            if (cinemachineCam.Lens.FieldOfView < 60) {
-                toonCamera.fieldOfView += 0.6f;
-                cinemachineCam.Lens.FieldOfView += 0.6f;
-            }
-            if (splineDolly.CameraPosition > 0) {
-                if (splineDolly.CameraPosition < 0.3f){
-                    splineDolly.CameraPosition -= 0.01f;
-                } else {
-                    splineDolly.CameraPosition -= 0.02f;
-                }
-            }
-            yield return new WaitForSeconds(0.005f);
-        }
-        cinemachineCam.LookAt = cameraLookAt.transform;
-        GameStateManager.SetState(GAMESTATE.PLAYING);
-        screenUI.SetActive(false);
-    } */
 }

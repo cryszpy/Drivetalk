@@ -42,7 +42,7 @@ public class Wheel : UIElementSlider
         }
     } */
 
-    public override void Drag()
+    /* public override void Drag()
     {
         // Check whether the player has stopped dragging slider
         if (Input.GetMouseButtonUp(0)) {
@@ -91,6 +91,11 @@ public class Wheel : UIElementSlider
                 }
             }
         }
+    } */
+
+    public override void OutlineRaycast()
+    {
+        return;
     }
 
     public IEnumerator TurnWheel(SteeringDirection direction) {

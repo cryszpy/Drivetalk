@@ -31,6 +31,11 @@ public class DialogueUIElement : MonoBehaviour
     }
 
     public void DestroyElement() {
+
+        if (GameStateManager.dialogueManager.activeDialogueBlocks.Contains(gameObject)) {
+            GameStateManager.dialogueManager.activeDialogueBlocks.Dequeue();
+        }
+        
         Destroy(gameObject);
     }
 

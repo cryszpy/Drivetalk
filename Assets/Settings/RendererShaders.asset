@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
   m_Name: PixelizeFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   injectionPoint: 550
   fetchColorBuffer: 1
   requirements: 0
@@ -76,10 +76,10 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 7127
+    m_Bits: 15319
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 7127
+    m_Bits: 15319
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0

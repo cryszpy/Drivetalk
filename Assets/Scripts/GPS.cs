@@ -118,8 +118,8 @@ public class GPS : UIElementSlider
         }
     }
 
-    public override void FixedUpdate() {
-
+    public override void OutlineRaycast()
+    {
         // If the game is not in a menu or in the main menu, and the car is at a taxi stop—
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING && dialogueManager.car.atTaxiStop && dialogueManager.waitForRouting) {
 
@@ -129,26 +129,7 @@ public class GPS : UIElementSlider
             // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
             {
-                // If the raycast has hit this button—
-                if (hit.collider.gameObject == gameObject) {
-
-                    // If there isn't any other button being hovered—
-                    if (carPointer.hoveredButton == null) {
-
-                        // Set this button to be hovered
-                        carPointer.hoveredButton = gameObject;
-                    }
-
-                    // If this button is the only button being hovered—
-                    if (carPointer.hoveredButton == gameObject) {
-
-                        // Trigger OnHover effects
-                        OnHover();
-                    }
-                    
-                } else {
-                    DefaultState();
-                }
+                RaycastCheck(hit);
             } 
             // If cursor is not hovered over element, reset to default state
             else {
@@ -156,7 +137,31 @@ public class GPS : UIElementSlider
             }
         }
     }
-    
+
+    public override void RaycastCheck(RaycastHit hit)
+    {
+        // If the raycast has hit this button—
+        if (hit.collider.gameObject == gameObject) {
+
+            // If there isn't any other button being hovered—
+            if (carPointer.hoveredButton == null) {
+
+                // Set this button to be hovered
+                carPointer.hoveredButton = gameObject;
+            }
+
+            // If this button is the only button being hovered—
+            if (carPointer.hoveredButton == gameObject) {
+
+                // Trigger OnHover effects
+                OnHover();
+            }
+            
+        } else {
+            DefaultState();
+        }
+    }
+
     // Function to be executed when the button is clicked
     public override void OnClick()
     {

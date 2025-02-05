@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1356488531130280755}
-  - component: {fileID: 1868223889170389938}
+  - component: {fileID: 5569854104963968779}
   - component: {fileID: 1263011137494141952}
   - component: {fileID: 7399464350003740976}
   m_Layer: 0
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 6643289867667163280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1868223889170389938
+--- !u!54 &5569854104963968779
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   passengerSeats:
   - {fileID: 8044128858160458301}
   shotgun: {fileID: 6520024981644954898}
-  rb: {fileID: 1868223889170389938}
+  rb: {fileID: 5569854104963968779}
   agent: {fileID: 1263011137494141952}
   currentPassenger: {fileID: 0}
   choicesBar: {fileID: 410141160781517827}
@@ -368,19 +368,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262395285730900762}
-  m_LocalRotation: {x: -0.081068665, y: 0, z: 0, w: 0.9967085}
-  m_LocalPosition: {x: 0, y: 0, z: 1.281}
+  m_LocalRotation: {x: -0.066553235, y: 0.17325118, z: 0.01173513, w: 0.9825564}
+  m_LocalPosition: {x: 0, y: 0, z: 0.805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 99173890390787573}
   - {fileID: 7837461687946066407}
   m_Father: {fileID: 6643289867667163280}
-  m_LocalEulerAnglesHint: {x: -9.3, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -7.75, y: 20, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.72, y: 0.75}
-  m_SizeDelta: {x: 1.17, y: 0.69}
+  m_AnchoredPosition: {x: -0.179, y: 0.648}
+  m_SizeDelta: {x: 1, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2417580230726870441
 Canvas:
@@ -613,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -387.50037}
+  m_AnchoredPosition: {x: 0, y: -387.50043}
   m_SizeDelta: {x: 0, y: -825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8962591695290171434
@@ -1209,7 +1209,7 @@ GameObject:
   - component: {fileID: 8182876775592049857}
   - component: {fileID: 1312550197009222352}
   - component: {fileID: 4055386366738202775}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1733,7 +1733,7 @@ GameObject:
   - component: {fileID: 8833902422367147485}
   - component: {fileID: 6013445624295589638}
   - component: {fileID: 8106425177409076112}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CameraTex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2649,6 +2649,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  mainCamera: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -2758,8 +2759,7 @@ GameObject:
   - component: {fileID: 2837308820973141571}
   - component: {fileID: 113883480644146214}
   - component: {fileID: 4573547115968523476}
-  - component: {fileID: 8044090953564952236}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2860,58 +2860,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.03, y: 1.03, z: 1.78}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8044090953564952236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3470094415439910807}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e1a8e6a341e435ca6cc4767ab51c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carPointer: {fileID: 0}
-  dialObject: {fileID: 0}
-  dialogueManager: {fileID: 0}
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8044090953564952236}
-        m_TargetAssemblyTypeName: RearviewMirror, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  hovered: 0
-  regularLayer: 0
-  hoveredLayer: 0
-  rotationMin: 0
-  rotationMax: 0
-  dragging: 0
-  car: {fileID: 0}
-  focusOn: {fileID: 0}
-  cinemachineCam: {fileID: 6836123010166041491}
-  splineDolly: {fileID: 7748635223701545014}
-  rotationComposer: {fileID: 0}
-  screenUI: {fileID: 0}
-  continueButton: {fileID: 0}
-  cameraLookAt: {fileID: 8176763884352324513}
-  unlockedColor: {r: 0, g: 0, b: 0, a: 0}
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
-  gpsButtons: []
-  person: {fileID: 0}
-  backButton: {fileID: 8503567940721224853}
 --- !u!1 &3483478264062141139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3325,7 +3273,7 @@ GameObject:
   - component: {fileID: 1833103994459817551}
   - component: {fileID: 5919058903221356710}
   - component: {fileID: 6415179848229829508}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialogueCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3946,7 +3894,7 @@ GameObject:
   - component: {fileID: 1912590402406796696}
   - component: {fileID: 6532036032493408037}
   - component: {fileID: 2126714677984640542}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialoguePivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6278,7 +6226,7 @@ Transform:
   m_GameObject: {fileID: 6920902538489781251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.401, y: 0.638, z: -0.465}
+  m_LocalPosition: {x: 0.401, y: 0.489, z: -0.539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8056,8 +8004,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8700206917078676077}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03427085, y: 0.077243134, z: -0.0026567, w: 0.9964196}
-  m_LocalPosition: {x: -0.71798706, y: 0.56500006, z: 0.14698792}
+  m_LocalRotation: {x: 0.034270864, y: 0.077242956, z: -0.002656695, w: 0.9964196}
+  m_LocalPosition: {x: -0.71796906, y: 0.5650001, z: 0.14697477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8376,17 +8324,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8915431064990800501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00002110377}
   m_LocalScale: {x: 0.039999995, y: 0.03343936, z: 0.00995788}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7012768284666903503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000011920929, y: 0.2}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.02, y: -0.2}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &6810910068470865608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8404,7 +8352,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 8
+  m_ChildAlignment: 2
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -8650,8 +8598,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2792643143057904915, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792643143057904915, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792643143057904915, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0022583008
+      value: 0.0014953613
       objectReference: {fileID: 0}
     - target: {fileID: 3928587236005492643, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8980,11 +8936,11 @@ PrefabInstance:
     - target: {fileID: 45494355510777793, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 3438589915144556879}
+      objectReference: {fileID: 1209032631347789436}
     - target: {fileID: 4039862015117090939, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 3438589915144556879}
+      objectReference: {fileID: 1209032631347789436}
     - target: {fileID: 5379596910552126378, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: m_Name
       value: Radio
@@ -8995,11 +8951,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8783516398834278187, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33
+      value: 0.281
       objectReference: {fileID: 0}
     - target: {fileID: 8783516398834278187, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.51
+      value: -0.524
       objectReference: {fileID: 0}
     - target: {fileID: 8783516398834278187, guid: 38bd91c9c53d14d11b5f9942bd5cae7b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9165,7 +9121,7 @@ PrefabInstance:
     - target: {fileID: 409750311585343788, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 3438589915144556879}
+      objectReference: {fileID: 1209032631347789436}
     - target: {fileID: 2244159429040236885, guid: 8a458169fd21d4a34a2c6cd10dcd8a56, type: 3}
       propertyPath: mainCamera
       value: 
@@ -9219,7 +9175,7 @@ PrefabInstance:
     - target: {fileID: 3565283297507695072, guid: cdeceac689ad545049b4419e0c41edd7, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 3438589915144556879}
+      objectReference: {fileID: 1209032631347789436}
     - target: {fileID: 3565283297507695072, guid: cdeceac689ad545049b4419e0c41edd7, type: 3}
       propertyPath: toonCamera
       value: 

@@ -48,37 +48,45 @@ public class RadioForward : UIElementSlider
         }
     }
 
-    public override void FixedUpdate() {
+    public override void OutlineRaycast() {
 
-        // Raycast from the UI element to the mouse cursor
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (GameStateManager.Gamestate != GAMESTATE.PAUSED) {
 
-        // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
-        {
-            // If the raycast has hit this button—
-            if (hit.collider.gameObject == gameObject) {
+            // Raycast from the UI element to the mouse cursor
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-                // If there isn't any other button being hovered—
-                if (carPointer.hoveredButton == null) {
-
-                    // Set this button to be hovered
-                    carPointer.hoveredButton = gameObject;
-                }
-
-                // If this button is the only button being hovered—
-                if (carPointer.hoveredButton == gameObject) {
-
-                    // Trigger OnHover effects
-                    OnHover();
-                }
-                
-            } else {
+            // If raycast successfully hits mouse cursor (meaning cursor is currently hovered over UI element), and the UI element belongs to this script—
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
+            {
+                RaycastCheck(hit);
+            } 
+            // If cursor is not hovered over element, reset to default state
+            else {
                 DefaultState();
             }
-        } 
-        // If cursor is not hovered over element, reset to default state
-        else {
+        }
+    }
+
+    public override void RaycastCheck(RaycastHit hit)
+    {
+        // If the raycast has hit this button—
+        if (hit.collider.gameObject == gameObject) {
+
+            // If there isn't any other button being hovered—
+            if (carPointer.hoveredButton == null) {
+
+                // Set this button to be hovered
+                carPointer.hoveredButton = gameObject;
+            }
+
+            // If this button is the only button being hovered—
+            if (carPointer.hoveredButton == gameObject) {
+
+                // Trigger OnHover effects
+                OnHover();
+            }
+            
+        } else {
             DefaultState();
         }
     }
