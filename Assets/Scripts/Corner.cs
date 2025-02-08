@@ -24,9 +24,9 @@ public class Corner : Road
                     StartCoroutine(carPointer.wheel.TurnWheel(carPointer.currentSteeringDirection));
                 }
 
-                if (carPointer.trackedIntersection == gameObject) {
+                /* if (carPointer.trackedIntersection == gameObject) {
                     carPointer.trackedIntersection = null;
-                }
+                } */
 
             } else {
                 Debug.LogWarning("Could not find CarPointer script on car pointer!");
@@ -48,9 +48,9 @@ public class Corner : Road
                 carPointer.calculatedDirections = false;
 
                 // Recalculate GPS route in case player missed a turn
-                if (carPointer.destinationObject) {
+                /* if (carPointer.destinationObject) {
                     carPointer.SetGPSPath(carPointer.destinationObject);
-                }
+                } */
             }
         }
     }

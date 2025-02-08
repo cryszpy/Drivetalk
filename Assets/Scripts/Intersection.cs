@@ -21,12 +21,17 @@ public class Intersection : Road
                 carPointer = script.carPointer;
                 carPointer.inIntersection = true;
 
-                if (carPointer.wheel) {
-                    StartCoroutine(carPointer.wheel.TurnWheel(carPointer.currentSteeringDirection));
-                }
-
-                if (carPointer.trackedIntersection == gameObject) {
+                /* if (carPointer.trackedIntersection == gameObject) {
                     carPointer.trackedIntersection = null;
+                } */
+
+                // Spawns new procedural road tile
+                carPointer.SpawnRoadTile();
+
+                // Set appropriate turn signal and wheel rotation only if at the appropriate intersection
+                if (carPointer.wheel && carPointer.turnSignal && carPointer.roadQueue.First().center.transform.parent == transform) {
+                    StartCoroutine(carPointer.turnSignal.SignalClick(carPointer.currentSteeringDirection));
+                    StartCoroutine(carPointer.wheel.TurnWheel(carPointer.currentSteeringDirection));
                 }
 
             } else {
@@ -42,17 +47,19 @@ public class Intersection : Road
 
             if (carPointer) {
 
-                if (carPointer.wheel) {
+                // Reset turn signal and wheel rotation
+                if (carPointer.wheel && carPointer.turnSignal) {
+                    StartCoroutine(carPointer.turnSignal.SignalClick(SteeringDirection.FORWARD));
                     StartCoroutine(carPointer.wheel.TurnWheel(SteeringDirection.FORWARD));
                 }
 
                 carPointer.inIntersection = false;
-                carPointer.calculatedDirections = false;
+                //carPointer.calculatedDirections = false;
 
                 // Recalculate GPS route in case player missed a turn unless car doesn't have a passenger
-                if (carPointer.destinationObject && carPointer.car.currentPassenger) {
+                /* if (carPointer.destinationObject && carPointer.car.currentPassenger) {
                     carPointer.SetGPSPath(carPointer.destinationObject);
-                }
+                } */
             }
         }
     }

@@ -17,7 +17,7 @@ public class TurnSignal : UIElementSlider
 
     public override void Update()
     {
-        base.Update();
+        /* base.Update();
 
         // If car is not in intersection or at a taxi stop (is driving), then allow player to use turn signal
         if (!carPointer.inIntersection && !carPointer.car.atTaxiStop) {
@@ -27,13 +27,13 @@ public class TurnSignal : UIElementSlider
         else if (coll.enabled == true) {
             coll.enabled = false;
             StartCoroutine(SignalClick(carPointer.currentSteeringDirection));
-        }
+        } */
     }
 
     public override void Drag()
     {
         // Check whether the player has stopped dragging slider
-        if (Input.GetMouseButtonUp(0)) {
+        /* if (Input.GetMouseButtonUp(0)) {
             dragging = false;
             StartCoroutine(SignalClick(carPointer.currentSteeringDirection));
         }
@@ -48,15 +48,6 @@ public class TurnSignal : UIElementSlider
         float newRot = currentRot + rotation;
 
         // Limit slider rotation to be between a certain minimum and maximum degree angle
-        /* if (validDirections.Count > 0) {
-            if (validDirections.Contains(SteeringDirection.RIGHT)) {
-                newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
-            } else if (validDirections.Contains(SteeringDirection.FORWARD)) {
-                newRot = Mathf.Clamp(newRot, rotationMin, 45);
-            } else if (validDirections.Contains(SteeringDirection.LEFT)) {
-                newRot = Mathf.Clamp(newRot, rotationMin, rotationMin + 1);
-            }
-        } */
         newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);
 
         // Apply change in rotation based on mouse cursor movement
@@ -72,7 +63,7 @@ public class TurnSignal : UIElementSlider
                     leftSignal.SetActive(false);
                     rightSignal.SetActive(false);
 
-                    carPointer.SwitchDirection();
+                    //carPointer.SwitchDirection();
                     Debug.Log("Signaled none!");
                 }
             }
@@ -84,7 +75,7 @@ public class TurnSignal : UIElementSlider
                     leftSignal.SetActive(true);
                     rightSignal.SetActive(false);
 
-                    carPointer.SwitchDirection();
+                    //carPointer.SwitchDirection();
                     Debug.Log("Signaled left!");
                 }
             } 
@@ -96,17 +87,20 @@ public class TurnSignal : UIElementSlider
                     leftSignal.SetActive(false);
                     rightSignal.SetActive(true);
 
-                    carPointer.SwitchDirection();
+                    //carPointer.SwitchDirection();
                     Debug.Log("Signaled right!");
                 }
             }
-        }
+
+            // Physically move turn signal handle
+            StartCoroutine(SignalClick(carPointer.currentSteeringDirection));
+        } */
     }
 
     public IEnumerator SignalClick(SteeringDirection direction) {
-        if (dragging) {
+        /* if (dragging) {
             yield return null;
-        }
+        } */
 
         float zValue = dialObject.transform.localEulerAngles.z;
 

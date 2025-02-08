@@ -42,7 +42,7 @@ public struct DialogueLine {
     public PassengerExpression startingExpression;
 }
 
-
+[System.Serializable]
 [CreateAssetMenu(menuName = "ScriptableObjects/DialoguePiece")]
 public class DialoguePiece : ScriptableObject
 {

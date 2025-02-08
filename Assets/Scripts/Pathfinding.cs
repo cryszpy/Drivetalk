@@ -10,9 +10,9 @@ public static class Pathfinding
         var closedList = new List<Marker>();  // Nodes we've already processed
 
         // Dictionaries to hold g and f scores
-        Dictionary<Marker, float> gScores = new Dictionary<Marker, float>();
-        Dictionary<Marker, float> fScores = new Dictionary<Marker, float>();
-        Dictionary<Marker, Marker> cameFrom = new Dictionary<Marker, Marker>();  // For tracing the path
+        Dictionary<Marker, float> gScores = new();
+        Dictionary<Marker, float> fScores = new();
+        Dictionary<Marker, Marker> cameFrom = new();  // For tracing the path
 
         // Initialize start marker's scores
         gScores[startMarker] = 0f;

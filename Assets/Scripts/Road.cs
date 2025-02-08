@@ -13,50 +13,42 @@ public class Road : MonoBehaviour
     public List<GameObject> adjacentRoads = new();
     public List<float> dotProducts = new();
 
+    private void Start() {
+
+        // If the list of all roads does not have this road, add it
+        if (!GameStateManager.roadManager.allRoads.Contains(this)) {
+            GameStateManager.roadManager.allRoads.Add(this);
+        }
+    }
+
+    private void OnDisable() {
+
+        if (GameStateManager.roadManager.allRoads.Contains(this)) {
+            GameStateManager.roadManager.allRoads.Remove(this);
+        }
+    }
+
     // This is a helper function to connect the markers between adjacent road pieces.
-    public void ConnectMarkersToAdjacentRoad(Road adjacentRoad)
+    /* public void ConnectMarkersToAdjacentRoad(Road adjacentRoad)
     {
-        // For corners and intersections which have multiple markers per road
-        /* if (isCorner) {
-
-            foreach (var marker in carMarkers) {
-
-                Debug.DrawLine(Vector3.zero, marker.Position, Color.magenta, 10);
-                if (marker.OpenForConnections) {
-
-                    Marker closestMarker = FindClosestMarkerOnAdjacentRoad(marker, this);
-                    //Debug.DrawLine(Vector3.zero, closestMarker.Position, Color.white, 10);
-                    if (closestMarker != null) {
-
-                        // Connect the current marker to the closest marker on the adjacent road
-                        marker.ConnectToAdjacentMarkers(new List<Marker> { closestMarker });
-                    }
-                }
-                break;
-            }
-        } 
-        // For straight roads with only 1 marker per lane
-        else  */{
-            // Loop through each marker on this road piece and connect it to the next road piece's markers
-            foreach (var marker in carMarkers)
+        // Loop through each marker on this road piece and connect it to the next road piece's markers
+        foreach (var marker in carMarkers)
+        {
+            if (marker.OpenForConnections && marker.adjacentMarkers.Count <= 1)
             {
-                if (marker.OpenForConnections && marker.adjacentMarkers.Count <= 1)
+                // Find the closest marker in the adjacent road piece
+                Marker closestMarker = FindClosestMarkerOnAdjacentRoad(marker, adjacentRoad);
+                if (closestMarker != null)
                 {
-                    // Find the closest marker in the adjacent road piece
-                    Marker closestMarker = FindClosestMarkerOnAdjacentRoad(marker, adjacentRoad);
-                    if (closestMarker != null)
-                    {
-                        // Connect the current marker to the closest marker on the adjacent road
-                        marker.ConnectToAdjacentMarkers(new List<Marker> { closestMarker });
-                    }
+                    // Connect the current marker to the closest marker on the adjacent road
+                    marker.ConnectToAdjacentMarkers(new List<Marker> { closestMarker });
                 }
             }
         }
-        
-    }
+    } */
 
     // This helper method finds the closest marker on an adjacent road piece to a given marker.
-    private Marker FindClosestMarkerOnAdjacentRoad(Marker currentMarker, Road adjacentRoad)
+    /* private Marker FindClosestMarkerOnAdjacentRoad(Marker currentMarker, Road adjacentRoad)
     {
         Marker closestMarker = null;
         float closestDistance = float.MaxValue;
@@ -75,6 +67,6 @@ public class Road : MonoBehaviour
             }
         }
         return closestMarker;
-    }
+    } */
 }
 

@@ -59,22 +59,25 @@ public class Destination : MonoBehaviour
 
         if (collider.CompareTag("CarFrame")) {
             inRadius = false;
-            Debug.Log(car.arrivedAtDest);
             
             if (car.arrivedAtDest) {
-                Debug.Log("did it");
                 car.arrivedAtDest = false;
 
                 // Re-raycast for directions
-                car.carPointer.GetValidDirections();
+                //car.carPointer.GetValidDirections();
+
+                car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
+                car.carPointer.turnSignal.hovered = false;
+                car.carPointer.turnSignal.dragging = false;
+                StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection));
 
                 // Reset steering direction to forward if possible
-                if (car.carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
+                /* if (car.carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
                     car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
                     car.carPointer.turnSignal.hovered = false;
                     car.carPointer.turnSignal.dragging = false;
                     StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection));
-                }
+                } */
             }
         }
     }

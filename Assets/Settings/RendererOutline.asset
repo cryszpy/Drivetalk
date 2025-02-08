@@ -47,7 +47,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -3310092880137283208}
   - {fileID: 5334724186590555637}
-  m_RendererFeatureMap: 7819de29103010d2f52d6a1462bf084a
+  - {fileID: 7090065332799426642}
+  m_RendererFeatureMap: 7819de29103010d2f52d6a1462bf084a5250d2fbdaf86462
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -90,6 +91,26 @@ MonoBehaviour:
   fetchColorBuffer: 1
   requirements: 0
   passMaterial: {fileID: 2100000, guid: e0f965cb5b05f4f8fabf62e0e59849bf, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
+--- !u!114 &7090065332799426642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: Dither
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  injectionPoint: 550
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: d1bc4333a39ab4ffd96dd2e70b035118, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1

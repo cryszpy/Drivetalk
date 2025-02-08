@@ -51,7 +51,7 @@ public class CarController : MonoBehaviour
     public bool arrivedAtDest = false;
 
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
-    public bool atTaxiStop = true;
+    public bool atTaxiStop = false;
 
     [Tooltip("The minimum possible amount of rides in a day.")]
     [SerializeField] private int minRides;
@@ -199,10 +199,9 @@ public class CarController : MonoBehaviour
             currentPassenger = script;
 
             // Tell the car it has arrived at a taxi stop
+            carPointer.taxiStopsEnabled = false;
             atTaxiStop = true;
             arrivedAtDest = false;
-
-            Debug.Log(PassengersDrivenIDs);
             
             // Add passenger to total driven passengers list if they are a new passenger
             if (!PassengersDrivenIDs.Contains(currentPassenger.id)) {
@@ -215,13 +214,14 @@ public class CarController : MonoBehaviour
             // Otherwise, increment their ride numbder
             else {
                 int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
-                Debug.LogWarning(index);
                 PassengersDrivenRideNum[index]++;
 
                 passengersDrivenRideNumTracker[index]++;
             }
 
             GameStateManager.EOnPassengerPickup?.Invoke();
+
+            carPointer.SpawnRoadTile();
 
             //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
 
@@ -256,15 +256,16 @@ public class CarController : MonoBehaviour
     public void DropOffPassenger() {
         Debug.Log("Arrived at destination!");
 
+        carPointer.taxiStopsEnabled = true;
+
         // Switches car pathfinding target to destination
         carPointer.StartDrive(carPointer.destinationObject);
 
         // Reset line renderer
-        carPointer.ResetLineRenderer();
-        carPointer.lc.SetUpLine(carPointer.gpsPath.ToArray());
+        carPointer.SetGPSPath();
 
         // Resets the destination highlight material
-        carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
+        //carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
 
         // Clears all previous dashboard requests
         dialogueManager.dashRequests.Clear();

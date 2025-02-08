@@ -9,7 +9,7 @@ using UnityEngine.Splines;
 public class Marker : MonoBehaviour
 {
     [Tooltip("Reference to the car pointer script.")]
-    private CarPointer carPointer;
+    protected CarPointer carPointer;
 
     [Tooltip("Reference to this marker's position.")]
     public Vector3 Position { get => transform.position; }
@@ -22,23 +22,40 @@ public class Marker : MonoBehaviour
     public bool OpenForConnections {
         get { return openForConnections; }
     }
-
-    [Tooltip("A* heuristic cost to reach this marker from the start.")]
-    public float gCost;
-
-    [Tooltip("A* heuristic cost to reach the destination.")]
-    public float hCost;
-
-    [Tooltip("A* heuristic for this marker's total cost (gCost + hCost).")]
-    public float fCost => gCost + hCost;
-
-    private void Start() {
+    
+    private void Awake() {
 
         // Finds any missing script references
         carPointer = GameObject.FindGameObjectWithTag("CarPointer").GetComponent<CarPointer>();
 
         // Adds this marker to the list of all markers in the game's map
-        carPointer.allMarkers.Add(this);
+        if (!carPointer.allMarkers.Contains(this)) {
+            carPointer.allMarkers.Add(this);
+        }
+    }
+
+    private void OnDisable() {
+
+        if (carPointer && GameStateManager.roadManager) {
+
+            if (carPointer.allMarkers.Contains(this)) {
+                carPointer.allMarkers.Remove(this);
+            }
+
+            if (carPointer.path.Contains(this)) {
+                carPointer.path.Remove(this);
+            }
+
+            if (carPointer.gpsPathRef.Contains(this)) {
+                carPointer.gpsPathRef.Remove(this);
+            }
+
+            foreach (var marker in carPointer.allMarkers) {
+                if (marker.adjacentMarkers.Contains(this)) {
+                    marker.adjacentMarkers.Remove(this);
+                }
+            }
+        }
     }
 
     // Connect this marker to the closest marker of the next road piece
@@ -50,7 +67,6 @@ public class Marker : MonoBehaviour
             // If this marker isn't connected to the iterated marker, and the marker is open for connections—
             if (!adjacentMarkers.Contains(marker) && marker.OpenForConnections)
             {
-                //Debug.DrawLine(Vector3.zero, marker.Position, Color.cyan, 10);
 
                 // Make a connection between the two markers
                 adjacentMarkers.Add(marker);

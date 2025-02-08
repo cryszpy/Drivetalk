@@ -29,6 +29,9 @@ TagManager:
   - DialoguePivot
   - GPSMarker
   - RaycastCamera
+  - ValidDirection
+  - InvalidDirection
+  - Marker
   layers:
   - Default
   - TransparentFX
@@ -44,7 +47,7 @@ TagManager:
   - Intersections
   - GPSMarker
   - PlayerCannotSee
-  - 
+  - Car
   - 
   - 
   - 

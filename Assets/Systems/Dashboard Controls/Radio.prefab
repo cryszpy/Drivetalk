@@ -596,8 +596,10 @@ MonoBehaviour:
   songs:
   - {fileID: 8300000, guid: ff2caea576b9a485da9d4097386351bb, type: 3}
   - {fileID: 8300000, guid: 904abe57d5e6846369df211d0359140d, type: 3}
+  - {fileID: 8300000, guid: 62eb7a112cd44437397586f4cef1ff00, type: 3}
   songColors:
   - {fileID: 2100000, guid: 848250051c7604217a5c00592d8d085e, type: 2}
+  - {fileID: 2100000, guid: 354499e6eb2c54bbd8d5e29072b7358d, type: 2}
   - {fileID: 2100000, guid: 354499e6eb2c54bbd8d5e29072b7358d, type: 2}
   audioSource: {fileID: 7240256105132336923}
   isSongPlaying: 0

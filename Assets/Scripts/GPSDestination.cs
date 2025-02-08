@@ -7,7 +7,7 @@ public class GPSDestination : MonoBehaviour
     public int destinationID;
 
     [Tooltip("Reference to this map location's real-city destination.")]
-    [SerializeField] private GameObject destinationObject;
+    [SerializeField] private GameObject destinationTile;
 
     [Tooltip("Reference to the main map script.")]
     [SerializeField] private GPS gps;
@@ -39,19 +39,19 @@ public class GPSDestination : MonoBehaviour
         GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
 
         // Re-enable dialogue continue button
-        gps.continueButton.SetActive(true);
+        //gps.continueButton.SetActive(true);
 
         // Sets car's boolean flag to no longer be at a taxi stop
         car.atTaxiStop = false;
 
         // Highlights the destination's color (temporary)
-        destinationObject.GetComponent<MeshRenderer>().material = car.setMaterial;
+        //destinationTile.GetComponent<MeshRenderer>().material = car.setMaterial;
 
         // If the car still has rides left in the day—
         if (car.currentRideNum < car.totalRideNum) {
 
             // Sets the passenger destination object
-            carPointer.destinationObject = destinationObject;
+            carPointer.destinationObject = destinationTile;
 
             // If already inside destination radius, allow rerouting
             if (carPointer.destinationRadius) {
@@ -59,10 +59,8 @@ public class GPSDestination : MonoBehaviour
             }
 
             // Routes the car pointer (and thus the car) to the selected destination
-            carPointer.SwitchDirection();
-
-            // Calculates shortest path to destination for GPS
-            carPointer.SetGPSPath(destinationObject);
+            //carPointer.SwitchDirection();
+            //carPointer.SpawnRoadTile();
 
             // Start waiting until the passenger talks
             GameStateManager.EOnDestinationSet?.Invoke();

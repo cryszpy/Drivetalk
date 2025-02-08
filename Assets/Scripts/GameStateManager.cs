@@ -42,13 +42,17 @@ public class GameStateManager : MonoBehaviour
     public static GlobalEvent EOnLeftWindow;
     public static GlobalEvent EOnRightWindow;
     public static GlobalEvent EOnBlockRadiusDetection;
+    public static GlobalEvent EOnRoadConnected;
 
     public static DialogueManager dialogueManager;
 
     public static AudioManager audioManager;
 
+    public static RoadManager roadManager;
+    public RoadManager roadManagerTracker;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void OnEnable()
     {
         // Singleton pattern
         if (instance != null) {
@@ -57,11 +61,13 @@ public class GameStateManager : MonoBehaviour
             instance = this;
             dialogueManager = GetComponent<DialogueManager>();
             audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            roadManager = GetComponent<RoadManager>();
             DontDestroyOnLoad(gameObject);
         }
     }
 
     private void Update() {
         gamestateTracker = Gamestate;
+        roadManagerTracker = roadManager;
     }
 }

@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 8397212073243433208}
   - component: {fileID: 1087201550889692529}
   - component: {fileID: 5993408646696354797}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Handle
   m_TagString: TurnSignal
   m_Icon: {fileID: 0}
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26619075c76d04f8faff111a8d32b868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 1066559384927801088}
   dialogueManager: {fileID: 0}
   unityEvent:
     m_PersistentCalls:
@@ -208,9 +210,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1088
   hovered: 0
-  regularLayer: 6
+  regularLayer: 0
   hoveredLayer: 10
-  dialObject: {fileID: 1066559384927801088}
   rotationMin: 0
   rotationMax: 90
   dragging: 0
@@ -219,4 +220,5 @@ MonoBehaviour:
   cutoffRight: 75
   straightCutoffLeft: 35
   straightCutoffRight: 55
-  carPointer: {fileID: 0}
+  leftSignal: {fileID: 0}
+  rightSignal: {fileID: 0}

@@ -220,7 +220,6 @@ public class UIElementSlider : MonoBehaviour
 
     // Function to be executed when button is hovered over
     public virtual void OnHover() {
-        Debug.Log("hovered");
         gameObject.layer = hoveredLayer;
         hovered = true;
         // Enable hovered version of GameObject

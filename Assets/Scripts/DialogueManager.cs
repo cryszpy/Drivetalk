@@ -336,7 +336,6 @@ public class DialogueManager : MonoBehaviour
     
     // Starts a piece of dialogue
     public void StartDialogue(DialoguePiece dialogue) {
-        Debug.Log("started dialogue");
 
         // Assigns any missing script references
         FindReferences();
@@ -383,7 +382,6 @@ public class DialogueManager : MonoBehaviour
 
     // Displays the next sentence
     public void DisplayNextSentence() {
-        Debug.Log("DisplayNextSentence");
 
         if (currentDialogue) {
 
@@ -812,9 +810,9 @@ public class DialogueManager : MonoBehaviour
         carPointer.finishedDialogue = true;
 
         // If driving around aimlessly, start driving towards destination
-        if (!car.atTaxiStop && car.carPointer.pathfindingTarget.CompareTag("Block")) {
+        /* if (!car.atTaxiStop && car.carPointer.pathfindingTarget.CompareTag("Block")) {
             carPointer.SwitchToFinalDestination();
-        }
+        } */
 
         // Hide skip indicator if on
         /* if (skipIndicator.activeInHierarchy) {

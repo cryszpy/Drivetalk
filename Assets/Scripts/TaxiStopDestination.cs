@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class TaxiStopDestination : MonoBehaviour
@@ -21,6 +22,11 @@ public class TaxiStopDestination : MonoBehaviour
 
                 // Set the car reference to the accessed script
                 car = script;
+
+                if (car.carPointer.taxiStopsEnabled) {
+                    car.atTaxiStop = true;
+                }
+                
             } else {
                 Debug.LogError("Could not find CarController script on car!");
             }

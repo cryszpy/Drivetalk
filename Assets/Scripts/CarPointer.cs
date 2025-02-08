@@ -18,14 +18,14 @@ public class CarPointer : MonoBehaviour
     [Tooltip("The car pointer's Navigation Mesh AI agent component.")]
     [SerializeField] private NavMeshAgent agent;
 
-    [Tooltip("List of all road markers on the game's map.")]
-    public List<Marker> allMarkers = new();
-
     [Tooltip("Reference to the currently tracked road marker for navigation purposes.")]
     public Marker currentMarker;
 
     [Tooltip("Reference to the destination target's closest road marker.")]
     public Marker destinationMarker;
+
+    [Tooltip("List of all road markers on the game's map.")]
+    public List<Marker> allMarkers = new();
 
     [Tooltip("The pointer that the car should target for pathfinding.")]
     public GameObject pointer;
@@ -36,40 +36,40 @@ public class CarPointer : MonoBehaviour
     [Tooltip("The current passenger's requested destination.")]
     public GameObject destinationObject;
 
-    public DestinationRadius destinationRadius;
+    [HideInInspector] public DestinationRadius destinationRadius;
 
     [Tooltip("Reference to the last saved block that the car has been to.")]
-    public GameObject savedBlock;
+    [HideInInspector] public GameObject savedBlock;
 
     [Tooltip("List of currently detected block markers to avoid.")]
-    public List<GameObject> currentBlocksList = new();
+    [HideInInspector] public List<GameObject> currentBlocksList = new();
 
     [Tooltip("The current car navigation route's path to the destination.")]
-    public List<Marker> path = new();
+    [HideInInspector] public List<Marker> path = new();
 
-    public List<Marker> gpsPathRef = new();
-    public List<Transform> gpsPath = new();
+    [HideInInspector] public List<Marker> gpsPathRef = new();
+    [HideInInspector] public List<Vector3> gpsPath = new();
 
     [Tooltip("Reference to the saved destination set before destination is switched due to unfinished dialogue. SET DYNAMICALLY")]
-    public GameObject savedDestination;
+    //public GameObject savedDestination;
 
-    public Road trackedIntersection;
+    //public Road trackedIntersection;
 
     public TurnSignal turnSignal;
     public Wheel wheel;
 
     public LineController lc;
 
-    [Header("STATS")]
+    [HideInInspector] public GameObject hoveredButton;
 
-    public GameObject hoveredButton;
+    [Header("STATS")]
 
     [Tooltip("Boolean flag; Checks whether dialogue has finished or not.")]
     public bool finishedDialogue;
 
     public bool setInitialBlock = false;
 
-    public LayerMask layerMask;
+    //public LayerMask layerMask;
     public LayerMask gpsMask;
 
     public SteeringDirection currentSteeringDirection;
@@ -77,9 +77,42 @@ public class CarPointer : MonoBehaviour
     public bool inIntersection = false;
 
     public bool calculatedDirections = false;
-    public SteeringDirection backupSteeringDirection;
+    //public SteeringDirection backupSteeringDirection;
 
-    public List<SteeringDirection> validDirections = new();
+    //public List<SteeringDirection> validDirections = new();
+
+    [Header("PROCEDURAL GENERATION")]
+
+    public GameObject gpsObject;
+
+    public bool taxiStopsEnabled = true;
+
+    public RoadList roadList;
+
+    public ProceduralRoad initialRoad;
+
+    public ProceduralRoad currentRoad;
+
+    public RoadConnectionPoint furthestConnectionPoint;
+
+    public Queue<ProceduralRoad> roadQueue = new();
+    private Queue<int> directionQueue = new();
+    public List<ProceduralRoad> roadQueueTracker = new();
+    public List<int> directionQueueTracker = new();
+
+    public int defaultRotation = 0;
+
+    private void OnEnable() {
+        GameStateManager.EOnRoadConnected += PathfindToTarget;
+    }
+
+    private void OnDisable() {
+        DisconnectEvents();
+    }
+
+    private void DisconnectEvents() {
+        GameStateManager.EOnRoadConnected -= PathfindToTarget;
+    }
 
     private void Start() {
 
@@ -97,21 +130,29 @@ public class CarPointer : MonoBehaviour
     }
 
     private void Update() {
+        roadQueueTracker = roadQueue.ToList();
+        directionQueueTracker = directionQueue.ToList();
 
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If the car pointer has calculated a route, and the game is not in a menu or paused—
-            if (path != null && path.Count > 0)
+            if (path != null && path.Count > 0 && !car.atTaxiStop && !car.arrivedAtDest)
             {
                 // Move the car pointer along the route
                 MoveAlongPath();
+
+                // Don't enable GPS when there's no passenger
+                if (car.currentPassenger) {
+                    // Set GPS path
+                    SetGPSPath();
+                }
             }
 
             // If the car has not calculated valid directions, and it is not at a taxi stop (it's driving) and there is a passenger to give a ride to–
             if (!calculatedDirections && !car.atTaxiStop && car.currentPassenger && !car.arrivedAtDest) {
 
                 // Calculate valid directions and steer towards one
-                SwitchDirection();
+                //SwitchDirection();
             }
 
             if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
@@ -123,7 +164,7 @@ public class CarPointer : MonoBehaviour
     }
 
     // Routes the car to the passenger's actual destination if dialogue has finished
-    public void SwitchToFinalDestination() {
+    /* public void SwitchToFinalDestination() {
         
         if (pathfindingTarget != savedDestination) {
             Debug.Log("Finished dialogue, driving to actual destination now!");
@@ -132,7 +173,7 @@ public class CarPointer : MonoBehaviour
 
             StartDrive(pathfindingTarget);
         }
-    }
+    } */
 
     // Calculate the closest route through the road layout to the destination passed in
     public void StartDrive(GameObject destination) {
@@ -162,44 +203,31 @@ public class CarPointer : MonoBehaviour
     }
 
     // Calculate the closest route through the road layout to the destination passed in
-    public void SetGPSPath(GameObject destination) {
+    public void SetGPSPath() {
 
         // Reset both GPS path lists
         ResetLineRenderer();
-        
-        // Find the closest marker to the car's starting position
-        Marker closestMarker = FindClosestMarker();
 
-        // Find the closest marker to the destination position
-        Marker destMarker = FindDestinationMarker(destination);
+        // Adds carPointer location to start line from
+        gpsPath.Add(new(gpsObject.transform.position.x, gpsObject.transform.position.y - 10f, gpsObject.transform.position.z));
 
-        // Find the path using A* pathfinding
-        if (closestMarker != null && destMarker != null)
-        {
-            // Grabs actual road markers for the quickest way to the passenger's destination
-            gpsPathRef = Pathfinding.FindPath(closestMarker, destMarker);
+        // For each road marker in previously grabbed path—
+        foreach (Marker point in path) {
 
-            // For each road marker in previously grabbed path—
-            foreach (Marker point in gpsPathRef) {
-
-                // Raycast into the ground
-                if (Physics.Raycast(point.transform.position, Vector3.down, out RaycastHit hit, 1000, gpsMask)) {
+            // Raycast into the ground
+            if (Physics.Raycast(point.transform.position, Vector3.down, out RaycastHit hit, 500f, gpsMask)) {
+                
+                // If the raycast hits a *new* GPS tile—
+                if (!gpsPath.Contains(hit.collider.gameObject.transform.position)) {
                     
-                    // If the raycast hits a *new* GPS tile—
-                    if (!gpsPath.Contains(hit.collider.gameObject.transform)) {
-                        
-                        // Adds hit gps path marker to the current path
-                        gpsPath.Add(hit.collider.gameObject.transform);
-                    }
+                    // Adds hit gps path marker to the current path
+                    gpsPath.Add(hit.collider.gameObject.transform.position);
                 }
             }
-
-            // Add calculated gps path to line renderer
-            lc.SetUpLine(gpsPath.ToArray());
-        } 
-        else {
-            Debug.LogError("Either currentMarker or destinationMarker are null!");
         }
+
+        // Add calculated gps path to line renderer
+        lc.SetUpLine(gpsPath.ToArray());
     }
 
     public void ResetLineRenderer() {
@@ -253,7 +281,7 @@ public class CarPointer : MonoBehaviour
         return new(vals[0], vals[1], vals[2]);
     }
 
-    public void GetValidDirections() {
+    /* public void GetValidDirections() {
         validDirections.Clear();
 
         Vector3 forward = SnapDirection(transform.TransformDirection(Vector3.forward));
@@ -308,9 +336,106 @@ public class CarPointer : MonoBehaviour
         } else if (!validDirections.Contains(backupSteeringDirection)) {
             backupSteeringDirection = validDirections[Random.Range(0, validDirections.Count)];
         }
+    } */
+
+    public void SpawnRoadTile() {
+
+        // Reset stats
+        calculatedDirections = false;
+        currentRoad = null;
+
+        // Adds initial road to queue if not already
+        if (initialRoad && !roadQueue.Contains(initialRoad)) {
+            roadQueue.Enqueue(initialRoad);
+
+            directionQueue.Enqueue(0);
+        }
+        
+        // Remove previous road tile
+        if (roadQueue.Count >= 3) {
+            ProceduralRoad discardRoad = roadQueue.Dequeue();
+            int discardDirection = directionQueue.Dequeue();
+
+            // Sets the steering direction for the upcoming turn to enable turn signal
+            if (roadQueue.Count >= 2) {
+                currentSteeringDirection = directionQueue.First() switch
+                {
+                    0 => SteeringDirection.FORWARD,
+                    90 => SteeringDirection.RIGHT,
+                    -90 => SteeringDirection.LEFT,
+                    _ => SteeringDirection.FORWARD,
+                };
+            }
+
+            // If the initial road is discarded, set to null to avoid errors
+            if (discardRoad == initialRoad) {
+                initialRoad = null;
+            }
+
+            Destroy(discardRoad.gameObject);
+        }
+
+        // INITIAL
+
+        // List of all possible road tiles
+        // Removes destination from list
+
+        // Picks random tile to spawn
+        GameObject roadFromList = roadList.allRoadsList[UnityEngine.Random.Range(0, roadList.allRoadsList.Count)];
+        GameObject selectedTile = Instantiate(roadFromList, furthestConnectionPoint.transform.position, Quaternion.identity);
+
+        if (selectedTile.TryGetComponent<ProceduralRoad>(out var script)) {
+
+            currentRoad = script;
+
+            // Add the current road to the queue
+            roadQueue.Enqueue(script);
+            
+            // Creates a temporary list that is an exact copy of the selected road tile's connection points
+            List<RoadConnectionPoint> tempList = new(script.roadConnections);
+
+            // Gets the initial connection point of the road tile
+            RoadConnectionPoint discardPoint = tempList.Find(x => x.initialConnection == true);
+
+            // Removes the initial connection point from the list (don't want to go backwards)
+            tempList.Remove(discardPoint);
+
+            // Randomly picks one direction from list of valid directions - A
+            RoadConnectionPoint randomPoint = tempList[UnityEngine.Random.Range(0, tempList.Count)];
+            directionQueue.Enqueue(randomPoint.connectionRotation);
+
+            // Rotates spawned road tile to correct rotation
+            selectedTile.transform.Rotate(new(0, defaultRotation, 0));
+
+            // Updates the default rotation based on orientation of new road tile
+            defaultRotation += randomPoint.connectionRotation;
+
+            // Sets the furthest connection point to the selected connection point
+            furthestConnectionPoint = randomPoint;
+            
+            // Connect new road markers to existing road markers
+            script.initialMarker.ConnectByRaycast();
+
+        } else {
+            Debug.LogError("Could not find ProceduralRoad component on road!");
+        }
     }
 
-    public void SwitchDirection() {
+    public void PathfindToTarget() {
+        
+        if (currentRoad) {
+
+            // Starts driving towards that intersection
+            StartDrive(currentRoad.center);
+
+            // Calculates shortest path to destination for GPS
+            //SetGPSPath();
+        } else {
+            Debug.LogWarning("Cannot pathfind, as currentRoad is null!");
+        }
+    }
+
+    /* public void SwitchDirection() {
 
         // Generates valid directions for the next intersection
         GetValidDirections();
@@ -320,7 +445,7 @@ public class CarPointer : MonoBehaviour
             currentSteeringDirection = backupSteeringDirection;
             turnSignal.hovered = false;
             turnSignal.dragging = false;
-            StartCoroutine(turnSignal.SignalClick(currentSteeringDirection));
+            //StartCoroutine(turnSignal.SignalClick(currentSteeringDirection));
         }
 
         // If the next intersection has been identified—
@@ -366,7 +491,7 @@ public class CarPointer : MonoBehaviour
         }
 
         calculatedDirections = true;
-    }
+    } */
 
     // Move the car pointer along the path
     private void MoveAlongPath()

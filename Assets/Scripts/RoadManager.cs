@@ -4,27 +4,26 @@ using UnityEngine;
 public class RoadManager : MonoBehaviour
 {
     [Tooltip("List of all roads in the game's map.")]
-    public List<Road> allRoads; // List of all road pieces in the scene
+    public List<Road> allRoads = new(); // List of all road pieces in the scene
 
-    private void Awake()
+    /* private void Start()
     {
-        allRoads = new List<Road>(FindObjectsByType<Road>(FindObjectsSortMode.InstanceID)); // Find all Road objects in the scene
+        // Find all Road objects in the scene
         ConnectAdjacentRoads();
     }
 
     // Connect all roads that are adjacent to each other
-    private void ConnectAdjacentRoads()
+    public void ConnectAdjacentRoads()
     {
-        for (int i = 0; i < allRoads.Count; i++)
-        {
-            Road currentRoad = allRoads[i];
 
-            for (int j = 0; j < allRoads.Count; j++)
-            {
+        // For every road—
+        foreach (Road currentRoad in allRoads) {
+
+            // For every road again—
+            foreach (Road adjacentRoad in allRoads) {
+
                 // Skip connecting the road to itself
-                if (i == j) continue;
-
-                Road adjacentRoad = allRoads[j];
+                if (currentRoad == adjacentRoad) continue;
 
                 // Check if the two roads are adjacent
                 if (AreRoadsAdjacent(currentRoad, adjacentRoad))
@@ -42,8 +41,7 @@ public class RoadManager : MonoBehaviour
         // Simple proximity check: distance between the centers of the roads
         float distanceThreshold = 20f;
         float distance = Vector3.Distance(roadA.transform.position, roadB.transform.position);
-        //Debug.Log(distance + " | " + roadA.transform.position + " | " + roadB.transform.position);
 
         return distance <= distanceThreshold;
-    }
+    } */
 }
