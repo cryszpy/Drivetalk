@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class GPSDestination : MonoBehaviour
 {
-    [Tooltip("The ID number of the destination linked to this button.")]
-    public int destinationID;
-
-    [Tooltip("Reference to this map location's real-city destination.")]
-    [SerializeField] private GameObject destinationTile;
+    [Tooltip("The destination tile linked to this button.")]
+    public GameObject destinationObject;
 
     [Tooltip("Reference to the main map script.")]
     [SerializeField] private GPS gps;
@@ -36,37 +33,27 @@ public class GPSDestination : MonoBehaviour
     // Sets the map upon clicking a map location
     public void SetGPS() {
 
-        GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
+        gps.dragging = false;
+        gps.gameObject.layer = gps.regularLayer;
 
-        // Re-enable dialogue continue button
-        //gps.continueButton.SetActive(true);
+        GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
 
         // Sets car's boolean flag to no longer be at a taxi stop
         car.atTaxiStop = false;
-
-        // Highlights the destination's color (temporary)
-        //destinationTile.GetComponent<MeshRenderer>().material = car.setMaterial;
 
         // If the car still has rides left in the day—
         if (car.currentRideNum < car.totalRideNum) {
 
             // Sets the passenger destination object
-            carPointer.destinationObject = destinationTile;
+            carPointer.currentDestinationTile = destinationObject;
 
             // If already inside destination radius, allow rerouting
             if (carPointer.destinationRadius) {
                 carPointer.setInitialBlock = false;
             }
 
-            // Routes the car pointer (and thus the car) to the selected destination
-            //carPointer.SwitchDirection();
-            //carPointer.SpawnRoadTile();
-
             // Start waiting until the passenger talks
             GameStateManager.EOnDestinationSet?.Invoke();
-
-            // Moves the camera back out of map view
-            //StartCoroutine(gps.EndDollyMovement());
         }
     }
 }

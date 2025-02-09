@@ -21,8 +21,8 @@ public class CarController : MonoBehaviour
     [Tooltip("List of all the car's available passenger seats.")]
     [SerializeField] private List<GameObject> passengerSeats;
 
-    [Tooltip("Reference to the shotgun seat of the car.")]
-    [SerializeField] private GameObject shotgun;
+    /* [Tooltip("Reference to the shotgun seat of the car.")]
+    [SerializeField] private GameObject shotgun; */
 
     [Tooltip("Reference to the car's Rigidbody component.")]
     [SerializeField] private Rigidbody rb;
@@ -42,8 +42,8 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the car's current taxi stop destination.")]
     public GameObject currentStop;
 
-    public Material setMaterial;
-    public Material unsetMaterial;
+    /* public Material setMaterial;
+    public Material unsetMaterial; */
 
     [Header("STATS")]
 
@@ -187,6 +187,12 @@ public class CarController : MonoBehaviour
         }
     }
 
+    public void StartInitialDrive() {
+        /* carPointer.StartDrive(carPointer.initialRoad.center);
+        carPointer.StartDrive(carPointer.initialRoad.center); */
+        carPointer.SpawnRoadTile();
+    }
+
     // Picks up a passenger when arriving at a taxi stop
     public void PickUpPassenger(GameObject passenger) {
 
@@ -220,8 +226,6 @@ public class CarController : MonoBehaviour
             }
 
             GameStateManager.EOnPassengerPickup?.Invoke();
-
-            carPointer.SpawnRoadTile();
 
             //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
 
@@ -259,7 +263,7 @@ public class CarController : MonoBehaviour
         carPointer.taxiStopsEnabled = true;
 
         // Switches car pathfinding target to destination
-        carPointer.StartDrive(carPointer.destinationObject);
+        //carPointer.StartDrive(carPointer.destinationObject);
 
         // Reset line renderer
         carPointer.SetGPSPath();
@@ -275,6 +279,10 @@ public class CarController : MonoBehaviour
 
         // Set the car's current stop to this stop
         currentStop = carPointer.destinationObject;
+
+        // Reset destination
+        carPointer.destinationObject = null;
+        carPointer.destinationSpawned = false;
 
         // Drops off the current passenger
         dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);

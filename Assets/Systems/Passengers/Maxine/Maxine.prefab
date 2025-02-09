@@ -266,7 +266,9 @@ MonoBehaviour:
   animator: {fileID: 2486925453300218498}
   requirements: []
   requirementMet: 0
-  requestedDestinationIDs: 0200000004000000
+  requestedDestinationTiles:
+  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
   textCPS: 0.05
   waitTimeMin: 1
   waitTimeMax: 2

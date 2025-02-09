@@ -8,9 +8,6 @@ using UnityEngine.UI;
 public class GPS : UIElementSlider
 {
 
-    [Tooltip("Reference to the car.")]
-    [SerializeField] private CarController car;
-
     [Tooltip("Reference to the object to look at when the GPS is clicked.")]
     [SerializeField] protected GameObject focusOn;
 
@@ -26,8 +23,8 @@ public class GPS : UIElementSlider
     [Tooltip("Reference to the map UI.")]
     [SerializeField] protected GameObject screenUI;
 
-    [Tooltip("Reference to the dialogue continue button.")]
-    public GameObject continueButton;
+    /* [Tooltip("Reference to the dialogue continue button.")]
+    public GameObject continueButton; */
 
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
@@ -50,14 +47,13 @@ public class GPS : UIElementSlider
     private void CachePassengerDest() {
 
         // Gets the index number of the current passenger
-        int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
+        int index = CarController.PassengersDrivenIDs.IndexOf(carPointer.car.currentPassenger.id);
 
-        // Gets the passenger's requested destination ID based on the current ride number
-        int selectedDestID = car.currentPassenger.requestedDestinationIDs[CarController.PassengersDrivenRideNum[index] - 1];
-        Debug.Log(selectedDestID);
+        // Gets the passenger's requested destination based on the current ride number
+        GameObject selectedDestination = carPointer.car.currentPassenger.requestedDestinationTiles[CarController.PassengersDrivenRideNum[index] - 1];
 
         // Gets the selected button corresponding to the requested destination
-        GameObject selectedButton = gpsButtons.Find(x => x.GetComponent<GPSDestination>().destinationID == selectedDestID);
+        GameObject selectedButton = gpsButtons.Find(x => x.GetComponent<GPSDestination>().destinationObject == selectedDestination);
 
         // Iterates through all buttons and turns them off except for the selected button
         foreach (GameObject button in gpsButtons) {
@@ -166,7 +162,7 @@ public class GPS : UIElementSlider
     public override void OnClick()
     {
         // Disable dialogue continue button
-        continueButton.SetActive(false);
+        //continueButton.SetActive(false);
 
         // Hide GPS indicator
         GameStateManager.dialogueManager.gpsIndicator.SetActive(false);
@@ -265,9 +261,9 @@ public class GPS : UIElementSlider
         screenUI.SetActive(false);
 
         // Enable dialogue continue button if disabled
-        if (!continueButton.activeInHierarchy) {
+        /* if (!continueButton.activeInHierarchy) {
             continueButton.SetActive(true);
-        }
+        } */
 
         // Disables smooth rotation
         float damp = 1;

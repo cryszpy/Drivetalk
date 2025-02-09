@@ -10,8 +10,8 @@ public class Road : MonoBehaviour
     [Tooltip("List of all car markers on this road piece.")]
     [SerializeField] protected List<Marker> carMarkers;
 
-    public List<GameObject> adjacentRoads = new();
-    public List<float> dotProducts = new();
+    /* public List<GameObject> adjacentRoads = new();
+    public List<float> dotProducts = new(); */
 
     private void Start() {
 

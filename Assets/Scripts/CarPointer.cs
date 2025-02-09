@@ -36,6 +36,8 @@ public class CarPointer : MonoBehaviour
     [Tooltip("The current passenger's requested destination.")]
     public GameObject destinationObject;
 
+    public GameObject currentDestinationTile;
+
     [HideInInspector] public DestinationRadius destinationRadius;
 
     [Tooltip("Reference to the last saved block that the car has been to.")]
@@ -83,6 +85,7 @@ public class CarPointer : MonoBehaviour
 
     [Header("PROCEDURAL GENERATION")]
 
+    [Tooltip("The GameObject for the car's GPS icon.")]
     public GameObject gpsObject;
 
     public bool taxiStopsEnabled = true;
@@ -99,6 +102,8 @@ public class CarPointer : MonoBehaviour
     private Queue<int> directionQueue = new();
     public List<ProceduralRoad> roadQueueTracker = new();
     public List<int> directionQueueTracker = new();
+
+    [HideInInspector] public bool destinationSpawned = false;
 
     public int defaultRotation = 0;
 
@@ -235,7 +240,7 @@ public class CarPointer : MonoBehaviour
         gpsPath.Clear();
     }
 
-    private Vector3 SnapDirection(Vector3 direction) {
+    /* private Vector3 SnapDirection(Vector3 direction) {
 
         // List of Vector3 components
         List<float> vals = new()
@@ -279,7 +284,7 @@ public class CarPointer : MonoBehaviour
 
         // Returns snapped Vector3
         return new(vals[0], vals[1], vals[2]);
-    }
+    } */
 
     /* public void GetValidDirections() {
         validDirections.Clear();
@@ -380,9 +385,32 @@ public class CarPointer : MonoBehaviour
         // List of all possible road tiles
         // Removes destination from list
 
-        // Picks random tile to spawn
-        GameObject roadFromList = roadList.allRoadsList[UnityEngine.Random.Range(0, roadList.allRoadsList.Count)];
-        GameObject selectedTile = Instantiate(roadFromList, furthestConnectionPoint.transform.position, Quaternion.identity);
+        // Picks random tile to spawn (or destination)
+        GameObject roadFromList = null;
+        GameObject selectedTile = null;
+
+        if (finishedDialogue && !destinationSpawned) {
+
+            if (currentDestinationTile) {
+                roadFromList = currentDestinationTile;
+                selectedTile = Instantiate(roadFromList, furthestConnectionPoint.transform.position, Quaternion.identity);
+                
+                destinationObject = selectedTile;
+
+                destinationSpawned = true;
+            } else {
+                Debug.LogError("Tried to spawn non-existing destination!");
+            }
+
+        } else {
+            roadFromList = roadList.allRoadsList[UnityEngine.Random.Range(0, roadList.allRoadsList.Count)];
+            selectedTile = Instantiate(roadFromList, furthestConnectionPoint.transform.position, Quaternion.identity);
+        }
+
+        // Checks to make sure roads were properly assigned
+        if (!roadFromList || !selectedTile) {
+            Debug.LogError("Tried to spawn null tile!");
+        }
 
         if (selectedTile.TryGetComponent<ProceduralRoad>(out var script)) {
 

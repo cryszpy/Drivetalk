@@ -229,7 +229,7 @@ public class Menu : MonoBehaviour
         StartCoroutine(StartDollyMovement());
         audioManager.PlaySoundByName("Engine");
         
-        GameStateManager.dialogueManager.car.FindNearestStop();
+        GameStateManager.dialogueManager.car.StartInitialDrive();
     }
 
     // Quits the game (called from button script assignment)

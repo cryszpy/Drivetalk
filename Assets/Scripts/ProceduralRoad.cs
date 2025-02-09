@@ -11,8 +11,6 @@ public class ProceduralRoad : MonoBehaviour
 
     public List<GameObject> taxiStops;
 
-    public List<GameObject> destinations;
-
     public List<RoadConnectionPoint> roadConnections = new();
 
     private void Start() {

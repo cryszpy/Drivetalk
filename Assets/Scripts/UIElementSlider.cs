@@ -12,7 +12,7 @@ public class UIElementSlider : MonoBehaviour
 {
     [Header("SCRIPT REFERENCES")]
 
-    public CarPointer carPointer;
+    [HideInInspector] public CarPointer carPointer;
 
     [Tooltip("Reference to the slider's physical object.")]
     [SerializeField] protected GameObject dialObject;
@@ -24,7 +24,7 @@ public class UIElementSlider : MonoBehaviour
     public UnityEvent unityEvent = new();
 
     [Tooltip("Reference to main camera.")]
-    public Camera mainCamera;
+    [HideInInspector] public Camera mainCamera;
 
     [Header("STATS")]
 
@@ -32,10 +32,10 @@ public class UIElementSlider : MonoBehaviour
     [SerializeField] protected LayerMask layerMask;
 
     [Tooltip("Boolean flag; Checks whether this button is hovered over.")]
-    public bool hovered;
+    [HideInInspector] public bool hovered;
 
     [Tooltip("The layer number for the default state of the object.")]
-    [SerializeField] protected int regularLayer;
+    public int regularLayer;
     [Tooltip("The layer number for the hovered state of the object.")]
     [SerializeField] protected int hoveredLayer;
     

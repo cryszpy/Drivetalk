@@ -46,7 +46,7 @@ public class Passenger : MonoBehaviour
     public bool requirementMet;
 
     [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
-    public List<int> requestedDestinationIDs;
+    public List<GameObject> requestedDestinationTiles;
 
     [Tooltip("The rate at which this passenger types out dialogue text. (lower values are faster)")]
     public float textCPS;

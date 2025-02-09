@@ -9,12 +9,6 @@ public enum ACSetting {
 public class AC : UIElementSlider
 {
 
-    [SerializeField] private TMP_Text coolText;
-    [SerializeField] private TMP_Text warmText;
-    [SerializeField] private TMP_FontAsset defMaterial;
-    [SerializeField] private TMP_FontAsset coolMaterial;
-    [SerializeField] private TMP_FontAsset warmMaterial;
-
     [SerializeField] private float cutoffCool;
     [SerializeField] private float cutoffWarm;
     [SerializeField] private float zeroMin;

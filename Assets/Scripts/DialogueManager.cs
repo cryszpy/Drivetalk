@@ -309,6 +309,7 @@ public class DialogueManager : MonoBehaviour
             autoDialogueToggle = GameObject.FindGameObjectWithTag("AutoDialogueToggle").GetComponent<Toggle>();
             autoDialogueToggle.onValueChanged.AddListener(delegate { SetAutoDialogue(autoDialogueToggle.isOn); } );
             autoDialogue = true;
+            autoDialogueToggle.gameObject.SetActive(false);
         }
     }
 
@@ -787,19 +788,22 @@ public class DialogueManager : MonoBehaviour
         // Reset finished dialogue boolean check
         carPointer.finishedDialogue = false;
 
+        // Allows car to continue driving
+        car.arrivedAtDest = false;
+
         // If the player has completed the last ride of the day—
         if (car.currentRideNum >= car.totalRideNum) {
 
             Debug.Log("Completed day's shift!");
             // TODO: Put after-day summary here!
 
-        } else {
+        } /* else {
 
             // Route the car to the nearest taxi stop to pick up another passenger
             if (!car.currentPassenger) {
                 car.FindNearestStop();
             }
-        }
+        } */
     }
 
     // Ends dialogue and starts wait before next sentence group

@@ -3,19 +3,25 @@ using UnityEngine;
 
 public class Destination : MonoBehaviour
 {
-    [Tooltip("This destination's ID number.")]
-    public int id;
     
     [Tooltip("Reference to the car's script component.")]
     private CarController car;
 
     [Tooltip("Boolean flag; Checks if the car is inside this radius.")]
-    [SerializeField] private bool inRadius = false;
+    private bool inRadius = false;
+
+    private void Start() {
+
+        if (!car) {
+            car = GameObject.FindGameObjectWithTag("CarFrame").transform.parent.GetComponent<CarController>();
+            Debug.LogWarning("CarController unassigned on Destination, reassigned!");
+        }
+    }
 
     private void Update() {
 
         // If the car reference is not null, and the car is inside this destination—
-        if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.gameObject) {
+        if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.parent.gameObject) {
 
             // Stop looping of this function
             car.arrivedAtDest = true;
@@ -66,10 +72,10 @@ public class Destination : MonoBehaviour
                 // Re-raycast for directions
                 //car.carPointer.GetValidDirections();
 
-                car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
+                /* car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
                 car.carPointer.turnSignal.hovered = false;
                 car.carPointer.turnSignal.dragging = false;
-                StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection));
+                StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection)); */
 
                 // Reset steering direction to forward if possible
                 /* if (car.carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
