@@ -44,24 +44,13 @@ public class PlayerInfo : MonoBehaviour
         GameStateManager.EOnRightWindow -= ViewRightWindow;
     }
 
-    private void Update() {
+    /* private void Update() {
 
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             switch (switchView) {
 
                 case false:
-                    /* if (Input.GetKey(KeyCode.A)) {
-                        switchView = true;
-
-                        GameStateManager.EOnLeftWindow?.Invoke();
-
-                    } else if (Input.GetKey(KeyCode.D)) {
-                        switchView = true;
-
-                        GameStateManager.EOnRightWindow?.Invoke();
-                    }
-                    break; */
                     if (Input.GetMouseButton(1)) {
                         switchView = true;
 
@@ -69,17 +58,13 @@ public class PlayerInfo : MonoBehaviour
                     }
                     break;
                 case true:
-                    /* if (cinemachineCam.LookAt != mainCameraLookAt && (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))) {
-                        ResetView();
-                    }
-                    break; */
                     if (Input.GetMouseButtonUp(1)) {
                         ResetLookAt();
                     }
                     break;
             } 
         }
-    }
+    } */
 
     private void IncreaseView() {
         rotationComposer.Damping = new(0.5f, 0.5f);
