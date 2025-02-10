@@ -166,8 +166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 4562185256764690388}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &184298155947241907
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,8 +512,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 3438109441543801528}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!65 &340755585688497356
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -586,8 +582,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 5859452419581307025}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &1335443572461074760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1030,37 @@ MonoBehaviour:
   - {fileID: 5859452419581307025}
   - {fileID: 559393237782307572}
   openForConnections: 1
+--- !u!1 &2658176768257768032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8478190565704108015}
+  m_Layer: 0
+  m_Name: PUT DECORATION UNDER THIS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8478190565704108015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658176768257768032}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1824541166749964565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2659801811493373041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,8 +1318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 2815227489762189570}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &3323738534954142891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,8 +1413,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 6334305552579866876}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &3642406027241725960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1449,7 @@ Transform:
   - {fileID: 1406205153602341767}
   - {fileID: 4455598441399710883}
   - {fileID: 7931022380373652886}
-  m_Father: {fileID: 1824541166749964565}
+  m_Father: {fileID: 3213287526650420191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3742253615218840167
 GameObject:
@@ -1479,8 +1500,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 3552442231786221377}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &3874009820143639690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,8 +1584,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 1658399364765503411}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &4144327539859444665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,8 +1725,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 4037152101078272429}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &5111737044534252287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,8 +1999,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 2186029914168060329}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &5657375902392060210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,7 +2032,7 @@ Transform:
   - {fileID: 2711528077838536737}
   - {fileID: 465454095212366901}
   - {fileID: 1013200794087533766}
-  m_Father: {fileID: 1824541166749964565}
+  m_Father: {fileID: 3213287526650420191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5843969105747902830
 GameObject:
@@ -2070,8 +2083,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 8037084261329606465}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &6444380705939247033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,8 +2180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 8350936943280678766}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &6855923075419973361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,8 +2277,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 8119952877779800156}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &7019946970288793663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,8 +2358,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 559393237782307572}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &7166558818844450719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,8 +2455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 2616252701919620182}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &7247080473360366342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,8 +2486,8 @@ Transform:
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5697755677513458575}
-  - {fileID: 7909185108210329208}
+  - {fileID: 3213287526650420191}
+  - {fileID: 8478190565704108015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4391827809078627211
@@ -2506,7 +2509,6 @@ MonoBehaviour:
   - {fileID: 287649514881319015}
   - {fileID: 2317392101112978547}
   - {fileID: 2905731189417180288}
-  destinations: []
   roadConnections:
   - {fileID: 1361582169514701184}
   - {fileID: 8218967951623912893}
@@ -2519,10 +2521,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7247080473360366342}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2672,8 +2674,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 1968785319772079695}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &7669743559966210076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,8 +2723,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 5473715597279968393}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &7758241061280822724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,8 +2818,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 6333892775460091136}
-  adjacentRoads: []
-  dotProducts: []
+--- !u!1 &7830486343688425810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3213287526650420191}
+  m_Layer: 0
+  m_Name: DO NOT TOUCH THIS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3213287526650420191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830486343688425810}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 5697755677513458575}
+  - {fileID: 7909185108210329208}
+  m_Father: {fileID: 1824541166749964565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7987098179297393372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,8 +2932,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 7314770776766473228}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &8250270613327632484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,8 +3077,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 8120185576602721834}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &8652661728983859790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,8 +3126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 1244488446964507525}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &8775545592675126462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,8 +3175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 844380394064269238}
-  adjacentRoads: []
-  dotProducts: []
 --- !u!1 &8809682173558581980
 GameObject:
   m_ObjectHideFlags: 0
