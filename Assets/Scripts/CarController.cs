@@ -272,7 +272,7 @@ public class CarController : MonoBehaviour
         //carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
 
         // Clears all previous dashboard requests
-        dialogueManager.dashRequests.Clear();
+        GameStateManager.comfortManager.activeRequests.Clear();
 
         // Reset initial block routing trigger
         carPointer.setInitialBlock = false;

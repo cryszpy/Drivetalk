@@ -23,9 +23,9 @@ public class PassengerExpressionTrigger : MonoBehaviour
         } else if (GameStateManager.dialogueManager.currentDialogue && GameStateManager.dialogueManager.preChoiceDialogue) {
 
             // If the currently active request has been precompleted, play respective dialogue
-            if (GameStateManager.dialogueManager.currentDialogue == GameStateManager.dialogueManager.preChoiceDialogue.request.preCompletedResponse) {
+            /* if (GameStateManager.dialogueManager.currentDialogue == GameStateManager.dialogueManager.preChoiceDialogue.request.preCompletedResponse) {
                 GameStateManager.dialogueManager.StartDialogue(GameStateManager.dialogueManager.currentDialogue);
-            }
+            } */
 
         }
         /* if (!dialogueManager.currentDialogue.nextDialogue && dialogueManager.preChoiceDialogue) {

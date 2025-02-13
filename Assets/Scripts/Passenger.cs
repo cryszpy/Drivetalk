@@ -62,6 +62,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("The maximum possible time that this passenger waits to switch from default to side expression views.")]
     public float maxSwitchTime;
 
+    [Tooltip("The rate at which this passenger's comfortability meter drains, per second.")]
+    public float meterSpeed;
+
     [Tooltip("The amount of time this passenger waits to begin talking after selecting a destination.")]
     public float waitAfterRouteTime;
 
@@ -70,6 +73,10 @@ public class Passenger : MonoBehaviour
 
     [Tooltip("List of all ride dialogue for this passenger, in order.")]
     public List<DialoguePiece> ridesDialogue;
+
+    [Header("DASHBOARD PREFERENCES")]
+
+    public DashboardPreference preferences;
 }
 
 [Tooltip("Enum describing passenger spawn requirement types.")]

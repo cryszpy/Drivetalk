@@ -44,9 +44,13 @@ public class GameStateManager : MonoBehaviour
     public static GlobalEvent EOnBlockRadiusDetection;
     public static GlobalEvent EOnRoadConnected;
 
+    public static CarController car;
+
     public static DialogueManager dialogueManager;
 
     public static AudioManager audioManager;
+
+    public static ComfortabilityManager comfortManager;
 
     public static RoadManager roadManager;
     public RoadManager roadManagerTracker;
@@ -59,9 +63,11 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             instance = this;
+            car = GameObject.FindGameObjectWithTag("CarFrame").transform.parent.GetComponent<CarController>();
             dialogueManager = GetComponent<DialogueManager>();
             audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
             roadManager = GetComponent<RoadManager>();
+            comfortManager = GetComponent<ComfortabilityManager>();
             DontDestroyOnLoad(gameObject);
         }
     }

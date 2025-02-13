@@ -22,6 +22,18 @@ public class AC : UIElementSlider
         CarController.Temperature = 0.5f;
     }
 
+    public override void Update()
+    {
+        base.Update();
+
+        if (GameStateManager.Gamestate == GAMESTATE.PLAYING) {
+            // Update the car's temperature statistic to use in passenger happiness calculations
+            float oldRange = rotationMax - rotationMin;
+            float newRange = 1 - 0;
+            CarController.Temperature = (((dialObject.transform.localEulerAngles.y - rotationMin) * newRange) / oldRange) + 0;
+        }
+    }
+
     public override void Drag()
     {
         // Check whether the player has stopped dragging slider
@@ -66,10 +78,5 @@ public class AC : UIElementSlider
         } */
 
         base.Drag();
-
-        // Update the car's temperature statistic to use in passenger happiness calculations
-        float oldRange = rotationMax - rotationMin;
-        float newRange = 1 - 0;
-        CarController.Temperature = (((dialObject.transform.localEulerAngles.y - rotationMin) * newRange) / oldRange) + 0;
     }
 }

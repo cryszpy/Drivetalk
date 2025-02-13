@@ -1,12 +1,5 @@
-using System.Collections;
-using Unity.Cinemachine;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Splines;
-using UnityEngine.UIElements;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 public class UIElementSlider : MonoBehaviour
 {
@@ -15,7 +8,7 @@ public class UIElementSlider : MonoBehaviour
     [HideInInspector] public CarPointer carPointer;
 
     [Tooltip("Reference to the slider's physical object.")]
-    [SerializeField] protected GameObject dialObject;
+    public GameObject dialObject;
 
     [Tooltip("Reference to the dialogue manager.")]
     [SerializeField] protected DialogueManager dialogueManager;
@@ -40,9 +33,9 @@ public class UIElementSlider : MonoBehaviour
     [SerializeField] protected int hoveredLayer;
     
     [Tooltip("Minimum angle in degrees that this slider / dial can rotate.")]
-    [SerializeField] protected float rotationMin;
+    public float rotationMin;
     [Tooltip("Maximum angle in degrees that this slider / dial can rotate.")]
-    [SerializeField] protected float rotationMax;
+    public float rotationMax;
 
     [Tooltip("The mouse cursor's previous position, set dynamically in-script.")]
     protected Vector3 mousePreviousPos = Vector3.zero;
@@ -60,7 +53,7 @@ public class UIElementSlider : MonoBehaviour
         
         // Assigns references to any missing script references
         if (!mainCamera) {
-            mainCamera = Camera.main; //GameObject.FindGameObjectWithTag("RaycastCamera").GetComponent<Camera>();
+            mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
         }
         dialogueManager = GameStateManager.dialogueManager;
@@ -82,29 +75,11 @@ public class UIElementSlider : MonoBehaviour
             if (hovered) {
                 OnHover();
 
-                /* // Start minigame
-                if (Input.GetMouseButtonDown(0) && dialogueManager.dashRequestRunning)
-                {
-                    // Execute click function
-                    unityEvent.Invoke();
-                } 
-                // Allow player to fiddle
-                else if (Input.GetMouseButton(0) && !dialogueManager.dashRequestRunning) {
-                    StartDrag();
-                }
-                else {
-                    dragging = false;
-                } */
-
                 if (Input.GetMouseButtonDown(0)) {
                     unityEvent.Invoke();
                 }
             }
 
-            // If player is fiddling with dial and no dash request is running
-            /* if (dragging && !dialogueManager.dashRequestRunning) {
-                Drag();
-            } */
             if (dragging) {
                 gameObject.layer = hoveredLayer;
                 Drag();
@@ -179,6 +154,7 @@ public class UIElementSlider : MonoBehaviour
         }
 
         if (dialObject) {
+            
             // Calculates the difference between the current mouse's position and mouse's previous position
             mousePosDelta = Input.mousePosition - mousePreviousPos;
 
@@ -201,31 +177,12 @@ public class UIElementSlider : MonoBehaviour
     {
         dragging = true;
         gameObject.layer = regularLayer;
-
-        /* GameStateManager.SetState(GAMESTATE.MENU);
-
-        splineDolly.Spline = spline;
-
-        // Reset camera position on spline dolly
-        splineDolly.CameraPosition = 0;
-
-        // Focus on this gameObject
-        cinemachineCam.LookAt = gameObject.transform;
-
-        // Start moving the camera on the dolly spline track
-        StartCoroutine(StartDollyMovement());
-        
-        Debug.Log("Slider clicked!");  */
     }
 
     // Function to be executed when button is hovered over
     public virtual void OnHover() {
         gameObject.layer = hoveredLayer;
         hovered = true;
-        // Enable hovered version of GameObject
-        /* if (!hoveredObject.activeSelf) {
-            hoveredObject.SetActive(true);
-        } */
     }
 
     public virtual void DefaultState()

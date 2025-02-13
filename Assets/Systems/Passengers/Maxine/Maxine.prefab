@@ -270,13 +270,15 @@ MonoBehaviour:
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
   textCPS: 0.05
-  waitTimeMin: 1
-  waitTimeMax: 2
+  waitTimeMin: 8
+  waitTimeMax: 10
   holdTime: 3.5
   minSwitchTime: 1.5
   maxSwitchTime: 3.5
+  meterSpeed: 2
   waitAfterRouteTime: 1
   hasStartedRideDialogue: 0
   ridesDialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
   - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}
+  preferences: {fileID: 11400000, guid: 54c123fb32c53497d9fb35fbe8a0700b, type: 2}
