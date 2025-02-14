@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Old Man McGee
   m_EditorClassIdentifier: 
   pickupGreeting: {fileID: 11400000, guid: f18dff20163b643799703d592eda3e92, type: 2}
-  dropoffSalute: {fileID: 11400000, guid: 9d8a0575db6884a2187c7784b395a801, type: 2}
+  dropoffSalute: {fileID: 11400000, guid: 5a53190ce4555479abbe87c00b6a906f, type: 2}

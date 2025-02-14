@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: maxine_dropoff_0
   m_EditorClassIdentifier: 
   lines:
-  - sentence: See you around.
+  - sentence: well, this is me!
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 1
+  - sentence: "i\u2019ll see you around!"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: till next time.
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

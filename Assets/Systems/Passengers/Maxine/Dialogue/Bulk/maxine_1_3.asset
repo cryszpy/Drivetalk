@@ -13,26 +13,74 @@ MonoBehaviour:
   m_Name: maxine_1_3
   m_EditorClassIdentifier: 
   lines:
-  - sentence: 'okay mr. taxi man, i know it''s been a while but do you remember how
-      to get to my place? '
+  - sentence: "well, anyways now that you\u2019re back we have a lot of catching
+      up to do!"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  nextDialogue: {fileID: 11400000, guid: 60a240b55574a4cafbdc89d0690187f2, type: 2}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "although before that\u2026"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "your skills as a taxi driver could use a bit of work\u2026"
+    expression: {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "your driving is good but everything else\u2026"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "let\u2019s just say it could use some work! "
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "as a taxi driver, it\u2019s important to <b>pay attention to the comfortability
+      of your passengers</b> yknow?"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: "if you notice anything out of the ordinary, don\u2019t be afraid to
+      fiddle around with some of your <b>dashboard settings</b>."
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: hehe.
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  nextDialogue: {fileID: 11400000, guid: 1a1f7e676ec6a4e58b3683c4e5db2e92, type: 2}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-  choices:
-  - {fileID: 11400000, guid: 0c5a2c41fea1049f3a6cb6b24718f37f, type: 2}
-  - {fileID: 11400000, guid: 27ac4f8e425f54e56a19d517a080a142, type: 2}
-  - {fileID: 11400000, guid: 9c530fb4999504d10bde8db353968b93, type: 2}
+  choices: []

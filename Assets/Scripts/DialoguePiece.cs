@@ -8,8 +8,20 @@ public struct DialogueLine {
     public PassengerExpression expression;
     public PassengerExpression startingExpression;
 
+    [Tooltip("Audio file to play <b>before</b> this line is typed out.")]
+    public AudioClip audioToPlay;
+
+    [Tooltip("An object to spawn on the dashboard <b>before</b> this line is said.")]
+    public GameObject dashboardObject;
+
+    [Tooltip("Whether this line enables the mood meter.")]
     public bool requestsStart;
+
+    [Tooltip("Whether this line disables the mood meter.")]
     public bool requestsEnd;
+
+    [Tooltip("Whether this line signals an early dropoff for the current passenger.")]
+    public bool earlyDropoff;
 }
 
 [System.Serializable]

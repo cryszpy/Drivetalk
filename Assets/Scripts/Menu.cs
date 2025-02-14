@@ -81,9 +81,6 @@ public class Menu : MonoBehaviour
         pauseMenuSettings.SetActive(false);
         transcriptScreen.SetActive(false);
 
-        // Hides the skip indicator
-        //GameStateManager.dialogueManager.skipIndicator.SetActive(false);
-
         Debug.Log("OPENED GAME!");
     }
 
@@ -225,10 +222,21 @@ public class Menu : MonoBehaviour
 
     // Play button functionality (called from button script assignment)
     public void PlayButton() {
+
+        // Reset stats
         passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        ResetStats();
+
+        // Generate day rides
+        GameStateManager.car.GenerateDayRides(passengerList.storyPassengers.Count);
+
+        // Start camera dolly motion
         StartCoroutine(StartDollyMovement());
+
+        // Play engine sound
         audioManager.PlaySoundByName("Engine");
         
+        // Start initial drive
         GameStateManager.dialogueManager.car.StartInitialDrive();
     }
 

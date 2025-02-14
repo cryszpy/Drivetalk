@@ -13,30 +13,30 @@ MonoBehaviour:
   m_Name: maxine_1_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: for a whole month you'd show up at my door and drive the two of us
-      aimlessly around town.
+  - sentence: "so you\u2019re a taxi driver now huh?"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
-  - sentence: 'it''s not polite to play with a girl''s heart like that y''know? '
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: if you didn't know my mom as a kid she definitely would've killed you.
-      haha!
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: honestly, this job seems to suit you well.
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "it\u2019s a bit nostalgic isn\u2019t it? "
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: do you remember when you first got your license?
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 11400000, guid: 8eff23407cf6d4764beb1429c146f300, type: 2}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-  choices: []
+  choices:
+  - {fileID: 11400000, guid: 0c5a2c41fea1049f3a6cb6b24718f37f, type: 2}
+  - {fileID: 11400000, guid: 27ac4f8e425f54e56a19d517a080a142, type: 2}
+  - {fileID: 11400000, guid: 9c530fb4999504d10bde8db353968b93, type: 2}

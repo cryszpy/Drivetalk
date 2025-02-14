@@ -25,7 +25,9 @@ public class DialogueUIElement : MonoBehaviour
 
     private IEnumerator NaturalDestroy() {
 
-        yield return new WaitForSeconds(car.currentPassenger.holdTime);
+        if (car.currentPassenger) {
+            yield return new WaitForSeconds(car.currentPassenger.holdTime);
+        }
 
         animator.SetTrigger("Out"); // Triggers destruction of element at end of animation
     }

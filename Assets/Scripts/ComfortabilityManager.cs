@@ -1,8 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComfortabilityManager : MonoBehaviour
 {
+    [Header("SCRIPT REFERENCES")]
+
+    [Tooltip("Reference to the visible mood meter slider.")]
+    public Slider moodMeter;
 
     [Header("STATS")] // --------------------------------------------------------------------------------
 
@@ -54,12 +59,34 @@ public class ComfortabilityManager : MonoBehaviour
                 }
             }
 
-            // Affect the passenger's comfortability
-            if (happy) {
-                currentComfortability += GameStateManager.car.currentPassenger.meterSpeed * Time.deltaTime;
-            } else {
-                currentComfortability -= GameStateManager.car.currentPassenger.meterSpeed * Time.deltaTime;
+            UpdateMood();
+        }
+    }
+
+    private void UpdateMood() {
+
+        // Affect the passenger's comfortability
+        if (happy) {
+
+            float add = GameStateManager.car.currentPassenger.meterSpeed * Time.deltaTime;
+
+            if ((currentComfortability + add) > moodMeter.maxValue) {
+                currentComfortability = moodMeter.maxValue;
+            }  else {
+                currentComfortability += add;
+            }
+            
+        } else {
+
+            float subtract = GameStateManager.car.currentPassenger.meterSpeed * Time.deltaTime;
+
+            if ((currentComfortability - subtract) < moodMeter.minValue) {
+                currentComfortability = moodMeter.minValue;
+            }  else {
+                currentComfortability -= subtract;
             }
         }
+
+        moodMeter.value = currentComfortability;
     }
 }

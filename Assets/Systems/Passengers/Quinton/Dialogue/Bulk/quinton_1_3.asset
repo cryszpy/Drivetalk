@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: quinton_1_3
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: "Man\u2026 there\u2019s this girl who\u2019s got me all nervous."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: Hey driver, ever fallen in love?
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  nextDialogue: {fileID: 11400000, guid: 25d15acce7b62469c91812d9b8d250fa, type: 2}
+  firstNameUsage: 0
+  fallbackExpression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+  choices:
+  - {fileID: 11400000, guid: df13849d37aad4735b3706c76e19f20a, type: 2}
+  - {fileID: 11400000, guid: 10ee5ecfb572a4e10848d69c57ca7fc9, type: 2}

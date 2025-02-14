@@ -53,21 +53,46 @@ public class RequestAC : DashboardRequestBase {
                 break;
         }
 
-        StartCoroutine(MoveDial());
+        StartCoroutine(MoveDial(floatValue));
     }
 
-    private IEnumerator MoveDial() {
-        
-        // While the dial is not set to its targeted rotation, and the player isn't messing with it—
-        while (acDial.dialObject.transform.localEulerAngles.y <= floatValue && !acDial.dragging) {
+    private IEnumerator MoveDial(float value) {
 
-            yield return new WaitForSeconds(dialWaitTime);
+        switch(value) {
 
-            // Move rotation towards target rotation
-            float newRot = acDial.dialObject.transform.localEulerAngles.y + dialSpeed;
+            case < 0.5f:
 
-            // Apply change in rotation
-            acDial.dialObject.transform.localEulerAngles = new Vector3(acDial.dialObject.transform.localEulerAngles.x, newRot, acDial.dialObject.transform.localEulerAngles.z);
+                // While the dial is not set to its targeted rotation, and the player isn't messing with it—
+                while (acDial.dialObject.transform.localEulerAngles.y >= floatValue && !acDial.dragging) {
+
+                    yield return new WaitForSeconds(dialWaitTime);
+
+                    // Move rotation towards target rotation
+                    float newRot = acDial.dialObject.transform.localEulerAngles.y - dialSpeed;
+
+                    // Apply change in rotation
+                    acDial.dialObject.transform.localEulerAngles = new Vector3(acDial.dialObject.transform.localEulerAngles.x, newRot, acDial.dialObject.transform.localEulerAngles.z);
+                }
+                break;
+
+            case > 0.5f:
+
+                // While the dial is not set to its targeted rotation, and the player isn't messing with it—
+                while (acDial.dialObject.transform.localEulerAngles.y <= floatValue && !acDial.dragging) {
+
+                    yield return new WaitForSeconds(dialWaitTime);
+
+                    // Move rotation towards target rotation
+                    float newRot = acDial.dialObject.transform.localEulerAngles.y + dialSpeed;
+
+                    // Apply change in rotation
+                    acDial.dialObject.transform.localEulerAngles = new Vector3(acDial.dialObject.transform.localEulerAngles.x, newRot, acDial.dialObject.transform.localEulerAngles.z);
+                }
+                break;
+
+            case 0.5f:
+                Debug.LogError("Target float value is exactly 0.5f!");
+                break;
         }
 
         changing = false;

@@ -13,7 +13,7 @@ public class ProceduralRoad : MonoBehaviour
 
     public List<RoadConnectionPoint> roadConnections = new();
 
-    private void Start() {
+    /* private void Start() {
         carPointer = GameObject.FindGameObjectWithTag("CarPointer").GetComponent<CarPointer>();
 
         // Adds all taxi stops in this road to the car's list of taxi stops
@@ -35,5 +35,5 @@ public class ProceduralRoad : MonoBehaviour
                 }
             }
         }
-    }
+    } */
 }

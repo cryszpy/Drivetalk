@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -15,17 +16,23 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the game's dialogue manager.")]
     public DialogueManager dialogueManager;
 
-    [Tooltip("List of all taxi stops in the game.")]
-    public List<GameObject> taxiStops = new();
+    [Tooltip("Reference to the mood meter animator.")]
+    public Animator moodMeterAnimator;
+
+    [Tooltip("Reference to the sprite renderer component of the passenger's head on the mood meter.")]
+    public Image moodMeterHandle;
+
+    /* [Tooltip("List of all taxi stops in the game.")]
+    public List<GameObject> taxiStops = new(); */
 
     [Tooltip("List of all the car's available passenger seats.")]
     [SerializeField] private List<GameObject> passengerSeats;
 
-    /* [Tooltip("Reference to the shotgun seat of the car.")]
-    [SerializeField] private GameObject shotgun; */
+    [Tooltip("List of all dashboard gift spawn locations.")]
+    public List<GiftSpawn> dashboardGiftSpawns = new();
 
-    [Tooltip("Reference to the car's Rigidbody component.")]
-    [SerializeField] private Rigidbody rb;
+    [Tooltip("Reference to the rearview mirror gift spawn location.")]
+    public GiftSpawn rearviewGiftSpawn;
 
     [Tooltip("Reference to the car's Navigation Mesh AI agent component.")]
     public NavMeshAgent agent;
@@ -39,11 +46,8 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the prefab for a UI choice button.")]
     public GameObject choicePrefab;
 
-    [Tooltip("Reference to the car's current taxi stop destination.")]
-    public GameObject currentStop;
-
-    /* public Material setMaterial;
-    public Material unsetMaterial; */
+    [Tooltip("Reference to the car's dropoff position for passengers.")]
+    public GameObject dropoffPosition;
 
     [Header("STATS")]
 
@@ -53,11 +57,11 @@ public class CarController : MonoBehaviour
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
     public bool atTaxiStop = false;
 
-    [Tooltip("The minimum possible amount of rides in a day.")]
+    /* [Tooltip("The minimum possible amount of rides in a day.")]
     [SerializeField] private int minRides;
 
     [Tooltip("The maximum possible amount of rides in a day.")]
-    [SerializeField] private int maxRides;
+    [SerializeField] private int maxRides; */
 
     [Tooltip("The current ride of the day.")]
     public int currentRideNum;
@@ -115,18 +119,12 @@ public class CarController : MonoBehaviour
 
     private void Start() {
 
-        // Flip camera projection horizontally (for accurate mirror effect)
-        /* Matrix4x4 mat = rearviewMirrorCam.projectionMatrix;
-        mat *= Matrix4x4.Scale(new Vector3(1, -1, 1));
-        rearviewMirrorCam.projectionMatrix = mat; */
+        FindReferences();
 
-        // If dialogue manager is null, reassign it
-        dialogueManager = GameStateManager.dialogueManager;
-
-        // If the day hasn't been started, generate random number of rides for today
+        /* // If the day hasn't been started, generate random number of rides for today
         if (totalRideNum <= 0){
             GenerateDayRides();
-        }
+        } */
     }
 
     private void Update() {
@@ -136,26 +134,45 @@ public class CarController : MonoBehaviour
         {
             // Drive to the current destination
             agent.SetDestination(carPointer.pointer.transform.position);
-
-            
         }
 
+# if UNITY_EDITOR
         // DEV static variable tracking—REMOVE FOR BUILDS
         ratingTracker = Rating;
         tempTracker = Temperature;
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
         currentRadioChannelTracker = CurrentRadioChannel;
+# endif
+    }
+
+    private void FindReferences() {
+
+        // If dialogue manager is null, reassign it
+        if (!dialogueManager) {
+            dialogueManager = GameStateManager.dialogueManager;
+            Debug.LogWarning("dialogueManager reference on: " + name + " is null! Reassigned.");
+        }
+
+        if (!moodMeterAnimator) {
+            moodMeterAnimator = GameObject.FindGameObjectWithTag("MoodMeter").GetComponent<Animator>();
+            Debug.LogWarning("moodMeterAnimator reference on: " + name + " is null! Reassigned.");
+        }
+
+        if (!moodMeterHandle) {
+            moodMeterHandle = GameObject.FindGameObjectWithTag("MoodMeterHandle").GetComponent<Image>();
+            Debug.LogWarning("moodMeterHandle reference on: " + name + " is null! Reassigned.");
+        }
     }
 
     // Generates the day's rides
-    private void GenerateDayRides() {
+    public void GenerateDayRides(int value) {
 
         // Get random number between min and max possible ride numbers
-        int rand = Random.Range(minRides, maxRides);
+        //int rand = Random.Range(minRides, maxRides);
 
         // Set the day's total rides to this number
-        totalRideNum = rand;
+        totalRideNum = value;
 
         // Start the day from ride number 0
         currentRideNum = 0;
@@ -163,7 +180,7 @@ public class CarController : MonoBehaviour
         Debug.Log("Generated rides for the day! " + totalRideNum);
     }
 
-    // Finds the nearest taxi stop to the car's current location
+    /* // Finds the nearest taxi stop to the car's current location
     public void FindNearestStop() {
 
         // New list of the distances between all taxi stops and the car
@@ -185,11 +202,9 @@ public class CarController : MonoBehaviour
             // Route the car to the nearest taxi stop
             carPointer.StartDrive(taxiStops[stopDistances.IndexOf(stopDistances.Min())]);
         }
-    }
+    } */
 
     public void StartInitialDrive() {
-        /* carPointer.StartDrive(carPointer.initialRoad.center);
-        carPointer.StartDrive(carPointer.initialRoad.center); */
         carPointer.SpawnRoadTile();
     }
 
@@ -208,6 +223,9 @@ public class CarController : MonoBehaviour
             carPointer.taxiStopsEnabled = false;
             atTaxiStop = true;
             arrivedAtDest = false;
+
+            // Assign correct headshot of passenger to the mood meter
+            moodMeterHandle.sprite = script.headshot;
             
             // Add passenger to total driven passengers list if they are a new passenger
             if (!PassengersDrivenIDs.Contains(currentPassenger.id)) {
@@ -227,11 +245,8 @@ public class CarController : MonoBehaviour
 
             GameStateManager.EOnPassengerPickup?.Invoke();
 
-            //dialogueManager.dashTicker = currentPassenger.dashRequestTickRate;
-
             // Start the passenger's pickup greeting if they have one
             dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting);
-            //dialogueManager.StartDialogue(currentPassenger.dialogue[currentPassenger.currentDialogueNum], false);
 
             // Set the passenger as having been picked up
             currentPassenger.tag = "PickedUp";
@@ -262,14 +277,8 @@ public class CarController : MonoBehaviour
 
         carPointer.taxiStopsEnabled = true;
 
-        // Switches car pathfinding target to destination
-        //carPointer.StartDrive(carPointer.destinationObject);
-
         // Reset line renderer
         carPointer.SetGPSPath();
-
-        // Resets the destination highlight material
-        //carPointer.destinationObject.GetComponent<MeshRenderer>().material = unsetMaterial;
 
         // Clears all previous dashboard requests
         GameStateManager.comfortManager.activeRequests.Clear();
@@ -277,14 +286,13 @@ public class CarController : MonoBehaviour
         // Reset initial block routing trigger
         carPointer.setInitialBlock = false;
 
-        // Set the car's current stop to this stop
-        currentStop = carPointer.destinationObject;
-
         // Reset destination
         carPointer.destinationObject = null;
         carPointer.destinationSpawned = false;
 
         // Drops off the current passenger
-        dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
+        if (currentPassenger) {
+            dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
+        }
     }
 }

@@ -13,46 +13,34 @@ MonoBehaviour:
   m_Name: maxine_1_2
   m_EditorClassIdentifier: 
   lines:
-  - sentence: this really does remind me of the old times though. we haven't had
-      the chance to talk like this in a while.
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
-  - sentence: it's nice.
+  - sentence: "you\u2019d show up to my house everyday and take me out for rides
+      around town."
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: we'd always talk about our dreams, hopes, and aspirations for the future
-      during those drives.
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "you\u2019re lucky my mom\u2019s known you your whole life."
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: maybe it's just me but it seemed like the walls surrounding you seemed
-      to lower back then.
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
-  - sentence: whenever you were driving you always seemed like a different person.
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "otherwise she would\u2019ve killed you!"
+    expression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "she told me you shouldn\u2019t play with a young maiden\u2019s heart
+      like that!"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: "\u2026"
-    expression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "i agree with her, y\u2019know!"
+    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: "i will say though\u2026"
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
-  - sentence: i really do think this job suits you!
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 11400000, guid: 5ad7b10915eb241c7ab966016323c409, type: 2}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

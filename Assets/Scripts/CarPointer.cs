@@ -47,15 +47,10 @@ public class CarPointer : MonoBehaviour
     [HideInInspector] public List<GameObject> currentBlocksList = new();
 
     [Tooltip("The current car navigation route's path to the destination.")]
-    [HideInInspector] public List<Marker> path = new();
+    public List<Marker> path = new();
 
     [HideInInspector] public List<Marker> gpsPathRef = new();
     [HideInInspector] public List<Vector3> gpsPath = new();
-
-    [Tooltip("Reference to the saved destination set before destination is switched due to unfinished dialogue. SET DYNAMICALLY")]
-    //public GameObject savedDestination;
-
-    //public Road trackedIntersection;
 
     public TurnSignal turnSignal;
     public Wheel wheel;
@@ -79,9 +74,6 @@ public class CarPointer : MonoBehaviour
     public bool inIntersection = false;
 
     public bool calculatedDirections = false;
-    //public SteeringDirection backupSteeringDirection;
-
-    //public List<SteeringDirection> validDirections = new();
 
     [Header("PROCEDURAL GENERATION")]
 
@@ -148,16 +140,10 @@ public class CarPointer : MonoBehaviour
 
                 // Don't enable GPS when there's no passenger
                 if (car.currentPassenger) {
+                    
                     // Set GPS path
                     SetGPSPath();
                 }
-            }
-
-            // If the car has not calculated valid directions, and it is not at a taxi stop (it's driving) and there is a passenger to give a ride to–
-            if (!calculatedDirections && !car.atTaxiStop && car.currentPassenger && !car.arrivedAtDest) {
-
-                // Calculate valid directions and steer towards one
-                //SwitchDirection();
             }
 
             if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
@@ -185,11 +171,6 @@ public class CarPointer : MonoBehaviour
 
         // Set the car pointer's destination
         pathfindingTarget = destination;
-
-        if (pathfindingTarget.CompareTag("Destination")) {
-            destinationRadius = pathfindingTarget.GetComponentInChildren<DestinationRadius>();
-            Debug.Log("Assigned destination radius!");
-        }
         
         // Find the closest marker to the car's starting position
         currentMarker = FindClosestMarker();
@@ -380,15 +361,11 @@ public class CarPointer : MonoBehaviour
             Destroy(discardRoad.gameObject);
         }
 
-        // INITIAL
-
-        // List of all possible road tiles
-        // Removes destination from list
-
         // Picks random tile to spawn (or destination)
         GameObject roadFromList = null;
         GameObject selectedTile = null;
 
+        // If dialogue is finished, spawn destination tile
         if (finishedDialogue && !destinationSpawned) {
 
             if (currentDestinationTile) {
@@ -402,7 +379,9 @@ public class CarPointer : MonoBehaviour
                 Debug.LogError("Tried to spawn non-existing destination!");
             }
 
-        } else {
+        } 
+        // Otherwise just pick a random tile
+        else {
             roadFromList = roadList.allRoadsList[UnityEngine.Random.Range(0, roadList.allRoadsList.Count)];
             selectedTile = Instantiate(roadFromList, furthestConnectionPoint.transform.position, Quaternion.identity);
         }
@@ -455,9 +434,6 @@ public class CarPointer : MonoBehaviour
 
             // Starts driving towards that intersection
             StartDrive(currentRoad.center);
-
-            // Calculates shortest path to destination for GPS
-            //SetGPSPath();
         } else {
             Debug.LogWarning("Cannot pathfind, as currentRoad is null!");
         }

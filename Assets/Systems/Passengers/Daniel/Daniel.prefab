@@ -247,11 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633de01fb2f404326b0691e0db1eb788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rarity: 0
-  id: 3
-  passengerName: Daniel
-  hiddenName: ???
-  nameRevealed: 0
+  headshot: {fileID: 1624075044, guid: 5c58235cf59877a4a8634b64ff4a24a9, type: 3}
+  animator: {fileID: 2486925453300218498}
   archetype: {fileID: 11400000, guid: 34e4cbca7db514987a9e2913ad32441d, type: 2}
   expressions:
   - {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
@@ -260,22 +257,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8fba82cc4ed2e46cfae16dfb7bcbadf1, type: 2}
   - {fileID: 11400000, guid: ba2d24060b4f04f8c9f782b252fe7c4a, type: 2}
   - {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
-  animator: {fileID: 2486925453300218498}
   requirements: []
-  requirementMet: 0
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  ridesDialogue:
+  - {fileID: 11400000, guid: 7096b599fc8fb488e97a204fef65c2a9, type: 2}
+  rarity: 0
+  id: 3
+  passengerName: Daniel
+  hiddenName: ???
+  nameRevealed: 0
+  requirementMet: 0
   textCPS: 0.08
-  waitTimeMin: 1
-  waitTimeMax: 2
+  longPauseMin: 3
+  longPauseMax: 6
   holdTime: 2
   minSwitchTime: 2.5
   maxSwitchTime: 4
-  comfortChangeSpeed: 0
-  comfortNewControlRate: 0
-  comfortPreferredRate: 0
-  preferredDashRequests: []
+  meterSpeed: 1
   waitAfterRouteTime: 2
   hasStartedRideDialogue: 0
-  ridesDialogue:
-  - {fileID: 11400000, guid: 7096b599fc8fb488e97a204fef65c2a9, type: 2}
+  preferences: {fileID: 11400000, guid: 40e2263edd41340bfa81ebc031a5b821, type: 2}

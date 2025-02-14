@@ -42,15 +42,10 @@ public class GPSDestination : MonoBehaviour
         car.atTaxiStop = false;
 
         // If the car still has rides left in the day—
-        if (car.currentRideNum < car.totalRideNum) {
+        if (car.currentRideNum <= car.totalRideNum) {
 
             // Sets the passenger destination object
             carPointer.currentDestinationTile = destinationObject;
-
-            // If already inside destination radius, allow rerouting
-            if (carPointer.destinationRadius) {
-                carPointer.setInitialBlock = false;
-            }
 
             // Start waiting until the passenger talks
             GameStateManager.EOnDestinationSet?.Invoke();

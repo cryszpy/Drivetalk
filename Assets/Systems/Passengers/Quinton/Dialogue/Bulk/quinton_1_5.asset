@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: quinton_1_5
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: "Ah\u2026 sorry, I drank a bit before this."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "Didn\u2019t mean to get all sappy with you."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "This town is small and everyone knows each other. It\u2019s hard to
+      fit in when you\u2019re not from here."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: I'm just here for a bit, moved here a few months ago to live with my
+      grandpa.
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: Everyone says I'm just like him, but I don't see it.
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "Once I get rich, I\u2019ll get a new car that actually works. An \u201806
+      Pluto, bright red."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "And I\u2019ll leave this town with my girl."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: I'll probably leave Grandpa a few grand, too. Least I could do.
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject:
+      objectToSpawn: {fileID: 0}
+      spawnPoint: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  nextDialogue: {fileID: 11400000, guid: 7427d934eed4a402ea1e329226dcbdb1, type: 2}
+  firstNameUsage: 0
+  fallbackExpression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+  choices: []

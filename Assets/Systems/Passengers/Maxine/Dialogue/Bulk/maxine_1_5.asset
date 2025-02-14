@@ -13,30 +13,17 @@ MonoBehaviour:
   m_Name: maxine_1_5
   m_EditorClassIdentifier: 
   lines:
-  - sentence: it's a harsh world out there for you taxi drivers! lots of competition
-      y'know?
+  - sentence: as much as i like to tease, it really is nice to see you again!
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: "well\u2026 there's not much competition around here but you don't
-      want the townsfolk hating you do you?"
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: 'distance does make the heart grow fonder! '
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: you'd rather be the first choice than the last resort!
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 11400000, guid: f3ff3b113bee14631b5b977d9cccf953, type: 2}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

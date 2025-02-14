@@ -8,7 +8,7 @@ public class Destination : MonoBehaviour
     private CarController car;
 
     [Tooltip("Boolean flag; Checks if the car is inside this radius.")]
-    private bool inRadius = false;
+    [SerializeField] private bool inRadius = false;
 
     private void Start() {
 
@@ -20,13 +20,16 @@ public class Destination : MonoBehaviour
 
     private void Update() {
 
+        //Debug.Log(car + " | " + inRadius + " | " + !car.arrivedAtDest + " | " + (car.carPointer.destinationObject == this.transform.parent.parent.parent.gameObject));
+
         // If the car reference is not null, and the car is inside this destination—
-        if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.parent.gameObject) {
+        if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.parent.parent.gameObject) {
+            Debug.Log("ahwigjwapg");
 
             // Stop looping of this function
             car.arrivedAtDest = true;
 
-            // If this destination is the car's intended destination, dialogue has finished, and the passenger exists—
+            // If the car is carrying a passenger—
             if (car.currentPassenger) {
 
                 GameStateManager.dialogueManager.ResetDialogue();
@@ -68,22 +71,6 @@ public class Destination : MonoBehaviour
             
             if (car.arrivedAtDest) {
                 car.arrivedAtDest = false;
-
-                // Re-raycast for directions
-                //car.carPointer.GetValidDirections();
-
-                /* car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
-                car.carPointer.turnSignal.hovered = false;
-                car.carPointer.turnSignal.dragging = false;
-                StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection)); */
-
-                // Reset steering direction to forward if possible
-                /* if (car.carPointer.validDirections.Contains(SteeringDirection.FORWARD)) {
-                    car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
-                    car.carPointer.turnSignal.hovered = false;
-                    car.carPointer.turnSignal.dragging = false;
-                    StartCoroutine(car.carPointer.turnSignal.SignalClick(car.carPointer.currentSteeringDirection));
-                } */
             }
         }
     }

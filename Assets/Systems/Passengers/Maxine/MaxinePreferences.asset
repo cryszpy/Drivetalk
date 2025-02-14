@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c73e00c3e2f48f29a7f4d01667437c, type: 3}
   m_Name: MaxinePreferences
   m_EditorClassIdentifier: 
-  acMin: 0.15
+  acMin: 0.08
   acMax: 0.4
   radioSongId: 2
   hazardPref: 0

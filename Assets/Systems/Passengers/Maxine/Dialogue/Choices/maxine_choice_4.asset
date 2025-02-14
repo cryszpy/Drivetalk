@@ -13,34 +13,13 @@ MonoBehaviour:
   m_Name: maxine_choice_4
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "\u2026"
+  - sentence: "don\u2019t get shy now you liar, i know you remember."
     expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: "i lived right next to you\u2026"
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
-    startingExpression: {fileID: 0}
-  - sentence: "just start driving towards your old place and you can\u2019t miss
-      it."
-    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
-    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
-  - sentence: "although, i guess it has been a while hasn't it? not long enough to
-      forget where i live though\u2026"
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
-    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
-  choiceText: No idea.
+  choiceText: "I don\u2019t."

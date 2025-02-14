@@ -16,6 +16,31 @@ public struct PassengerRequirement {
 public class Passenger : MonoBehaviour
 {
 
+    [Header("SCRIPT REFERENCES")] // -------------------------------------------------------------------------------------------------
+
+    [Tooltip("The image to be displayed on the mood meter for this passenger's rides.")]
+    public Sprite headshot;
+
+    [Tooltip("This passenger's Animator component.")]
+    public Animator animator;
+
+    [Tooltip("This passenger's generic response archetype.")]
+    public PassengerArchetype archetype;
+
+    [Tooltip("This passenger's possible expressions.")]
+    public List<PassengerExpression> expressions = new();
+
+    [Tooltip("Any requirements for this passenger to have a chance of showing up.")]
+    public List<PassengerRequirement> requirements;
+
+    [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
+    public List<GameObject> requestedDestinationTiles;
+
+    [Tooltip("List of all ride dialogue for this passenger, in order.")]
+    public List<DialoguePiece> ridesDialogue;
+
+    [Header("STATS")] // -------------------------------------------------------------------------------------------------
+
     [Tooltip("The rarity bracket this passenger belongs to.")]
     public PassengerRarity rarity;
 
@@ -31,30 +56,16 @@ public class Passenger : MonoBehaviour
     [Tooltip("Whether this passenger's name has been revealed yet or not.")]
     public bool nameRevealed = false;
 
-    [Tooltip("This passenger's generic response archetype.")]
-    public PassengerArchetype archetype;
-
-    [Tooltip("This passenger's possible expressions.")]
-    public List<PassengerExpression> expressions = new();
-
-    [Tooltip("This passenger's Animator component.")]
-    public Animator animator;
-
-    [Tooltip("Any requirements for this passenger to have a chance of showing up.")]
-    public List<PassengerRequirement> requirements;
     [Tooltip("Whether this passenger's spawn requirements have been met.")]
     public bool requirementMet;
-
-    [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
-    public List<GameObject> requestedDestinationTiles;
 
     [Tooltip("The rate at which this passenger types out dialogue text. (lower values are faster)")]
     public float textCPS;
 
     [Tooltip("The minimum possible time that this passenger waits between saying dialogue groups.")]
-    public float waitTimeMin;
+    public float longPauseMin;
     [Tooltip("The maximum possible time that this passenger waits between saying dialogue groups.")]
-    public float waitTimeMax;
+    public float longPauseMax;
     [Tooltip("The amount of time this passenger will have each sentence held on-screen for.")]
     public float holdTime;
     [Tooltip("The minimum possible time that this passenger waits to switch from default to side expression views.")]
@@ -71,10 +82,7 @@ public class Passenger : MonoBehaviour
     [Tooltip("Boolean to check if the passenger has started ride dialogue.")]
     public bool hasStartedRideDialogue = false;
 
-    [Tooltip("List of all ride dialogue for this passenger, in order.")]
-    public List<DialoguePiece> ridesDialogue;
-
-    [Header("DASHBOARD PREFERENCES")]
+    [Header("DASHBOARD PREFERENCES")] // -------------------------------------------------------------------------------------------------
 
     public DashboardPreference preferences;
 }

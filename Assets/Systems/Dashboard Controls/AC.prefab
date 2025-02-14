@@ -577,7 +577,7 @@ MonoBehaviour:
   boolValue: 0
   fulfilled: 0
   active: 0
-  cooldown: 6
+  cooldown: 11
   cooldownTimer: 0
   acDial: {fileID: 767679985645254037}
   dialWaitTime: 0.1

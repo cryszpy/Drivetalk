@@ -13,27 +13,18 @@ MonoBehaviour:
   m_Name: maxine_choice_3
   m_EditorClassIdentifier: 
   lines:
-  - sentence: oh? you do? haha! i'm glad to see you didn't completely forget about
-      us.
+  - sentence: haha! it was like i was seeing a whole different side of you!
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "i\u2019d never seen you giddy like that before."
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: i did live right next to you though, so it'd be pretty hard to forget.
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
-    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
-  choiceText: How could I forget?
+  choiceText: Of course I do.

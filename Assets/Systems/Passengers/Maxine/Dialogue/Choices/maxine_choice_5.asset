@@ -13,27 +13,17 @@ MonoBehaviour:
   m_Name: maxine_choice_5
   m_EditorClassIdentifier: 
   lines:
-  - sentence: "i lived right next to you y'know\u2026 did your brain go on vacation
-      too?"
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+  - sentence: 'your silence speaks volumes dom! '
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
-  - sentence: "although, i guess it has been a while hasn't it? not long enough to
-      forget where i live though\u2026"
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
-    startingExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "i know you\u2019re embarrassed."
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

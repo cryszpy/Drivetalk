@@ -247,11 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633de01fb2f404326b0691e0db1eb788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rarity: 0
-  id: 1
-  passengerName: Maxine
-  hiddenName: Maxine
-  nameRevealed: 0
+  headshot: {fileID: 1186082652, guid: f9f86e3a9bc6e2840b973c21dc41c891, type: 3}
+  animator: {fileID: 2486925453300218498}
   archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   expressions:
   - {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
@@ -263,22 +260,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
   - {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
   - {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
-  animator: {fileID: 2486925453300218498}
   requirements: []
-  requirementMet: 0
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  ridesDialogue:
+  - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
+  - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}
+  rarity: 0
+  id: 1
+  passengerName: Maxine
+  hiddenName: Maxine
+  nameRevealed: 0
+  requirementMet: 0
   textCPS: 0.05
-  waitTimeMin: 8
-  waitTimeMax: 10
+  longPauseMin: 3
+  longPauseMax: 5
   holdTime: 3.5
   minSwitchTime: 1.5
   maxSwitchTime: 3.5
   meterSpeed: 2
   waitAfterRouteTime: 1
   hasStartedRideDialogue: 0
-  ridesDialogue:
-  - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
-  - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}
   preferences: {fileID: 11400000, guid: 54c123fb32c53497d9fb35fbe8a0700b, type: 2}

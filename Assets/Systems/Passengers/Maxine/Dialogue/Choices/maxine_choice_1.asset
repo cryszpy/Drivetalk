@@ -13,23 +13,18 @@ MonoBehaviour:
   m_Name: maxine_choice_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: don't get shy now you liar, i know you remember.
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+  - sentence: you froze up like you saw a ghost or something!
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "well, i\u2019m glad you didn't forget about us during your time away!"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []
-  choiceText: I don't.
+  choiceText: "I didn\u2019t forget."

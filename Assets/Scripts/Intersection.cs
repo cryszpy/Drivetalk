@@ -21,10 +21,6 @@ public class Intersection : Road
                 carPointer = script.carPointer;
                 carPointer.inIntersection = true;
 
-                /* if (carPointer.trackedIntersection == gameObject) {
-                    carPointer.trackedIntersection = null;
-                } */
-
                 // Spawns new procedural road tile
                 carPointer.SpawnRoadTile();
 
@@ -54,12 +50,6 @@ public class Intersection : Road
                 }
 
                 carPointer.inIntersection = false;
-                //carPointer.calculatedDirections = false;
-
-                // Recalculate GPS route in case player missed a turn unless car doesn't have a passenger
-                /* if (carPointer.destinationObject && carPointer.car.currentPassenger) {
-                    carPointer.SetGPSPath(carPointer.destinationObject);
-                } */
             }
         }
     }

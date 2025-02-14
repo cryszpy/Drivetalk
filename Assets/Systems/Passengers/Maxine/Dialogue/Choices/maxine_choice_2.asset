@@ -13,22 +13,27 @@ MonoBehaviour:
   m_Name: maxine_choice_2
   m_EditorClassIdentifier: 
   lines:
-  - sentence: your silence speaks volumes dom! i know you're embarrassed.
-    expression: {fileID: 11400000, guid: 55a3822015a8d439c99ad0e78eb5f871, type: 2}
+  - sentence: as silent as ever dom
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: as silent as ever dom.
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: ...
+    expression: {fileID: 11400000, guid: 13c861d582ee7427bb966430e12405b5, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: glad to have you back!
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

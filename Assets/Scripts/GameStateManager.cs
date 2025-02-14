@@ -53,7 +53,6 @@ public class GameStateManager : MonoBehaviour
     public static ComfortabilityManager comfortManager;
 
     public static RoadManager roadManager;
-    public RoadManager roadManagerTracker;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnEnable()
@@ -74,6 +73,5 @@ public class GameStateManager : MonoBehaviour
 
     private void Update() {
         gamestateTracker = Gamestate;
-        roadManagerTracker = roadManager;
     }
 }

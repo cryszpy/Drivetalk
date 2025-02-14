@@ -13,23 +13,32 @@ MonoBehaviour:
   m_Name: maxine_1_4
   m_EditorClassIdentifier: 
   lines:
-  - sentence: don't forget, a truly skilled taxi driver always keeps the comfortability
-      of their passengers in mind! got it?
+  - sentence: "this car could use some work too y\u2019know?"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    requestsStart: 1
+    requestsEnd: 0
+  - sentence: "seems like you\u2019re fighting the car more than driving it!"
+    expression: {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "although now that i\u2019m taking a closer look\u2026"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "this is your old car from way back then isn\u2019t it?"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+  - sentence: "this is your old car from way back then isn\u2019t it?"
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
   nextDialogue: {fileID: 11400000, guid: ab949d651c2ce416c93a4679b42793c9, type: 2}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices:

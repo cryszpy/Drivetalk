@@ -16,22 +16,17 @@ TagManager:
   - NameBox
   - TranscriptLog
   - SkipIndicator
-  - Destination
-  - DestinationRadius
-  - Block
   - MainCanvas
   - AutoDialogueToggle
   - AudioManager
-  - ContinueButton
   - GPSIndicator
   - TurnSignal
   - Wheel
   - DialoguePivot
   - GPSMarker
-  - RaycastCamera
-  - ValidDirection
-  - InvalidDirection
   - Marker
+  - MoodMeter
+  - MoodMeterHandle
   layers:
   - Default
   - TransparentFX

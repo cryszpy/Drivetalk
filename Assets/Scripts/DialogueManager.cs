@@ -34,13 +34,6 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the transcript log object.")]
     public TranscriptLog transcriptLog;
 
-    /* [Tooltip("Reference to the continue button element.")]
-    public GameObject continueButton; */
-    /* public TMP_Text RMM_dialogueText;
-    public GameObject RMM_dialogueBox; */
-
-    //[SerializeField] private Animator choiceNotifAnimator;
-
     [SerializeField] private GameObject dialoguePivot;
 
     [SerializeField] private GameObject dialogueElement;
@@ -60,17 +53,11 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("List of all choice buttons in a choice branch.")]
     [SerializeField] private List<GameObject> choiceButtonsList;
 
-    /* [Tooltip("Reference to the skip dialogue indicator image.")]
-    public GameObject skipIndicator; */
-
     private Toggle autoDialogueToggle;
 
     public GameObject currentElement;
 
     public List<DialogueLine> bruh = new();
-    /* public GameObject choiceNotif;
-
-    [SerializeField] private RearviewMirror rearviewMirror; */
     
     [Header("STATS")] // --------------------------------------------------------------------------------
 
@@ -259,7 +246,9 @@ public class DialogueManager : MonoBehaviour
                     playingChoices = true;
 
                     // Set the previous non-choice dialogue piece to jump back to after choices
-                    preChoiceDialogue = currentDialogue;
+                    if (preChoiceDialogue == null) {
+                        preChoiceDialogue = currentDialogue;
+                    }
 
                     // Show choices
                     ShowChoices();
@@ -396,8 +385,8 @@ public class DialogueManager : MonoBehaviour
         // Switches from the "playing choices" state
         playingChoices = false;
 
-        // Enables the continue button
-        //continueButton.SetActive(true);
+        // Affect mood meter with appropriate change
+        GameStateManager.comfortManager.currentComfortability += choice.moodChange;
 
         // If choice response exists, play it
         if (choice.lines.Length > 0) {
@@ -412,14 +401,36 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     public IEnumerator TypeSentence(DialogueLine line) {
 
+        // Start fading previous dialogue line element
         if (activeDialogueBlocks.Count >= maxDialogueElements) {
             GameObject deadBlock = activeDialogueBlocks.Dequeue();
 
             if (deadBlock.TryGetComponent<DialogueUIElement>(out var deadScript)) {
-                deadScript.animator.SetTrigger("Out"); // Starts destruction of dialogue block
+
+                // Starts destruction of dialogue block
+                deadScript.animator.SetTrigger("Out");
             }
         }
 
+        // Sets the currentLine stats
+        currentLine.sentence = line.sentence;
+        currentLine.expression = line.expression;
+        currentLine.startingExpression = line.startingExpression;
+        currentLine.requestsStart = line.requestsStart;
+        currentLine.requestsEnd = line.requestsEnd;
+        currentLine.audioToPlay = line.audioToPlay;
+        currentLine.dashboardObject = line.dashboardObject;
+        currentLine.earlyDropoff = line.earlyDropoff;
+
+        // Play audio file if there is one
+        if (currentLine.audioToPlay != null) {
+            Debug.Log("jaigeijowag");
+            GameStateManager.audioManager.PlaySoundByFile(currentLine.audioToPlay);
+
+            yield return new WaitForSeconds(currentLine.audioToPlay.length);
+        }
+
+        // Spawn new dialogue element
         if (dialogueElement.TryGetComponent<DialogueUIElement>(out var blockScript)) {
             currentElement = (GameObject)blockScript.Create(dialogueElement, dialoguePivot.transform, car);
             currentElement.transform.SetAsFirstSibling();
@@ -429,18 +440,13 @@ public class DialogueManager : MonoBehaviour
 
         DialogueUIElement dScript = null;
 
+        // Set dialogue element text to the line's text
         if (currentElement.TryGetComponent<DialogueUIElement>(out var script)) {
             dScript = script;
             currentDialogueText = script.elementText;
         } else {
             Debug.LogError("Could not find DialogueUIElement component on this dialogue element!");
         }
-
-        currentLine.sentence = line.sentence;
-        currentLine.expression = line.expression;
-        currentLine.startingExpression = line.startingExpression;
-        currentLine.requestsStart = line.requestsStart;
-        currentLine.requestsEnd = line.requestsEnd;
 
         // Set appropriate expression before talking
         if (currentLine.expression != null) {
@@ -454,14 +460,57 @@ public class DialogueManager : MonoBehaviour
             transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
         }
 
-        // Set whether dashboard requests are active or not
+        // Set whether dashboard requests are active or not and activate mood meter
         if (currentLine.requestsEnd) {
             GameStateManager.comfortManager.comfortabilityRunning = false;
+
+            car.moodMeterAnimator.SetTrigger("FadeOut");
         }
 
         if (currentLine.requestsStart) {
             GameStateManager.comfortManager.comfortabilityRunning = true;
-            Debug.Log("bruhhhh");
+
+            car.moodMeterAnimator.SetTrigger("FadeIn");
+        }
+
+        // Spawn dashboard object if it exists
+        if (currentLine.dashboardObject && currentLine.dashboardObject.TryGetComponent<Gift>(out var gift)) {
+
+            switch (gift.location) {
+                case GiftLocation.DASHBOARD:
+
+                    if (car.dashboardGiftSpawns.Count > 0) {
+
+                        GameObject spawnedObject = null;
+
+                        // Iterate through all dashboard gift spawnpoints to check for first available
+                        for (int i = 0; i < car.dashboardGiftSpawns.Count; i++){
+
+                            if (!car.dashboardGiftSpawns[i].taken) {
+                                spawnedObject = Instantiate(currentLine.dashboardObject, car.dashboardGiftSpawns[i].spawnPoint.transform);
+                                car.dashboardGiftSpawns[i].taken = true;
+                                break;
+                            }
+                        }
+
+                        if (spawnedObject == null) {
+                            Debug.LogWarning("Could not find available dashboard gift spawnpoint!");
+                        }
+
+                        break;
+                    }
+                    break;
+                case GiftLocation.REARVIEW:
+
+                    if (!car.rearviewGiftSpawn.taken) {
+                        GameObject spawnedObject = Instantiate(currentLine.dashboardObject, car.rearviewGiftSpawn.spawnPoint.transform);
+                        car.rearviewGiftSpawn.taken = true;
+                        break;
+                    } else {
+                        Debug.LogWarning("Rearview gift spawn already taken!");
+                        break;
+                    }
+            }
         }
 
         string message = null;
@@ -545,6 +594,14 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Passenger line does not have an expression or a starting expression!");
         }
 
+        // Initiate an early dropoff if needed
+        if (currentLine.earlyDropoff) {
+            DropoffDialogue();
+            GameStateManager.dialogueManager.ResetDialogue();
+
+            GameStateManager.EOnPassengerDropoff?.Invoke();
+        }
+
         if (autoDialogue && !startingExpressionDone) {
 
             // Starts countdown to fade dialogue away
@@ -582,7 +639,7 @@ public class DialogueManager : MonoBehaviour
         StartDialogue(car.currentPassenger.ridesDialogue[CarController.PassengersDrivenRideNum[index] - 1]);
     }
 
-    // Dropoff goodbye salute dialogue and dropoff of passenger
+    // Called AFTER a passenger's dropoff dialogue has concluded
     public void DropoffDialogue() {
         Debug.Log("Finished dropoff dialogue piece!");
 
@@ -593,10 +650,7 @@ public class DialogueManager : MonoBehaviour
         car.currentPassenger.transform.parent = null;
 
         // Set passenger position to the destination stop
-        car.currentPassenger.transform.position = car.currentStop.transform.position;
-
-        // Clear current taxi stop
-        car.currentStop = null;
+        car.currentPassenger.transform.position = car.dropoffPosition.transform.position;
 
         // Clear current passenger
         car.currentPassenger = null;
@@ -639,7 +693,6 @@ public class DialogueManager : MonoBehaviour
 
         currentDialogue = null;
         preChoiceDialogue = null;
-        
     }
 
     public void DialogueGroupWait() {
@@ -652,7 +705,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Waiting for next dialogue piece!");
 
         // Generates a random amount of time to wait from minimum and maximum possible wait times for the current passenger
-        float waitTime = UnityEngine.Random.Range(car.currentPassenger.waitTimeMin, car.currentPassenger.waitTimeMax);
+        float waitTime = UnityEngine.Random.Range(car.currentPassenger.longPauseMin, car.currentPassenger.longPauseMax);
         
         // Waits for the generated amount of time
         yield return new WaitForSeconds(waitTime);
