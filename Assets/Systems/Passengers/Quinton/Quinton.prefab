@@ -267,6 +267,7 @@ MonoBehaviour:
   id: 5
   passengerName: Quinton
   hiddenName: ???
+  nameColor: {r: 0.8018868, g: 0.4798361, b: 0.2988163, a: 1}
   nameRevealed: 0
   requirementMet: 0
   textCPS: 0.03

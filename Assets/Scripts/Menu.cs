@@ -6,6 +6,9 @@ using UnityEngine.Splines;
 
 public class Menu : MonoBehaviour
 {
+
+    [Header("SCRIPT REFERENCES")] // ------------------------------------------------------------------------------------------------------------
+
     [Tooltip("Reference to the global audio manager.")]
     [SerializeField] private AudioManager audioManager;
 
@@ -32,6 +35,9 @@ public class Menu : MonoBehaviour
 
     [Tooltip("Reference to the camera focal point script.")]
     private CameraLookAt cameraLookAt;
+
+    [Tooltip("Reference to the in-game GUI screen.")]
+    [SerializeField] private GameObject gameScreen;
     
     [Tooltip("Reference to the pause menu hierarchy stack.")]
     [SerializeField] private GameObject pauseMenu;
@@ -44,6 +50,8 @@ public class Menu : MonoBehaviour
 
     [Tooltip("Reference to the transcript log object.")]
     [SerializeField] private GameObject transcriptScreen;
+
+    [Header("STATS")] // ------------------------------------------------------------------------------------------------------------
 
     [Tooltip("Reference to the transition time for going back to the main menu.")]
     [SerializeField] private float transitionTime;
@@ -80,6 +88,7 @@ public class Menu : MonoBehaviour
         pauseScreen.SetActive(false);
         pauseMenuSettings.SetActive(false);
         transcriptScreen.SetActive(false);
+        gameScreen.SetActive(false);
 
         Debug.Log("OPENED GAME!");
     }
@@ -153,6 +162,9 @@ public class Menu : MonoBehaviour
             pauseScreen.SetActive(false);
             pauseMenuSettings.SetActive(false);
             transcriptScreen.SetActive(false);
+
+            // Re-enables game screen
+            gameScreen.SetActive(true);
         } 
         // PAUSE
         else if (GameStateManager.Gamestate == GAMESTATE.PLAYING){
@@ -165,6 +177,9 @@ public class Menu : MonoBehaviour
             pauseMenu.SetActive(true);
             pauseMenuSettings.SetActive(false);
             transcriptScreen.SetActive(false);
+
+            // Hides game screen
+            gameScreen.SetActive(false);
         }
     }
 
@@ -188,14 +203,22 @@ public class Menu : MonoBehaviour
     // Toggles transcript log screen
     public void ToggleTranscriptLog() {
 
+        //GAMESTATE savedState = GameStateManager.Gamestate;
+
         // SHOW
         if (!transcriptScreen.activeInHierarchy) {
+
+            GameStateManager.SetState(GAMESTATE.PAUSED);
+
             transcriptScreen.SetActive(true);
             pauseScreen.SetActive(false);
             pauseMenuSettings.SetActive(false);
         } 
         // HIDE
         else if (transcriptScreen.activeInHierarchy) {
+
+            GameStateManager.SetState(GAMESTATE.PLAYING);
+
             transcriptScreen.SetActive(false);
             pauseMenuSettings.SetActive(false);
             pauseScreen.SetActive(true);
@@ -226,6 +249,9 @@ public class Menu : MonoBehaviour
         // Reset stats
         passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
         ResetStats();
+
+        // Enables game screen
+        gameScreen.SetActive(true);
 
         // Generate day rides
         GameStateManager.car.GenerateDayRides(passengerList.storyPassengers.Count);

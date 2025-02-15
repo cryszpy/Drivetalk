@@ -488,7 +488,7 @@ MonoBehaviour:
   currentSongIndex: 0
   currentColor: {fileID: 0}
   songs:
-  - {fileID: 8300000, guid: ff2caea576b9a485da9d4097386351bb, type: 3}
+  - {fileID: 8300000, guid: 7e014702330d74d499d8f4d15ab691eb, type: 3}
   - {fileID: 8300000, guid: 904abe57d5e6846369df211d0359140d, type: 3}
   - {fileID: 8300000, guid: 62eb7a112cd44437397586f4cef1ff00, type: 3}
   songColors:

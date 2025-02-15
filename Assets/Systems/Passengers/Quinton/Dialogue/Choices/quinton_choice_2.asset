@@ -17,9 +17,7 @@ MonoBehaviour:
     expression: {fileID: 11400000, guid: ef19422ed3326429096a37108f4b7736, type: 2}
     startingExpression: {fileID: 0}
     audioToPlay: {fileID: 0}
-    dashboardObject:
-      objectToSpawn: {fileID: 0}
-      spawnPoint: {fileID: 0}
+    dashboardObject: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -27,9 +25,7 @@ MonoBehaviour:
     expression: {fileID: 11400000, guid: ef19422ed3326429096a37108f4b7736, type: 2}
     startingExpression: {fileID: 0}
     audioToPlay: {fileID: 0}
-    dashboardObject:
-      objectToSpawn: {fileID: 0}
-      spawnPoint: {fileID: 0}
+    dashboardObject: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -37,11 +33,9 @@ MonoBehaviour:
     expression: {fileID: 11400000, guid: ef19422ed3326429096a37108f4b7736, type: 2}
     startingExpression: {fileID: 0}
     audioToPlay: {fileID: 0}
-    dashboardObject:
-      objectToSpawn: {fileID: 0}
-      spawnPoint: {fileID: 0}
+    dashboardObject: {fileID: 0}
     requestsStart: 0
-    requestsEnd: 0
+    requestsEnd: 1
     earlyDropoff: 1
   nextDialogue: {fileID: 0}
   firstNameUsage: 0

@@ -271,7 +271,8 @@ MonoBehaviour:
   id: 1
   passengerName: Maxine
   hiddenName: Maxine
-  nameRevealed: 0
+  nameColor: {r: 0.5707547, g: 0.69815826, b: 1, a: 1}
+  nameRevealed: 1
   requirementMet: 0
   textCPS: 0.05
   longPauseMin: 3

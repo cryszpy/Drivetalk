@@ -263,6 +263,7 @@ MonoBehaviour:
   id: 2
   passengerName: Old Man McGee
   hiddenName: ???
+  nameColor: {r: 1, g: 0.8237487, b: 0.514151, a: 1}
   nameRevealed: 0
   requirementMet: 0
   textCPS: 0.1

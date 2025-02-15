@@ -16,8 +16,9 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the car's script component.")]
     public CarController car;
 
-    /* [Tooltip("Reference to the dialogue box's Animator component.")]
-    [SerializeField] private Animator dialogueAnimator; */
+    [Tooltip("Reference to the name box.")]
+    public GameObject nameBox;
+    private TMP_Text nameBoxText;
 
     [Tooltip("Reference to the dialogue text element.")]
     public TMP_Text currentDialogueText;
@@ -169,6 +170,17 @@ public class DialogueManager : MonoBehaviour
             autoDialogueToggle.onValueChanged.AddListener(delegate { SetAutoDialogue(autoDialogueToggle.isOn); } );
             autoDialogue = true;
             autoDialogueToggle.gameObject.SetActive(false);
+        }
+
+        if (!nameBoxText) {
+
+            if (!nameBox) {
+                nameBox = GameObject.FindGameObjectWithTag("NameBox");
+            }
+
+            nameBoxText = nameBox.GetComponentInChildren<TMP_Text>();
+
+            Debug.LogWarning("nameBox reference on: " + name + " is null! Reassigned.");
         }
     }
 
@@ -424,7 +436,6 @@ public class DialogueManager : MonoBehaviour
 
         // Play audio file if there is one
         if (currentLine.audioToPlay != null) {
-            Debug.Log("jaigeijowag");
             GameStateManager.audioManager.PlaySoundByFile(currentLine.audioToPlay);
 
             yield return new WaitForSeconds(currentLine.audioToPlay.length);
@@ -453,12 +464,37 @@ public class DialogueManager : MonoBehaviour
             SwitchExpression(currentLine.expression);
         }
 
+        bool isFirstLine = false;
+
+        // If this line is the first line said by the passenger—
+        if (currentDialogue.lines.First().sentence == line.sentence && currentDialogue == car.currentPassenger.archetype.pickupGreeting) {
+
+            // Set appropriate boolean flag
+            isFirstLine = true;
+        }
+
         // Log appropriate name to transcript
         if (car.currentPassenger.nameRevealed) {
             transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
         } else {
             transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
         }
+
+        // If line is first line said by passenger—
+        /* if (isFirstLine) {
+
+            // Log appropriate name to transcript
+            if (car.currentPassenger.nameRevealed) {
+                transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
+            } else {
+                transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
+            }
+
+        } else {
+
+            // Log sentence without name
+            transcriptLog.LogText(line.sentence, null);
+        } */
 
         // Set whether dashboard requests are active or not and activate mood meter
         if (currentLine.requestsEnd) {
@@ -525,27 +561,45 @@ public class DialogueManager : MonoBehaviour
 
         string name = null;
 
-        // If the passenger has/not revealed their name, set UI accordingly
+        // Enable name box if hidden
+        if (!nameBox.activeInHierarchy) {
+            nameBox.SetActive(true);
+        }
+
+        // If the passenger has/not revealed their name, set their name and color accordingly
         if (currentDialogue.firstNameUsage) {
             name = car.currentPassenger.passengerName;
+
             Debug.Log("Set passenger name: " + car.currentPassenger.passengerName);
+
             car.currentPassenger.nameRevealed = true;
+
+            // Sets name box color
+            nameBoxText.color = car.currentPassenger.nameColor;
+
         } else if (nameCheck || nameIndex < 0) {
             name = car.currentPassenger.hiddenName;
             car.currentPassenger.nameRevealed = false;
+
+            nameBoxText.color = Color.white;
         }
 
+        name += ": ";
+
         // Separate everything but the name
-        string concat = ": " + line.sentence;
+        string concat = line.sentence;
 
         // String together message including name
-        message = name + concat;
+        message = concat;
 
-        Debug.Log(message);
+        Debug.Log(name + message);
+
+        // Sets UI name
+        nameBoxText.text = name;
 
         // Initializes empty text as full message to start typing
         currentDialogueText.text = message;
-        currentDialogueText.maxVisibleCharacters = name.Length;
+        currentDialogueText.maxVisibleCharacters = 0;
 
         // Indicates that a sentence is being typed out
         typingSentence = true;

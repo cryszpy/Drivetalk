@@ -18,7 +18,7 @@ MonoBehaviour:
     startingExpression: {fileID: 0}
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
-    requestsStart: 0
+    requestsStart: 1
     requestsEnd: 0
     earlyDropoff: 0
   - sentence: Hey dude.
