@@ -13,10 +13,4 @@ MonoBehaviour:
   m_Name: RoadList
   m_EditorClassIdentifier: 
   allRoadsList:
-  - {fileID: 7247080473360366342, guid: a98effe66e1cd419e8178a12425ee060, type: 3}
-  - {fileID: 7247080473360366342, guid: 43adf4bd9218f4d60838edd70e2a5b11, type: 3}
-  - {fileID: 7247080473360366342, guid: 9d164b9e277fc43b581e4132651e50e3, type: 3}
-  - {fileID: 7247080473360366342, guid: 0870cf5be48994897942fc6840dcbea7, type: 3}
-  - {fileID: 7247080473360366342, guid: 500c1ce11420e4a60895bae7f26db2d6, type: 3}
-  - {fileID: 7247080473360366342, guid: 408d8f711c83042f6ac9ac87a1ab64e6, type: 3}
-  - {fileID: 7247080473360366342, guid: b0c1e86ea105b4cdea60b8bf1bfc2923, type: 3}
+  - {fileID: 7247080473360366342, guid: d57468fe4f42d974eafd0e5c913f2055, type: 3}
