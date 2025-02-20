@@ -577,11 +577,13 @@ public class DialogueManager : MonoBehaviour
             // Sets name box color
             nameBoxText.color = car.currentPassenger.nameColor;
 
-        } else if (nameCheck || nameIndex < 0) {
+        } 
+        else if (!car.currentPassenger.nameRevealed) {
             name = car.currentPassenger.hiddenName;
-            car.currentPassenger.nameRevealed = false;
-
             nameBoxText.color = Color.white;
+        } else if (car.currentPassenger.nameRevealed) {
+            name = car.currentPassenger.passengerName;
+            nameBoxText.color = car.currentPassenger.nameColor;
         }
 
         name += ": ";
