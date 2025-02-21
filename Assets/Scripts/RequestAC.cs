@@ -60,7 +60,8 @@ public class RequestAC : DashboardRequestBase {
 
         switch(value) {
 
-            case < 0.5f:
+            case < 90f:
+                Debug.Log("bruh");
 
                 // While the dial is not set to its targeted rotation, and the player isn't messing with it—
                 while (acDial.dialObject.transform.localEulerAngles.y >= floatValue && !acDial.dragging) {
@@ -75,7 +76,7 @@ public class RequestAC : DashboardRequestBase {
                 }
                 break;
 
-            case > 0.5f:
+            case > 90f:
 
                 // While the dial is not set to its targeted rotation, and the player isn't messing with it—
                 while (acDial.dialObject.transform.localEulerAngles.y <= floatValue && !acDial.dragging) {
@@ -90,8 +91,8 @@ public class RequestAC : DashboardRequestBase {
                 }
                 break;
 
-            case 0.5f:
-                Debug.LogError("Target float value is exactly 0.5f!");
+            case 90f:
+                Debug.LogError("Target float value is exactly 90f!");
                 break;
         }
 

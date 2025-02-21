@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844a50c4dac544132adc1c691fe57f21, type: 3}
   m_Name: Phone
   m_EditorClassIdentifier: 
-  animatorTrigger: Default
+  animatorTrigger: Phone
   runExpressionTimer: 0
   allowedAsDefault: 0
