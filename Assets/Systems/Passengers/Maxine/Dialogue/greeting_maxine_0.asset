@@ -16,93 +16,136 @@ MonoBehaviour:
   - sentence: 'take me to <b>270 ardendale</b> please! '
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 1
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: ...
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: '!!!'
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: "so um, i noticed we weren\u2019t moving."
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: you must be new around here!
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: "you won\u2019t make it as a taxi driver if you don\u2019t know where
       you\u2019re going!"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: "it\u2019s a harsh world out there for you taxi drivers!"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: "lots of competition y\u2019know?"
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: well, maybe.
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: "<b>that\u2019s just a pet theory of mine.</b>"
     expression: {fileID: 11400000, guid: a3a88837627794f75bbf177b06ceefd2, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   - sentence: anyways, you can just use the <b>gps</b> right up there on your dashboard!
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   nextDialogue: {fileID: 0}
-  firstNameUsage: 1
   fallbackExpression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
   choices: []

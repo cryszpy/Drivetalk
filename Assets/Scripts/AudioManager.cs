@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Array of most sounds to be played asynchronously.")]
     public Sound[] sounds;
 
+    public Sound vo;
+
     void Awake() {
 
         // Singleton pattern
@@ -29,6 +31,8 @@ public class AudioManager : MonoBehaviour
             // If the audio source location object is null, plays from AudioManager object
             if (s.location == null) {
                 s.source = gameObject.AddComponent<AudioSource>();
+            } else if (s.location.TryGetComponent<AudioSource>(out var foundSource)) {
+                s.source = foundSource;
             } else {
                 s.source = s.location.AddComponent<AudioSource>();
             }
@@ -78,6 +82,38 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayVoiceLine(AudioClip clip, GameObject passenger) {
+
+        if (!clip || !passenger) {
+            Debug.LogError("Voice line clip or passenger location is missing!");
+            return;
+        }
+
+        // If the passenger already has an audio source, use that one
+        if (passenger.TryGetComponent<AudioSource>(out var foundSource)) {
+            vo.source = foundSource;
+        } 
+        // Otherwise, add one
+        else {
+            vo.source = passenger.AddComponent<AudioSource>();
+        }
+
+        // Assigns sound stats (volume, pitch, 2D/3D spatial blend, etc)
+        vo.source.clip = clip;
+        vo.name = clip.name;
+        vo.location = passenger;
+        vo.source.outputAudioMixerGroup = vo.mixerGroup;
+        vo.source.volume = vo.volume;
+        vo.source.pitch = vo.pitch;
+        vo.source.spatialBlend = vo.spatialBlend;
+        vo.source.panStereo = vo.stereoPan;
+        vo.source.playOnAwake = vo.playOnAwake;
+        vo.source.loop = vo.loop;
+
+        Debug.Log("Playing sound: " + vo.name + "- " + clip.name);
+        vo.source.Play();
+    }
+
     // Plays a sound by name
     public void PlaySoundByName(string name) {
 
@@ -121,6 +157,11 @@ public class AudioManager : MonoBehaviour
     // Sets master volume (used in settings sliders)
     public void SetMasterVolume(float level) {
         mainMixer.SetFloat("masterVolume", level);
+    }
+
+    // Sets voice volume (used in settings sliders)
+    public void SetVoiceVolume(float level) {
+        mainMixer.SetFloat("voiceVolume", level);
     }
 
     // Sets music volume (used in settings sliders)

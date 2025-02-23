@@ -11,7 +11,7 @@ public enum SteeringDirection {
 
 public class CarPointer : MonoBehaviour
 {
-    [Header("SCRIPT REFERENCES")]
+    [Header("SCRIPT REFERENCES")] // --------------------------------------------------------------------------------------
 
     public CarController car;
 
@@ -59,10 +59,12 @@ public class CarPointer : MonoBehaviour
 
     [HideInInspector] public GameObject hoveredButton;
 
-    [Header("STATS")]
+    [Header("STATS")] // --------------------------------------------------------------------------------------
 
     [Tooltip("Boolean flag; Checks whether dialogue has finished or not.")]
     public bool finishedDialogue;
+
+    public bool readyToSpawnDest;
 
     public bool setInitialBlock = false;
 
@@ -75,7 +77,7 @@ public class CarPointer : MonoBehaviour
 
     public bool calculatedDirections = false;
 
-    [Header("PROCEDURAL GENERATION")]
+    [Header("PROCEDURAL GENERATION")] // --------------------------------------------------------------------------------------
 
     [Tooltip("The GameObject for the car's GPS icon.")]
     public GameObject gpsObject;
@@ -366,7 +368,7 @@ public class CarPointer : MonoBehaviour
         GameObject selectedTile = null;
 
         // If dialogue is finished, spawn destination tile
-        if (finishedDialogue && !destinationSpawned) {
+        if (readyToSpawnDest && !destinationSpawned) {
 
             if (currentDestinationTile) {
                 roadFromList = currentDestinationTile;

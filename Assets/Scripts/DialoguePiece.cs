@@ -6,13 +6,27 @@ public struct DialogueLine {
     [TextArea(3, 10)]
     public string sentence;
     public PassengerExpression expression;
+
+    [Header("PRE-DIALOGUE ACTIONS")]
+
     public PassengerExpression startingExpression;
+
+    [Tooltip("The duration that this passenger will wait before saying **this** line. (If this is not a long pause, leave at 0)")]
+    public float longPauseTime;
 
     [Tooltip("Audio file to play <b>before</b> this line is typed out.")]
     public AudioClip audioToPlay;
 
     [Tooltip("An object to spawn on the dashboard <b>before</b> this line is said.")]
     public GameObject dashboardObject;
+
+    [Header("OTHER")]
+
+    [Tooltip("Whether this dialogue piece contains the first mention of the passenger's name.")]
+    public bool firstNameUsage;
+
+    [Tooltip("Voice line to play.")]
+    public AudioClip voiceLine;
 
     [Tooltip("Whether this line enables the mood meter.")]
     public bool requestsStart;
@@ -22,6 +36,9 @@ public struct DialogueLine {
 
     [Tooltip("Whether this line signals an early dropoff for the current passenger.")]
     public bool earlyDropoff;
+
+    [Tooltip("Upon reaching this dialogue line, the destination will spawn.")]
+    public bool spawnDestination;
 }
 
 [System.Serializable]
@@ -34,9 +51,6 @@ public class DialoguePiece : ScriptableObject
 
     [Tooltip("The next dialogue piece to play after this piece.")]
     public DialoguePiece nextDialogue;
-
-    [Tooltip("Boolean flag; Whether this dialogue piece contains the first mention of the passenger's name.")]
-    public bool firstNameUsage = false;
 
     [Tooltip("What expression the passenger should have during this dialogue piece.")]
     public PassengerExpression fallbackExpression;

@@ -272,11 +272,15 @@ MonoBehaviour:
     sentence: 
     expression: {fileID: 0}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
     dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
+    spawnDestination: 0
   preChoiceDialogue: {fileID: 0}
   choiceButtonsList: []
   currentElement: {fileID: 0}
@@ -4307,6 +4311,19 @@ MonoBehaviour:
     playOnAwake: 0
     loop: 0
     source: {fileID: 0}
+  vo:
+    type: 0
+    name: 
+    location: {fileID: 0}
+    clips: []
+    mixerGroup: {fileID: -8296206446056197383, guid: d7148047a9a3e4c2fb74b5778e58b8d4, type: 2}
+    volume: 0.7
+    pitch: 1
+    stereoPan: 0
+    spatialBlend: 0.75
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1574461899
 Transform:
   m_ObjectHideFlags: 0
@@ -6133,6 +6150,10 @@ PrefabInstance:
     - target: {fileID: 835529776851904630, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -5.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 884413606785296103, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 892325878956812888, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -9084,7 +9105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577274797501552625, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0.00018310547
       objectReference: {fileID: 0}
     - target: {fileID: 2591262033751072631, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y

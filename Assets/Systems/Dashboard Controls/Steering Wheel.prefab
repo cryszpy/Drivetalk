@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2800119783770298541}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17364825, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: -0, y: 0.0359, z: 0.0144}
-  m_LocalScale: {x: 0.11000001, y: 0.0058666696, z: 0.11000001}
+  m_LocalRotation: {x: 0.11536711, y: 0.697632, z: 0.11536705, w: 0.697632}
+  m_LocalPosition: {x: 0.0012529744, y: 0.065004766, z: 0.022104004}
+  m_LocalScale: {x: 0.11000002, y: 0.00586667, z: 0.11000003}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2269643540107109640}
+  m_Father: {fileID: 2624632133172475507}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8635721406669236731
 MeshFilter:
@@ -181,6 +181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2624632133172475507}
   - {fileID: 2269643540107109640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 75}
@@ -253,15 +254,16 @@ PrefabInstance:
       value: SteeringWheel
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 86e7c82819f7d43a2bf3c73c055ef8c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 86e7c82819f7d43a2bf3c73c055ef8c4, type: 3}
       propertyPath: m_TagString
       value: Wheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86e7c82819f7d43a2bf3c73c055ef8c4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2984142243003238966}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 86e7c82819f7d43a2bf3c73c055ef8c4, type: 3}
       insertIndex: -1
@@ -322,3 +324,141 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86e7c82819f7d43a2bf3c73c055ef8c4, type: 3}
   m_PrefabInstance: {fileID: 1798587422244946659}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2586799538634183064
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7253946500622966053}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.697632
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.11536707
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.697632
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.11536707
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -18.78
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_Name
+      value: SteeringWheel(alltgther)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      propertyPath: m_TagString
+      value: Wheel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2984142243003238966}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2159313778311053080}
+  m_SourcePrefab: {fileID: 100100000, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+--- !u!4 &2624632133172475507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+  m_PrefabInstance: {fileID: 2586799538634183064}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3397756635586915529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c2117561396fe47e9b052c9e592e10f9, type: 3}
+  m_PrefabInstance: {fileID: 2586799538634183064}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2159313778311053080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397756635586915529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab84b0b6700e42fd8eab95399a677cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carPointer: {fileID: 0}
+  dialObject: {fileID: 3397756635586915529}
+  dialogueManager: {fileID: 0}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2159313778311053080}
+        m_TargetAssemblyTypeName: UIElementSlider, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mainCamera: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1088
+  hovered: 0
+  regularLayer: 6
+  hoveredLayer: 10
+  rotationMin: 0
+  rotationMax: 180
+  dragging: 0
+  coll: {fileID: 0}
+  cutoffLeft: 30
+  cutoffRight: 150
+  straightCutoffLeft: 70
+  straightCutoffRight: 110

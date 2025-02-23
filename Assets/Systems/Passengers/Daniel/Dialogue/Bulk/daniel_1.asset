@@ -13,22 +13,26 @@ MonoBehaviour:
   m_Name: daniel_1
   m_EditorClassIdentifier: 
   lines:
-  - sentence: This is placeholder!
+  - sentence: Why'd you come here, anyway?
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
-  nextDialogue: {fileID: 0}
-  request:
-    control: 0
-    value: 5
-    min: 0
-    max: 0
-    requestTimer: 0
-    floatCheckType: 0
-    boolValue: 0
-    floatValue: 0
-    hasResponded: 0
-    completedResponse: {fileID: 0}
-    preCompletedResponse: {fileID: 0}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  - sentence: I mean, I'm sure you'd make a lot more driving 'round in a big city.
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 11400000, guid: ba2d24060b4f04f8c9f782b252fe7c4a, type: 2}
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+  nextDialogue: {fileID: 11400000, guid: 22dae7a29499848eca478c0c493649d8, type: 2}
   firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
-  choices: []
+  choices:
+  - {fileID: 11400000, guid: 1c443b93655da4651bc99bffcd127cb9, type: 2}
+  - {fileID: 11400000, guid: 2596d93ba902d44e3abac282574b56f7, type: 2}
+  - {fileID: 11400000, guid: 934cfc6f509ab4fb08caaef0f1d28616, type: 2}

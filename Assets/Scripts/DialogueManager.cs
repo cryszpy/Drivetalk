@@ -71,9 +71,6 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Static boolean flag; Checks whether automatic dialogue playing is enabled.")]
     private bool autoDialogue = false;
 
-    [Tooltip("Boolean flag; Checks if the dialogue is waiting for a manual skip.")]
-    private bool waitForSkip = false;
-
     [Tooltip("Boolean flag; Checks whether the passenger is waiting for the player to select a destination.")]
     [HideInInspector] public bool waitForRouting = false;
 
@@ -433,6 +430,23 @@ public class DialogueManager : MonoBehaviour
         currentLine.audioToPlay = line.audioToPlay;
         currentLine.dashboardObject = line.dashboardObject;
         currentLine.earlyDropoff = line.earlyDropoff;
+        currentLine.spawnDestination = line.spawnDestination;
+        currentLine.voiceLine = line.voiceLine;
+        currentLine.longPauseTime = line.longPauseTime;
+        currentLine.firstNameUsage = line.firstNameUsage;
+
+        // Wait for the appropriate amount of long pause time before continuing with this line
+        yield return new WaitForSeconds(currentLine.longPauseTime);
+
+        // Start voice line and short pause time
+        if (currentLine.voiceLine) {
+            StartCoroutine(StartVoiceLine());
+        }
+
+        // Set whether destination is ready to spawn
+        if (currentLine.spawnDestination) {
+            carPointer.readyToSpawnDest = true;
+        }
 
         // Play audio file if there is one
         if (currentLine.audioToPlay != null) {
@@ -464,14 +478,14 @@ public class DialogueManager : MonoBehaviour
             SwitchExpression(currentLine.expression);
         }
 
-        bool isFirstLine = false;
+        /* bool isFirstLine = false;
 
         // If this line is the first line said by the passenger—
         if (currentDialogue.lines.First().sentence == line.sentence && currentDialogue == car.currentPassenger.archetype.pickupGreeting) {
 
             // Set appropriate boolean flag
             isFirstLine = true;
-        }
+        } */
 
         // Log appropriate name to transcript
         if (car.currentPassenger.nameRevealed) {
@@ -551,14 +565,6 @@ public class DialogueManager : MonoBehaviour
 
         string message = null;
 
-        // Get this dialogue piece's index in passenger's dialogue list
-        int index = car.currentPassenger.ridesDialogue.IndexOf(currentDialogue);
-
-        int nameIndex = car.currentPassenger.ridesDialogue.FindIndex(x => x.firstNameUsage == true);
-
-        // Check whether this dialogue piece is before the passenger reveals their name or not
-        bool nameCheck = index <= nameIndex;
-
         string name = null;
 
         // Enable name box if hidden
@@ -567,7 +573,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // If the passenger has/not revealed their name, set their name and color accordingly
-        if (currentDialogue.firstNameUsage) {
+        if (currentLine.firstNameUsage) {
             name = car.currentPassenger.passengerName;
 
             Debug.Log("Set passenger name: " + car.currentPassenger.passengerName);
@@ -586,7 +592,7 @@ public class DialogueManager : MonoBehaviour
             nameBoxText.color = car.currentPassenger.nameColor;
         }
 
-        name += ": ";
+        //name += ": ";
 
         // Separate everything but the name
         string concat = line.sentence;
@@ -658,15 +664,25 @@ public class DialogueManager : MonoBehaviour
             GameStateManager.EOnPassengerDropoff?.Invoke();
         }
 
-        if (autoDialogue && !startingExpressionDone) {
+        // Play the next dialogue line only if auto-dialogue is enabled, there isn't currently a starting expression playing, and
+        // there is no voice line to be played. 
+        if (autoDialogue && !startingExpressionDone && !currentLine.voiceLine) {
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
-        } else {
-
-            // Switches continue button functionality in ContinueButton()
-            waitForSkip = true;
         }
+    }
+
+    private IEnumerator StartVoiceLine() {
+
+        // Plays voice line
+        GameStateManager.audioManager.PlayVoiceLine(currentLine.voiceLine, car.currentPassenger.gameObject);
+
+        // Waits until after voice line is done, and the next sentence is ready to be said
+        yield return new WaitForSeconds(currentLine.voiceLine.length + shortPauseTime);
+
+        // Displays next sentence
+        DisplayNextSentence();
     }
 
     private IEnumerator WaitBeforeNextSentence() {
@@ -681,9 +697,6 @@ public class DialogueManager : MonoBehaviour
     // Starts the first ride dialogue
     public void StartRideDialogue() {
         Debug.Log("Greeting finished, moving onto general ride dialogue.");
-
-        // Plays the "hide dialogue UI" animation
-        //dialogueAnimator.SetBool("Play", false);
 
         // Clears the current dialogue piece
         currentDialogue = null;
@@ -714,6 +727,8 @@ public class DialogueManager : MonoBehaviour
         // Reset finished dialogue boolean check
         carPointer.finishedDialogue = false;
 
+        carPointer.readyToSpawnDest = false;
+
         // Allows car to continue driving
         car.arrivedAtDest = false;
 
@@ -733,6 +748,8 @@ public class DialogueManager : MonoBehaviour
         // Indicate the end of the ride dialogue
         carPointer.finishedDialogue = true;
 
+        carPointer.readyToSpawnDest = true;
+
         // Clear current dialogue
         currentDialogue = null;
     }
@@ -744,6 +761,7 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
 
         carPointer.finishedDialogue = true;
+        carPointer.readyToSpawnDest = true;
 
         lines.Clear();
 

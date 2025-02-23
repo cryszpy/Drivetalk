@@ -120,12 +120,8 @@ public class Menu : MonoBehaviour
             splineDolly.CameraPosition -= 0.01f;
 
             // Waits between movements
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.03f);
         }
-
-        // Allows camera to follow mouse cursor movement
-        //cameraLookAt.transform.localPosition = new(-0.3855f, 0.228f, 3.19347f);
-        //cinemachineCam.LookAt = cameraLookAt.transform;
 
         // Sets game out of main menu when done
         inMainMenu = false;

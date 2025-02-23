@@ -34,9 +34,9 @@ public class Radio : MonoBehaviour
     void Start() {
 
         // Checks if the radio has a valid audio source, and adds one if not
-        if (TryGetComponent<AudioSource>(out var source)) {
+        if (!audioSource && TryGetComponent<AudioSource>(out var source)) {
             audioSource = source;
-        } else {
+        } else if (!audioSource) {
             audioSource = gameObject.AddComponent<AudioSource>();
 
             // Assigns radio song variables (volume, pitch, 2D/3D spatial blend, etc)
