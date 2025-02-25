@@ -4,8 +4,9 @@ using UnityEngine.Audio;
 
 public class Radio : MonoBehaviour
 {
-    [Tooltip("Reference to the radio's mesh renderer component.")]
-    public MeshRenderer meshRenderer;
+
+    [Tooltip("Reference to the radio's waveform line renderer.")]
+    [SerializeField] private LineRenderer lineRenderer;
 
     [Tooltip("Reference to the current song's audio clip component.")]
     public AudioClip currentSong;
@@ -14,13 +15,13 @@ public class Radio : MonoBehaviour
     [HideInInspector] public int currentSongIndex;
 
     [Tooltip("Reference to the current song's color material.")]
-    public Material currentColor;
+    public Gradient currentColor;
 
     [Tooltip("Array of all radio song audio clip components.")]
     public AudioClip[] songs;
 
     [Tooltip("Array of all radio song material colors.")]
-    public Material[] songColors;
+    public Gradient[] songColors;
 
     [Tooltip("Reference to the radio's audio source component.")]
     public AudioSource audioSource;
@@ -118,7 +119,8 @@ public class Radio : MonoBehaviour
         currentColor = songColors[currentSongIndex];
 
         audioSource.clip = currentSong;
-        meshRenderer.material = currentColor;
+
+        lineRenderer.colorGradient = currentColor;
 
         isSongPlaying = true;
         audioSource.Play();

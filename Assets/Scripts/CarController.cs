@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
-    [Header("SCRIPT REFERENCES")]
+    [Header("SCRIPT REFERENCES")] // -------------------------------------------------------------------------------------------
 
     [Tooltip("Reference to the road navigator AI that the car follows.")]
     public CarPointer carPointer;
@@ -49,7 +49,9 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the car's dropoff position for passengers.")]
     public GameObject dropoffPosition;
 
-    [Header("STATS")]
+    public AudioSource radioSource;
+
+    [Header("STATS")] // -------------------------------------------------------------------------------------------
 
     [Tooltip("Boolean flag; Checks whether the passenger has arrived at destination or not.")]
     public bool arrivedAtDest = false;
@@ -97,17 +99,21 @@ public class CarController : MonoBehaviour
     private static int currentRadioChannel;
     public static int CurrentRadioChannel { get => currentRadioChannel; set => currentRadioChannel = value; }
 
-    [Tooltip("The current volume of the radio.")]
-    private static float radioVolume;
-    public static float RadioVolume { get => radioVolume; set => radioVolume = value;}
+    [Tooltip("The current power status of the radio.")]
+    public static bool RadioPower = true;
 
-    [Header("STATIC VARIABLE TRACKERS")]
+    [Tooltip("Current activation status of the hazard lights.")]
+    public static bool HazardsActive = false;
+
+    [Header("STATIC VARIABLE TRACKERS")] // -------------------------------------------------------------------------------------------
 
     public float ratingTracker;
     public float tempTracker;
     public float totalPassengersTracker;
     public float lastPassengerIDTracker;
     public float currentRadioChannelTracker;
+    public bool radioPowerTracker;
+    public bool hazardsTracker;
 
     private void OnEnable() {
         GameStateManager.EOnPassengerDropoff += DropOffPassenger;
@@ -143,6 +149,8 @@ public class CarController : MonoBehaviour
         totalPassengersTracker = TotalPassengersDriven;
         lastPassengerIDTracker = LastPassengerID;
         currentRadioChannelTracker = CurrentRadioChannel;
+        radioPowerTracker = RadioPower;
+        hazardsTracker = HazardsActive;
 # endif
     }
 

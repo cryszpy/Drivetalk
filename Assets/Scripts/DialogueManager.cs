@@ -23,12 +23,6 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the dialogue text element.")]
     public TMP_Text currentDialogueText;
 
-    /* [Tooltip("Reference to the dialogue UI box object.")]
-    public GameObject dash_dialogueBox;
-
-    [Tooltip("Reference to the name box text element.")]
-    public TMP_Text nameBoxText; */
-
     [Tooltip("Reference to the flashing indicator on the GPS.")]
     public GameObject gpsIndicator;
 
@@ -600,7 +594,7 @@ public class DialogueManager : MonoBehaviour
         // String together message including name
         message = concat;
 
-        Debug.Log(name + message);
+        Debug.Log(name + ": " + message);
 
         // Sets UI name
         nameBoxText.text = name;

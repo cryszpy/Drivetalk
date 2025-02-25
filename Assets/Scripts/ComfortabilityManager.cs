@@ -12,6 +12,7 @@ public class ComfortabilityManager : MonoBehaviour
     [Header("STATS")] // --------------------------------------------------------------------------------
 
     public List<DashboardRequestBase> dashRequests = new();
+    private List<DashboardRequestBase> availableRequests;
 
     public List<DashboardRequestBase> activeRequests = new();
     
@@ -25,6 +26,11 @@ public class ComfortabilityManager : MonoBehaviour
 
     public float initialCooldown;
     private float initialTimer = 0;
+
+    private void Start()
+    {
+        availableRequests = new(dashRequests);
+    }
 
     private void Update() {
         
@@ -53,8 +59,9 @@ public class ComfortabilityManager : MonoBehaviour
                 if (initialTimer > initialCooldown) {
                     initialTimer = 0;
 
-                    DashboardRequestBase selected = dashRequests[Random.Range(0, dashRequests.Count)];
+                    DashboardRequestBase selected = availableRequests[Random.Range(0, availableRequests.Count)];
                     selected.active = true;
+                    availableRequests.Remove(selected);
                     activeRequests.Add(selected);
                 }
             }
