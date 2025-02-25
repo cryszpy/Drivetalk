@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Line_Thickness: 0.015
+    - _Line_Thickness: 0.0075
     - _Step: 0.000175
     m_Colors:
     - _Color: {r: 1, g: 0.9622642, b: 0.7877358, a: 0}

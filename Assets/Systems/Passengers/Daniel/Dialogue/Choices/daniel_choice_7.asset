@@ -124,5 +124,5 @@ MonoBehaviour:
   nextDialogue: {fileID: 0}
   fallbackExpression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
   choices: []
-  choiceText: I don't.
+  choiceText: ...
   moodChange: 0

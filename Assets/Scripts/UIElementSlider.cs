@@ -10,9 +10,6 @@ public class UIElementSlider : MonoBehaviour
     [Tooltip("Reference to the slider's physical object.")]
     public GameObject dialObject;
 
-    [Tooltip("Reference to the dialogue manager.")]
-    [SerializeField] protected DialogueManager dialogueManager;
-
     [Tooltip("New on-click function event.")]
     public UnityEvent unityEvent = new();
 
@@ -44,7 +41,7 @@ public class UIElementSlider : MonoBehaviour
     protected Vector3 mousePosDelta = Vector3.zero;
 
     [Tooltip("Rotation value of this slider.")]
-    protected float rotation;
+    protected float change;
 
     [Tooltip("Whether the slider is actively being dragged.")]
     public bool dragging;
@@ -56,7 +53,6 @@ public class UIElementSlider : MonoBehaviour
             mainCamera = Camera.main;
             Debug.LogWarning("Main camera not assigned! Reassigned.");
         }
-        dialogueManager = GameStateManager.dialogueManager;
 
         dragging = false;
 
@@ -159,10 +155,10 @@ public class UIElementSlider : MonoBehaviour
             mousePosDelta = Input.mousePosition - mousePreviousPos;
 
             // Get the mouse's difference in position applied to the slider's desired rotation axis
-            rotation = Vector3.Dot(mousePosDelta, new Vector3(1, 0, 0));
+            change = Vector3.Dot(mousePosDelta, new Vector3(1, 0, 0));
 
             float currentRot = dialObject.transform.localEulerAngles.y;
-            float newRot = currentRot + rotation;
+            float newRot = currentRot + change;
 
             // Limit slider rotation to be between a certain minimum and maximum degree angle
             newRot = Mathf.Clamp(newRot, rotationMin, rotationMax);

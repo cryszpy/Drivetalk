@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class GPS : UIElementSlider
 {
+    [Header("GPS REFERENCES")] // --------------------------------------------------------------------------------------------
+
+    [Tooltip("Reference to the dialogue manager.")]
+    protected DialogueManager dialogueManager;
 
     [Tooltip("Reference to the object to look at when the GPS is clicked.")]
     [SerializeField] protected GameObject focusOn;
@@ -22,9 +26,6 @@ public class GPS : UIElementSlider
 
     [Tooltip("Reference to the map UI.")]
     [SerializeField] protected GameObject screenUI;
-
-    /* [Tooltip("Reference to the dialogue continue button.")]
-    public GameObject continueButton; */
 
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
@@ -42,6 +43,13 @@ public class GPS : UIElementSlider
     private void OnDisable() {
         GameStateManager.EOnDestinationSet -= StartDampingReset;
         GameStateManager.EOnPassengerPickup -= CachePassengerDest;
+    }
+
+    public override void Start()
+    {
+        base.Start();
+
+        dialogueManager = GameStateManager.dialogueManager;
     }
 
     private void CachePassengerDest() {

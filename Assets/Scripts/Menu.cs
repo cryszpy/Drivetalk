@@ -236,7 +236,7 @@ public class Menu : MonoBehaviour
         CarController.TotalPassengersDriven = 0;
         CarController.LastPassengerID = 0;
         CarController.CurrentRadioChannel = 0;
-        CarController.RadioVolume = 0;
+        CarController.RadioPower = true;
     }
 
     // Play button functionality (called from button script assignment)
