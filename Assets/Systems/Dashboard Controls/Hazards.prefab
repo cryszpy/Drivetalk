@@ -50,12 +50,12 @@ MonoBehaviour:
   id: 1
   currentChance: 0.15
   baseChance: 0.15
-  baseIncrease: 0.1
+  baseIncrease: 0.05
   floatValue: 0
   boolValue: 0
   fulfilled: 0
   active: 0
-  cooldown: 7
+  cooldown: 10
   cooldownTimer: 0
   buttonAnimator: {fileID: 6606385033999630173}
 --- !u!1 &6847154693685340982

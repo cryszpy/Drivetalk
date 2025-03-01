@@ -12,7 +12,7 @@ public class ComfortabilityManager : MonoBehaviour
     [Header("STATS")] // --------------------------------------------------------------------------------
 
     public List<DashboardRequestBase> dashRequests = new();
-    private List<DashboardRequestBase> availableRequests;
+    public List<DashboardRequestBase> availableRequests;
 
     public List<DashboardRequestBase> activeRequests = new();
     

@@ -332,6 +332,7 @@ MonoBehaviour:
   - {fileID: 529218816}
   - {fileID: 196195863}
   - {fileID: 2992284672251928932}
+  availableRequests: []
   activeRequests: []
   currentComfortability: 100
   comfortabilityRunning: 0
@@ -9150,7 +9151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577274797501552625, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2591262033751072631, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y

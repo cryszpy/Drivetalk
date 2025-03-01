@@ -15,6 +15,6 @@ MonoBehaviour:
   acMin: 0.6
   acMax: 0.9
   radioSongId: 4
-  hazardPref: 1
+  hazardPref: 0
   wipersPref: 0
   radioPower: 1
