@@ -253,6 +253,8 @@ public class CarController : MonoBehaviour
 
             GameStateManager.EOnPassengerPickup?.Invoke();
 
+            GameStateManager.comfortManager.availableRequests = new(GameStateManager.comfortManager.dashRequests);
+
             // Start the passenger's pickup greeting if they have one
             dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting);
 

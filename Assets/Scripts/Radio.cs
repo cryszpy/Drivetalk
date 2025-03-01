@@ -5,17 +5,24 @@ using UnityEngine.Audio;
 public class Radio : MonoBehaviour
 {
 
+    [Header("SCRIPT REFERENCES")] // ---------------------------------------------------------------------------------
+
     [Tooltip("Reference to the radio's waveform line renderer.")]
-    [SerializeField] private LineRenderer lineRenderer;
+    [HideInInspector] public LineRenderer lineRenderer;
+
+    [SerializeField] private RadioChannel radioChannels;
 
     [Tooltip("Reference to the current song's audio clip component.")]
-    public AudioClip currentSong;
+    [HideInInspector] public AudioClip currentSong;
 
-    [Tooltip("Current song's index number in list of total songs.")]
-    [HideInInspector] public int currentSongIndex;
+    [Tooltip("Audio file of radio static to play when no channels are selected.")]
+    public AudioClip radioStatic;
+
+    [Tooltip("Gradient color for the static channels.")]
+    public Gradient staticColor;
 
     [Tooltip("Reference to the current song's color material.")]
-    public Gradient currentColor;
+    [HideInInspector] public Gradient currentColor;
 
     [Tooltip("Array of all radio song audio clip components.")]
     public AudioClip[] songs;
@@ -25,6 +32,8 @@ public class Radio : MonoBehaviour
 
     [Tooltip("Reference to the radio's audio source component.")]
     public AudioSource audioSource;
+
+    [Header("STATS")] // ---------------------------------------------------------------------------------------------------
 
     [Tooltip("Boolean flag; Checks whether a song is currently playing.")]
     [HideInInspector] public bool isSongPlaying;
@@ -54,13 +63,9 @@ public class Radio : MonoBehaviour
         // If there are songs able to be played—
         if (songs.Length > 0) {
 
-            // Chooses a random radio song to start out with
-            currentSongIndex = Random.Range(0, songs.Length);
-
             // Sets the first radio song upon opening the game
-            SetRadioSong(currentSongIndex);
-
-            Debug.Log("First radio song is: " + currentSong.name);
+            //StartCoroutine(radioChannels.TurnDial(0));
+            radioChannels.ChangeChannel(0);
         }
     }
 
@@ -78,11 +83,8 @@ public class Radio : MonoBehaviour
                 // Stop current song
                 audioSource.Stop();
 
-                // Increment song number
-                IncrementSongNumber(1);
-
                 // Play next song
-                SetRadioSong(currentSongIndex);
+                IncrementSongNumber(1);
             }
         }
     }
@@ -91,40 +93,39 @@ public class Radio : MonoBehaviour
     public void IncrementSongNumber(int value) {
 
         // If the incremented song index would be out of the list bounds—
-        if (currentSongIndex + value > songs.Length - 1) {
+        if (CarController.CurrentRadioChannel + value > songs.Length - 1) {
 
             // Reset to 0
-            currentSongIndex = 0;
+            StartCoroutine(radioChannels.TurnDial(0, true));
         } 
         // If the incremented song index would be under 0 (not in list)
-        else if (currentSongIndex + value < 0) {
+        else if (CarController.CurrentRadioChannel + value < 0) {
 
             // Reset to last song in the songs list
-            currentSongIndex = songs.Length - 1;
+            StartCoroutine(radioChannels.TurnDial(songs.Length - 1, true));
         }
         else {
 
             // Increment song number
-            currentSongIndex += value;
+            StartCoroutine(radioChannels.TurnDial(CarController.CurrentRadioChannel + value));
         }
     }
 
-    // Starts playing a song on the radio
-    public void SetRadioSong(int index) {
+    public void SetRadioStatic() {
 
         // Sets current radio song and radio color
-        currentSongIndex = index;
+        CarController.CurrentRadioChannel = -1;
 
-        currentSong = songs[currentSongIndex];
-        currentColor = songColors[currentSongIndex];
+        currentSong = radioStatic;
+        currentColor = staticColor;
 
         audioSource.clip = currentSong;
 
         lineRenderer.colorGradient = currentColor;
 
-        isSongPlaying = true;
+        isSongPlaying = false;
         audioSource.Play();
 
-        Debug.Log("Currently playing: " + currentSong.name);
+        Debug.Log("Currently not tuned to a channel!");
     }
 }
