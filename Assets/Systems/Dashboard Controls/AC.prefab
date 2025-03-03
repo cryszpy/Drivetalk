@@ -279,9 +279,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1940588148582947765}
   id: 0
-  currentChance: 0.15
-  baseChance: 0.15
-  baseIncrease: 0.075
+  currentChance: 0.05
+  baseChance: 0.05
+  baseIncrease: 0.025
   floatValue: 0
   boolValue: 0
   fulfilled: 0

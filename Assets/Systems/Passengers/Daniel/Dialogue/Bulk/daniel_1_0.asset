@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: daniel_1_0
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Oh. Y'know...
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 11400000, guid: ba2d24060b4f04f8c9f782b252fe7c4a, type: 2}
+    longPauseTime: 5
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    voiceLine: {fileID: 8300000, guid: d9da134cd8c8a459dbb55b25379578ea, type: 3}
+    requestsStart: 1
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  - sentence: When I heard a taxi driver was coming to town, I was stoked.
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  - sentence: "'Cause dude. Don't get me wrong\u2014it's a small town, but walking
+      takes"
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  - sentence: F O R E V E R .
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  - sentence: So I'm glad you're here, man.
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  nextDialogue: {fileID: 11400000, guid: 58d6e3ef7f8cc4129b3d7c410f30d4ce, type: 2}
+  firstNameUsage: 0
+  fallbackExpression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 84fcc836840494cdca8d12b11af94797, type: 2}
+  - {fileID: 11400000, guid: 935b563f8e78443b88b659fa43db44cc, type: 2}

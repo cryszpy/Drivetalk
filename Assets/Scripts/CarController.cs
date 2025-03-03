@@ -22,9 +22,6 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the sprite renderer component of the passenger's head on the mood meter.")]
     public Image moodMeterHandle;
 
-    /* [Tooltip("List of all taxi stops in the game.")]
-    public List<GameObject> taxiStops = new(); */
-
     [Tooltip("List of all the car's available passenger seats.")]
     [SerializeField] private List<GameObject> passengerSeats;
 
@@ -49,7 +46,11 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the car's dropoff position for passengers.")]
     public GameObject dropoffPosition;
 
+    [Tooltip("Reference to the AudioSource component on the radio.")]
     public AudioSource radioSource;
+
+    [Tooltip("Reference to the GPS screen.")]
+    public GPSScreen gpsScreen;
 
     [Header("STATS")] // -------------------------------------------------------------------------------------------
 
@@ -245,11 +246,15 @@ public class CarController : MonoBehaviour
             } 
             // Otherwise, increment their ride numbder
             else {
-                int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
-                PassengersDrivenRideNum[index]++;
 
-                passengersDrivenRideNumTracker[index]++;
+                // Get the index of the current passenger's ride number
+                int tempIndex = PassengersDrivenIDs.IndexOf(currentPassenger.id);
+                PassengersDrivenRideNum[tempIndex]++;
+
+                passengersDrivenRideNumTracker[tempIndex]++;
             }
+
+            int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
 
             GameStateManager.EOnPassengerPickup?.Invoke();
 
@@ -260,6 +265,9 @@ public class CarController : MonoBehaviour
 
             // Set the passenger as having been picked up
             currentPassenger.tag = "PickedUp";
+
+            // Set the correct destination on the GPS
+            gpsScreen.SetDestination(gpsScreen.roadList.destinations.Find(x => x.tile == currentPassenger.requestedDestinationTiles[PassengersDrivenRideNum[index] - 1]));
 
             // Increment the car's current ride number out of total rides in the day
             currentRideNum++;

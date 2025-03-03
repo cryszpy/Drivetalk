@@ -48,7 +48,7 @@ MonoBehaviour:
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 1
+    spawnDestination: 0
   - sentence: "Though I won't lie, I never thought I'd see you again after\u2014"
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 0
+    spawnDestination: 1
   - sentence: "The stores seem newer, the houses look nicer... Oh\u2014"
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -110,6 +110,18 @@ MonoBehaviour:
     earlyDropoff: 0
     spawnDestination: 0
   - sentence: They fixed up the park, too. It's pretty clean now.
+    expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+  - sentence: You should stop by sometime.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
     longPauseTime: 0

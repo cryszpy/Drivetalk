@@ -706,6 +706,9 @@ public class DialogueManager : MonoBehaviour
     public void DropoffDialogue() {
         Debug.Log("Finished dropoff dialogue piece!");
 
+        // Hide the name box
+        nameBox.SetActive(false);
+
         // Clear current dialogue
         currentDialogue = null;
 

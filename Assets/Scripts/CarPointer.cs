@@ -148,11 +148,12 @@ public class CarPointer : MonoBehaviour
                 }
             }
 
-            if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
+            // REPLACE WITH STOP SIGNS AND TRAFFIC LIGHTS
+            /* if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
                 agent.speed = 0;
             } else if (agent.speed != car.agent.speed) {
                 agent.speed = car.agent.speed;
-            }
+            } */
         }
     }
 

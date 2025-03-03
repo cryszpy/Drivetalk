@@ -7,4 +7,14 @@ public class RoadList : ScriptableObject
 {
     
     public List<GameObject> allRoadsList = new();
+
+    public List<GPSDestination> destinations = new();
+}
+
+[System.Serializable]
+public class GPSDestination {
+
+    public GameObject tile;
+
+    public string gpsText;
 }

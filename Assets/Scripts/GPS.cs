@@ -24,25 +24,28 @@ public class GPS : UIElementSlider
     [Tooltip("Reference to the spline dolly track to switch the camera to when the GPS is clicked.")]
     [SerializeField] protected CinemachineRotationComposer rotationComposer;
 
+    [SerializeField] protected GameObject navigationScreen;
+
     [Tooltip("Reference to the map UI.")]
-    [SerializeField] protected GameObject screenUI;
+    [SerializeField] protected GPSScreen gpsScreen;
 
     [Tooltip("Reference to the camera focal point object.")]
     [SerializeField] protected GameObject cameraLookAt;
 
-    [SerializeField] private Color unlockedColor;
-    [SerializeField] private Color lockedColor;
+    [Tooltip("Reference to the GPS spline track.")]
+    [SerializeField] protected SplineContainer spline;
 
-    [SerializeField] private List<GameObject> gpsButtons;
+    [Tooltip("The recent destination prefab.")]
+    [SerializeField] private GameObject recentDestElement;
 
     private void OnEnable() {
         GameStateManager.EOnDestinationSet += StartDampingReset;
-        GameStateManager.EOnPassengerPickup += CachePassengerDest;
+        //GameStateManager.EOnPassengerPickup += CachePassengerDest;
     }
 
     private void OnDisable() {
         GameStateManager.EOnDestinationSet -= StartDampingReset;
-        GameStateManager.EOnPassengerPickup -= CachePassengerDest;
+        //GameStateManager.EOnPassengerPickup -= CachePassengerDest;
     }
 
     public override void Start()
@@ -52,7 +55,7 @@ public class GPS : UIElementSlider
         dialogueManager = GameStateManager.dialogueManager;
     }
 
-    private void CachePassengerDest() {
+    /* private void CachePassengerDest() {
 
         // Gets the index number of the current passenger
         int index = CarController.PassengersDrivenIDs.IndexOf(carPointer.car.currentPassenger.id);
@@ -61,7 +64,7 @@ public class GPS : UIElementSlider
         GameObject selectedDestination = carPointer.car.currentPassenger.requestedDestinationTiles[CarController.PassengersDrivenRideNum[index] - 1];
 
         // Gets the selected button corresponding to the requested destination
-        GameObject selectedButton = gpsButtons.Find(x => x.GetComponent<GPSDestination>().destinationObject == selectedDestination);
+        GameObject selectedButton = gpsButtons.Find(x => x.GetComponent<GPSRecentDestination>().destinationObject == selectedDestination);
 
         // Iterates through all buttons and turns them off except for the selected button
         foreach (GameObject button in gpsButtons) {
@@ -94,7 +97,7 @@ public class GPS : UIElementSlider
                 }
             }
         }
-    }
+    } */
 
     public override void Update() {
 
@@ -166,6 +169,13 @@ public class GPS : UIElementSlider
         }
     }
 
+    // Function to be executed when button is hovered over
+    public override void OnHover() {
+        gameObject.layer = hoveredLayer;
+        navigationScreen.layer = hoveredLayer;
+        hovered = true;
+    }
+
     // Function to be executed when the button is clicked
     public override void OnClick()
     {
@@ -181,7 +191,7 @@ public class GPS : UIElementSlider
         GameStateManager.SetState(GAMESTATE.MENU);
 
         // Switches the camera's spline dolly track
-        //splineDolly.Spline = spline;
+        splineDolly.Spline = spline;
 
         // Reset camera position on spline dolly
         //splineDolly.CameraPosition = 0;
@@ -193,23 +203,31 @@ public class GPS : UIElementSlider
         cinemachineCam.LookAt = focusOn.transform;
 
         // Activate the map when the camera is done moving
-        screenUI.SetActive(true);
+        //gpsScreen.SetActive(true);
 
         // Start moving the camera on the dolly spline track
-        //StartCoroutine(StartDollyMovement());
+        StartCoroutine(StartDollyMovement());
         
         Debug.Log("GPS clicked!");
+    }
+
+    public override void DefaultState()
+    {
+        gameObject.layer = regularLayer;
+        navigationScreen.layer = 0;
+        hovered = false;
+
+        // If this button isn't being held down or hovered, but is still set as the hovered button, reset
+        if (!dragging && carPointer.hoveredButton == gameObject) {
+            carPointer.hoveredButton = null;
+        }
     }
 
     // Starts the dolly movement on the current spline track
     public virtual IEnumerator StartDollyMovement() {
 
         // While the camera has not finished moving along spline track—
-        while (splineDolly.CameraPosition < 1 /* || cinemachineCam.Lens.FieldOfView > 30 */) {
-            /* if (cinemachineCam.Lens.FieldOfView > 30) {
-                toonCamera.fieldOfView -= 0.6f;
-                cinemachineCam.Lens.FieldOfView -= 0.6f;
-            } */
+        while (splineDolly.CameraPosition < 1) {
 
             // If the camera isn't finished moving along the spline track, move it along at different rates
             if (splineDolly.CameraPosition < 1f) {
@@ -225,7 +243,7 @@ public class GPS : UIElementSlider
         }
 
         // Activate the map when the camera is done moving
-        screenUI.SetActive(true);
+        gpsScreen.gameObject.SetActive(true);
     }
 
     public void GPSBackButton() {
@@ -244,7 +262,7 @@ public class GPS : UIElementSlider
         }
 
         // While the camera has not finished moving back along spline track—
-        /* while (splineDolly.CameraPosition > 0) {
+        while (splineDolly.CameraPosition > 0) {
 
             // If the camera isn't finished moving back along the spline track, move it along at different rates
             if (splineDolly.CameraPosition > 0) {
@@ -257,7 +275,7 @@ public class GPS : UIElementSlider
 
             // Wait in between moving
             yield return new WaitForSeconds(0.005f);
-        } */
+        }
 
         // Reset camera focal point
         cinemachineCam.LookAt = cameraLookAt.transform;
@@ -266,12 +284,17 @@ public class GPS : UIElementSlider
         GameStateManager.SetState(GAMESTATE.PLAYING);
 
         // Disable map UI
-        screenUI.SetActive(false);
+        gpsScreen.gameObject.SetActive(false);
 
-        // Enable dialogue continue button if disabled
-        /* if (!continueButton.activeInHierarchy) {
-            continueButton.SetActive(true);
-        } */
+        // Add destination to recent destinations if it's not there already
+        if (!gpsScreen.recentDestTiles.Contains(gpsScreen.currentDestination.tile)) {
+
+            // Spawn a recent location element
+            GameObject recent = GPSRecentDestination.Create(recentDestElement, gpsScreen.pivot.transform, gpsScreen);
+
+            // Add the current destination tile to the recent destinations list
+            gpsScreen.recentDestTiles.Add(gpsScreen.currentDestination.tile);
+        }
 
         // Disables smooth rotation
         float damp = 1;

@@ -84,7 +84,7 @@ MonoBehaviour:
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 0
+    spawnDestination: 1
   - sentence: Must be tiring sometimes.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
@@ -108,7 +108,7 @@ MonoBehaviour:
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 1
+    spawnDestination: 0
   - sentence: The park's a good place if you're having a slow day.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
