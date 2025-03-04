@@ -52,6 +52,19 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
+--- !u!114 &6394681374789202937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81836a6f66da44d93b516337f2252948, type: 3}
+  m_Name: TransparentPass
+  m_EditorClassIdentifier: 
+  m_Active: 0
 --- !u!114 &8500520363806924290
 MonoBehaviour:
   m_ObjectHideFlags: 0

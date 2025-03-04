@@ -25,8 +25,6 @@ public class RadioChannel : UIElementSlider
     public float turnSpeed;
     public float turnWaitTime;
 
-    private bool turning = false;
-
     public override void Start() {
         base.Start();
         CarController.CurrentRadioChannel = 0;
@@ -143,7 +141,6 @@ public class RadioChannel : UIElementSlider
     }
 
     public virtual IEnumerator TurnDial(int index, bool skip = default) {
-        turning = true;
 
         float oldRange = rotationMax - rotationMin;
         float newRange = 1 - 0;
@@ -185,7 +182,5 @@ public class RadioChannel : UIElementSlider
 
             yield return new WaitForSeconds(turnWaitTime);
         }
-
-        turning = false;
     }
 }

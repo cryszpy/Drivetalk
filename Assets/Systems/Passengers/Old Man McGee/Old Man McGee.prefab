@@ -258,7 +258,8 @@ MonoBehaviour:
   requirements: []
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
-  ridesDialogue: []
+  ridesDialogue:
+  - {fileID: 11400000, guid: 224217c5bedb74e24860595858d024dc, type: 2}
   rarity: 0
   id: 2
   passengerName: Old Man McGee

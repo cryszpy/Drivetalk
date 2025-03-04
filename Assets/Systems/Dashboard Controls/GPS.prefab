@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_text: Where would you like to go?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1614308716483282191
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_text: Enter text...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2596,6 +2596,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 0}
+  objectsToOutline:
+  - {fileID: 8928611010222166760}
+  - {fileID: 3359843671557904272}
   unityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2625,7 +2628,6 @@ MonoBehaviour:
   cinemachineCam: {fileID: 0}
   splineDolly: {fileID: 0}
   rotationComposer: {fileID: 0}
-  navigationScreen: {fileID: 3359843671557904272}
   gpsScreen: {fileID: 1743190875777454970}
   cameraLookAt: {fileID: 0}
   spline: {fileID: 0}
@@ -2698,7 +2700,7 @@ MonoBehaviour:
   m_text: Recents
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_sharedMaterial: {fileID: -2911035905263889489, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2763,6 +2765,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
