@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class TaxiStopDestination : MonoBehaviour
 {
-    [Tooltip("Reference to the list of all passengers.")]
-    public PassengerList passengerList;
 
     [Tooltip("Reference to the car.")]
     private CarController car;
@@ -48,16 +46,16 @@ public class TaxiStopDestination : MonoBehaviour
         GetPassengerProbability(rand, passengerList.rarityProbabilities); */
 
         // Make sure there are passengers to pick up
-        if (passengerList.storyPassengers.Count > 0) {
+        if (car.passengerList.storyPassengers.Count > 0) {
 
             // Get the next passenger in the queue
-            Passenger passenger = passengerList.storyPassengers[0];
+            Passenger passenger = car.passengerList.storyPassengers[0];
 
             // Spawn passenger at stop
             GameObject character = Instantiate(passenger.gameObject, transform.position, Quaternion.identity);
 
             // Exhaust / remove passenger from the queue
-            passengerList.ExhaustPassenger(passenger, PassengerRarity.STORY);
+            car.passengerList.ExhaustPassenger(passenger, PassengerRarity.STORY);
 
             // Pick up passenger in the car
             car.PickUpPassenger(character);

@@ -125,7 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 0}
-  dialogueManager: {fileID: 0}
+  objectsToOutline:
+  - {fileID: 2800119783770298541}
   unityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 1455986950470664114}
-  dialogueManager: {fileID: 0}
+  objectsToOutline: []
   unityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -431,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 3397756635586915529}
-  dialogueManager: {fileID: 0}
+  objectsToOutline: []
   unityEvent:
     m_PersistentCalls:
       m_Calls:

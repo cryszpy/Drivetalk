@@ -39,6 +39,9 @@ public struct DialogueLine {
 
     [Tooltip("Upon reaching this dialogue line, the destination will spawn.")]
     public bool spawnDestination;
+
+    [Tooltip("Whether this line starts the time loop reversal.")]
+    public bool timeLoop;
 }
 
 [System.Serializable]

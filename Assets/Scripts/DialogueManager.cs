@@ -79,6 +79,8 @@ public class DialogueManager : MonoBehaviour
 
     public float shortPauseTime;
 
+    public float staticIncreaseTime;
+
     public List<string> punctuationList = new();
 
     public Queue<GameObject> activeDialogueBlocks = new();
@@ -295,7 +297,7 @@ public class DialogueManager : MonoBehaviour
                 else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute) {
                     Debug.Log("5");
                     // Starts the passenger's dropoff dialogue
-                    DropoffDialogue();
+                    PostDropoff();
                     return;
                 }
                 // End dialogue if no choices and nothing else to say
@@ -428,6 +430,7 @@ public class DialogueManager : MonoBehaviour
         currentLine.voiceLine = line.voiceLine;
         currentLine.longPauseTime = line.longPauseTime;
         currentLine.firstNameUsage = line.firstNameUsage;
+        currentLine.timeLoop = line.timeLoop;
 
         // Wait for the appropriate amount of long pause time before continuing with this line
         yield return new WaitForSeconds(currentLine.longPauseTime);
@@ -650,9 +653,14 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Passenger line does not have an expression or a starting expression!");
         }
 
+        // Start time loop
+        if (currentLine.timeLoop) {
+            StartCoroutine(StartTimeLoop());
+        }
+
         // Initiate an early dropoff if needed
         if (currentLine.earlyDropoff) {
-            DropoffDialogue();
+            PostDropoff();
             GameStateManager.dialogueManager.ResetDialogue();
 
             GameStateManager.EOnPassengerDropoff?.Invoke();
@@ -665,6 +673,46 @@ public class DialogueManager : MonoBehaviour
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
         }
+    }
+
+    private IEnumerator StartTimeLoop() {
+
+        // Lock radio channel knob to static
+        foreach (var obj in car.radio.radioChannels.objectsToOutline) {
+            obj.layer = 0;
+        }
+
+        // Turn dial to static
+        car.radio.SetRadioStatic();
+        car.radio.radioChannels.enabled = false;
+
+        // Slowly increase static volume for a certain amount of time
+        float timer = 0;
+        while (timer < staticIncreaseTime) {
+            timer += Time.deltaTime;
+
+            if (car.radio.audioSource.volume < 1) {
+                car.radio.audioSource.volume += Time.deltaTime / 4;
+            }
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        // Play glitch effect and swap passengers
+        ErasePassenger();
+        GameStateManager.dialogueManager.ResetDialogue();
+
+        // Get the next passenger in the queue
+        Passenger passenger = car.passengerList.storyPassengers[0];
+
+        // Spawn passenger at stop
+        GameObject character = Instantiate(passenger.gameObject, car.passengerSeats[0].transform.position, Quaternion.identity);
+
+        // Exhaust / remove passenger from the queue
+        car.passengerList.ExhaustPassenger(passenger, PassengerRarity.STORY);
+
+        // Pick up passenger in the car
+        car.PickUpPassenger(character);
     }
 
     private IEnumerator StartVoiceLine() {
@@ -703,7 +751,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Called AFTER a passenger's dropoff dialogue has concluded
-    public void DropoffDialogue() {
+    public void PostDropoff() {
         Debug.Log("Finished dropoff dialogue piece!");
 
         // Hide the name box
@@ -736,6 +784,34 @@ public class DialogueManager : MonoBehaviour
             // TODO: Put after-day summary here!
 
         }
+    }
+
+    public void ErasePassenger() {
+        Debug.Log("Static switched passenger!");
+
+        // Hide the name box
+        nameBox.SetActive(false);
+
+        // Clear current dialogue
+        currentDialogue = null;
+
+        // Unparent passenger from car
+        car.currentPassenger.transform.parent = null;
+
+        // Set passenger position to the destination stop
+        GameObject passenger = car.currentPassenger.gameObject;
+
+        // Clear current passenger
+        car.currentPassenger = null;
+        Destroy(passenger);
+
+        // Reset finished dialogue boolean check
+        carPointer.finishedDialogue = false;
+
+        carPointer.readyToSpawnDest = false;
+
+        // Allows car to continue driving
+        car.arrivedAtDest = false;
     }
 
     // Ends dialogue and starts wait before next sentence group

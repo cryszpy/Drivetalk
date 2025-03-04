@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,9 @@ public class UIElementSlider : MonoBehaviour
 
     [Tooltip("Reference to the slider's physical object.")]
     public GameObject dialObject;
+
+    [Tooltip("List of all objects to highlight when hovering.")]
+    public List<GameObject> objectsToOutline = new();
 
     [Tooltip("New on-click function event.")]
     public UnityEvent unityEvent = new();
@@ -77,7 +81,7 @@ public class UIElementSlider : MonoBehaviour
             }
 
             if (dragging) {
-                gameObject.layer = hoveredLayer;
+                OutlineObjects(hoveredLayer);
                 Drag();
             }
 
@@ -168,22 +172,28 @@ public class UIElementSlider : MonoBehaviour
         }
     }
 
+    public virtual void OutlineObjects(int newLayer) {
+        foreach (var obj in objectsToOutline) {
+            obj.layer = newLayer;
+        }
+    }
+
     // Function to be executed when slider is clicked
     public virtual void OnClick()
     {
         dragging = true;
-        gameObject.layer = regularLayer;
+        OutlineObjects(regularLayer);
     }
 
     // Function to be executed when button is hovered over
     public virtual void OnHover() {
-        gameObject.layer = hoveredLayer;
+        OutlineObjects(hoveredLayer);
         hovered = true;
     }
 
     public virtual void DefaultState()
     {
-        gameObject.layer = regularLayer;
+        OutlineObjects(regularLayer);
         hovered = false;
 
         // If this button isn't being held down or hovered, but is still set as the hovered button, reset

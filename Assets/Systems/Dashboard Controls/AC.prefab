@@ -519,6 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 9146612707172334904}
+  objectsToOutline: []
   unityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -678,6 +679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 0}
   dialObject: {fileID: 2157583070687290674}
+  objectsToOutline:
+  - {fileID: 2157583070687290674}
   unityEvent:
     m_PersistentCalls:
       m_Calls:

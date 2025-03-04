@@ -10,7 +10,7 @@ public class Radio : MonoBehaviour
     [Tooltip("Reference to the radio's waveform line renderer.")]
     [HideInInspector] public LineRenderer lineRenderer;
 
-    [SerializeField] private RadioChannel radioChannels;
+    public RadioChannel radioChannels;
 
     [Tooltip("Reference to the current song's audio clip component.")]
     [HideInInspector] public AudioClip currentSong;

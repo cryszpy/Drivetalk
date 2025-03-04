@@ -24,8 +24,6 @@ public class GPS : UIElementSlider
     [Tooltip("Reference to the spline dolly track to switch the camera to when the GPS is clicked.")]
     [SerializeField] protected CinemachineRotationComposer rotationComposer;
 
-    [SerializeField] protected GameObject navigationScreen;
-
     [Tooltip("Reference to the map UI.")]
     [SerializeField] protected GPSScreen gpsScreen;
 
@@ -116,7 +114,7 @@ public class GPS : UIElementSlider
             }
 
             if (dragging) {
-                gameObject.layer = hoveredLayer;
+                OutlineObjects(hoveredLayer);
                 Drag();
             }
 
@@ -169,13 +167,6 @@ public class GPS : UIElementSlider
         }
     }
 
-    // Function to be executed when button is hovered over
-    public override void OnHover() {
-        gameObject.layer = hoveredLayer;
-        navigationScreen.layer = hoveredLayer;
-        hovered = true;
-    }
-
     // Function to be executed when the button is clicked
     public override void OnClick()
     {
@@ -209,18 +200,6 @@ public class GPS : UIElementSlider
         StartCoroutine(StartDollyMovement());
         
         Debug.Log("GPS clicked!");
-    }
-
-    public override void DefaultState()
-    {
-        gameObject.layer = regularLayer;
-        navigationScreen.layer = 0;
-        hovered = false;
-
-        // If this button isn't being held down or hovered, but is still set as the hovered button, reset
-        if (!dragging && carPointer.hoveredButton == gameObject) {
-            carPointer.hoveredButton = null;
-        }
     }
 
     // Starts the dolly movement on the current spline track

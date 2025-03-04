@@ -9,8 +9,7 @@ public class Hazards : UIElementSlider
     // Function to be executed when slider is clicked
     public override void OnClick()
     {
-        dragging = true;
-        gameObject.layer = regularLayer;
+        base.OnClick();
 
         // Toggle radio power status
         buttonAnimator.SetBool("Active", !CarController.HazardsActive);

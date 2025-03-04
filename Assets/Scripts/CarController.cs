@@ -23,7 +23,7 @@ public class CarController : MonoBehaviour
     public Image moodMeterHandle;
 
     [Tooltip("List of all the car's available passenger seats.")]
-    [SerializeField] private List<GameObject> passengerSeats;
+    public List<GameObject> passengerSeats;
 
     [Tooltip("List of all dashboard gift spawn locations.")]
     public List<GiftSpawn> dashboardGiftSpawns = new();
@@ -33,6 +33,9 @@ public class CarController : MonoBehaviour
 
     [Tooltip("Reference to the car's Navigation Mesh AI agent component.")]
     public NavMeshAgent agent;
+
+    [Tooltip("Reference to the list of all passengers.")]
+    public PassengerList passengerList;
 
     [Tooltip("Reference to the car's current passenger. UPDATED DYNAMICALLY.")]
     public Passenger currentPassenger;
@@ -47,7 +50,7 @@ public class CarController : MonoBehaviour
     public GameObject dropoffPosition;
 
     [Tooltip("Reference to the AudioSource component on the radio.")]
-    public AudioSource radioSource;
+    public Radio radio;
 
     [Tooltip("Reference to the GPS screen.")]
     public GPSScreen gpsScreen;
