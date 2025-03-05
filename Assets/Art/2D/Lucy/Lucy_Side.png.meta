@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d65024473948dfb4fa9721c4e0500dd5
+guid: 4f16f129528514b4fb8bab3261106351
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,73 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lucy_Talk_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b279237edae7a2448c18f39cb217789
-      internalID: -1417983869
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lucy_Talk_1
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 74d7da1ff45468647bb5db15fdeff91a
-      internalID: -1223889656
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lucy_Talk_2
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c79d6033c83dc9a4ca2d2fa6390def71
-      internalID: -1981421329
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lucy_Talk_3
+      name: Lucy_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -178,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24f9251724a833a4e88ce1b822fcbdee
-      internalID: 2126049564
+      spriteID: eb4bbcc0715d7b54e82a290728b056a6
+      internalID: 2021152853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lucy_Talk_4
+      name: Lucy_Side_1
       rect:
         serializedVersion: 2
         x: 600
@@ -200,18 +134,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74a30983b7d3dd045bf6c6144b11acb7
-      internalID: -2125681563
+      spriteID: cc8355c3e6e6e6a4bb8f756de35e58d2
+      internalID: 286344131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lucy_Talk_5
+      name: Lucy_Side_2
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 900
+        x: 0
+        y: 0
         width: 600
         height: 900
       alignment: 0
@@ -222,8 +156,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca333669f94ae564d8034345e8c32054
-      internalID: 66611404
+      spriteID: 830a620fc05f7964c8b6b2fc02dfbd89
+      internalID: -367305080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lucy_Side_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 600
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37b300fabaff9b24ba6421410705ded5
+      internalID: -1449836085
       vertices: []
       indices: 
       edges: []
@@ -232,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c59049fa0248fe8489f8e910c165a000
+    spriteID: 2d29bdc449958b042999f867e82a90be
     internalID: 0
     vertices: []
     indices: 
@@ -242,14 +198,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":600.0,"y":900.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":600.0,"y":900.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Lucy_Talk_0: -1417983869
-      Lucy_Talk_1: -1223889656
-      Lucy_Talk_2: -1981421329
-      Lucy_Talk_3: 2126049564
-      Lucy_Talk_4: -2125681563
-      Lucy_Talk_5: 66611404
+      Lucy_Side_0: 2021152853
+      Lucy_Side_1: 286344131
+      Lucy_Side_2: -367305080
+      Lucy_Side_3: -1449836085
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
