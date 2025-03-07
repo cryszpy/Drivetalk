@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 166813861}
   - component: {fileID: 166813862}
   - component: {fileID: 166813863}
+  - component: {fileID: 166813864}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: DialogueManager
@@ -304,6 +305,7 @@ MonoBehaviour:
   - '-'
   - "\u2014"
   activeDialogueTracker: []
+  textEffects: {fileID: 166813864}
 --- !u!114 &166813862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +342,67 @@ MonoBehaviour:
   comfortabilityRunning: 0
   happy: 0
   initialCooldown: 6
+--- !u!114 &166813864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166813858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eba8d87c1d7e489bb3f3dfdcf09d665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertices: []
+  colors: []
+  wobbleOn: 0
+  wobbleSpeedX: 0
+  wobbleSpeedY: 1
+  wobbleStart: 0
+  wobbleEnd: 0
+  glitchOn: 0
+  possibleReplacements: "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\xB4\"'.?!*&^%$#@()[]\\{}|;:"
+  colorSpeedMin: 5
+  colorSpeedMax: 100
+  flickerSpeedMin: 0.15
+  flickerSpeedMax: 0.4
+  normalHoldSpeedMin: 0.15
+  normalHoldSpeedMax: 0.6
+  glitchSpeedX: 0
+  glitchSpeedY: 3.5
+  flickerChance: 0.5
+  glitchBackup: 
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 1}
+    key1: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+    key2: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
+    key3: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
+    key4: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
+    key5: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 0}
+    key6: {r: 0.06666667, g: 0.06666667, b: 0.06666667, a: 0}
+    key7: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
+    ctime0: 14456
+    ctime1: 14842
+    ctime2: 29684
+    ctime3: 30262
+    ctime4: 45296
+    ctime5: 45682
+    ctime6: 57825
+    ctime7: 58211
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
 --- !u!114 &196195863 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5005851211835550486, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
@@ -5490,7 +5553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 401310073113907742, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -740.0001
+      value: -740.00024
       objectReference: {fileID: 0}
     - target: {fileID: 401644285967711358, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6160,6 +6223,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 801073968648915593, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 191.20001
+      objectReference: {fileID: 0}
     - target: {fileID: 835529776851904630, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -6511,6 +6578,10 @@ PrefabInstance:
     - target: {fileID: 1048168428960198748, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081268411076735985, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 191.20001
       objectReference: {fileID: 0}
     - target: {fileID: 1083418472112805941, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -9238,7 +9309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2577274797501552625, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2591262033751072631, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10608,6 +10679,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3438589915144556879, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: near clip plane
+      value: 0.19
+      objectReference: {fileID: 0}
     - target: {fileID: 3440758162091901045, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: audioManager
       value: 
@@ -11175,6 +11250,10 @@ PrefabInstance:
     - target: {fileID: 3723656969868126623, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735711573917859834, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 189.40002
       objectReference: {fileID: 0}
     - target: {fileID: 3756357672048780570, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -20191,6 +20270,10 @@ PrefabInstance:
     - target: {fileID: 9158168998257180399, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164182360582720615, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 191.20001
       objectReference: {fileID: 0}
     - target: {fileID: 9165644489236970033, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y

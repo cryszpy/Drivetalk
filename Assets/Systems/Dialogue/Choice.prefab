@@ -200,8 +200,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: josephg awesome
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
-  m_sharedMaterial: {fileID: 1961426711053289096, guid: b0ef797465d73412d9f51ca13a66eb4b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e636307fe70a49b4e9676e7b2a04c457, type: 2}
+  m_sharedMaterial: {fileID: -6718654615946038721, guid: e636307fe70a49b4e9676e7b2a04c457, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

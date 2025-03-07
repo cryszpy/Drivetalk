@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,10 @@ public class DialogueManager : MonoBehaviour
 
     [Tooltip("Reference to the dialogue text element.")]
     public TMP_Text currentDialogueText;
+
+    private Mesh textMesh;
+
+    private Vector3[] vertices;
 
     [Tooltip("Reference to the flashing indicator on the GPS.")]
     public GameObject gpsIndicator;
@@ -85,6 +90,15 @@ public class DialogueManager : MonoBehaviour
 
     public Queue<GameObject> activeDialogueBlocks = new();
     [HideInInspector] public List<GameObject> activeDialogueTracker = new();
+
+    [Header("ANIMATED TEXT")] // --------------------------------------------------------------------------------------------
+
+    public TextEffects textEffects;
+
+    /* public EmotionEvent onEmotionChange; */
+    //public ActionEvent onAction;
+    /* public TextRevealEvent onTextReveal;
+    public DialogueEvent onDialogueFinish; */
 
     private void OnEnable() {
         GameStateManager.EOnRideFinish += EndDialogue;
@@ -417,6 +431,9 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        // Clear all text effects
+        textEffects.ClearEffects();
+
         // Sets the currentLine stats
         currentLine.sentence = line.sentence;
         currentLine.expression = line.expression;
@@ -603,18 +620,130 @@ public class DialogueManager : MonoBehaviour
         nameBoxText.text = name;
 
         // Initializes empty text as full message to start typing
-        currentDialogueText.text = message;
-        currentDialogueText.maxVisibleCharacters = 0;
+        //currentDialogueText.text = message;
+        //currentDialogueText.maxVisibleCharacters = 0;
 
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
+        // Trigger speaking if line isn't silence
         if (line.sentence != "...") {
             car.currentPassenger.animator.SetTrigger("Speak");
         }
 
+        // Clear dialogue box
+        currentDialogueText.text = string.Empty;
+
+        // --------------------------------------------------------- BEGIN PARSING ---------------------------------------------------------
+
+        // Split dialogue into sections separated by < and >.
+        // Even numbers are valid text, odd numbers are tags
+        string[] subTexts = message.Split('<', '>');
+
+        string displayText = "";
+
+        // ------------------------------------------ REMOVE CUSTOM TAGS FROM DIALOGUE ------------------------------------------------
+
+        for (int i = 0; i < subTexts.Length; i++)
+        {
+            // Characters (even number)
+            if (i % 2 == 0)
+                displayText += subTexts[i];
+            // Non-custom tags (odd number)
+            else if (!isCustomTag(subTexts[i].Replace("/", "")))
+                displayText += $"<{subTexts[i]}>";
+        }
+
+        // Check to see if tag is custom tag
+        bool isCustomTag(string tag)
+        {
+            return tag.StartsWith("wobble") || tag.StartsWith("glitch");
+        }
+
+        // Set current dialogue to the dialogue without custom tags
+        currentDialogueText.text = displayText;
+
+        // Hide all dialogue visibility
+        currentDialogueText.maxVisibleCharacters = 0;
+
+        // ------------------------------------------ PARSE TO FIND CUSTOM TAGS AND ACTIVATE THEM --------------------------------------------
+        
+        int spaceCounter = 0;
+        int characterTracker = 0;
+
+        // For each subsection split—
+        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++){
+
+            // Subsection split is an odd number, therefore is a tag
+            if (sectionNum % 2 == 1)
+            {
+                // Get the amount of spaces in the text with the effect
+                int spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
+
+                yield return EvaluateTag(subTexts[sectionNum].Replace(" ", ""), characterTracker, characterTracker + subTexts[sectionNum + 1].Length - 1, spaceCounter, spaceCounter + spaces);
+            }
+            // Subsection split is an even number, therefore made up of words
+            else
+            {
+                // For each character in this subsection
+                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum) {
+
+                    // The current iterated character
+                    string character = subTexts[sectionNum][charNum].ToString();
+
+                    characterTracker++;
+
+                    // If the character is a space, increment the number of spaces
+                    if (character == " ") {
+                        spaceCounter++;
+                    }
+                    /* onTextReveal.Invoke(subTexts[subCounter][visibleCounter]); */
+                }
+            }
+        }
+        yield return null;
+
+        // ------------------------------------------ TRIGGER CUSTOM TEXT EFFECTS (called above) ---------------------------------------------
+
+        WaitForSeconds EvaluateTag(string tag, int start, int end, int spacesBefore, int spacesAfter)
+        {
+            if (tag.Length > 0)
+            {
+                /* if (tag.StartsWith("speed="))
+                {
+                    speed = float.Parse(tag.Split('=')[1]);
+                }
+                else if (tag.StartsWith("pause="))
+                {
+                    return new WaitForSeconds(float.Parse(tag.Split('=')[1]));
+                }
+                else if (tag.StartsWith("emotion="))
+                {
+                    onEmotionChange.Invoke((Emotion)System.Enum.Parse(typeof(Emotion), tag.Split('=')[1]));
+                }
+                else  */
+                if (tag == "wobble"/* tag.StartsWith("action=") */) {
+                    //Debug.Log(start + " | " + end + " | " + spacesBefore + " | " + spacesAfter);
+                    //string action = tag.Split('=')[1];
+
+                    //onAction.Invoke(tag.Split('=')[1]);
+                    //SetAction(action);
+
+                    Debug.Log("Wobble detected!");
+                    textEffects.StartWobble((start - spacesBefore) * 4, (end - spacesAfter) * 4, 0.01f, 0.16f);
+                } else if (tag == "glitch") {
+
+                    Debug.Log("Glitch detected!");
+                    textEffects.StartGlitch(currentDialogueText.text, start, end, spacesBefore, spacesAfter);
+                }
+            }
+            return null;
+        }
+
+        // ----------------------------------------------------- REVEAL TEXT  ---------------------------------------------------------
+
         // For every character in ONLY THE MESSAGE WITHOUT THE NAME
-        foreach (char letter in concat.ToCharArray()) {
+        foreach (char letter in currentDialogueText.text) {
 
             if (typingSentence) {
 
