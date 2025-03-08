@@ -24,10 +24,6 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Reference to the dialogue text element.")]
     public TMP_Text currentDialogueText;
 
-    private Mesh textMesh;
-
-    private Vector3[] vertices;
-
     [Tooltip("Reference to the flashing indicator on the GPS.")]
     public GameObject gpsIndicator;
 
@@ -172,18 +168,21 @@ public class DialogueManager : MonoBehaviour
             transcriptLog = GameObject.FindGameObjectWithTag("MainCanvas").GetComponentInChildren<TranscriptLog>();
         }
 
-        if (!autoDialogueToggle) {
+        /* if (!autoDialogueToggle) {
             autoDialogueToggle = GameObject.FindGameObjectWithTag("AutoDialogueToggle").GetComponent<Toggle>();
             autoDialogueToggle.onValueChanged.AddListener(delegate { SetAutoDialogue(autoDialogueToggle.isOn); } );
             autoDialogue = true;
             autoDialogueToggle.gameObject.SetActive(false);
-        }
+        } */
+        autoDialogue = true;
 
         if (!nameBoxText) {
 
             if (!nameBox) {
                 nameBox = GameObject.FindGameObjectWithTag("NameBox");
             }
+
+            nameBox.SetActive(false);
 
             nameBoxText = nameBox.GetComponentInChildren<TMP_Text>();
 
@@ -756,7 +755,7 @@ public class DialogueManager : MonoBehaviour
                 }
 
                 // Waits for the typing speed time
-                yield return new WaitForSeconds(car.currentPassenger.textCPS);
+                yield return new WaitForSeconds(car.currentPassenger.textCPS / CarController.TextSpeedMult);
 
             } else {
                 Debug.Log("Skipped typing!");
@@ -895,6 +894,8 @@ public class DialogueManager : MonoBehaviour
         // Set passenger position to the destination stop
         car.currentPassenger.transform.position = car.dropoffPosition.transform.position;
 
+        StartCoroutine(DeletePassenger(car.currentPassenger.gameObject));
+
         // Clear current passenger
         car.currentPassenger = null;
 
@@ -913,6 +914,13 @@ public class DialogueManager : MonoBehaviour
             // TODO: Put after-day summary here!
 
         }
+    }
+
+    private IEnumerator DeletePassenger(GameObject passenger) {
+
+        yield return new WaitForSeconds(10f);
+
+        Destroy(passenger);
     }
 
     public void ErasePassenger() {

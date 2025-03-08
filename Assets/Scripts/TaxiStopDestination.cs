@@ -11,7 +11,7 @@ public class TaxiStopDestination : MonoBehaviour
     private void OnTriggerEnter(Collider collider) {
 
         // If the collided object is the car—
-        if (collider.CompareTag("CarFrame")) {
+        if (collider.CompareTag("CarFrame") && GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             Debug.Log("Arrived at taxi stop!");
 

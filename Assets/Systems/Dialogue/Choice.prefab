@@ -201,7 +201,7 @@ MonoBehaviour:
   m_text: josephg awesome
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e636307fe70a49b4e9676e7b2a04c457, type: 2}
-  m_sharedMaterial: {fileID: -6718654615946038721, guid: e636307fe70a49b4e9676e7b2a04c457, type: 2}
+  m_sharedMaterial: {fileID: 8662757706142818535, guid: e636307fe70a49b4e9676e7b2a04c457, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

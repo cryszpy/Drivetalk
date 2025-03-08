@@ -12,7 +12,7 @@ public class Intersection : Road
     private void OnTriggerEnter(Collider collider) {
         
         // If the car pointer has been collided with—
-        if (collider.CompareTag("CarFrame")) {
+        if (collider.CompareTag("CarFrame") && GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
             // If the car pointer's script can be accessed
             if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {

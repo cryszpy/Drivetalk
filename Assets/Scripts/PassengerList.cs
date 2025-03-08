@@ -133,11 +133,10 @@ public class PassengerList : ScriptableObject
     }
 
     public void ResetAllPassengers() {
-        ResetPassengerList(exhaustedStory, storyPassengers);
+        ResetListInOrder(exhaustedStory, storyPassengers);
         ResetPassengerList(exhaustedTierOne, tierOnePassengers);
         ResetPassengerList(exhaustedTierTwo, tierTwoPassengers);
         ResetPassengerList(exhaustedTierThree, tierThreePassengers);
         ResetPassengerList(exhaustedTierFour, tierFourPassengers);
     }
-
 }

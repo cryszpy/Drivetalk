@@ -13,6 +13,9 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the road navigator AI that the car follows.")]
     public CarPointer carPointer;
 
+    [Tooltip("Reference to the car's rigidbody component.")]
+    public Rigidbody rb;
+
     [Tooltip("Reference to the game's dialogue manager.")]
     public DialogueManager dialogueManager;
 
@@ -75,13 +78,11 @@ public class CarController : MonoBehaviour
     [Tooltip("The total rides in the day.")]
     public int totalRideNum;
 
+    // STATIC VARIABLES ---------------------------------------------------------------------------------------------------
+
     [Tooltip("Might get rid of this.")]
     private static float rating;
     public static float Rating { get => rating; set => rating = value; }
-
-    [Tooltip("The car's internal temperature variable.")]
-    private static float temperature;
-    public static float Temperature { get => temperature; set => temperature = value;}
 
     [Tooltip("List of all seen/driven passenger IDs thus far.")]
     public static List<int> PassengersDrivenIDs = new();
@@ -98,6 +99,16 @@ public class CarController : MonoBehaviour
     [Tooltip("The most recent passenger's ID number.")]
     private static int lastPassengerID;
     public static int LastPassengerID { get => lastPassengerID; set => lastPassengerID = value; }
+
+    [Tooltip("Current text speed multiplier for all passengers.")]
+    public static float TextSpeedMult = 1;
+    public float textSpeedMultTracker;
+
+    // DASHBOARD CONTROLS ---------------------------------------------------------------------------------------------------
+
+    [Tooltip("The car's internal temperature variable.")]
+    private static float temperature;
+    public static float Temperature { get => temperature; set => temperature = value;}
 
     [Tooltip("The ID of the currently played radio channel.")]
     private static int currentRadioChannel;
@@ -138,6 +149,7 @@ public class CarController : MonoBehaviour
     }
 
     private void Update() {
+        textSpeedMultTracker = TextSpeedMult;
 
         // If the game isn't in a menu or paused—
         if (GameStateManager.Gamestate == GAMESTATE.PLAYING)
@@ -259,7 +271,7 @@ public class CarController : MonoBehaviour
 
             int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
 
-            GameStateManager.EOnPassengerPickup?.Invoke();
+            //GameStateManager.EOnPassengerPickup?.Invoke();
 
             GameStateManager.comfortManager.availableRequests = new(GameStateManager.comfortManager.dashRequests);
 

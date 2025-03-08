@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 692b3ac73e788f04ea97a29d88cdb7e3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Rose-Tinted
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a46911fff98b36045adcf863ac908483, type: 3}
+  - {fileID: 12800000, guid: 19c48787078f8a94cafb8046aa549798, type: 3}
+  - {fileID: 12800000, guid: 1b6681fc8b15a5c468b843768f09414d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

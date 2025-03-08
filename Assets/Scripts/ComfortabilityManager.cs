@@ -17,7 +17,7 @@ public class ComfortabilityManager : MonoBehaviour
     public List<DashboardRequestBase> activeRequests = new();
     
     [Tooltip("The current passenger's comfortability level.")]
-    public float currentComfortability;
+    public float currentComfortability = 100;
 
     [Tooltip("Whether the passive comfortability system is currently running or not.")]
     public bool comfortabilityRunning = false;
@@ -50,7 +50,7 @@ public class ComfortabilityManager : MonoBehaviour
             happy = unfulfilledRequests <= 0;
         }
 
-        if (GameStateManager.car.currentPassenger && comfortabilityRunning) {
+        if (GameStateManager.car.currentPassenger && comfortabilityRunning && !GameStateManager.dialogueManager.playingChoices) {
 
             // If no requests are active, start the gradual ramp
             if (activeRequests.Count != dashRequests.Count) {
@@ -95,5 +95,19 @@ public class ComfortabilityManager : MonoBehaviour
         }
 
         moodMeter.value = currentComfortability;
+    }
+
+    public void ResetDashboardControls() {
+
+        comfortabilityRunning = false;
+
+        activeRequests.Clear();
+        availableRequests.Clear();
+
+        currentComfortability = 100;
+
+        initialTimer = 0;
+
+        availableRequests = new(dashRequests);
     }
 }

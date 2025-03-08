@@ -16,7 +16,10 @@ public class CarPointer : MonoBehaviour
     public CarController car;
 
     [Tooltip("The car pointer's Navigation Mesh AI agent component.")]
-    [SerializeField] private NavMeshAgent agent;
+    public NavMeshAgent agent;
+
+    [Tooltip("Reference to the car pointer's rigidbody component.")]
+    public Rigidbody rb;
 
     [Tooltip("Reference to the currently tracked road marker for navigation purposes.")]
     public Marker currentMarker;
@@ -93,7 +96,7 @@ public class CarPointer : MonoBehaviour
     public RoadConnectionPoint furthestConnectionPoint;
 
     public Queue<ProceduralRoad> roadQueue = new();
-    private Queue<int> directionQueue = new();
+    public Queue<int> directionQueue = new();
     public List<ProceduralRoad> roadQueueTracker = new();
     public List<int> directionQueueTracker = new();
 
@@ -521,7 +524,7 @@ public class CarPointer : MonoBehaviour
     }
 
     // Find the closest marker to the car's current position
-    private Marker FindClosestMarker()
+    public Marker FindClosestMarker()
     {
         // Set temporary variables
         Marker closestMarker = null;

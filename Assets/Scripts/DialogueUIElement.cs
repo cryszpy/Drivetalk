@@ -29,6 +29,10 @@ public class DialogueUIElement : MonoBehaviour
             yield return new WaitForSeconds(car.currentPassenger.holdTime);
         }
 
+        while (GameStateManager.dialogueManager.playingChoices) {
+            yield return null;
+        }
+
         animator.SetTrigger("Out"); // Triggers destruction of element at end of animation
     }
 

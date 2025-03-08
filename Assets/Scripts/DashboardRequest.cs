@@ -39,7 +39,7 @@ public class DashboardRequestBase : MonoBehaviour {
     public virtual void Update()
     {
         // Activate new dashboard controls if the car has a passenger
-        if (GameStateManager.comfortManager.comfortabilityRunning && GameStateManager.car.currentPassenger != null && active) {
+        if (!GameStateManager.dialogueManager.playingChoices && GameStateManager.comfortManager.comfortabilityRunning && GameStateManager.car.currentPassenger != null && active) {
 
             // Checks the dashboard request for completion if it is active
             CheckRequest();
