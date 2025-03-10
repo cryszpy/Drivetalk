@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Lucy Dropoff Positive
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Here, before I go, I have something for you. Take it!
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 8336120612843639648, guid: c8d5337c58dd94399b97cab717760b0d, type: 3}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 1
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's exclusive Lucy's Laundry merchandise!
+    expression: {fileID: 11400000, guid: 8a92d305a7b4a4c99a459ffcf61a172a, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Hehe, it's not even released to the public yet.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I want you to have it.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I'll see you around!
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 0}
+  fallbackExpression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+  choices: []

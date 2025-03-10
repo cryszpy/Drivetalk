@@ -1,15 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
+public struct Range {
+
+    public int start;
+    public int end;
+
+    public Range(int item1, int item2) {
+        start = item1;
+        end = item2;
+    }
+}
+
 public class TextEffects : MonoBehaviour
 {
+    [Header("GENERAL")] // ----------------------------------------------------------------------------
+    public TMP_SubMeshUI childText;
+
+    public List<Range> lengths = new();
+    private Queue<Range> qLengths = new();
+    public List<Range> regLengths = new();
+    private Queue<Range> qRegLengths = new();
+    public List<Range> richLengths = new();
+    private Queue<Range> qRichLengths = new();
 
     private Mesh mesh;
+    public Vector3[] totalVertices;
+    public Color[] totalColors;
     public Vector3[] vertices;
     public Color[] colors;
+
+    private Vector3[] convertedVerts;
+    private Color[] convertedColors;
+    private Vector3[] convertedChildVerts;
+    private Color[] convertedChildColors;
+
+    public Vector3[] childVertices;
+    public Color[] childColors;
 
     [Header("WOBBLE")]
 
@@ -18,8 +50,7 @@ public class TextEffects : MonoBehaviour
     public float wobbleSpeedX = 1.1f;
     public float wobbleSpeedY = 0.8f;
 
-    private int wobbleStart;
-    private int wobbleEnd;
+    public List<Range> wobbleRanges = new();
 
     [Header("GLITCH")]
 
@@ -39,10 +70,8 @@ public class TextEffects : MonoBehaviour
     public float glitchSpeedX;
     public float glitchSpeedY;
 
-    private int glitchStart;
-    private int glitchEnd;
-    private int glitchJoinedStart;
-    private int glitchJoinedEnd;
+    public List<Range> glitchRanges = new();
+    public List<Range> glitchPureRanges = new();
 
     public float flickerChance = 0.5f;
 
@@ -50,72 +79,273 @@ public class TextEffects : MonoBehaviour
 
     public Gradient gradient;
 
+    private bool on = false;
+
+    private void Update()
+    {
+        // Activates text effects if any are on
+        if (glitchOn || wobbleOn) {
+            on = true;
+        } else {
+            on = false;
+        }
+    }
+
     private void LateUpdate()
     {
 
         // If there is no dialogue being spoken, don't do anything
         if (!GameStateManager.dialogueManager.currentDialogueText) {
             return;
-        } 
-        
-        // Wobble
-        if (wobbleOn) {
-
-            for (int i = wobbleStart; i <= wobbleEnd; i++) {
-
-                Vector3 offset = Wobble(Time.time + i, wobbleSpeedX, wobbleSpeedY);
-
-                vertices[i] = vertices[i] + offset;
-            }
-
-            mesh.vertices = vertices;
-            GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
         }
 
         // Glitch
-        if (glitchOn) {
+        if (on) {
 
             GameStateManager.dialogueManager.currentDialogueText.ForceMeshUpdate();
             mesh = GameStateManager.dialogueManager.currentDialogueText.mesh;
             vertices = mesh.vertices;
             colors = mesh.colors;
 
-            for (int i = glitchJoinedStart * 4; i <= glitchJoinedEnd * 4; i += 4) {
+            UpdateMeshes(childText);
 
-                /* // Color
-                if (glitchingColors[i] > -1) {
-                    GlitchColorTimer(i);
-                } else {
-                    glitchColorSpeed = Random.Range(glitchColorSpeedMin, glitchColorSpeedMax);
-                    GlitchColor(i);
-                } */
+            if (glitchOn) {
 
-                float colorSpeed = Random.Range(colorSpeedMin, colorSpeedMax);
+                foreach (var range in glitchPureRanges) {
 
-                colors[i] = gradient.Evaluate(Mathf.Repeat(Time.time + vertices[i].x * colorSpeed, 1f));
-                colors[i + 1] = gradient.Evaluate(Mathf.Repeat(Time.time + vertices[i + 1].x * colorSpeed, 1f));
-                colors[i + 2] = gradient.Evaluate(Mathf.Repeat(Time.time + vertices[i + 2].x * colorSpeed, 1f));
-                colors[i + 3] = gradient.Evaluate(Mathf.Repeat(Time.time + vertices[i + 3].x * colorSpeed, 1f));
+                    int parseStart = range.start;
+                    int parseEnd = range.end;
 
-                Vector3 offset = Wobble(Time.time + i, glitchSpeedX, glitchSpeedY);
+                    // Applies glitch effect
+                    for (int i = parseStart; i <= parseEnd; i += 4) {
 
-                vertices[i] += offset;
-                vertices[i + 1] += offset;
-                vertices[i + 2] += offset;
-                vertices[i + 3] += offset;
+                        float colorSpeed = UnityEngine.Random.Range(colorSpeedMin, colorSpeedMax);
+
+                        totalColors[i] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i].x * colorSpeed, 1f));
+                        totalColors[i + 1] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i + 1].x * colorSpeed, 1f));
+                        totalColors[i + 2] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i + 2].x * colorSpeed, 1f));
+                        totalColors[i + 3] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i + 3].x * colorSpeed, 1f));
+
+                        Vector3 offset = Wobble(Time.fixedDeltaTime + i, glitchSpeedX, glitchSpeedY);
+
+                        totalVertices[i] += offset;
+                        totalVertices[i + 1] += offset;
+                        totalVertices[i + 2] += offset;
+                        totalVertices[i + 3] += offset;
+                    }
+                }
             }
 
-            mesh.colors = colors;
-            mesh.vertices = vertices;
+            if (wobbleOn) {
+
+                foreach (var range in wobbleRanges) {
+
+                    int pStart = range.start;
+                    int pEnd = range.end;
+
+                    for (int i = pStart; i <= pEnd; i+=4) {
+
+                        Vector3 offset = Wobble(Time.fixedDeltaTime + UnityEngine.Random.value * 2, wobbleSpeedX, wobbleSpeedY);
+
+                        totalVertices[i] += offset;
+                        totalVertices[i + 1] += offset;
+                        totalVertices[i + 2] += offset;
+                        totalVertices[i + 3] += offset;
+                    }
+                }
+            }
+
+            RevertMeshes(childText);
+
+            mesh.colors = convertedColors;
+            mesh.vertices = convertedVerts;
+
             GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
+            
+            if (childText) {
+                childText.mesh.colors = convertedChildColors;
+                childText.mesh.vertices = convertedChildVerts;
+                
+                childText.canvasRenderer.SetMesh(childText.mesh);
+            }
         }
     }
 
-    public void StartWobble(int start, int end, float speedX, float speedY) {
-        wobbleStart = start;
-        wobbleEnd = end;
-        wobbleSpeedX = speedX;
-        wobbleSpeedY = speedY;
+    public void UpdateMeshes(TMP_SubMeshUI subMeshUI) {
+
+        Mesh subMesh = null;
+
+        if (subMeshUI != null) {
+            subMesh = subMeshUI.mesh;
+        }
+
+        // If there are submeshes found (italics, bold), update child meshes
+        if (subMesh) {
+            childVertices = subMesh.vertices;
+            childColors = subMesh.colors;
+            totalVertices = new Vector3[childVertices.Length + vertices.Length];
+            totalColors = new Color[childColors.Length + colors.Length];
+
+            // Initializes regular vertices and colors
+            int length = 0;
+            for (int pair = 0; pair < lengths.Count; pair++) {
+
+                // If this is the first pair range—
+                if (pair == 0) {
+
+                    // If this range doesn't start at index 0—
+                    if (lengths[pair].start != 0) {
+
+                        // Set the length of the regular vertices array to the length of the range
+                        length = lengths[pair].start - 1;
+                    } else {
+                        length = 0;
+                    }
+                } else {
+                    length += lengths[pair].start - lengths[pair - 1].end;
+                }
+            }
+
+            qLengths = new(lengths);
+            qRegLengths = new(regLengths);
+            qRichLengths = new(richLengths);
+
+            int childCounter = 0;
+            int totalCounter = 0;
+            int nonChildCounter = 0;
+
+            // Loop through all the vertices—
+            while (totalCounter < totalVertices.Length) {
+                //Debug.Log("T: " + totalCounter + " | NC: " + nonChildCounter + " | C: " + childCounter);
+
+                // If the current vertex is part of an effect—
+                if (qLengths.Count > 0 && totalCounter >= qLengths.First().start && totalCounter <= qLengths.First().end) {
+
+                    // Add 
+                    for (int v = qLengths.First().start; v <= qLengths.First().end; v++) {
+                        totalVertices[totalCounter] = vertices[nonChildCounter];
+                        totalColors[totalCounter] = colors[nonChildCounter];
+
+                        nonChildCounter++;
+                        totalCounter++;
+                    }
+
+                    qLengths.Dequeue();
+                    continue;
+                } else if (qRichLengths.Count > 0 && totalCounter >= qRichLengths.First().start && totalCounter <= qRichLengths.First().end) {
+
+                    for (int v = qRichLengths.First().start; v <= qRichLengths.First().end; v++) {
+                        totalVertices[totalCounter] = childVertices[childCounter];
+                        totalColors[totalCounter] = childColors[childCounter];
+                        
+                        childCounter++;
+                        totalCounter++;
+                    }
+
+                    qRichLengths.Dequeue();
+                    continue;
+                } else if (totalCounter < (vertices.Length - 4 + childVertices.Length - 4)) {
+                    totalVertices[totalCounter] = vertices[nonChildCounter];
+                    totalColors[totalCounter] = colors[nonChildCounter];
+
+                    nonChildCounter++;
+                    totalCounter++;
+                    continue;
+                }
+                totalCounter++;
+                //Debug.Log(totalCounter + " | " + glitchCounter + " | " + childCounter);
+            }
+
+        } else {
+            totalVertices = vertices;
+            totalColors = colors;
+        }
+    }
+
+    public void RevertMeshes(TMP_SubMeshUI subMeshUI) {
+
+        convertedVerts = new Vector3[vertices.Length];
+        convertedColors = new Color[colors.Length];
+
+        Mesh subMesh = null;
+
+        if (subMeshUI != null) {
+            subMesh = subMeshUI.mesh;
+        }
+
+        if (subMesh) {
+
+            convertedChildVerts = new Vector3[childVertices.Length];
+            convertedChildColors = new Color[childColors.Length];
+
+            qLengths = new(lengths);
+            qRegLengths = new(regLengths);
+            qRichLengths = new(richLengths);
+
+            int childCounter = 0;
+            int totalCounter = 0;
+            int nonChildCounter = 0;
+
+            // Loop through all the child vertices—
+            while (totalCounter < totalVertices.Length) {
+                //Debug.Log("REVERT - T: " + totalCounter + " | NC: " + nonChildCounter + " | C: " + childCounter);
+
+                // If the current vertex is part of an effect—
+                if (qLengths.Count > 0 && totalCounter >= qLengths.First().start && totalCounter <= qLengths.First().end) {
+
+                    for (int v = qLengths.First().start; v <= qLengths.First().end; v++) {
+                        convertedVerts[nonChildCounter] = totalVertices[totalCounter];
+                        convertedColors[nonChildCounter] = totalColors[totalCounter];
+                        
+                        nonChildCounter++;
+                        totalCounter++;
+                    }
+
+                    qLengths.Dequeue();
+                    continue;
+                } else if (qRichLengths.Count > 0 && totalCounter >= qRichLengths.First().start && totalCounter <= qRichLengths.First().end) {
+
+                    for (int v = qRichLengths.First().start; v <= qRichLengths.First().end; v++) {
+                        convertedChildVerts[childCounter] = totalVertices[totalCounter];
+                        convertedChildColors[childCounter] = totalColors[totalCounter];
+                        
+                        childCounter++;
+                        totalCounter++;
+                    }
+
+                    qRichLengths.Dequeue();
+                    continue;
+                } else if (totalCounter < totalVertices.Length - 4) {
+
+                    convertedVerts[nonChildCounter] = totalVertices[totalCounter];
+                    convertedColors[nonChildCounter] = totalColors[totalCounter];
+
+                    nonChildCounter++;
+                    totalCounter++;
+                    continue;
+                }
+                totalCounter++;
+            }
+        } else {
+            convertedVerts = totalVertices;
+            convertedColors = totalColors;
+        }
+    }
+
+    public void StartWobble(int start, int end, int spacesBefore, int spacesAfter, int tagLengthsBefore) {
+        int wobbleStart = (start - spacesBefore - tagLengthsBefore) * 4;
+        int wobbleEnd = ((end - spacesAfter - tagLengthsBefore) * 4) - 1;
+        //Debug.Log(end + " | " + spacesAfter + " | " + tagLengthsBefore);
+
+        if (!wobbleRanges.Contains(new(wobbleStart, wobbleEnd))) wobbleRanges.Add(new(wobbleStart, wobbleEnd));
+
+        if (!lengths.Contains(new(wobbleStart, wobbleEnd))) lengths.Add(new(wobbleStart, wobbleEnd));
+
+        TMP_SubMeshUI[] childMeshes = GameStateManager.dialogueManager.currentDialogueText.GetComponentsInChildren<TMP_SubMeshUI>();
+
+        if (childMeshes.Length > 0) {
+            childText = childMeshes[0];
+        }
 
         wobbleOn = true;
     }
@@ -124,75 +354,50 @@ public class TextEffects : MonoBehaviour
         return new(Mathf.Sin(time * speedX), Mathf.Cos(time * speedY), 0);
     }
 
-    public void StartGlitch(string sentence, int start, int end, int spacesBefore, int spacesAfter) {
-
-        // Set glitch stats
+    public void StartGlitch(string sentence, int start, int end, int spacesBefore, int spacesAfter, int tagLengthsBefore) {
         glitchBackup = sentence;
-        glitchStart = start;
-        glitchEnd = end;
-        glitchJoinedStart = glitchStart - spacesBefore;
-        glitchJoinedEnd = glitchEnd - spacesAfter;
+        int glitchStart = start;
+        int glitchEnd = end;
+        int glitchPureStart = (glitchStart - spacesBefore - tagLengthsBefore) * 4;
+        int glitchPureEnd = ((glitchEnd - spacesAfter - tagLengthsBefore) * 4) - 1;
+
+        if (!glitchRanges.Contains(new(glitchStart, glitchEnd))) glitchRanges.Add(new(glitchStart, glitchEnd));
+        if (!glitchPureRanges.Contains(new(glitchPureStart, glitchPureEnd))) glitchPureRanges.Add(new(glitchPureStart, glitchPureEnd));
+
+        if (!lengths.Contains(new(glitchPureStart, glitchPureEnd))) lengths.Add(new(glitchPureStart, glitchPureEnd));
+
+        TMP_SubMeshUI[] childMeshes = GameStateManager.dialogueManager.currentDialogueText.GetComponentsInChildren<TMP_SubMeshUI>();
+
+        if (childMeshes.Length > 0) {
+            childText = childMeshes[0];
+        }
 
         // Start color glitch
         glitchOn = true;
 
-        /* Debug.Log(start + " | " + end);
-        Debug.Log(glitchJoinedStart + " | " + glitchJoinedEnd);
-        Debug.Log(spacesBefore + " | " + spacesAfter); */
-
         // For every glitched *letter*—
-        for (int i = glitchStart; i <= glitchEnd; i++) {
+        foreach (var range in glitchRanges) {
+            for (int i = range.start; i < range.end; i++) {
 
-            // Start letter glitch
-            StartCoroutine(Glitch(i));
-        }
-    }
-
-    /* private void GlitchColorTimer(int i) {
-
-        glitchingColors[i] += Time.deltaTime;
-
-        // Reset timer
-        if (glitchingColors[i] > glitchColorSpeed) {
-            glitchingColors[i] = -1;
-        }
-    } */
-
-    /* private void GlitchLetterTimer(int i) {
-
-        glitchingLetters[i] += Time.deltaTime;
-
-        //mesh.vertices = vertices;
-        //GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
-
-        // Reset timer
-        if (glitchingLetters[i] > glitchLetterSpeed) {
-            
-            // Go back to original letter
-            char[] original = GameStateManager.dialogueManager.currentDialogueText.text.ToArray();
-            original[i] = glitchBackup[i];
-
-            // Revert letter
-            GameStateManager.dialogueManager.currentDialogueText.text = string.Concat(original.ToArray());
-
-            mesh.vertices = vertices;
-            GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
-
-            if (glitchingLetters[i] > glitchLetterRevertSpeed + glitchLetterSpeed) {
-                glitchingLetters[i] = -1;
+                // Start letter glitch
+                StartCoroutine(Glitch(i));
             }
         }
-    } */
+    }
 
     private IEnumerator Glitch(int index) {
 
         while (glitchOn && GameStateManager.dialogueManager.currentDialogueText) {
 
-            float rand = Random.value;
+            float rand = UnityEngine.Random.value;
 
             GameStateManager.dialogueManager.currentDialogueText.ForceMeshUpdate();
             mesh = GameStateManager.dialogueManager.currentDialogueText.mesh;
             vertices = mesh.vertices;
+
+            if (convertedVerts == null || convertedVerts.Length <= 0) {
+                convertedVerts = vertices;
+            }
 
             // If roll succeeds—
             if (rand < flickerChance) {
@@ -214,23 +419,17 @@ public class TextEffects : MonoBehaviour
                 }
                 
                 // Choose replacement letter
-                temp[index] = shuffled[Random.Range(0, shuffled.Count - 1)].ToString();
+                temp[index] = shuffled[UnityEngine.Random.Range(0, shuffled.Count - 1)].ToString();
 
                 // Replace letter
                 GameStateManager.dialogueManager.currentDialogueText.text = string.Concat(temp.ToArray()); 
 
                 // ---------------------------------------------------------------------------------------- MOVE POSITION
 
-                /* Vector3 offset = Wobble(Time.time + index, 0, 100);
-                vertices[index] += offset;
-                vertices[index + 1] += offset;
-                vertices[index + 2] += offset;
-                vertices[index + 3] += offset; */
-
-                mesh.vertices = vertices;
+                mesh.vertices = convertedVerts;
                 GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
 
-                yield return new WaitForSeconds(Random.Range(flickerSpeedMin, flickerSpeedMax)); // WAIT --------------------------------
+                yield return new WaitForSeconds(UnityEngine.Random.Range(flickerSpeedMin, flickerSpeedMax)); // WAIT --------------------------------
 
                 // Copy down current dialogue sentence
                 List<string> current = new();
@@ -246,82 +445,52 @@ public class TextEffects : MonoBehaviour
 
                 // ---------------------------------------------------------------------------------------- MOVE POSITION BACK
 
-                /* vertices[index] -= offset;
-                vertices[index + 1] -= offset;
-                vertices[index + 2] -= offset;
-                vertices[index + 3] -= offset; */
-
                 // Update vertices
-                mesh.vertices = vertices;
-                GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
+                if (mesh) {
+                    mesh.vertices = convertedVerts;
+                    GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
+                }
             }
 
-            yield return new WaitForSeconds(Random.Range(normalHoldSpeedMin, normalHoldSpeedMax));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(normalHoldSpeedMin, normalHoldSpeedMax));
         }
     }
 
-    /* private void GlitchLetter(int index) {
+    public void AddRichTextRange(Range range) {
 
-        float rand = Random.value;
-
-        if (rand <= replaceChance) {
-
-            // Shuffle all possible replacement letters
-            List<char> shuffled = ShuffleList(possibleReplacements.ToList());
-            
-            // Choose replacement letter
-            char[] temp = GameStateManager.dialogueManager.currentDialogueText.text.ToArray();
-            temp[index] = shuffled[Random.Range(0, shuffled.Count - 1)];
-
-            // Replace letter
-            GameStateManager.dialogueManager.currentDialogueText.text = string.Concat(temp.ToArray());
-
-            mesh.vertices = vertices;
-            GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
+        if (!richLengths.Contains(range)) {
+            richLengths.Add(range);
         }
+    }
 
-        // Resets the timer (SHOULD BE THE LAST THING IN THIS FUNCTION)
-        glitchingLetters[index] = 0;
-    } */
+    public void AddRegularTextRange(Range range) {
 
-    /* private void GlitchColor(int index) {
-            
-        // g1 = 4 | g2 = 19
-
-        if (colors.Length != vertices.Length) {
-            colors = mesh.colors;
+        if (!regLengths.Contains(range)) {
+            regLengths.Add(range);
         }
-
-        float rand = Random.value;
-
-        Color c = new(255, 0, 0);
-
-        if (rand < 0.5) {
-            c = new(255, 0, 0);
-        } else {
-            c = new(0, 0, 255);
-        }
-        
-        colors[index] = c;
-        colors[index + 1] = c;
-        colors[index + 2] = c;
-        colors[index + 3] = c;
-
-        /* mesh.colors = colors;
-        GameStateManager.dialogueManager.currentDialogueText.canvasRenderer.SetMesh(mesh);
-
-        // Resets the timer (SHOULD BE THE LAST THING IN THIS FUNCTION)
-        glitchingColors[index] = 0;
-    } */
+    }
 
     public void ClearEffects() {
+        on = false;
+        lengths.Clear();
+        regLengths.Clear();
+        qLengths.Clear();
+        qRegLengths.Clear();
+        vertices = null;
+        colors = null;
+        childVertices = null;
+        childColors = null;
+        convertedVerts = null;
+        convertedColors = null;
+        convertedChildVerts = null;
+        convertedChildColors = null;
+
         wobbleOn = false;
-        wobbleStart = 0;
-        wobbleEnd = 0;
+        wobbleRanges.Clear();
 
         glitchOn = false;
-        glitchStart = 0;
-        glitchEnd = 0;
+        glitchRanges.Clear();
+        glitchPureRanges.Clear();
         glitchBackup = "";
 
         StopAllCoroutines();

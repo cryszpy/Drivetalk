@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Lucy R1 D4
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Lucy's Laundry isn't the global, worldwide brand I thought it would
+      be.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: But mark my words it'll get there! I have an ace hidden up my sleeve.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I'll let you in on the secret, now that we're best friends.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I've been working on something amazing...pods! Detergent Pods!
+    expression: {fileID: 11400000, guid: 8a92d305a7b4a4c99a459ffcf61a172a, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: They have a water-soluble outer layer with highly concentrated laundry
+      detergent underneath!
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's a masterpiece if I do say so myself. And, well, I am myself!
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It'll revolutionize Big Laundry and take the world by storm!
+    expression: {fileID: 11400000, guid: c23614f7f7e794e48b225c846fcff4be, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 8a3d25ecad4464fd69924867ed12b639, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+  choices:
+  - {fileID: 11400000, guid: df17584e522104220a97d6609fdb0551, type: 2}
+  - {fileID: 11400000, guid: df17584e522104220a97d6609fdb0551, type: 2}
+  - {fileID: 11400000, guid: df17584e522104220a97d6609fdb0551, type: 2}

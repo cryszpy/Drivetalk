@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Lucy R1 D6
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Well, I've been doing a bit of thinking recently.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Someone...
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: No.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Everyone here always says the same thing.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: '"This town never changes." "It''s the same old Mackenzie it''s always
+      been."'
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <glitch>Mackenzie's just that kind of place I guess.</glitch>
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: No one ever leaves.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: No one ever moves in.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Don't get me wrong, I love everyone here, but it's driving me a bit
+      insane.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I don't know what they're so afraid of.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Everyone's so comfrortable being stagnant; it's kind of creepy.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's almost like Mackenzie's frozen in time or something.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: But if this town never changes, what does that make us?
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: We're kind of anomalies here, don't you think?
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 615b5625496d1461082b634c004c195c, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 0e220f826bcc44ecc8f0d3dd9468f836, type: 2}
+  - {fileID: 11400000, guid: 64c29b1491bb6455784e3a165ab19235, type: 2}
+  - {fileID: 11400000, guid: 043a76384562f47649ee5cdb0fa52c2d, type: 2}

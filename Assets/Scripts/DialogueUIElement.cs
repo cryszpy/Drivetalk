@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -29,7 +30,11 @@ public class DialogueUIElement : MonoBehaviour
             yield return new WaitForSeconds(car.currentPassenger.holdTime);
         }
 
-        while (GameStateManager.dialogueManager.playingChoices) {
+        Debug.Log("Checked!");
+
+        while (GameStateManager.dialogueManager.playingChoices || 
+            (GameStateManager.dialogueManager.currentDialogue != null && GameStateManager.dialogueManager.currentLine.sentence == GameStateManager.dialogueManager.currentDialogue.lines.Last().sentence && 
+                GameStateManager.dialogueManager.currentDialogue.choices.Length > 0)) {
             yield return null;
         }
 

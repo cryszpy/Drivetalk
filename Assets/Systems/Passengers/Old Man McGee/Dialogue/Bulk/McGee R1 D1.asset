@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: McGee R1 D1
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: ...
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 1
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's been a while, Dom.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 1
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: You look different now, boy. You've grown.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's only been a short year, but you've changed.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I can tell you've been through a lot.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I'm sorry I couldn't be there when you needed me most.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It all happened so suddenly.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <glitch>The day she died...</glitch>
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: The day you left...
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: ...
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's been hard.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Even now, things feel wrong.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I can't quite put my finger on it...
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Every day has this strange sense of deja vu.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: The smallest details feel different, yet everything else remains stagnant.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's not that every day feels the same.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Every day <b><i>is</i></b> the same.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: ...
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Sorry, boy. I think my age is getting the better of me.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: They all tell me that's just how this town is.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: "I know how it is\u2014how it's always been, but this feels different."
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I don't know what to believe anymore.
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <glitch>I wonder what she would think.</glitch>
+    expression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 1
+  nextDialogue: {fileID: 0}
+  fallbackExpression: {fileID: 11400000, guid: 4ec80af0aad724ae9aeeac6aca1e861e, type: 2}
+  choices: []

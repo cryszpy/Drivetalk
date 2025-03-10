@@ -69,6 +69,9 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Boolean flag; Checks whether the passenger is waiting for the player to select a destination.")]
     [HideInInspector] public bool waitForRouting = false;
 
+    public float moodNegativeCeiling;
+    public float moodNeutralCeiling;
+
     private float expressionTimer = 0;
     private bool expressionTimerRunning = false;
 
@@ -86,6 +89,11 @@ public class DialogueManager : MonoBehaviour
 
     public Queue<GameObject> activeDialogueBlocks = new();
     [HideInInspector] public List<GameObject> activeDialogueTracker = new();
+
+    [HideInInspector] public bool transcriptShown = false;
+
+    public List<int> hi = new();
+    public List<int> hi2 = new();
 
     [Header("ANIMATED TEXT")] // --------------------------------------------------------------------------------------------
 
@@ -307,7 +315,7 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 // Dropoff dialogue
-                else if (currentDialogue.choices.Length == 0 && currentDialogue == car.currentPassenger.archetype.dropoffSalute) {
+                else if (currentDialogue.choices.Length == 0 && (currentDialogue == car.currentPassenger.archetype.dropoffSalute || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos)) {
                     Debug.Log("5");
                     // Starts the passenger's dropoff dialogue
                     PostDropoff();
@@ -450,6 +458,11 @@ public class DialogueManager : MonoBehaviour
 
         // Wait for the appropriate amount of long pause time before continuing with this line
         yield return new WaitForSeconds(currentLine.longPauseTime);
+
+        // Prevents dialogue from continuing while transcript log is shown
+        while (transcriptLog.gameObject.activeInHierarchy) {
+            yield return null;
+        }
 
         // Start voice line and short pause time
         if (currentLine.voiceLine) {
@@ -627,7 +640,7 @@ public class DialogueManager : MonoBehaviour
 
         // Trigger speaking if line isn't silence
         if (line.sentence != "...") {
-            car.currentPassenger.animator.SetTrigger("Speak");
+            car.currentPassenger.animator.SetBool("Speak", true);
         }
 
         // Clear dialogue box
@@ -639,10 +652,15 @@ public class DialogueManager : MonoBehaviour
         // Even numbers are valid text, odd numbers are tags
         string[] subTexts = message.Split('<', '>');
 
+        /* foreach (var b in subTexts) {
+            Debug.Log(b.ToString());
+        } */
+
         string displayText = "";
 
         // ------------------------------------------ REMOVE CUSTOM TAGS FROM DIALOGUE ------------------------------------------------
 
+        // Removes custom tags from dialogue, but keeps standard rich text tags
         for (int i = 0; i < subTexts.Length; i++)
         {
             // Characters (even number)
@@ -652,6 +670,8 @@ public class DialogueManager : MonoBehaviour
             else if (!isCustomTag(subTexts[i].Replace("/", "")))
                 displayText += $"<{subTexts[i]}>";
         }
+        
+        char[] bruh = displayText.ToArray();
 
         // Check to see if tag is custom tag
         bool isCustomTag(string tag)
@@ -669,75 +689,179 @@ public class DialogueManager : MonoBehaviour
         
         int spaceCounter = 0;
         int characterTracker = 0;
+        int tagTracker = 0;
+        Queue<int> tagLengths = new();
+        Queue<int> richTagLengths = new();
+
+        // For every subsection split—
+        for (int element = 0; element < subTexts.Length; element++) {
+
+            // If the subsection is a tag—
+            if (element % 2 == 1) {
+
+                switch (isCustomTag(subTexts[element].Replace("/", ""))) {
+
+                    // If the subsection is a default rich text tag—
+                    case false:
+
+                        // Mark this section's length as irrelevant
+                        richTagLengths.Enqueue(tagTracker);
+
+                        // Increment tag tracker by the length of the tag
+                        tagTracker += subTexts[element].Length + 2;
+                        break;
+                    
+                    // If the subsection is a custom tag—
+                    case true:
+
+                        // We don't care about the custom closing tag
+                        /* if (subTexts[element].Contains("/")) {
+                            break;
+                        } */
+
+                        // Mark this section as starting at the correct index
+                        tagLengths.Enqueue(tagTracker);
+                        break;
+                }
+            }
+        }
+
+        hi = new(tagLengths);
+        hi2 = new(richTagLengths);
+
+        int dequeued = 0;
+        int richDequeued = 0;
+
+        int spaces = 0;
+
+        // ------------------------------------------------------------------------- REALLY BADLY OPTIMIZED CODE --------------------
 
         // For each subsection split—
-        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++){
+        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++) {
 
             // Subsection split is an odd number, therefore is a tag
             if (sectionNum % 2 == 1)
             {
                 // Get the amount of spaces in the text with the effect
-                int spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
+                spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
 
-                yield return EvaluateTag(subTexts[sectionNum].Replace(" ", ""), characterTracker, characterTracker + subTexts[sectionNum + 1].Length - 1, spaceCounter, spaceCounter + spaces);
+                // If this tag is a standard rich-text tag, include it in character counter
+                if (!isCustomTag(subTexts[sectionNum].Replace("/", ""))) {
+                    characterTracker += subTexts[sectionNum].Length + 2;
+                    richDequeued = richTagLengths.Dequeue();
+                }
+
+                // If this tag is the START of a custom tag—
+                if (isCustomTag(subTexts[sectionNum].Replace(" ", ""))) {
+                    dequeued = tagLengths.Dequeue();
+                    tagLengths.Dequeue(); // Remove closing tag as well, but don't use it
+                }
+
+                // If this tag is the START of a standard rich-text tag, add its text section to the list
+                if (!isCustomTag(subTexts[sectionNum].Replace(" ", "")) && !subTexts[sectionNum].Contains("/")) {
+
+                    int start = (characterTracker - spaceCounter - (richDequeued + subTexts[sectionNum].Length + 2)) * 4;
+                    int end = ((characterTracker + subTexts[sectionNum + 1].Length - (spaceCounter + spaces) - (richDequeued + subTexts[sectionNum].Length + 2)) * 4) - 1;
+
+                    textEffects.AddRichTextRange(new(start, end));
+                }
+
+                // If this tag is the opening tag of any kind—
+                if (!subTexts[sectionNum].Contains("/")) {
+
+                    // If the previous section exists, is not a tag, and is not just a space—
+                    if (sectionNum - 1 >= 0 && sectionNum - 1 % 2 != 1 && subTexts[sectionNum - 1].Replace(" ", "").Length > 0) {
+
+                        int start = (characterTracker - spaceCounter - dequeued) * 4;
+                        int end = ((characterTracker - (spaceCounter + spaces) - dequeued) * 4) - 1;
+                        
+                        textEffects.AddRegularTextRange(new(start, end));
+                    }
+                }
             }
             // Subsection split is an even number, therefore made up of words
             else
             {
+
                 // For each character in this subsection
                 for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum) {
 
                     // The current iterated character
                     string character = subTexts[sectionNum][charNum].ToString();
 
+                    // If the character is a space, increment the number of spaces
+                    if (character == " ") {
+                        spaceCounter++;
+                    }
+
                     characterTracker++;
+                    /* onTextReveal.Invoke(subTexts[subCounter][visibleCounter]); */
+                }
+            }
+        }
+
+        // RESET
+
+        spaceCounter = 0;
+        characterTracker = 0;
+        tagTracker = 0;
+
+        tagLengths = new(hi);
+        richTagLengths = new(hi2);
+
+        dequeued = 0;
+        richDequeued = 0;
+
+        spaces = 0;
+
+        // ------------------------------------------------------------------------- TRIGGER EFFECTS --------------------
+
+        // For each subsection split—
+        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++) {
+
+            // Subsection split is an odd number, therefore is a tag
+            if (sectionNum % 2 == 1)
+            {
+                // Get the amount of spaces in the text with the effect
+                spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
+
+                // If this tag is a standard rich-text tag, include it in character counter
+                if (!isCustomTag(subTexts[sectionNum].Replace("/", ""))) {
+                    characterTracker += subTexts[sectionNum].Length + 2;
+                    richDequeued = richTagLengths.Dequeue();
+                }
+
+                // If this tag is the START of a custom tag—
+                if (isCustomTag(subTexts[sectionNum].Replace(" ", ""))) {
+                    dequeued = tagLengths.Dequeue();
+                    tagLengths.Dequeue(); // Remove closing tag as well, but don't use it
+                }
+
+                // Trigger the tag effect
+                yield return EvaluateTag(subTexts[sectionNum].Replace(" ", ""), characterTracker, characterTracker + subTexts[sectionNum + 1].Length, spaceCounter, spaceCounter + spaces, dequeued);
+
+            }
+            // Subsection split is an even number, therefore made up of words
+            else
+            {
+
+                // For each character in this subsection
+                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum) {
+
+                    // The current iterated character
+                    string character = subTexts[sectionNum][charNum].ToString();
 
                     // If the character is a space, increment the number of spaces
                     if (character == " ") {
                         spaceCounter++;
                     }
+
+                    characterTracker++;
                     /* onTextReveal.Invoke(subTexts[subCounter][visibleCounter]); */
                 }
             }
         }
         yield return null;
-
-        // ------------------------------------------ TRIGGER CUSTOM TEXT EFFECTS (called above) ---------------------------------------------
-
-        WaitForSeconds EvaluateTag(string tag, int start, int end, int spacesBefore, int spacesAfter)
-        {
-            if (tag.Length > 0)
-            {
-                /* if (tag.StartsWith("speed="))
-                {
-                    speed = float.Parse(tag.Split('=')[1]);
-                }
-                else if (tag.StartsWith("pause="))
-                {
-                    return new WaitForSeconds(float.Parse(tag.Split('=')[1]));
-                }
-                else if (tag.StartsWith("emotion="))
-                {
-                    onEmotionChange.Invoke((Emotion)System.Enum.Parse(typeof(Emotion), tag.Split('=')[1]));
-                }
-                else  */
-                if (tag == "wobble"/* tag.StartsWith("action=") */) {
-                    //Debug.Log(start + " | " + end + " | " + spacesBefore + " | " + spacesAfter);
-                    //string action = tag.Split('=')[1];
-
-                    //onAction.Invoke(tag.Split('=')[1]);
-                    //SetAction(action);
-
-                    Debug.Log("Wobble detected!");
-                    textEffects.StartWobble((start - spacesBefore) * 4, (end - spacesAfter) * 4, 0.01f, 0.16f);
-                } else if (tag == "glitch") {
-
-                    Debug.Log("Glitch detected!");
-                    textEffects.StartGlitch(currentDialogueText.text, start, end, spacesBefore, spacesAfter);
-                }
-            }
-            return null;
-        }
 
         // ----------------------------------------------------- REVEAL TEXT  ---------------------------------------------------------
 
@@ -768,6 +892,9 @@ public class DialogueManager : MonoBehaviour
         if (dScript) {
             dScript.finished = true;
         }
+
+        // Reset speaking boolean in Animator
+        car.currentPassenger.animator.SetBool("Speak", false);
 
         // Switches expression after done talking
         if (line.expression != null) {
@@ -801,6 +928,41 @@ public class DialogueManager : MonoBehaviour
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
         }
+    }
+
+    private WaitForSeconds EvaluateTag(string tag, int start, int end, int spacesBefore, int spacesAfter, int tagLengthsBefore)
+    {
+        if (tag.Length > 0)
+        {
+            /* if (tag.StartsWith("speed="))
+            {
+                speed = float.Parse(tag.Split('=')[1]);
+            }
+            else if (tag.StartsWith("pause="))
+            {
+                return new WaitForSeconds(float.Parse(tag.Split('=')[1]));
+            }
+            else if (tag.StartsWith("emotion="))
+            {
+                onEmotionChange.Invoke((Emotion)System.Enum.Parse(typeof(Emotion), tag.Split('=')[1]));
+            }
+            else  */
+            if (tag == "wobble"/* tag.StartsWith("action=") */) {
+                //Debug.Log(start + " | " + end + " | " + spacesBefore + " | " + spacesAfter);
+                //string action = tag.Split('=')[1];
+
+                //onAction.Invoke(tag.Split('=')[1]);
+                //SetAction(action);
+
+                Debug.Log("Wobble detected!");
+                textEffects.StartWobble(start, end, spacesBefore, spacesAfter, tagLengthsBefore);
+            } else if (tag == "glitch") {
+
+                Debug.Log("Glitch detected!");
+                textEffects.StartGlitch(currentDialogueText.text, start, end, spacesBefore, spacesAfter, tagLengthsBefore);
+            }
+        }
+        return null;
     }
 
     private IEnumerator StartTimeLoop() {

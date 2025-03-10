@@ -257,14 +257,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27dc05212532744e0b8383bc74644dea, type: 2}
   requirements: []
   requestedDestinationTiles:
-  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  - {fileID: 7247080473360366342, guid: d38e542ea9f344427a673dc7af99b7eb, type: 3}
   ridesDialogue:
   - {fileID: 11400000, guid: 224217c5bedb74e24860595858d024dc, type: 2}
   rarity: 0
   id: 2
   passengerName: Old Man McGee
-  hiddenName: ???
-  nameColor: {r: 1, g: 0.8237487, b: 0.514151, a: 1}
+  hiddenName: Old Man McStink?
+  nameColor: {r: 1, g: 0.83906674, b: 0.2216981, a: 1}
   nameRevealed: 0
   requirementMet: 0
   textCPS: 0.1
@@ -274,6 +274,6 @@ MonoBehaviour:
   minSwitchTime: 2.5
   maxSwitchTime: 4
   meterSpeed: 1
-  waitAfterRouteTime: 1
+  waitAfterRouteTime: 5
   hasStartedRideDialogue: 0
   preferences: {fileID: 11400000, guid: 9f0a76fcf46b6440f863b7ba49c3f6e4, type: 2}

@@ -16,8 +16,6 @@ public class GPSScreen : MonoBehaviour
 
     public TMP_InputField inputField;
 
-    public TMP_Text inputText;
-
     public TMP_Text placeholderText;
 
     public TMP_Text actualText;

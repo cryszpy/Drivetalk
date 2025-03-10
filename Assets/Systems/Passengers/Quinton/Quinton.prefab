@@ -260,7 +260,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8ee5206c8f2042b58a581d63441638b, type: 2}
   requirements: []
   requestedDestinationTiles:
-  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  - {fileID: 7247080473360366342, guid: d23710308dd9f474c96cd37b22803f00, type: 3}
   ridesDialogue:
   - {fileID: 11400000, guid: 072f0a56a4012467a9ad104fea776fdd, type: 2}
   rarity: 0

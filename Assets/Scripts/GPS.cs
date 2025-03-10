@@ -265,6 +265,10 @@ public class GPS : UIElementSlider
         // Disable map UI
         gpsScreen.gameObject.SetActive(false);
 
+        // Reset input
+        gpsScreen.inputField.text = "";
+        gpsScreen.actualText.text = "";
+
         // Add destination to recent destinations if it's not there already
         if (!gpsScreen.recentDestTiles.Contains(gpsScreen.currentDestination.tile)) {
 

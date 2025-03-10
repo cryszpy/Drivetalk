@@ -262,8 +262,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 576ea3e6fe8ed418b8c7dbe72d18bea5, type: 2}
   requirements: []
   requestedDestinationTiles:
-  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
-  - {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
+  - {fileID: 7247080473360366342, guid: c486829ef693e424b85fc9822ce8cff8, type: 3}
+  - {fileID: 7247080473360366342, guid: c486829ef693e424b85fc9822ce8cff8, type: 3}
   ridesDialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
   - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}

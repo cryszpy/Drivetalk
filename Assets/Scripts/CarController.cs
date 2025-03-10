@@ -325,7 +325,20 @@ public class CarController : MonoBehaviour
 
         // Drops off the current passenger
         if (currentPassenger) {
-            dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
+
+            // NEGATIVE RESPONSE
+            if (GameStateManager.comfortManager.currentComfortability < GameStateManager.dialogueManager.moodNegativeCeiling) {
+                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSaluteNeg);
+            }
+            // NEUTRAL RESPONSE
+            else if (GameStateManager.comfortManager.currentComfortability >= GameStateManager.dialogueManager.moodNegativeCeiling 
+                && GameStateManager.comfortManager.currentComfortability <= GameStateManager.dialogueManager.moodNeutralCeiling) {
+                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
+            }
+            // POSITIVE RESPONSE
+            else {
+                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalutePos);
+            }
         }
     }
 }

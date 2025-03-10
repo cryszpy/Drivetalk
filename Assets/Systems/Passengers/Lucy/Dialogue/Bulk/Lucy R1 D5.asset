@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Lucy R1 D5
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Laundry aside, I'm glad I was able to meet you.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I've been trying my best, but it's kind of hard to make friends around
+      here.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: In fact, I don't think I have any yet...
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Well, maybe Old Stink McGuy...
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: Anyway, I have a question for you.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: It's a question that <glitch>only you</glitch> can answer.
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: What do you think about this town?
+    expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 5a07a32ba865643f88614e8dc4a232ce, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 504668ceffed9485392c26c567a4747c, type: 2}
+  - {fileID: 11400000, guid: 105ccadb4ef494efb994442d476ebda7, type: 2}
+  - {fileID: 11400000, guid: 0688b7c21dda847709758c001c8130c6, type: 2}
