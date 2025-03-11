@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 669a95fc1160ce74c95abde2967a7a7c
+guid: 1bf0e8b780b47144eb8c9fd1a678c8de
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Julie Sad 1_0
+      name: Julie Side Blink_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1716f68ea47fd64393021495b917949
-      internalID: -2003931037
+      spriteID: 06099a75646b73f4fbf2ad80f61bafe5
+      internalID: -732247694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Julie Sad 1_1
+      name: Julie Side Blink_1
       rect:
         serializedVersion: 2
         x: 600
@@ -134,14 +134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d6fd3dd953ad1549b39aef9d545c1bf
-      internalID: 2130586151
+      spriteID: d4f3eaff745d9bf4f8c6458f0a2ce1ec
+      internalID: 381152293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Julie Sad 1_2
+      name: Julie Side Blink_2
       rect:
         serializedVersion: 2
         x: 1200
@@ -156,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 626e0dcdc39db9c4da3918d30c806f19
-      internalID: 2096574235
+      spriteID: af3396259f428874bb9f0bd8ba1a90bb
+      internalID: 2116559055
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Julie Sad 1_3
+      name: Julie Side Blink_3
       rect:
         serializedVersion: 2
         x: 0
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c389da4e34f13044bb31033d8f163a4e
-      internalID: 1617467424
+      spriteID: 965593698c0d83c46a4bc96e964812fc
+      internalID: -1534186950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Julie Sad 1_4
+      name: Julie Side Blink_4
       rect:
         serializedVersion: 2
         x: 600
@@ -200,30 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6fdb97799cf0f848a43f1055796d0c2
-      internalID: 1302529773
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Julie Sad 1_5
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 900
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8dd4e35e9c80d84ba89a2dd9ad72114
-      internalID: 2072751854
+      spriteID: 14362eda2f55fb545b96827ce726d698
+      internalID: 2064973104
       vertices: []
       indices: 
       edges: []
@@ -232,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 47cf14727ac94994690d4877bb8fb15a
+    spriteID: a659ce576318e90498c4b762b4f4a831
     internalID: 0
     vertices: []
     indices: 
@@ -242,14 +220,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":600.0,"y":900.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":600.0,"y":900.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Julie Sad 1_0: -2003931037
-      Julie Sad 1_1: 2130586151
-      Julie Sad 1_2: 2096574235
-      Julie Sad 1_3: 1617467424
-      Julie Sad 1_4: 1302529773
-      Julie Sad 1_5: 2072751854
+      Julie Side Blink_0: -732247694
+      Julie Side Blink_1: 381152293
+      Julie Side Blink_2: 2116559055
+      Julie Side Blink_3: -1534186950
+      Julie Side Blink_4: 2064973104
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
