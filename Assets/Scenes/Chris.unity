@@ -281,6 +281,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -298,7 +299,7 @@ MonoBehaviour:
   startingExpressionDone: 0
   maxDialogueElements: 1
   punctuationWaitTime: 0.2
-  shortPauseTime: 2
+  shortPauseTime: 1
   staticIncreaseTime: 3
   punctuationList:
   - ','
@@ -314,6 +315,9 @@ MonoBehaviour:
   hi: 
   hi2: 
   textEffects: {fileID: 166813864}
+  volumeProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  vignetteDefault: 0.1
+  vignetteHallucinating: 0.24
 --- !u!114 &166813862
 MonoBehaviour:
   m_ObjectHideFlags: 0

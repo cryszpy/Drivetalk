@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Julie R1 D6
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: I don't mean to get all gloomy on you.
+    expression: {fileID: 11400000, guid: 01ce0d7c9e9314c08b5d829f1f293156, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I think I just want to try enjoying life a little more.
+    expression: {fileID: 11400000, guid: 01ce0d7c9e9314c08b5d829f1f293156, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 6d7678b89a7b6479397e26512c85b5f9, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: 01ce0d7c9e9314c08b5d829f1f293156, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 54c1bbda67b074600b96e0b0658960ad, type: 2}
+  - {fileID: 11400000, guid: de04b408099814e69acc4cd755af1f6b, type: 2}
+  - {fileID: 11400000, guid: f1b0fb5e1c1e448728032bf0ea63a536, type: 2}

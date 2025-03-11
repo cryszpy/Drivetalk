@@ -32,9 +32,11 @@ public class DialogueUIElement : MonoBehaviour
 
         Debug.Log("Checked!");
 
-        while (GameStateManager.dialogueManager.playingChoices || 
-            (GameStateManager.dialogueManager.currentDialogue != null && GameStateManager.dialogueManager.currentLine.sentence == GameStateManager.dialogueManager.currentDialogue.lines.Last().sentence && 
-                GameStateManager.dialogueManager.currentDialogue.choices.Length > 0)) {
+        while (GameStateManager.dialogueManager.playingChoices 
+            || (GameStateManager.dialogueManager.currentDialogue != null 
+            && GameStateManager.dialogueManager.currentDialogue.choices.Length > 0 
+            && GameStateManager.dialogueManager.currentLine.sentence == GameStateManager.dialogueManager.currentDialogue.lines.Last().sentence 
+            && GameStateManager.dialogueManager.currentDialogue.choices.Length > 0)) {
             yield return null;
         }
 

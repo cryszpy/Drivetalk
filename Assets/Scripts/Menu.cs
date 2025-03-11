@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
@@ -258,6 +259,10 @@ public class Menu : MonoBehaviour
         CarController.LastPassengerID = 0;
         CarController.CurrentRadioChannel = 0;
         CarController.RadioPower = true;
+
+        if (GameStateManager.dialogueManager.volumeProfile.TryGet<Vignette>(out var vignette)) {
+            vignette.intensity.value = GameStateManager.dialogueManager.vignetteDefault;
+        }
     }
 
     // Play button functionality (called from button script assignment)

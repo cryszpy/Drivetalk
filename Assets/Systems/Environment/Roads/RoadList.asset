@@ -27,3 +27,5 @@ MonoBehaviour:
     gpsText: Lucy's Laundry
   - tile: {fileID: 7247080473360366342, guid: d38e542ea9f344427a673dc7af99b7eb, type: 3}
     gpsText: 562 Willow Blvd
+  - tile: {fileID: 7247080473360366342, guid: 68301ff9f36d14913a0edb782146616a, type: 3}
+    gpsText: 25 Harmony Hill Dr

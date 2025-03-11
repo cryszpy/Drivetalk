@@ -50,7 +50,7 @@ public class ComfortabilityManager : MonoBehaviour
             happy = unfulfilledRequests <= 0;
         }
 
-        if (GameStateManager.car.currentPassenger && comfortabilityRunning && !GameStateManager.dialogueManager.playingChoices) {
+        if (GameStateManager.car.currentPassenger && GameStateManager.car.currentPassenger.preferences != null && comfortabilityRunning && !GameStateManager.dialogueManager.playingChoices) {
 
             // If no requests are active, start the gradual ramp
             if (activeRequests.Count != dashRequests.Count) {

@@ -124,6 +124,8 @@ MonoBehaviour:
     taken: 0
   - spawnPoint: {fileID: 7392558472931265521}
     taken: 0
+  rearviewMirror: {fileID: 4831498487519124706}
+  rearviewMirrorCam: {fileID: 2734782208504086995}
   rearviewGiftSpawn:
     spawnPoint: {fileID: 5172186089144528587}
     taken: 0
@@ -8695,9 +8697,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 471856b68a4f44b0a8b9764a64923afe, type: 3}
+--- !u!20 &2734782208504086995 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9132873455547277025, guid: 471856b68a4f44b0a8b9764a64923afe, type: 3}
+  m_PrefabInstance: {fileID: 6579083855784615730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3766535035154526826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8000911096326024536, guid: 471856b68a4f44b0a8b9764a64923afe, type: 3}
+  m_PrefabInstance: {fileID: 6579083855784615730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4831498487519124706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1747809721263752144, guid: 471856b68a4f44b0a8b9764a64923afe, type: 3}
   m_PrefabInstance: {fileID: 6579083855784615730}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5172186089144528587 stripped

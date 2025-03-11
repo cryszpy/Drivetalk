@@ -31,6 +31,9 @@ public class CarController : MonoBehaviour
     [Tooltip("List of all dashboard gift spawn locations.")]
     public List<GiftSpawn> dashboardGiftSpawns = new();
 
+    [Tooltip("Reference to the rearview mirror object.")]
+    public GameObject rearviewMirror;
+
     [Tooltip("Reference to the rearview mirror gift spawn location.")]
     public GiftSpawn rearviewGiftSpawn;
 
@@ -250,6 +253,13 @@ public class CarController : MonoBehaviour
 
             // Assign correct headshot of passenger to the mood meter
             moodMeterHandle.sprite = script.headshot;
+
+            // If the passenger is Romeo—
+            if (PassengersDrivenIDs.Count > 0 && PassengersDrivenIDs.Last() == 6) {
+
+                // Start camera tilt
+                StartCoroutine(RevertCameraTilt());
+            }
             
             // Add passenger to total driven passengers list if they are a new passenger
             if (!PassengersDrivenIDs.Contains(currentPassenger.id)) {
@@ -270,6 +280,13 @@ public class CarController : MonoBehaviour
             }
 
             int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
+
+            // If the passenger is Romeo—
+            if (currentPassenger.id == 6) {
+
+                // Start camera tilt
+                StartCoroutine(CameraTilt());
+            }
 
             //GameStateManager.EOnPassengerPickup?.Invoke();
 
@@ -339,6 +356,34 @@ public class CarController : MonoBehaviour
             else {
                 dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalutePos);
             }
+        }
+    }
+
+    private IEnumerator CameraTilt() {
+
+        float currentRot = 10;
+
+        yield return new WaitForSeconds(1.25f);
+
+        while (currentRot > 9.1) {
+            currentRot -= .02f;
+
+            rearviewMirror.transform.localEulerAngles = new(rearviewMirror.transform.localEulerAngles.x - 0.2f, rearviewMirror.transform.localEulerAngles.y, rearviewMirror.transform.localEulerAngles.z);
+            yield return new WaitForSeconds(0.005f);
+        }
+    }
+
+    private IEnumerator RevertCameraTilt() {
+
+        float currentRot = 8.2f;
+
+        yield return new WaitForSeconds(1.25f);
+
+        while (currentRot < 9.1) {
+            currentRot += .02f;
+
+            rearviewMirror.transform.localEulerAngles = new(rearviewMirror.transform.localEulerAngles.x + 0.2f, rearviewMirror.transform.localEulerAngles.y, rearviewMirror.transform.localEulerAngles.z);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 }

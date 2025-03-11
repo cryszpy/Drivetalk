@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -95,9 +98,14 @@ public class DialogueManager : MonoBehaviour
     public List<int> hi = new();
     public List<int> hi2 = new();
 
-    [Header("ANIMATED TEXT")] // --------------------------------------------------------------------------------------------
+    [Header("VFX")] // --------------------------------------------------------------------------------------------
 
     public TextEffects textEffects;
+
+    public VolumeProfile volumeProfile;
+
+    public float vignetteDefault;
+    public float vignetteHallucinating;
 
     /* public EmotionEvent onEmotionChange; */
     //public ActionEvent onAction;
@@ -114,6 +122,13 @@ public class DialogueManager : MonoBehaviour
         GameStateManager.EOnRideFinish -= EndDialogue;
         GameStateManager.EOnDialogueGroupFinish -= DialogueGroupWait;
         GameStateManager.EOnDestinationSet -= TalkAfterRouting;
+    }
+
+    private void Awake()
+    {
+        if (volumeProfile.TryGet<Vignette>(out var vignette)) {
+            vignette.intensity.value = vignetteDefault;
+        }
     }
 
     private void Update() {
@@ -272,7 +287,7 @@ public class DialogueManager : MonoBehaviour
                     playingChoices = true;
 
                     // Set the previous non-choice dialogue piece to jump back to after choices
-                    if (preChoiceDialogue == null) {
+                    if (preChoiceDialogue == null || (preChoiceDialogue != currentDialogue && currentDialogue.nextDialogue)) {
                         preChoiceDialogue = currentDialogue;
                     }
 
@@ -282,8 +297,9 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 // If just coming out of a post-choice dialogue, and pre-choice dialogue has more to say—
-                else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue) {
+                else if (preChoiceDialogue != null && preChoiceDialogue.nextDialogue && !currentDialogue.nextDialogue && currentDialogue != preChoiceDialogue.nextDialogue) {
                     Debug.Log("2");
+
                     // Set current dialogue piece to the pre-choice branch dialogue piece
                     currentDialogue = preChoiceDialogue;
 
@@ -315,7 +331,9 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 // Dropoff dialogue
-                else if (currentDialogue.choices.Length == 0 && (currentDialogue == car.currentPassenger.archetype.dropoffSalute || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos)) {
+                else if (currentDialogue.choices.Length == 0 
+                    && (currentDialogue == car.currentPassenger.archetype.dropoffSalute || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos
+                    || currentDialogue == car.currentPassenger.archetype.dropoffSalute.nextDialogue || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg.nextDialogue || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos.nextDialogue)) {
                     Debug.Log("5");
                     // Starts the passenger's dropoff dialogue
                     PostDropoff();
@@ -337,6 +355,7 @@ public class DialogueManager : MonoBehaviour
 
             // Start passenger starting expression before talking
             if (!startingExpressionDone && lines.First().startingExpression != null) {
+                Debug.Log("im going to die");
 
                 // Switch expression to starting expression of the next line
                 SwitchExpression(lines.First().startingExpression);
@@ -416,6 +435,7 @@ public class DialogueManager : MonoBehaviour
 
         // If choice response exists, play it
         if (choice.lines.Length > 0) {
+            Debug.Log("bruh");
             StartDialogue(choice);
         } 
         // Else, go to next dialogue piece
@@ -455,6 +475,7 @@ public class DialogueManager : MonoBehaviour
         currentLine.longPauseTime = line.longPauseTime;
         currentLine.firstNameUsage = line.firstNameUsage;
         currentLine.timeLoop = line.timeLoop;
+        currentLine.hallucination = line.hallucination;
 
         // Wait for the appropriate amount of long pause time before continuing with this line
         yield return new WaitForSeconds(currentLine.longPauseTime);
@@ -638,8 +659,20 @@ public class DialogueManager : MonoBehaviour
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
-        // Trigger speaking if line isn't silence
-        if (line.sentence != "...") {
+        // Trigger speaking if line isn't silence or a hallucination
+        if (currentLine.hallucination) {
+            if (volumeProfile.TryGet<Vignette>(out var vignette)) {
+                StartCoroutine(FadeVignette(vignette, true));
+            } else {
+                Debug.LogError("Could not get Vignette component on global volume!");
+            }
+        } else if (volumeProfile.TryGet<Vignette>(out var vignette)) {
+            if (vignette.intensity.value != vignetteDefault) {
+                StartCoroutine(FadeVignette(vignette, false));
+            }
+        }
+
+        if (currentLine.sentence != "..." && !currentLine.hallucination) {
             car.currentPassenger.animator.SetBool("Speak", true);
         }
 
@@ -965,6 +998,34 @@ public class DialogueManager : MonoBehaviour
         return null;
     }
 
+    private IEnumerator FadeVignette(Vignette vignette, bool value) {
+
+        switch (value) {
+
+            case true:
+                
+                float Tcurrent = vignette.intensity.value;
+
+                while (Tcurrent < vignetteHallucinating) {
+                    Tcurrent += 0.01f;
+
+                    vignette.intensity.value = Tcurrent;
+                    yield return new WaitForSeconds(0.005f);
+                }
+                break;
+            case false:
+                float Fcurrent = vignette.intensity.value;
+
+                while (Fcurrent > vignetteDefault) {
+                    Fcurrent -= 0.01f;
+
+                    vignette.intensity.value = Fcurrent;
+                    yield return new WaitForSeconds(0.005f);
+                }
+                break;
+        }
+    }
+
     private IEnumerator StartTimeLoop() {
 
         // Lock radio channel knob to static
@@ -1124,6 +1185,7 @@ public class DialogueManager : MonoBehaviour
 
         // Clear current dialogue
         currentDialogue = null;
+        preChoiceDialogue = null;
     }
 
     public void ResetDialogue() {
@@ -1168,12 +1230,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void SwitchExpression(PassengerExpression expression) {
+        Debug.Log(expression.animatorTrigger);
 
         expressionTimerRunning = expression.runExpressionTimer switch
         {
             true => true,
             false => false
         };
+
+        foreach (var emote in car.currentPassenger.expressions) {
+
+            if (emote.animatorTrigger != expression.animatorTrigger){
+                car.currentPassenger.animator.ResetTrigger(emote.animatorTrigger);
+            }
+        }
 
         car.currentPassenger.animator.SetTrigger(expression.animatorTrigger.ToString());
     }

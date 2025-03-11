@@ -28,6 +28,9 @@ public struct DialogueLine {
     [Tooltip("Voice line to play.")]
     public AudioClip voiceLine;
 
+    [Tooltip("Whether this is Dom hallucinating or not.")]
+    public bool hallucination;
+
     [Tooltip("Whether this line enables the mood meter.")]
     public bool requestsStart;
 

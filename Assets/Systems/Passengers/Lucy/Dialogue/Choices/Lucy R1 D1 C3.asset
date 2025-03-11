@@ -21,12 +21,14 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
     timeLoop: 0
-  - sentence: <s>You couldn't even say anything when</s> <glitch>Maxine died</glitch>.
+  - sentence: <wobble>You couldn't even say anything when</wobble> <glitch>Maxine
+      died</glitch>.
     expression: {fileID: 11400000, guid: ecacf2362d2d84e52ba09166fcca8138, type: 2}
     startingExpression: {fileID: 0}
     longPauseTime: 0
@@ -34,6 +36,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 1
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -47,6 +50,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -60,6 +64,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -73,6 +78,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -86,6 +92,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
@@ -99,6 +106,7 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0

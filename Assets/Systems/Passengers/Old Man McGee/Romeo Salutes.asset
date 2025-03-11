@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c016cdd296b9645b7a44a128932c3a26, type: 3}
-  m_Name: Old Man McGee Salutes
+  m_Name: Romeo Salutes
   m_EditorClassIdentifier: 
   pickupGreeting: {fileID: 11400000, guid: f18dff20163b643799703d592eda3e92, type: 2}
   dropoffSaluteNeg: {fileID: 11400000, guid: 5a53190ce4555479abbe87c00b6a906f, type: 2}
