@@ -246,6 +246,9 @@ public class CarController : MonoBehaviour
             // Set the car's current passenger
             currentPassenger = script;
 
+            // Reset passenger archetypes if for some reason it wasn't reset before
+            currentPassenger.archetype.playingSalute = false;
+
             // Tell the car it has arrived at a taxi stop
             carPointer.taxiStopsEnabled = false;
             atTaxiStop = true;
@@ -342,6 +345,7 @@ public class CarController : MonoBehaviour
 
         // Drops off the current passenger
         if (currentPassenger) {
+            currentPassenger.archetype.playingSalute = true;
 
             // NEGATIVE RESPONSE
             if (GameStateManager.comfortManager.currentComfortability < GameStateManager.dialogueManager.moodNegativeCeiling) {

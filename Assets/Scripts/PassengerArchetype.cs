@@ -15,4 +15,6 @@ public class PassengerArchetype : ScriptableObject
 
     [Tooltip("Dropoff salute that is said when passenger's mood is high.")]
     public DialoguePiece dropoffSalutePos;
+
+    public bool playingSalute = false;
 }

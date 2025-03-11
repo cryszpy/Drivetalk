@@ -331,10 +331,9 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 // Dropoff dialogue
-                else if (currentDialogue.choices.Length == 0 
-                    && (currentDialogue == car.currentPassenger.archetype.dropoffSalute || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos
-                    || currentDialogue == car.currentPassenger.archetype.dropoffSalute.nextDialogue || currentDialogue == car.currentPassenger.archetype.dropoffSaluteNeg.nextDialogue || currentDialogue == car.currentPassenger.archetype.dropoffSalutePos.nextDialogue)) {
+                else if (currentDialogue.choices.Length == 0 && car.currentPassenger.archetype.playingSalute) {
                     Debug.Log("5");
+
                     // Starts the passenger's dropoff dialogue
                     PostDropoff();
                     return;
@@ -342,6 +341,7 @@ public class DialogueManager : MonoBehaviour
                 // End dialogue if no choices and nothing else to say
                 else if (currentDialogue.choices.Length == 0) {
                     Debug.Log("6");
+
                     // Ends the ride's dialogue
                     GameStateManager.EOnRideFinish?.Invoke();
                     return;
@@ -353,21 +353,27 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
 
-            // Start passenger starting expression before talking
-            if (!startingExpressionDone && lines.First().startingExpression != null) {
-                Debug.Log("im going to die");
-
-                // Switch expression to starting expression of the next line
-                SwitchExpression(lines.First().startingExpression);
-                return;
-            }
-            startingExpressionDone = false;
-
             // Removes previously said sentence from sentences queue
             DialogueLine line = lines.Dequeue();
 
-            // Starts typing the queued sentence
-            StartCoroutine(TypeSentence(line));
+            // Start passenger starting expression before talking
+            if (!startingExpressionDone && line.startingExpression != null) {
+                Debug.Log("im going to die");
+                startingExpressionDone = false;
+
+                // Switch expression to starting expression of the next line
+                SwitchExpression(line.startingExpression);
+                
+                
+                // Starts typing the queued sentence
+                StartCoroutine(TypeSentence(line, true));
+            } else {
+                startingExpressionDone = false;
+
+                // Starts typing the queued sentence
+                StartCoroutine(TypeSentence(line, false));
+            }
+
         } else {
             EndDialogue();
         }
@@ -445,7 +451,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Visually types the current sentence
-    public IEnumerator TypeSentence(DialogueLine line) {
+    public IEnumerator TypeSentence(DialogueLine line, bool preExpression) {
 
         // Start fading previous dialogue line element
         if (activeDialogueBlocks.Count >= maxDialogueElements) {
@@ -479,6 +485,14 @@ public class DialogueManager : MonoBehaviour
 
         // Wait for the appropriate amount of long pause time before continuing with this line
         yield return new WaitForSeconds(currentLine.longPauseTime);
+
+        // If there is a pre-expression to wait for, wait until it is done before typing out sentence
+        if (preExpression) {
+            
+            while (!startingExpressionDone) {
+                yield return null;
+            }
+        }
 
         // Prevents dialogue from continuing while transcript log is shown
         while (transcriptLog.gameObject.activeInHierarchy) {
@@ -522,17 +536,9 @@ public class DialogueManager : MonoBehaviour
 
         // Set appropriate expression before talking
         if (currentLine.expression != null) {
+            Debug.Log("heehee haha");
             SwitchExpression(currentLine.expression);
         }
-
-        /* bool isFirstLine = false;
-
-        // If this line is the first line said by the passenger—
-        if (currentDialogue.lines.First().sentence == line.sentence && currentDialogue == car.currentPassenger.archetype.pickupGreeting) {
-
-            // Set appropriate boolean flag
-            isFirstLine = true;
-        } */
 
         // Log appropriate name to transcript
         if (car.currentPassenger.nameRevealed) {
@@ -540,22 +546,6 @@ public class DialogueManager : MonoBehaviour
         } else {
             transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
         }
-
-        // If line is first line said by passenger—
-        /* if (isFirstLine) {
-
-            // Log appropriate name to transcript
-            if (car.currentPassenger.nameRevealed) {
-                transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
-            } else {
-                transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
-            }
-
-        } else {
-
-            // Log sentence without name
-            transcriptLog.LogText(line.sentence, null);
-        } */
 
         // Set whether dashboard requests are active or not and activate mood meter
         if (currentLine.requestsEnd) {
@@ -929,7 +919,7 @@ public class DialogueManager : MonoBehaviour
         // Reset speaking boolean in Animator
         car.currentPassenger.animator.SetBool("Speak", false);
 
-        // Switches expression after done talking
+        // Switches back to regular expression after done talking
         if (line.expression != null) {
             SwitchExpression(line.expression);
         } else if (currentDialogue.fallbackExpression != null) {
@@ -956,7 +946,7 @@ public class DialogueManager : MonoBehaviour
 
         // Play the next dialogue line only if auto-dialogue is enabled, there isn't currently a starting expression playing, and
         // there is no voice line to be played. 
-        if (autoDialogue && !startingExpressionDone && !currentLine.voiceLine) {
+        if (autoDialogue && !currentLine.voiceLine) {
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
@@ -1114,6 +1104,9 @@ public class DialogueManager : MonoBehaviour
         // Unparent passenger from car
         car.currentPassenger.transform.parent = null;
 
+        // Reset dropoff dialogue status
+        car.currentPassenger.archetype.playingSalute = false;
+
         // Set passenger position to the destination stop
         car.currentPassenger.transform.position = car.dropoffPosition.transform.position;
 
@@ -1237,13 +1230,6 @@ public class DialogueManager : MonoBehaviour
             true => true,
             false => false
         };
-
-        foreach (var emote in car.currentPassenger.expressions) {
-
-            if (emote.animatorTrigger != expression.animatorTrigger){
-                car.currentPassenger.animator.ResetTrigger(emote.animatorTrigger);
-            }
-        }
 
         car.currentPassenger.animator.SetTrigger(expression.animatorTrigger.ToString());
     }
