@@ -358,7 +358,6 @@ public class DialogueManager : MonoBehaviour
 
             // Start passenger starting expression before talking
             if (!startingExpressionDone && line.startingExpression != null) {
-                Debug.Log("im going to die");
                 startingExpressionDone = false;
 
                 // Switch expression to starting expression of the next line
@@ -441,7 +440,6 @@ public class DialogueManager : MonoBehaviour
 
         // If choice response exists, play it
         if (choice.lines.Length > 0) {
-            Debug.Log("bruh");
             StartDialogue(choice);
         } 
         // Else, go to next dialogue piece
@@ -536,7 +534,6 @@ public class DialogueManager : MonoBehaviour
 
         // Set appropriate expression before talking
         if (currentLine.expression != null) {
-            Debug.Log("heehee haha");
             SwitchExpression(currentLine.expression);
         }
 

@@ -153,4 +153,48 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Could not find sound: " + name);
         }
     }
+
+    public void StopSoundByName(string name) {
+
+        // Finds the sound type in question
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        Debug.Log(s.source.clip.name);
+
+        // If sound exists—
+        if (s != null) {
+            Debug.Log("Stopping random sound: " + s.name);
+
+            if (s.source == null) {
+                Debug.LogError("Tried to get nonexistent AudioSource");
+            }
+
+            s.source.Stop();
+            Debug.Log("hi");
+        } else {
+            Debug.LogWarning("Could not find sound: " + name);
+        }
+    }
+
+    public void StopSoundByFile(AudioClip clip) {
+
+        // Finds the file in question
+        Sound s = Array.Find(sounds, sound => sound.clips.Contains(clip));
+
+        Debug.Log(s.source.clip.name);
+
+        // If sound exists—
+        if (s != null) {
+            Debug.Log("Stopping random sound: " + s.name);
+
+            if (s.source == null) {
+                Debug.LogError("Tried to get nonexistent AudioSource");
+            }
+
+            s.source.Stop();
+            Debug.Log("hi");
+        } else {
+            Debug.LogWarning("Could not find sound: " + name);
+        }
+    }
 }

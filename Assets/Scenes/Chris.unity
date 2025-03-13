@@ -445,7 +445,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7399464350003740976, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
   m_PrefabInstance: {fileID: 2992284672251928929}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1551970067}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2241cdacbf8d444bbe8b9de36a3097f, type: 3}
@@ -4383,6 +4383,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1551970067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 39084441008714550, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+  m_PrefabInstance: {fileID: 2992284672251928929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1574461897
 GameObject:
   m_ObjectHideFlags: 0
@@ -4452,6 +4457,32 @@ MonoBehaviour:
     spatialBlend: 0.75
     playOnAwake: 0
     loop: 0
+    source: {fileID: 0}
+  - type: 0
+    name: Ambience
+    location: {fileID: 1551970067}
+    clips:
+    - {fileID: 8300000, guid: 1854907209d9e4fe3a788c3d68ead77e, type: 3}
+    mixerGroup: {fileID: -1843145625059563717, guid: d7148047a9a3e4c2fb74b5778e58b8d4, type: 2}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    spatialBlend: 0.95
+    playOnAwake: 1
+    loop: 1
+    source: {fileID: 0}
+  - type: 0
+    name: Blinker
+    location: {fileID: 1551970067}
+    clips:
+    - {fileID: 8300000, guid: 4bc971c6a56cc4fe9a69796b66ba9dae, type: 3}
+    mixerGroup: {fileID: -3645944861826002065, guid: d7148047a9a3e4c2fb74b5778e58b8d4, type: 2}
+    volume: 0.6
+    pitch: 1
+    stereoPan: 0
+    spatialBlend: 0.75
+    playOnAwake: 0
+    loop: 1
     source: {fileID: 0}
   vo:
     type: 0

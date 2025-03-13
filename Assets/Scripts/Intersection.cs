@@ -28,6 +28,10 @@ public class Intersection : Road
                 if (carPointer.wheel && carPointer.turnSignal && carPointer.roadQueue.First().center.transform.parent == transform) {
                     StartCoroutine(carPointer.turnSignal.SignalClick(carPointer.currentSteeringDirection));
                     StartCoroutine(carPointer.wheel.TurnWheel(carPointer.currentSteeringDirection));
+                    
+                    if (carPointer.currentSteeringDirection != SteeringDirection.FORWARD) {
+                        GameStateManager.audioManager.PlayRandomSoundByName("Blinker");
+                    }
                 }
 
             } else {
@@ -47,6 +51,7 @@ public class Intersection : Road
                 if (carPointer.wheel && carPointer.turnSignal) {
                     StartCoroutine(carPointer.turnSignal.SignalClick(SteeringDirection.FORWARD));
                     StartCoroutine(carPointer.wheel.TurnWheel(SteeringDirection.FORWARD));
+                    GameStateManager.audioManager.StopSoundByName("Blinker");
                 }
 
                 carPointer.inIntersection = false;
