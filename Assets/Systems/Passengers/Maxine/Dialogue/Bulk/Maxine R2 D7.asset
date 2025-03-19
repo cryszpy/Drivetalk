@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Maxine R2 D7
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Y'know, the town hasn't changed much since you've been gone.
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <b>Mackenzie's</b> just that kind of place I guess.
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 0}
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 292ac16097f9d407d9c38828fbde12ef, type: 2}
+  - {fileID: 11400000, guid: 37561a20b4b554983af49bb3d305fe48, type: 2}

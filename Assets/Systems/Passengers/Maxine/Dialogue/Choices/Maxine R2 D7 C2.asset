@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
+  m_Name: Maxine R2 D7 C2
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Oh?
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: a5619b3dbedd34fde9f440beb509b59a, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 2731c236030ab431785e5fe0f10cb30c, type: 2}
+  - {fileID: 11400000, guid: 23746718e04ad4c7ab629e99443b6d9e, type: 2}
+  - {fileID: 11400000, guid: 62a38fc18451243a7b2f2fe47e14ceda, type: 2}
+  choiceText: No, it's not.
+  moodChange: 0

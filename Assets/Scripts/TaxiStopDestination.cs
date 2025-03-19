@@ -65,6 +65,7 @@ public class TaxiStopDestination : MonoBehaviour
         } else {
             Debug.LogWarning("No story passengers left!");
             // PUT END OF DEMO SCREEN HERE
+            GameStateManager.dialogueManager.demoOverScreen.SetActive(true);
         }
     }
 

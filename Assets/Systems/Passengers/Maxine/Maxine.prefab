@@ -249,7 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: 1186082652, guid: f9f86e3a9bc6e2840b973c21dc41c891, type: 3}
   animator: {fileID: 2486925453300218498}
-  archetype: {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
   expressions:
   - {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   - {fileID: 11400000, guid: 5b970ecc9433b46cbb517ef13f76f105, type: 2}
@@ -264,9 +263,12 @@ MonoBehaviour:
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: c486829ef693e424b85fc9822ce8cff8, type: 3}
   - {fileID: 7247080473360366342, guid: c486829ef693e424b85fc9822ce8cff8, type: 3}
+  salutes:
+  - {fileID: 11400000, guid: 13bb6e7d98d464bd297834e3e92888d6, type: 2}
+  - {fileID: 11400000, guid: 93787df71a8f04e5cbdcfcef034c1f06, type: 2}
   ridesDialogue:
   - {fileID: 11400000, guid: 2920b4e44b29a4e5984896464a3a490c, type: 2}
-  - {fileID: 11400000, guid: 766929efa3b57433590bd6ca019bb7c0, type: 2}
+  - {fileID: 11400000, guid: e0daf921b37e44c5396287acd71fea7b, type: 2}
   rarity: 0
   id: 1
   passengerName: Maxine

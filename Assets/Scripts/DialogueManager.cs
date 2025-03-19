@@ -56,6 +56,9 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject currentElement;
 
+    [Tooltip("Reference to the demo over screen.")]
+    public GameObject demoOverScreen;
+
     public List<DialogueLine> bruh = new();
     
     [Header("STATS")] // --------------------------------------------------------------------------------
@@ -106,11 +109,6 @@ public class DialogueManager : MonoBehaviour
 
     public float vignetteDefault;
     public float vignetteHallucinating;
-
-    /* public EmotionEvent onEmotionChange; */
-    //public ActionEvent onAction;
-    /* public TextRevealEvent onTextReveal;
-    public DialogueEvent onDialogueFinish; */
 
     private void OnEnable() {
         GameStateManager.EOnRideFinish += EndDialogue;
@@ -279,6 +277,9 @@ public class DialogueManager : MonoBehaviour
             // If there aren't any sentences to display (reached the end of this dialogue piece)
             if (lines.Count <= 0) {
 
+                // Gets the index number of the current passenger
+                int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
+
                 // If there are choices attached to this dialogue piece—
                 if (currentDialogue.choices.Length > 0) {
                     Debug.Log("1");
@@ -331,7 +332,7 @@ public class DialogueManager : MonoBehaviour
                     return;
                 }
                 // Dropoff dialogue
-                else if (currentDialogue.choices.Length == 0 && car.currentPassenger.archetype.playingSalute) {
+                else if (currentDialogue.choices.Length == 0 && car.currentPassenger.salutes[CarController.PassengersDrivenRideNum[index] - 1].playingSalute) {
                     Debug.Log("5");
 
                     // Starts the passenger's dropoff dialogue
@@ -381,9 +382,6 @@ public class DialogueManager : MonoBehaviour
     // Shows the choices at a choice branch
     public void ShowChoices() {
 
-        // Disables continue button
-        //continueButton.SetActive(false);
-
         // Remove existing buttons
         if (choiceButtonsList.Count > 0) {
             // For every active choice button—
@@ -396,12 +394,6 @@ public class DialogueManager : MonoBehaviour
             // Clears choice buttons list
             choiceButtonsList.Clear();
         }
-
-        // Hides the "show dialogue box" animation
-        //dialogueAnimator.SetBool("Play", false);
-
-        // Hides the skip indicator
-        //skipIndicator.SetActive(false);
 
         // Enables the choices bar in preparation for displaying choice buttons
         car.choicesBar.SetActive(true);
@@ -537,13 +529,17 @@ public class DialogueManager : MonoBehaviour
             SwitchExpression(currentLine.expression);
         }
 
-        // Log appropriate name to transcript
-        if (car.currentPassenger.nameRevealed) {
-            transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
-        } else {
-            transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
-        }
+        // If the current sentence doesn't have any effects—
+        if (!line.sentence.Contains("<glitch>") && !line.sentence.Contains("<wobble>")) {
 
+            // Log appropriate name and message to transcript
+            if (car.currentPassenger.nameRevealed) {
+                transcriptLog.LogText(line.sentence, car.currentPassenger.passengerName);
+            } else {
+                transcriptLog.LogText(line.sentence, car.currentPassenger.hiddenName);
+            }
+        }
+        
         // Set whether dashboard requests are active or not and activate mood meter
         if (currentLine.requestsEnd) {
             GameStateManager.comfortManager.comfortabilityRunning = false;
@@ -646,10 +642,13 @@ public class DialogueManager : MonoBehaviour
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
-        // Trigger speaking if line isn't silence or a hallucination
+        // Trigger vignette effect if line is hallucination
         if (currentLine.hallucination) {
+
             if (volumeProfile.TryGet<Vignette>(out var vignette)) {
+
                 StartCoroutine(FadeVignette(vignette, true));
+
             } else {
                 Debug.LogError("Could not get Vignette component on global volume!");
             }
@@ -659,6 +658,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        // Trigger speaking if line isn't silence or a hallucination
         if (currentLine.sentence != "..." && !currentLine.hallucination) {
             car.currentPassenger.animator.SetBool("Speak", true);
         }
@@ -1036,6 +1036,11 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        // Replace with glitched sprite
+        car.currentPassenger.animator.SetTrigger("Glitch");
+
+        yield return new WaitForSeconds(0.75f);
+
         // Play glitch effect and swap passengers
         ErasePassenger();
         GameStateManager.dialogueManager.ResetDialogue();
@@ -1092,6 +1097,9 @@ public class DialogueManager : MonoBehaviour
     public void PostDropoff() {
         Debug.Log("Finished dropoff dialogue piece!");
 
+        // Gets the index number of the current passenger
+        int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
+
         // Hide the name box
         nameBox.SetActive(false);
 
@@ -1102,7 +1110,7 @@ public class DialogueManager : MonoBehaviour
         car.currentPassenger.transform.parent = null;
 
         // Reset dropoff dialogue status
-        car.currentPassenger.archetype.playingSalute = false;
+        car.currentPassenger.salutes[CarController.PassengersDrivenRideNum[index] - 1].playingSalute = false;
 
         // Set passenger position to the destination stop
         car.currentPassenger.transform.position = car.dropoffPosition.transform.position;

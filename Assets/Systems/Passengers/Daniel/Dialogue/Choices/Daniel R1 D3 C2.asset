@@ -21,10 +21,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: Been a minute. I don't blame you.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -33,10 +35,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: It's good to have you back, man.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
@@ -45,10 +49,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 1
+    spawnDestination: 0
+    timeLoop: 0
   - sentence: "Though I won't lie, I never thought I'd see you again after\u2014"
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -57,10 +63,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: Ah. Uh... never mind. Anyways...
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 11400000, guid: ba2d24060b4f04f8c9f782b252fe7c4a, type: 2}
@@ -69,10 +77,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
-    spawnDestination: 0
+    spawnDestination: 1
+    timeLoop: 0
   - sentence: A lot changed after you left.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -81,10 +91,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: Man... the older I get, the smaller this place feels.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
@@ -93,10 +105,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 1
+    timeLoop: 0
   - sentence: "The stores seem newer, the houses look nicer... Oh\u2014"
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -105,10 +119,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: They fixed up the park, too. It's pretty clean now.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -117,10 +133,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: You should stop by sometime.
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 0}
@@ -129,10 +147,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   - sentence: Maybe when the sun's out?
     expression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
     startingExpression: {fileID: 11400000, guid: 4d3ee73049fdc43ec8914391dfe63f79, type: 2}
@@ -141,10 +161,12 @@ MonoBehaviour:
     dashboardObject: {fileID: 0}
     firstNameUsage: 0
     voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
     earlyDropoff: 0
     spawnDestination: 0
+    timeLoop: 0
   nextDialogue: {fileID: 0}
   fallbackExpression: {fileID: 11400000, guid: 9c3dccf5ecbc245068f1fb696cdee5e5, type: 2}
   choices: []

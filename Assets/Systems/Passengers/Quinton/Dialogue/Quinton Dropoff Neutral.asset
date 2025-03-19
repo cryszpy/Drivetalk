@@ -14,24 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - sentence: Thanks, this was much better than walking.
-    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    expression: {fileID: 11400000, guid: d74aa8c0f6d2e460881a24ffd2f52631, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
-    dashboardObject:
-      objectToSpawn: {fileID: 0}
-      spawnPoint: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 1
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
   - sentence: Drive safe, dude.
-    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    expression: {fileID: 11400000, guid: d74aa8c0f6d2e460881a24ffd2f52631, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
     audioToPlay: {fileID: 0}
-    dashboardObject:
-      objectToSpawn: {fileID: 0}
-      spawnPoint: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
   nextDialogue: {fileID: 0}
-  firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
   choices: []

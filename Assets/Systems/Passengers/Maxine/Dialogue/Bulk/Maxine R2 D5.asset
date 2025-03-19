@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Maxine R2 D5
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Do you remember <glitch>when you first got your license</glitch>?
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 1
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 1077a1864e14041d2ac2b7115f711a1c, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 4190689cd2d4648da934aa0952c8eccd, type: 2}
+  - {fileID: 11400000, guid: c6c2bb7f1904a418a8fbc27c5d8aa47c, type: 2}
+  - {fileID: 11400000, guid: e0de9650a79f4403ea11bb4814e4332a, type: 2}

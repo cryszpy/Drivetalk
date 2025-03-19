@@ -89,6 +89,7 @@ public class Menu : MonoBehaviour
         settingsScreen.SetActive(false);
         transcriptScreen.SetActive(false);
         gameScreen.SetActive(false);
+        GameStateManager.dialogueManager.demoOverScreen.SetActive(false);
 
         Debug.Log("OPENED GAME!");
     }
@@ -206,6 +207,16 @@ public class Menu : MonoBehaviour
         transcriptScreen.SetActive(false);
     }
 
+    // Toggles pause menu settings page
+    public void ToggleMMSettingsScreen() {
+
+        // Toggle
+        pauseScreen.SetActive(false);
+        settingsScreen.SetActive(!settingsScreen.activeInHierarchy);
+
+        transcriptScreen.SetActive(false);
+    }
+
     // Toggles transcript log screen
     public void ToggleTranscriptLog() {
 
@@ -244,8 +255,12 @@ public class Menu : MonoBehaviour
     public void LoadMainMenu() {
         GameStateManager.SetState(GAMESTATE.MAINMENU);
         GameStateManager.dialogueManager.StopAllCoroutines();
+
+        // Reset canvas screens
         pauseScreen.SetActive(false);
         gameScreen.SetActive(false);
+        GameStateManager.dialogueManager.demoOverScreen.SetActive(false);
+        
         ResetStats();
         StartCoroutine(FadeToBlack());
     }

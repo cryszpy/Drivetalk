@@ -246,9 +246,6 @@ public class CarController : MonoBehaviour
             // Set the car's current passenger
             currentPassenger = script;
 
-            // Reset passenger archetypes if for some reason it wasn't reset before
-            currentPassenger.archetype.playingSalute = false;
-
             // Tell the car it has arrived at a taxi stop
             carPointer.taxiStopsEnabled = false;
             atTaxiStop = true;
@@ -281,8 +278,12 @@ public class CarController : MonoBehaviour
 
                 passengersDrivenRideNumTracker[tempIndex]++;
             }
-
+            
+            // Gets the index number of the current passenger
             int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
+
+            // Reset passenger archetypes if for some reason it wasn't reset before
+            currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].playingSalute = false;
 
             // If the passenger is Romeo—
             if (currentPassenger.id == 6) {
@@ -296,7 +297,7 @@ public class CarController : MonoBehaviour
             GameStateManager.comfortManager.availableRequests = new(GameStateManager.comfortManager.dashRequests);
 
             // Start the passenger's pickup greeting if they have one
-            dialogueManager.StartDialogue(currentPassenger.archetype.pickupGreeting);
+            dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].pickupGreeting);
 
             // Set the passenger as having been picked up
             currentPassenger.tag = "PickedUp";
@@ -345,20 +346,24 @@ public class CarController : MonoBehaviour
 
         // Drops off the current passenger
         if (currentPassenger) {
-            currentPassenger.archetype.playingSalute = true;
+
+            // Gets the index number of the current passenger
+            int index = CarController.PassengersDrivenIDs.IndexOf(currentPassenger.id);
+
+            currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].playingSalute = true;
 
             // NEGATIVE RESPONSE
             if (GameStateManager.comfortManager.currentComfortability < GameStateManager.dialogueManager.moodNegativeCeiling) {
-                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSaluteNeg);
+                dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].dropoffSaluteNeg);
             }
             // NEUTRAL RESPONSE
             else if (GameStateManager.comfortManager.currentComfortability >= GameStateManager.dialogueManager.moodNegativeCeiling 
                 && GameStateManager.comfortManager.currentComfortability <= GameStateManager.dialogueManager.moodNeutralCeiling) {
-                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalute);
+                dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].dropoffSalute);
             }
             // POSITIVE RESPONSE
             else {
-                dialogueManager.StartDialogue(currentPassenger.archetype.dropoffSalutePos);
+                dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].dropoffSalutePos);
             }
         }
     }

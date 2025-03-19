@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f83bf776b7d4fa39367f6fd9c2cab4, type: 3}
+  m_Name: Quinton R1 D1 C2
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: "C'mon! I\u2019ll leave my hula girl with you. Probably worth a lot."
+    expression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 8336120612843639648, guid: b18536abecb1e4868be3ba475c9d7026, type: 3}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 0}
+  fallbackExpression: {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
+  choices:
+  - {fileID: 11400000, guid: 6128e28e3a7234f0bbd8d7656912a4f2, type: 2}
+  - {fileID: 11400000, guid: 08e5e35e1f74743bd8e2c2ae48e75188, type: 2}
+  choiceText: No.
+  moodChange: 0

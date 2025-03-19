@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe1fb690a6a451da2670a268ab7ae4, type: 3}
+  m_Name: Maxine R2 D2
+  m_EditorClassIdentifier: 
+  lines:
+  - sentence: Dom<glitch>?!</glitch>
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 1
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <glitch>I heard</glitch> you <glitch>were back in town, but I</glitch>
+      didn't believe <glitch>it.</glitch>
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 1
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: You've <glitch>almost</glitch> been gone <glitch>for a full year y'know?</glitch>
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 1
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  nextDialogue: {fileID: 11400000, guid: 29b0ff1c8798c4a1b97809e329154353, type: 2}
+  fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+  choices:
+  - {fileID: 11400000, guid: ddaa27b1e6d1c4b8cb60cbc03a1d392b, type: 2}
+  - {fileID: 11400000, guid: 62a3aed6695b8400a835a081952d041f, type: 2}
+  - {fileID: 11400000, guid: 26763c6a1ef944fe9b39089ce45493ed, type: 2}

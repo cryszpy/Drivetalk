@@ -24,9 +24,6 @@ public class Passenger : MonoBehaviour
     [Tooltip("This passenger's Animator component.")]
     public Animator animator;
 
-    [Tooltip("This passenger's generic response archetype.")]
-    public PassengerArchetype archetype;
-
     [Tooltip("This passenger's possible expressions.")]
     public List<PassengerExpression> expressions = new();
 
@@ -35,6 +32,9 @@ public class Passenger : MonoBehaviour
 
     [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
     public List<GameObject> requestedDestinationTiles;
+
+    [Tooltip("This passenger's list of salutes, respective to ride number.")]
+    public List<PassengerArchetype> salutes = new();
 
     [Tooltip("List of all ride dialogue for this passenger, in order.")]
     public List<DialoguePiece> ridesDialogue;

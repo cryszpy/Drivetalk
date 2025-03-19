@@ -83,11 +83,37 @@ public class GameStateManager : MonoBehaviour
 
     public void ExitToMainMenu() {
 
+        // Reset car stuff
+        dialogueManager.gpsIndicator.SetActive(false);
+        dialogueManager.activeDialogueBlocks.Clear();
+        car.gpsScreen.gps.dragging = false;
+        car.gpsScreen.gps.gameObject.layer = car.gpsScreen.gps.regularLayer;
+        car.gpsScreen.actualText.maxVisibleCharacters = 0;
+        car.gpsScreen.inputField.textComponent.text = "";
+        car.gpsScreen.inputField.text = "";
+
+        // Toggle hazards status off
+        CarController.HazardsActive = false;
+        GameObject.FindGameObjectWithTag("Hazards").GetComponent<Hazards>().buttonAnimator.SetBool("Active", CarController.HazardsActive);
+
+        if (dialogueManager.currentElement) {
+            Destroy(dialogueManager.currentElement);
+        }
+        if (dialogueManager.currentDialogue) {
+            dialogueManager.currentDialogue = null;
+        }
+        dialogueManager.nameBox.SetActive(false);
+
+        comfortManager.comfortabilityRunning = false;
+
         // Reset initial road
         GameObject initialRoad = Instantiate(initialRoadPrefab, Vector3.zero, Quaternion.identity);
 
         // Set new initial road
         car.carPointer.initialRoad = initialRoad.GetComponent<ProceduralRoad>();
+
+        // Assumes initial road is a 4-way
+        car.carPointer.furthestConnectionPoint = car.carPointer.initialRoad.roadConnections[0];
 
         // Reset positions of car and carPointer
         car.agent.enabled = false;
@@ -97,13 +123,13 @@ public class GameStateManager : MonoBehaviour
 
         // Clear all previous roads
         foreach (var road in car.carPointer.roadQueue) {
-            Destroy(road);
+            Destroy(road.gameObject);
         }
         car.carPointer.roadQueue.Clear();
         car.carPointer.directionQueue.Clear();
 
-        // Add new initial road to road list
-        car.carPointer.roadQueue.Enqueue(car.carPointer.initialRoad);
+        car.carPointer.defaultRotation = 0;
+        car.carPointer.currentSteeringDirection = SteeringDirection.FORWARD;
 
         // Remove current passenger
         if (car.currentPassenger) {
@@ -125,6 +151,7 @@ public class GameStateManager : MonoBehaviour
         car.carPointer.gpsPath.Clear();
         car.carPointer.gpsPathRef.Clear();
         car.carPointer.pathfindingTarget = null;
+        car.carPointer.destinationMarker = null;
 
         car.passengerList.ResetAllPassengers();
         comfortManager.ResetDashboardControls();

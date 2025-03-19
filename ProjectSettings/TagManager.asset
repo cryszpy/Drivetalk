@@ -27,6 +27,7 @@ TagManager:
   - Marker
   - MoodMeter
   - MoodMeterHandle
+  - Hazards
   layers:
   - Default
   - TransparentFX

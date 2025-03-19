@@ -13,22 +13,62 @@ MonoBehaviour:
   m_Name: Maxine Dropoff Neutral
   m_EditorClassIdentifier: 
   lines:
-  - sentence: well, this is me!
+  - sentence: Well, this is me.
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 1
-  - sentence: "i\u2019ll see you around!"
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: <glitch>It's been a while since you've been here hasn't it?</glitch>
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
-  - sentence: till next time.
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: I'll see you around!
     expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
     startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
     requestsStart: 0
     requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
+  - sentence: '''Till next time, Dom!'
+    expression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
+    startingExpression: {fileID: 0}
+    longPauseTime: 0
+    audioToPlay: {fileID: 0}
+    dashboardObject: {fileID: 0}
+    firstNameUsage: 0
+    voiceLine: {fileID: 0}
+    hallucination: 0
+    requestsStart: 0
+    requestsEnd: 0
+    earlyDropoff: 0
+    spawnDestination: 0
+    timeLoop: 0
   nextDialogue: {fileID: 0}
-  firstNameUsage: 0
   fallbackExpression: {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   choices: []

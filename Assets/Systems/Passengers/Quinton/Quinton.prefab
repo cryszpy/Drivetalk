@@ -249,7 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: 1103461974, guid: c1b9999ee27073b42ab941ce4874be15, type: 3}
   animator: {fileID: 2486925453300218498}
-  archetype: {fileID: 11400000, guid: 6b3b8641420e6446ba54e1509ad887b3, type: 2}
   expressions:
   - {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
   - {fileID: 11400000, guid: c96b6e0839f664ba697a62aadc3835bf, type: 2}
@@ -258,9 +257,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e63052b40762d4e3f919f9ef8d99dba1, type: 2}
   - {fileID: 11400000, guid: 23d8f5ae25a934e1b85170026accae76, type: 2}
   - {fileID: 11400000, guid: a8ee5206c8f2042b58a581d63441638b, type: 2}
+  - {fileID: 11400000, guid: d74aa8c0f6d2e460881a24ffd2f52631, type: 2}
+  - {fileID: 11400000, guid: a18fa0ec9327f44a092875801b134c4d, type: 2}
   requirements: []
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: d23710308dd9f474c96cd37b22803f00, type: 3}
+  salutes:
+  - {fileID: 11400000, guid: 6b3b8641420e6446ba54e1509ad887b3, type: 2}
   ridesDialogue:
   - {fileID: 11400000, guid: 072f0a56a4012467a9ad104fea776fdd, type: 2}
   rarity: 0
@@ -270,10 +273,10 @@ MonoBehaviour:
   nameColor: {r: 0.8018868, g: 0.4798361, b: 0.2988163, a: 1}
   nameRevealed: 0
   requirementMet: 0
-  textCPS: 0.03
+  textCPS: 0.045
   longPauseMin: 2
   longPauseMax: 4
-  holdTime: 3.5
+  holdTime: 2.5
   minSwitchTime: 0.6
   maxSwitchTime: 2.5
   meterSpeed: 4

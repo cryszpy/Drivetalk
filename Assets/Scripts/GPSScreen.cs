@@ -8,7 +8,7 @@ public class GPSScreen : MonoBehaviour
 {
 
     [Tooltip("Reference to the main map script.")]
-    [SerializeField] private GPS gps;
+    public GPS gps;
 
     public RoadList roadList;
 

@@ -9,6 +9,8 @@ public class Intersection : Road
 {
     private CarPointer carPointer;
 
+    public bool shouldStop;
+
     private void OnTriggerEnter(Collider collider) {
         
         // If the car pointer has been collided with—
@@ -34,6 +36,11 @@ public class Intersection : Road
                     }
                 }
 
+                // Sets car to stop at stop signs or traffic lights
+                if (shouldStop) {
+                    StartCoroutine(WaitAtStop());
+                }
+
             } else {
                 Debug.LogWarning("Could not find CarPointer script on car pointer!");
                 return;
@@ -57,6 +64,17 @@ public class Intersection : Road
                 carPointer.inIntersection = false;
             }
         }
+    }
+
+    private IEnumerator WaitAtStop() {
+        
+        float prevSpeed = carPointer.agent.speed;
+
+        carPointer.agent.speed = 0;
+
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1f, 2.5f));
+
+        carPointer.agent.speed = prevSpeed;
     }
 }
 

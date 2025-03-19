@@ -416,6 +416,7 @@ public class CarPointer : MonoBehaviour
             // Randomly picks one direction from list of valid directions - A
             RoadConnectionPoint randomPoint = tempList[UnityEngine.Random.Range(0, tempList.Count)];
             directionQueue.Enqueue(randomPoint.connectionRotation);
+            Debug.Log("MOWAIFALWJFILAWF");
 
             // Rotates spawned road tile to correct rotation
             selectedTile.transform.Rotate(new(0, defaultRotation, 0));

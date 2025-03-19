@@ -249,7 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: -514052550, guid: fb94da1c1ae9a4d41afc1e487960f2dc, type: 3}
   animator: {fileID: 2486925453300218498}
-  archetype: {fileID: 11400000, guid: 3c955995693be4c5d8478a40a1a16a4b, type: 2}
   expressions:
   - {fileID: 11400000, guid: 01ce0d7c9e9314c08b5d829f1f293156, type: 2}
   - {fileID: 11400000, guid: df4e378f3dc98467b9f97bfb13890b1e, type: 2}
@@ -263,6 +262,8 @@ MonoBehaviour:
   requirements: []
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: d23710308dd9f474c96cd37b22803f00, type: 3}
+  salutes:
+  - {fileID: 11400000, guid: 3c955995693be4c5d8478a40a1a16a4b, type: 2}
   ridesDialogue:
   - {fileID: 11400000, guid: df43d4534b93d4158af798faa8774c6d, type: 2}
   rarity: 0

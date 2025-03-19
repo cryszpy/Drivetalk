@@ -126,7 +126,7 @@ public class TextEffects : MonoBehaviour
                         totalColors[i + 2] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i + 2].x * colorSpeed, 1f));
                         totalColors[i + 3] = gradient.Evaluate(Mathf.Repeat(Time.time + totalVertices[i + 3].x * colorSpeed, 1f));
 
-                        Vector3 offset = Wobble(Time.fixedDeltaTime + i, glitchSpeedX, glitchSpeedY);
+                        Vector3 offset = Wobble(Time.fixedDeltaTime + UnityEngine.Random.value * 2, glitchSpeedX, glitchSpeedY);
 
                         totalVertices[i] += offset;
                         totalVertices[i + 1] += offset;
@@ -347,11 +347,22 @@ public class TextEffects : MonoBehaviour
             childText = childMeshes[0];
         }
 
+        GameStateManager.dialogueManager.currentDialogueText.ForceMeshUpdate();
+        mesh = GameStateManager.dialogueManager.currentDialogueText.mesh;
+        vertices = mesh.vertices;
+
         wobbleOn = true;
     }
 
     private Vector3 Wobble(float time, float speedX, float speedY) {
-        return new(Mathf.Sin(time * speedX), Mathf.Cos(time * speedY), 0);
+
+        float xDiff = time * speedX;
+        float yDiff = time * speedY;
+
+        /* if (speedX == 0) xDiff = 0;
+        if (speedY == 0) yDiff = 0; */
+
+        return new(xDiff - speedX, yDiff - speedY, 0);
     }
 
     public void StartGlitch(string sentence, int start, int end, int spacesBefore, int spacesAfter, int tagLengthsBefore) {
@@ -372,6 +383,10 @@ public class TextEffects : MonoBehaviour
             childText = childMeshes[0];
         }
 
+        GameStateManager.dialogueManager.currentDialogueText.ForceMeshUpdate();
+        mesh = GameStateManager.dialogueManager.currentDialogueText.mesh;
+        vertices = mesh.vertices;
+
         // Start color glitch
         glitchOn = true;
 
@@ -390,10 +405,6 @@ public class TextEffects : MonoBehaviour
         while (glitchOn && GameStateManager.dialogueManager.currentDialogueText) {
 
             float rand = UnityEngine.Random.value;
-
-            GameStateManager.dialogueManager.currentDialogueText.ForceMeshUpdate();
-            mesh = GameStateManager.dialogueManager.currentDialogueText.mesh;
-            vertices = mesh.vertices;
 
             if (convertedVerts == null || convertedVerts.Length <= 0) {
                 convertedVerts = vertices;
