@@ -41,8 +41,8 @@ MonoBehaviour:
     earlyDropoff: 0
     spawnDestination: 0
     timeLoop: 0
-  - sentence: I used to spend so much time there, all my days starting to feel like
-      they were blurring together!
+  - sentence: I used to spend so much time there, all my days were starting to feel
+      like they were blurring together!
     expression: {fileID: 11400000, guid: efa7cbc4093b74eb897a16da8eb2374b, type: 2}
     startingExpression: {fileID: 0}
     longPauseTime: 0
