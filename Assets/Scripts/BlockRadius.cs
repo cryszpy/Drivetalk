@@ -19,7 +19,7 @@ public class BlockRadius : MonoBehaviour
         if (car && carPointer && inBlockRadius) {
 
             // If ride has not finished dialogue, the car is routed to a destination, and that destination is this block—
-            if (!carPointer.finishedDialogue && carPointer.pathfindingTarget != null && carPointer.pathfindingTarget == gameObject) {
+            if (!GameStateManager.dialogueManager.stopDialogue && carPointer.pathfindingTarget != null && carPointer.pathfindingTarget == gameObject) {
                 Debug.Log("Reached temporary block destination!");
 
                 // Save this block as the car's previous block destination
@@ -41,7 +41,7 @@ public class BlockRadius : MonoBehaviour
                 Debug.LogError("Could not find DestinationRadius script on destination object!");
             }
 
-            GameStateManager.EOnBlockRadiusDetection?.Invoke();
+            //GameStateManager.EOnBlockRadiusDetection?.Invoke();
         }
         
         // If the car pointer has been collided with—

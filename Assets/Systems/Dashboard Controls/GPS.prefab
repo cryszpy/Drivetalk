@@ -1860,7 +1860,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1743190875777454970}
         m_TargetAssemblyTypeName: GPSScreen, Assembly-CSharp
-        m_MethodName: EnterDestination
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2465,7 +2465,6 @@ MonoBehaviour:
   roadList: {fileID: 11400000, guid: 1a5ee8fdef419486594f5f6a77f8c6e7, type: 2}
   pivot: {fileID: 5328184320602319658}
   inputField: {fileID: 4568274134794747623}
-  inputText: {fileID: 0}
   placeholderText: {fileID: 3587421742550777460}
   actualText: {fileID: 513926267734743202}
   currentDestination:

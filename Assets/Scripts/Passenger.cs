@@ -24,6 +24,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("This passenger's Animator component.")]
     public Animator animator;
 
+    [Tooltip("The story container reference for this passenger's dialogue.")]
+    public StoryContainer storyContainer;
+
     [Tooltip("This passenger's possible expressions.")]
     public List<PassengerExpression> expressions = new();
 
@@ -33,11 +36,8 @@ public class Passenger : MonoBehaviour
     [Tooltip("List of all destinations this passenger will request, in order of ride number.")]
     public List<GameObject> requestedDestinationTiles;
 
-    [Tooltip("This passenger's list of salutes, respective to ride number.")]
-    public List<PassengerArchetype> salutes = new();
-
-    [Tooltip("List of all ride dialogue for this passenger, in order.")]
-    public List<DialoguePiece> ridesDialogue;
+    [Tooltip("This passenger's list of gifted objects, using the index as the ID.")]
+    public List<GameObject> gifts = new();
 
     [Header("STATS")] // -------------------------------------------------------------------------------------------------
 
@@ -65,10 +65,6 @@ public class Passenger : MonoBehaviour
     [Tooltip("The rate at which this passenger types out dialogue text. (lower values are faster)")]
     public float textCPS;
 
-    [Tooltip("The minimum possible time that this passenger waits between saying dialogue groups.")]
-    public float longPauseMin;
-    [Tooltip("The maximum possible time that this passenger waits between saying dialogue groups.")]
-    public float longPauseMax;
     [Tooltip("The amount of time this passenger will have each sentence held on-screen for.")]
     public float holdTime;
     [Tooltip("The minimum possible time that this passenger waits to switch from default to side expression views.")]
@@ -81,9 +77,6 @@ public class Passenger : MonoBehaviour
 
     [Tooltip("The amount of time this passenger waits to begin talking after selecting a destination.")]
     public float waitAfterRouteTime;
-
-    [Tooltip("Boolean to check if the passenger has started ride dialogue.")]
-    public bool hasStartedRideDialogue = false;
 
     [Header("DASHBOARD PREFERENCES")] // -------------------------------------------------------------------------------------------------
 

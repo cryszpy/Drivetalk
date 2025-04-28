@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GPSScreen : MonoBehaviour
 {
@@ -91,59 +90,51 @@ public class GPSScreen : MonoBehaviour
         }
     }
 
-    // Sets the map upon clicking the enter
-    public void EnterDestination() {
-
-        if (actualText.maxVisibleCharacters >= currentDestination.gpsText.Length) {
-
-            gps.dragging = false;
-            gps.gameObject.layer = gps.regularLayer;
-
-            GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
-
-            // Sets car's boolean flag to no longer be at a taxi stop
-            car.atTaxiStop = false;
-
-            // If the car still has rides left in the day—
-            if (car.currentRideNum <= car.totalRideNum) {
-
-                // Sets the passenger destination object
-                car.carPointer.currentDestinationTile = currentDestination.tile;
-
-                // Start waiting until the passenger talks
-                GameStateManager.EOnDestinationSet?.Invoke();
-            }
-        } else {
-            Debug.LogWarning("Wrong address bubbo!");
-            entered = false;
-        }
+    // UnityEvents do not allow parameterized function calls, so this is a reroute
+    public void OnClick() {
+        EnterDestination();
     }
 
     // Sets the map upon clicking the enter
-    public void EnterDestination(GPSDestination destination) {
+    public void EnterDestination(GPSDestination destination = default) {
 
-        if (destination.tile != null) {
+        GPSDestination target = currentDestination;
 
-            gps.dragging = false;
-            gps.gameObject.layer = gps.regularLayer;
+        if (destination != null) {
+            target = destination;
 
-            GameStateManager.dialogueManager.waitForRouting = false; // Set this when correct destination is picked
-
-            // Sets car's boolean flag to no longer be at a taxi stop
-            car.atTaxiStop = false;
-
-            // If the car still has rides left in the day—
-            if (car.currentRideNum <= car.totalRideNum) {
-
-                // Sets the passenger destination object
-                car.carPointer.currentDestinationTile = destination.tile;
-
-                // Start waiting until the passenger talks
-                GameStateManager.EOnDestinationSet?.Invoke();
-            }
+            StartCoroutine(AssignDestination(target));
         } else {
-            Debug.LogWarning("Wrong address bubbo!");
-            entered = false;
+
+            if (actualText.maxVisibleCharacters >= currentDestination.gpsText.Length) {
+
+                StartCoroutine(AssignDestination(target));
+            } else {
+                Debug.LogWarning("Wrong address bubbo!");
+                entered = false;
+            }
+        }
+    }
+
+    public IEnumerator AssignDestination(GPSDestination dest) {
+        
+        gps.dragging = false;
+        gps.gameObject.layer = gps.regularLayer;
+
+        // Sets car's boolean flag to no longer be at a taxi stop
+        car.atTaxiStop = false;
+
+        // If the car still has rides left in the day—
+        if (car.currentRideNum <= car.totalRideNum) {
+
+            // Sets the passenger destination object
+            car.carPointer.currentDestinationTile = dest.tile;
+
+            // Start waiting until the passenger talks (DONT CALL ANYTHING AFTER THIS BC THE GPSSCREEN SCRIPT GETS DISABLED)
+            GameStateManager.EOnDestinationSet?.Invoke();
+        } else {
+            Debug.LogError("No rides remaining!");
+            yield return null;
         }
     }
 }

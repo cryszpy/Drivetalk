@@ -265,39 +265,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPointer: {fileID: 109818932}
   car: {fileID: 252045954}
-  nameBox: {fileID: 808577793}
-  currentDialogueText: {fileID: 0}
-  gpsIndicator: {fileID: 0}
+  gpsIndicator: {fileID: 1598443141}
   transcriptLog: {fileID: 1950187948}
+  demoOverScreen: {fileID: 2992284672251928930}
   dialoguePivot: {fileID: 69005311}
   dialogueElement: {fileID: 8058823728116239593, guid: 26beb286349254f91bf4c9077d873cee, type: 3}
-  currentDialogue: {fileID: 0}
-  currentLine:
-    sentence: 
-    expression: {fileID: 0}
-    startingExpression: {fileID: 0}
-    longPauseTime: 0
-    audioToPlay: {fileID: 0}
-    dashboardObject: {fileID: 0}
-    firstNameUsage: 0
-    voiceLine: {fileID: 0}
-    hallucination: 0
-    requestsStart: 0
-    requestsEnd: 0
-    earlyDropoff: 0
-    spawnDestination: 0
-    timeLoop: 0
-  preChoiceDialogue: {fileID: 0}
-  choiceButtonsList: []
   currentElement: {fileID: 0}
-  demoOverScreen: {fileID: 2992284672251928930}
-  bruh: []
-  typingSentence: 0
+  nameBox: {fileID: 808577793}
+  currentDialogueText: {fileID: 0}
+  activeDialogueTracker: []
+  choicesBar: {fileID: 1870039069}
+  choicePrefab: {fileID: 1869503689464623647, guid: d333b144158d64c3cb9852c09ab29aaf, type: 3}
+  choiceButtonsList: []
   playingChoices: 0
-  waitForRouting: 0
-  moodNegativeCeiling: 0
-  moodNeutralCeiling: 0
-  startingExpressionDone: 0
+  currentKnot: 
+  stopDialogue: 0
   maxDialogueElements: 1
   punctuationWaitTime: 0.2
   shortPauseTime: 1
@@ -311,14 +293,23 @@ MonoBehaviour:
   - ;
   - '-'
   - "\u2014"
-  activeDialogueTracker: []
-  transcriptShown: 0
-  hi: 
-  hi2: 
+  typingSentence: 0
+  startingExpressionDone: 0
   textEffects: {fileID: 166813864}
   volumeProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
   vignetteDefault: 0.1
   vignetteHallucinating: 0.24
+  currentExpression: {fileID: 0}
+  currentPreExpression: {fileID: 0}
+  currentPauseLength: 0
+  spawnedDestination: 0
+  currentGift: {fileID: 0}
+  isHallucinating: 0
+  kickedOut: 0
+  timeLoop: 0
+  currentVox: {fileID: 0}
+  waitForRouting: 0
+  waitForDropoff: 0
 --- !u!114 &166813862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4513,6 +4504,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1598443141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2450948831917366989, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+  m_PrefabInstance: {fileID: 2992284672251928929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1672203623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4698,6 +4694,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1870039069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8006204006788587156, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+  m_PrefabInstance: {fileID: 2992284672251928929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1950187948 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6259429411411276673, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
@@ -13017,6 +13018,10 @@ PrefabInstance:
     - target: {fileID: 3956774942056010310, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961770931541149646, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 3963115321662718450, guid: 85312e91bac0441878f107f0d8c98afb, type: 3}
       propertyPath: m_AnchorMax.y

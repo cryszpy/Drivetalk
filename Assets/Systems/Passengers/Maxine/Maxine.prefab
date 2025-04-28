@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: 1186082652, guid: f9f86e3a9bc6e2840b973c21dc41c891, type: 3}
   animator: {fileID: 2486925453300218498}
+  storyContainer: {fileID: 11400000, guid: ced06fb136ff54bdbb5b6c7d0d1073c8, type: 2}
   expressions:
   - {fileID: 11400000, guid: 87499949f619c42e18a1a26b459f4f58, type: 2}
   - {fileID: 11400000, guid: 5b970ecc9433b46cbb517ef13f76f105, type: 2}

@@ -30,13 +30,8 @@ public class DialogueUIElement : MonoBehaviour
             yield return new WaitForSeconds(car.currentPassenger.holdTime);
         }
 
-        Debug.Log("Checked!");
-
-        while (GameStateManager.dialogueManager.playingChoices 
-            || (GameStateManager.dialogueManager.currentDialogue != null 
-            && GameStateManager.dialogueManager.currentDialogue.choices.Length > 0 
-            && GameStateManager.dialogueManager.currentLine.sentence == GameStateManager.dialogueManager.currentDialogue.lines.Last().sentence 
-            && GameStateManager.dialogueManager.currentDialogue.choices.Length > 0)) {
+        // Make sure choice prompt dialogue stays while choices are active
+        while (GameStateManager.dialogueManager.playingChoices) {
             yield return null;
         }
 

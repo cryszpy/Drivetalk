@@ -46,12 +46,6 @@ public class CarController : MonoBehaviour
     [Tooltip("Reference to the car's current passenger. UPDATED DYNAMICALLY.")]
     public Passenger currentPassenger;
 
-    [Tooltip("Reference to the invisible horizontal bar where choice button UI pops up.")]
-    public GameObject choicesBar;
-
-    [Tooltip("Reference to the prefab for a UI choice button.")]
-    public GameObject choicePrefab;
-
     [Tooltip("Reference to the car's dropoff position for passengers.")]
     public GameObject dropoffPosition;
 
@@ -68,12 +62,6 @@ public class CarController : MonoBehaviour
 
     [Tooltip("Boolean flag; Checks whether the car is currently at a taxi stop or not.")]
     public bool atTaxiStop = false;
-
-    /* [Tooltip("The minimum possible amount of rides in a day.")]
-    [SerializeField] private int minRides;
-
-    [Tooltip("The maximum possible amount of rides in a day.")]
-    [SerializeField] private int maxRides; */
 
     [Tooltip("The current ride of the day.")]
     public int currentRideNum;
@@ -283,7 +271,7 @@ public class CarController : MonoBehaviour
             int index = PassengersDrivenIDs.IndexOf(currentPassenger.id);
 
             // Reset passenger archetypes if for some reason it wasn't reset before
-            currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].playingSalute = false;
+            //currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].playingSalute = false;
 
             // If the passenger is Romeo—
             if (currentPassenger.id == 6) {
@@ -295,9 +283,9 @@ public class CarController : MonoBehaviour
             //GameStateManager.EOnPassengerPickup?.Invoke();
 
             GameStateManager.comfortManager.availableRequests = new(GameStateManager.comfortManager.dashRequests);
-
+            //currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].pickupGreeting
             // Start the passenger's pickup greeting if they have one
-            dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].pickupGreeting);
+            dialogueManager.StartDialogue(currentPassenger.storyContainer);
 
             // Set the passenger as having been picked up
             currentPassenger.tag = "PickedUp";
@@ -347,7 +335,7 @@ public class CarController : MonoBehaviour
         // Drops off the current passenger
         if (currentPassenger) {
 
-            // Gets the index number of the current passenger
+            /* // Gets the index number of the current passenger
             int index = CarController.PassengersDrivenIDs.IndexOf(currentPassenger.id);
 
             currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].playingSalute = true;
@@ -364,7 +352,10 @@ public class CarController : MonoBehaviour
             // POSITIVE RESPONSE
             else {
                 dialogueManager.StartDialogue(currentPassenger.salutes[PassengersDrivenRideNum[index] - 1].dropoffSalutePos);
-            }
+            } */
+
+            // Allows dialogue (end salute) to continue
+            GameStateManager.dialogueManager.waitForDropoff = false;
         }
     }
 

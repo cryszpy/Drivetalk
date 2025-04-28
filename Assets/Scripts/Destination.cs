@@ -24,7 +24,6 @@ public class Destination : MonoBehaviour
 
         // If the car reference is not null, and the car is inside this destination—
         if (car && inRadius && !car.arrivedAtDest && car.carPointer.destinationObject == this.transform.parent.parent.parent.gameObject) {
-            Debug.Log("ahwigjwapg");
 
             // Stop looping of this function
             car.arrivedAtDest = true;
@@ -32,9 +31,8 @@ public class Destination : MonoBehaviour
             // If the car is carrying a passenger—
             if (car.currentPassenger) {
 
-                GameStateManager.dialogueManager.ResetDialogue();
-                Destroy(GameStateManager.dialogueManager.currentElement);
-                Debug.Log("Destroyed");
+                //GameStateManager.dialogueManager.ResetDialogue();
+                //Destroy(GameStateManager.dialogueManager.currentElement);
 
                 GameStateManager.EOnPassengerDropoff?.Invoke();
             }
@@ -68,10 +66,6 @@ public class Destination : MonoBehaviour
 
         if (collider.CompareTag("CarFrame")) {
             inRadius = false;
-            
-            if (car.arrivedAtDest) {
-                car.arrivedAtDest = false;
-            }
         }
     }
 }

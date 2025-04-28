@@ -34,14 +34,10 @@ public class GameStateManager : MonoBehaviour
     public GAMESTATE gamestateTracker;
 
     public delegate void GlobalEvent();
-    public static GlobalEvent EOnRideFinish;
-    public static GlobalEvent EOnDialogueGroupFinish;
     public static GlobalEvent EOnDestinationSet;
-    public static GlobalEvent EOnPassengerPickup;
     public static GlobalEvent EOnPassengerDropoff;
     public static GlobalEvent EOnLeftWindow;
     public static GlobalEvent EOnRightWindow;
-    public static GlobalEvent EOnBlockRadiusDetection;
     public static GlobalEvent EOnRoadConnected;
 
     public static CarController car;
@@ -96,13 +92,8 @@ public class GameStateManager : MonoBehaviour
         CarController.HazardsActive = false;
         GameObject.FindGameObjectWithTag("Hazards").GetComponent<Hazards>().buttonAnimator.SetBool("Active", CarController.HazardsActive);
 
-        if (dialogueManager.currentElement) {
-            Destroy(dialogueManager.currentElement);
-        }
-        if (dialogueManager.currentDialogue) {
-            dialogueManager.currentDialogue = null;
-        }
-        dialogueManager.nameBox.SetActive(false);
+        // Reset dialogue systems
+        dialogueManager.ResetDialogue();
 
         comfortManager.comfortabilityRunning = false;
 

@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: 283660585, guid: 6fb0bfde685bfc2438f200f16f8bc00f, type: 3}
   animator: {fileID: 2486925453300218498}
+  storyContainer: {fileID: 11400000, guid: 62c23d4c847174b92bb205a7c6a28e1e, type: 2}
   expressions:
   - {fileID: 11400000, guid: bd2b4354be5154504b0777d755ed8dd9, type: 2}
   - {fileID: 11400000, guid: 417a40eefcdce4ee19d587a09ee61f4e, type: 2}
@@ -257,8 +258,6 @@ MonoBehaviour:
   - {fileID: 7247080473360366342, guid: 68301ff9f36d14913a0edb782146616a, type: 3}
   salutes:
   - {fileID: 11400000, guid: f070b229c4e1f4eccb86934c3026133a, type: 2}
-  ridesDialogue:
-  - {fileID: 11400000, guid: 41eddd91a89a34b3bab06dd9686e2eb0, type: 2}
   rarity: 0
   id: 6
   passengerName: Romeo
@@ -267,12 +266,9 @@ MonoBehaviour:
   nameRevealed: 0
   requirementMet: 0
   textCPS: 0.2
-  longPauseMin: 0.8
-  longPauseMax: 1.8
   holdTime: 2
   minSwitchTime: 2.5
   maxSwitchTime: 4
   meterSpeed: 1
   waitAfterRouteTime: 1.5
-  hasStartedRideDialogue: 0
   preferences: {fileID: 11400000, guid: c5dc908fc6ed74312a6abd3dcd34b122, type: 2}

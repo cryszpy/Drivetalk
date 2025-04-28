@@ -13,8 +13,6 @@ public class TaxiStopDestination : MonoBehaviour
         // If the collided object is the car—
         if (collider.CompareTag("CarFrame") && GameStateManager.Gamestate == GAMESTATE.PLAYING) {
 
-            Debug.Log("Arrived at taxi stop!");
-
             // If the car's script is accessible—
             if (collider.transform.parent.TryGetComponent<CarController>(out var script)) {
 
@@ -23,6 +21,7 @@ public class TaxiStopDestination : MonoBehaviour
 
                 if (car.carPointer.taxiStopsEnabled) {
                     car.atTaxiStop = true;
+                    Debug.Log("Arrived at taxi stop!");
                 }
                 
             } else {
@@ -56,6 +55,9 @@ public class TaxiStopDestination : MonoBehaviour
 
             // Exhaust / remove passenger from the queue
             car.passengerList.ExhaustPassenger(passenger, PassengerRarity.STORY);
+
+            // Ensure dialogue is updated and external functions are bound
+            passenger.storyContainer.SetStories();
 
             // Pick up passenger in the car
             car.PickUpPassenger(character);

@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headshot: {fileID: 1103461974, guid: c1b9999ee27073b42ab941ce4874be15, type: 3}
   animator: {fileID: 2486925453300218498}
+  storyContainer: {fileID: 11400000, guid: 41858df93e05d422485c4bf5fef76921, type: 2}
   expressions:
   - {fileID: 11400000, guid: b6090df751c2b4b6b83aec73906b61d0, type: 2}
   - {fileID: 11400000, guid: c96b6e0839f664ba697a62aadc3835bf, type: 2}
@@ -264,8 +265,8 @@ MonoBehaviour:
   - {fileID: 7247080473360366342, guid: d23710308dd9f474c96cd37b22803f00, type: 3}
   salutes:
   - {fileID: 11400000, guid: 6b3b8641420e6446ba54e1509ad887b3, type: 2}
-  ridesDialogue:
-  - {fileID: 11400000, guid: 072f0a56a4012467a9ad104fea776fdd, type: 2}
+  gifts:
+  - {fileID: 8336120612843639648, guid: b18536abecb1e4868be3ba475c9d7026, type: 3}
   rarity: 0
   id: 5
   passengerName: Quinton
@@ -274,12 +275,9 @@ MonoBehaviour:
   nameRevealed: 0
   requirementMet: 0
   textCPS: 0.045
-  longPauseMin: 2
-  longPauseMax: 4
   holdTime: 2.5
   minSwitchTime: 0.6
   maxSwitchTime: 2.5
   meterSpeed: 4
   waitAfterRouteTime: 1
-  hasStartedRideDialogue: 0
   preferences: {fileID: 11400000, guid: 713c616e6045c4c2db24dafdcc3ae04c, type: 2}

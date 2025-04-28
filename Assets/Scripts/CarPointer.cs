@@ -64,9 +64,6 @@ public class CarPointer : MonoBehaviour
 
     [Header("STATS")] // --------------------------------------------------------------------------------------
 
-    [Tooltip("Boolean flag; Checks whether dialogue has finished or not.")]
-    public bool finishedDialogue;
-
     public bool readyToSpawnDest;
 
     public bool setInitialBlock = false;
@@ -140,6 +137,8 @@ public class CarPointer : MonoBehaviour
             // If the car pointer has calculated a route, and the game is not in a menu or paused—
             if (path != null && path.Count > 0 && !car.atTaxiStop && !car.arrivedAtDest)
             {
+                if (agent.speed != car.agent.speed) agent.speed = car.agent.speed;
+                
                 // Move the car pointer along the route
                 MoveAlongPath();
 
@@ -149,14 +148,9 @@ public class CarPointer : MonoBehaviour
                     // Set GPS path
                     SetGPSPath();
                 }
-            }
-
-            // REPLACE WITH STOP SIGNS AND TRAFFIC LIGHTS
-            /* if (inIntersection && GameStateManager.dialogueManager.playingChoices) {
+            } else {
                 agent.speed = 0;
-            } else if (agent.speed != car.agent.speed) {
-                agent.speed = car.agent.speed;
-            } */
+            }
         }
     }
 
@@ -416,7 +410,6 @@ public class CarPointer : MonoBehaviour
             // Randomly picks one direction from list of valid directions - A
             RoadConnectionPoint randomPoint = tempList[UnityEngine.Random.Range(0, tempList.Count)];
             directionQueue.Enqueue(randomPoint.connectionRotation);
-            Debug.Log("MOWAIFALWJFILAWF");
 
             // Rotates spawned road tile to correct rotation
             selectedTile.transform.Rotate(new(0, defaultRotation, 0));

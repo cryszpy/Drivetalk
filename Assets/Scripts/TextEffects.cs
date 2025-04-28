@@ -505,7 +505,7 @@ public class TextEffects : MonoBehaviour
         glitchBackup = "";
 
         StopAllCoroutines();
-        Debug.Log("CLEARED");
+        //Debug.Log("CLEARED");
     }
 
     public List<char> ShuffleList(List<char> list) {
