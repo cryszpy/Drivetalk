@@ -12,12 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd9f322a0bf84504ba50ae568b01526, type: 3}
   m_Name: PassengerList
   m_EditorClassIdentifier: 
-  rarityProbabilities:
-  - 1
-  - 0.7
-  - 0.9
-  - 1
-  passengerQueue: []
   storyPassengers:
   - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
   - {fileID: 9063711376122243, guid: 010e4f4a656324286a1c8e085d8f8461, type: 3}
@@ -28,13 +22,7 @@ MonoBehaviour:
   - {fileID: 9063711376122243, guid: be3b94d5a7e2e4425bbb6f5d892acfb2, type: 3}
   - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
   exhaustedStory: []
-  tierOnePassengers: []
-  exhaustedTierOne: []
-  tierTwoPassengers: []
-  exhaustedTierTwo: []
-  tierThreePassengers: []
-  exhaustedTierThree: []
-  tierFourPassengers:
+  backupList:
   - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
   - {fileID: 9063711376122243, guid: 010e4f4a656324286a1c8e085d8f8461, type: 3}
   - {fileID: 9063711376122243, guid: d8b4c24f5273042cda347868089f2c2a, type: 3}
@@ -43,4 +31,3 @@ MonoBehaviour:
   - {fileID: 9063711376122243, guid: ab06ad682a2da4977aafa10b3b1be07d, type: 3}
   - {fileID: 9063711376122243, guid: be3b94d5a7e2e4425bbb6f5d892acfb2, type: 3}
   - {fileID: 9063711376122243, guid: 15f19ae80cc1043959854318460834d9, type: 3}
-  exhaustedTierFour: []

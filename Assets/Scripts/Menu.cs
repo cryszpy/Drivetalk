@@ -36,6 +36,9 @@ public class Menu : MonoBehaviour
 
     [Tooltip("Reference to the in-game GUI screen.")]
     [SerializeField] private GameObject gameScreen;
+
+    [Tooltip("Reference to the passenger select screen.")]
+    [SerializeField] private GameObject selectScreen;
     
     [Tooltip("Reference to the pause menu hierarchy stack.")]
     [SerializeField] private GameObject pauseScreen;
@@ -280,12 +283,108 @@ public class Menu : MonoBehaviour
         }
     }
 
+    public void TogglePassengerSelect() {
+        selectScreen.SetActive(!selectScreen.activeInHierarchy);
+    }
+
     // Play button functionality (called from button script assignment)
     public void PlayButton() {
 
         // Reset stats
-        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.exhaustedStory.Clear();
+        passengerList.storyPassengers = new(passengerList.backupList);
         ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectMaxine() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 1)); // Adds Maxine only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectJulie() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 7)); // Adds Julie only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectDaniel() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 3)); // Adds Daniel only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectLucy() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 4)); // Adds Lucy only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectRomeo() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 6)); // Adds Romeo only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectQuinton() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 5)); // Adds Quinton only
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    // Play button functionality (called from button script assignment)
+    public void SelectMcGee() {
+
+        // Reset stats
+        passengerList.ResetListInOrder(passengerList.exhaustedStory, passengerList.storyPassengers);
+        passengerList.storyPassengers.Clear();
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 2)); // Adds McGee and Maxine only
+        passengerList.storyPassengers.Add(passengerList.backupList.Find(x => x.id == 1));
+        ResetStats();
+
+        InitiatePlay();
+    }
+
+    public void InitiatePlay() {
 
         // Enables game screen
         gameScreen.SetActive(true);
