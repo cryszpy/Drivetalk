@@ -282,9 +282,7 @@ Mackenzie, I mean. Though I guess my stop's coming up too, isn't it...
         
         I appreciate it, really. More than you know.
         
-        If you see me around, don't be a stranger now! # pre_emotion:laugh
-
-        Well, time to turn heads! # emotion:flirty
+        If you see me around, don't be a stranger now! # emotion:flirty
         
     - mood > 50:
         Thanks again for the ride.
