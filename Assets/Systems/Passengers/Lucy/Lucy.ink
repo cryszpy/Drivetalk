@@ -88,14 +88,20 @@ You're not new here, are you? # emotion:default
         
         <wobble>You couldn't face</wobble> <glitch>her death</glitch>.
         
-        Although...this feels kind of... # hallucinating:off
+        Hm? # hallucinating:off
+        
+        ...
+        
+        You okay? Looks like you're sweating bullets.
+        
+        I- Oh wait!
         
         Ah!
         
         I do know you!
         
         -> p1
-    + [No.]
+    + [No, I'm not.]
         Weird...I've definitely never met you before. # mood:5
         
         ...
@@ -106,7 +112,15 @@ You're not new here, are you? # emotion:default
         
         <wobble>You couldn't face</wobble> <glitch>her death</glitch>.
         
-        Now that I think about it, I do know you! # hallucinating:off
+        Hm? # hallucinating:off
+        
+        ...
+        
+        You okay? Looks like you're sweating bullets.
+        
+        I- Oh wait!
+        
+        Now that I think about it, I do know you!
         
         -> p1
     + [...]
@@ -114,7 +128,17 @@ You're not new here, are you? # emotion:default
         
         <wobble>You couldn't even say anything when</wobble> <glitch>Maxine died</glitch>. # hallucinating:on
         
-        Well...I've definitely never met you before. # hallucinating:off
+        Hm? # hallucinating:off
+        
+        ...
+        
+        You okay? You're sweating bullets.
+        
+        Did I say something weird? I'm sorry if I did.
+        
+        Nothing wrong with being quiet y'know!
+        
+        Anyways, I've definitely never met you before.
         
         Guess I haven't met everyone yet...
         
@@ -141,7 +165,7 @@ You're the guy who left town last year!
 
 He never told me why...
 
-Oh, but don't worry. I won't pry!
+Oh, but don't worry. I won't pry further!
 
 Although...just between you and me, he seems a bit envious of you.
 
