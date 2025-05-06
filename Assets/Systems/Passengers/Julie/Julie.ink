@@ -66,9 +66,13 @@ Thank goodness you're here! Boy, am I glad to see you. # emotion:flirty
 
 Can you take me to 1100 Flower Blvd? The one by the park? # emotion:default # end_greeting
 
-Man, you really saved me. My boyfriend was supposed to pick me up so we could go together, but he said some emergency came up. # requests_start
+Man, you really saved me. 
 
-This isn't the first time this has happened...but he's been so sweet to me so I can't be too mad at him. # emotion:flirty
+My boyfriend was supposed to pick me up so we could go together, but he said some emergency came up. # requests_start
+
+This isn't the first time this has happened...
+
+...but he's been so sweet to me so I can't be too mad at him. # emotion:flirty
 
 It hasn't been too long, but things feel new and exciting. # emotion:default
 
@@ -102,7 +106,9 @@ There's only so much to do in this town. Gotta make the most of my youth or some
         
         Now I'm at the bridal boutique on 5th. Every day feels so dreamy! # pre_emotion:laugh
         
-        Everyone who walks in looks like a princess. Makes me wonder about my big day, too...whenever that'll be.
+        Everyone who walks in looks like a princess. 
+        
+        Makes me wonder about my big day, too...whenever that'll be.
         
         -> p1
     + [Something like that.]
@@ -151,7 +157,9 @@ I'm Julie, by the way. Been back long? # name_revealed
         
         We don't get a lot of taxi drivers out here either, so it's nice that you're here.
         
-        Especially when your boyfriend's car breaks down for the umpteenth time this month. Real unfortunate luck. # pre_emotion:laugh
+        Especially when your boyfriend's car breaks down for the umpteenth time this month. 
+        
+        Real unfortunate luck. # pre_emotion:laugh
         
         -> p2
     + [More or less.]
@@ -196,7 +204,9 @@ Say...do you ever feel like you're running out of time?
 = p3
 I'm sure you've been doing this for a while. Doing fine for yourself and all.
 
-There's so many people my age that are done with school, got good jobs lined up, or even have kids!
+There's so many people my age that are done with school...
+
+...got good jobs lined up, or even have kids!
 
 I want nothing more than to have a life like that, but...
 
@@ -204,13 +214,17 @@ I keep hopping from job to job.
 
 It's been a long time since I've been in school.
 
-I keep saying I'm planning to go back, but it's becoming harder to convince myself it's ever gonna happen. # emotion:sad
+I keep saying I'm planning to go back...
+
+...but it's becoming harder to convince myself it's ever gonna happen. # emotion:sad
 
 I just don't know what I'm doing wrong. # emotion:default
 
 ...
 
-Especially with the news of <glitch>her passing</glitch> last year. You know she was just a little older than me?
+Especially with the news of <glitch>her passing</glitch> last year. 
+
+You know she was just a little older than me?
 
 Well, of course you knew. What am I saying... # pre_emotion:laugh
     + [I'd rather not speak about this anymore.]
