@@ -20,7 +20,7 @@ public class DialogueUIElement : MonoBehaviour
         if (finished) {
             finished = false;
 
-            StartCoroutine(NaturalDestroy());
+            if (GameStateManager.dialogueManager.autoDialogue) StartCoroutine(NaturalDestroy());
         }
     }
 

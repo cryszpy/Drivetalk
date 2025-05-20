@@ -66,15 +66,19 @@ Haha! Glad I saw you! My legs were starting to hurt. # emotion:default
 
 Take me to 1000… No 1100 Flower Blvd. # end_greeting
 
-I’m crazy late, can you drive faster? Damn… # requests_start # pause:2
+Haha! I'm actually gonna be on time at this rate. # requests_start  #emotion:smile
+
+Everyone's gonna be surprised! # pause:4
 
 Hey, Driver... # emotion:disappointed
+
+I know this looks bad, but...
 
 I just realized I don't have my wallet on me.
 
 If you give me a ride, next time I'll bring enough to pay you back and then some. Promise. # emotion:default
     + [No.]
-        C'mon! I’ll leave my hula girl with you. Probably worth a lot. # gift:0
+        C'mon! I’ll even leave my hula girl with you. She's probably worth a lot. # gift:0
         ** [I'm dropping you off here.]
             Wait! # emotion:disappointed
             
@@ -97,15 +101,21 @@ If you give me a ride, next time I'll bring enough to pay you back and then some
 = p1
 You're a lifesaver! # emotion:smile # pause:2.5
 
+I can tell you're a good guy, since you let me stay.
+
+This town could use more good people.
+
 Man...there's this girl who's got me all nervous.
 
-Hey driver, ever fallen in <glitch>love</glitch>?
+Uh... hey driver, ever fallen in <glitch>love</glitch>?
     + [Once.]
         What kinda girl was she?
         ** [Hardworking]
             Sounds like my girl! # mood:10
             
-            I try to visit her at work but she won't let me stay long. Says I distract her. # emotion:laugh
+            I try to visit her at work but she won't let me stay long. Says I distract her. # emotion:smile
+            
+            I get it. I mean, who wouldn't be distracted by all this? # emotion:laugh
             
             I bet she's happy to see me, though. # emotion:smile
             
@@ -139,11 +149,11 @@ Hey driver, ever fallen in <glitch>love</glitch>?
 = p2
 I just don't wanna mess this one up. # emotion:default
 
-I remember when I first got to talkin' with her a few months ago.
+I remember when I first got to talkin' with her a few months ago. # emotion:smile
 
 She used to work at the diner my uncle runs.
 
-My uncle's an asshole and one time she snapped at him.
+My uncle's an asshole and one time she snapped at him. # emotion:default
 
 Someone needed to get him off his horse. # emotion:smile # pre_emotion:laugh
 
@@ -159,15 +169,25 @@ Didn't mean to get sappy with you. # emotion:default
 
 I've just been down on my luck recently. Drinkin' helps.
 
-Got kicked out of my old place and moved in with my grandpa. Still gettin' used to it.
+Speakin' of, do you want some? # emotion:smile
 
-I always get into these loud arguments with him.
+Ah shit what am I sayin'! You're driving! Haha, that could've been bad. # emotion:laugh # pause:1.5
 
-...Hate to admit it, but he's probably right. Pisses me off.
+Man... it just feels like things need to slow down. # emotion:default
 
-For some reason, everyone says I'm just like him, but I don't see it.
+My Grandpa's age has been catchin' up to him.
 
-Once I get rich, I'll get a new car that actually works. An '06 Pluto, bright red.
+That stubborn old man actually lets me help him now. # emotion:smile
+
+We used to get into these loud arguments, but it's been real quiet lately. # emotion:default
+
+It's weird. You'd think I'd like having peace in the house, but it just reminds me that he won't be here forever. # emotion:disappointed
+
+There's never enough time...
+
+Or money! I could always use more of that. # emotion:smile
+
+Though, once I finally do get rich, I'll get a new car that actually works. An '06 Pluto, bright red.
 
 And I'll leave this town with my girl. # emotion:smile
 
@@ -177,6 +197,11 @@ Thanks again for letting me stay earlier. I swear I have the money to pay for th
 
 Speakin' of money, Driver, give me some lotto numbers! # emotion:smile
     + [2 5 11 24 25]
+        Haha, thanks, dude! # mood:10
+
+        -> p3
+        
+    + [7 9 13 37 49]
         Haha, thanks, dude! # mood:10
 
         -> p3
@@ -196,7 +221,7 @@ I'll hit it big soon, though. # pause:3.5
 // play cell phone audio
 Hey, it's Q-dog! # emotion:phone
 
-Ah, I mean I'm Quinton. It's Quinton.
+Ah, I mean it's Quinton. I'm Quinton.
 
 Oh, from SmallMart!
 
@@ -230,7 +255,7 @@ If somethin' seems too good to be true, it is. Money ain't free.
 
 I got in some deep shit with a few sharks a while back. # spawn_dest
 
-Long story short, I ended up takin' the fall for someone I thought was a friend in order to clear my debt.
+Long story short, I ended up takin' the fall for someone who I thought was a friend in order to clear my debt.
 
 Spent some time behind bars.
 

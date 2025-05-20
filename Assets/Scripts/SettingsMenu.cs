@@ -13,6 +13,11 @@ public class SettingsMenu : MonoBehaviour
 
     public TMP_Text textSpeedLabel;
 
+    public TMP_Text autoDialogueLabel;
+
+    public const string AUTODIALOGUE_ENABLED = "Enabled";
+    public const string AUTODIALOGUE_DISABLED = "Disabled";
+
     //[Header("STATS")] // ------------------------------------------------------------------------------------------------------------
 
     public void Awake()
@@ -45,6 +50,12 @@ public class SettingsMenu : MonoBehaviour
         }
         CarController.TextSpeedMult = textSpeeds[currentSpeedIndex].value;
         textSpeedLabel.text = textSpeeds[currentSpeedIndex].label;
+    }
+
+    public void ToggleAutoDialogue() {
+        GameStateManager.dialogueManager.autoDialogue = !GameStateManager.dialogueManager.autoDialogue;
+
+        autoDialogueLabel.text = GameStateManager.dialogueManager.autoDialogue ? AUTODIALOGUE_ENABLED : AUTODIALOGUE_DISABLED;
     }
 
     // Sets master volume (used in settings sliders)

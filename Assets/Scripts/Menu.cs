@@ -129,7 +129,7 @@ public class Menu : MonoBehaviour
             splineDolly.CameraPosition -= 0.01f;
 
             // Waits between movements
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.02f);
         }
 
         // Sets game out of main menu when done

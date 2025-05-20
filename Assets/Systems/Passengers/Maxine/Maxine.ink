@@ -64,7 +64,7 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 
 Hey! # emotion:default # name_revealed
 
-Do you mind dropping me off at 270 Ardendale?
+Do you mind <link="hey brother">dropping</link> me off at 270 Ardendale?
 
 ...
 

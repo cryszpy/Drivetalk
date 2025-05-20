@@ -12,6 +12,8 @@ public class DialogueManager : MonoBehaviour
 {
     
     [Header("SCRIPT REFERENCES")] // --------------------------------------------------------------------------------
+
+    public Camera mainCam;
     
     [Tooltip("Reference to the car pointer's script component.")]
     public CarPointer carPointer;
@@ -37,6 +39,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialogueElement;
 
     public GameObject currentElement;
+
+    public Canvas dialogueCanvas;
 
     [Tooltip("Reference to the name box.")]
     public GameObject nameBox;
@@ -70,7 +74,11 @@ public class DialogueManager : MonoBehaviour
 
     public StoryContainer CurrentStoryContainer { get; private set; }
 
+    public bool playingDialogue = false;
+
     public bool stopDialogue = false;
+
+    public bool waitForSkip = false;
 
     [Space(10)]
 
@@ -93,7 +101,10 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public bool typingSentence = false;
 
     [Tooltip("Static boolean flag; Checks whether automatic dialogue playing is enabled.")]
-    private bool autoDialogue = false;
+    public bool autoDialogue = false;
+
+    public bool textLineDone = false;
+    public bool voiceLineDone = false;
 
     private float expressionTimer = 0;
     private bool expressionTimerRunning = false;
@@ -141,7 +152,7 @@ public class DialogueManager : MonoBehaviour
     public const string TIME_LOOP_TAG = "time_loop";
 
     public AudioClip currentVox = null;
-    public const string VOICE_LINE_TAG = "vox";
+    public const string VOICE_TAG = "voice";
 
     [Tooltip("Boolean flag; Checks whether the passenger is waiting for the player to select a destination.")]
     public bool waitForRouting = false;
@@ -154,13 +165,51 @@ public class DialogueManager : MonoBehaviour
     public const string REQUESTS_END_TAG = "requests_end";
 
     public const string MOOD_TAG = "mood";
+
+    [Header("SAVABLE WORDS")]
+
+    [SerializeField] private GameObject heldWordPrefab;
+
+    public string currentlyHeldWord = "";
+
+    public bool holdingOnWord = false;
+
+    public List<GameObject> activeHeldWords = new();
     
     private void OnEnable() {
         GameStateManager.EOnDestinationSet += TalkAfterRouting;
+        ClickableTextHandler.EOnLinkClick += ClickedWord;
     }
 
     private void OnDisable() {
         GameStateManager.EOnDestinationSet -= TalkAfterRouting;
+        ClickableTextHandler.EOnLinkClick -= ClickedWord;
+    }
+
+    public void ClickedWord(string keyword) {
+        holdingOnWord = true;
+        currentlyHeldWord = keyword;
+
+        // Spawn new held word
+        Vector2 pos = GameStateManager.instance.ConvertToCanvasSpace(Input.mousePosition, dialogueCanvas);
+        GameObject prefab = Instantiate(heldWordPrefab, pos, Quaternion.identity);
+
+        // Assign canvas to new held word
+        if (prefab.TryGetComponent<HeldWord>(out var wordScript)) {
+            wordScript.canvas = dialogueCanvas;
+        } else {
+            throw new System.Exception("HeldWord script could not be found on object!");
+        }
+
+        // Make sure held word spawns with correct transforms
+        Vector3 scale = prefab.transform.localScale;
+        prefab.transform.SetParent(dialoguePivot.transform, true);
+        prefab.transform.localRotation = Quaternion.identity;
+        prefab.transform.localScale = scale;
+
+        // Assign held word text
+        prefab.GetComponentInChildren<TMP_Text>().text = currentlyHeldWord;
+        activeHeldWords.Add(prefab);
     }
 
     public void BindExternalFunctions(Story story) {
@@ -189,9 +238,6 @@ public class DialogueManager : MonoBehaviour
     public Path GetRideNumber() {
         int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
 
-        Debug.Log(index);
-        Debug.Log("_" + CarController.PassengersDrivenRideNum[index]);
-
         return new("_" + CarController.PassengersDrivenRideNum[index]);
     }
 
@@ -205,6 +251,8 @@ public class DialogueManager : MonoBehaviour
             vignette.intensity.value = vignetteDefault;
         }
 
+        if (!mainCam) mainCam = Camera.main;
+
         // Reloads all dialogue files into Ink Stories upon loading the game
         foreach (Passenger passenger in car.passengerList.storyPassengers) {
             if (passenger.storyContainer != null) passenger.storyContainer.SetStories();
@@ -214,6 +262,31 @@ public class DialogueManager : MonoBehaviour
     private void Update() {
 
         activeDialogueTracker = activeDialogueBlocks.ToList();
+
+        // Reset held word
+        if (Input.GetMouseButtonUp(0) && holdingOnWord) {
+            holdingOnWord = false;
+            
+            // Check if word is held above the notebook
+            currentlyHeldWord = "";
+
+            foreach (var word in activeHeldWords) {
+                Destroy(word);
+            }
+            activeHeldWords.Clear();
+        }
+
+        // Auto/Non-auto dialogue
+        if (autoDialogue) {
+            waitForSkip = false;
+
+            // If both text and voice line have finished, continue to the next dialogue piece
+            if (textLineDone && voiceLineDone) {
+                textLineDone = false;
+                voiceLineDone = false;
+                ContinueDialogue();
+            }
+        }
 
         if (waitForRouting) {
             // TODO: Add silly passenger quips about not moving
@@ -252,7 +325,7 @@ public class DialogueManager : MonoBehaviour
                 car = carScript;
                 carPointer = carScript.carPointer;
             } else {
-                Debug.LogError("Could not find CarController component!");
+                throw new System.Exception("Could not find CarController component!");
             }
         }
 
@@ -276,7 +349,7 @@ public class DialogueManager : MonoBehaviour
             autoDialogue = true;
             autoDialogueToggle.gameObject.SetActive(false);
         } */
-        autoDialogue = true;
+        //autoDialogue = true;
 
         if (!nameBoxText) {
 
@@ -290,10 +363,6 @@ public class DialogueManager : MonoBehaviour
 
             Debug.LogWarning("nameBox reference on: " + name + " is null! Reassigned.");
         }
-    }
-
-    public void SetAutoDialogue(bool value) {
-        autoDialogue = value;
     }
 
     public void TalkAfterRouting() {
@@ -311,6 +380,7 @@ public class DialogueManager : MonoBehaviour
     
     // Starts a piece of dialogue
     public void StartDialogue(StoryContainer container) {
+        playingDialogue = true;
 
         // Assigns any missing script references
         FindReferences();
@@ -326,6 +396,25 @@ public class DialogueManager : MonoBehaviour
         ContinueDialogue();
     }
 
+    public void ContinueButton() {
+
+        if (playingDialogue && !autoDialogue) {
+
+            // Skip typing on click
+            if (typingSentence) {
+                currentDialogueText.maxVisibleCharacters = currentDialogueText.text.Length;
+                typingSentence = false;
+            } 
+            // If sentence is typed out, play next sentence on click
+            else if (waitForSkip) {
+                waitForSkip = false;
+                StopCoroutine(StartVoiceLine()); // Stops any voice line waiting
+                StopCoroutine(WaitAfterRouting()); // Stops any text line waiting
+                ContinueDialogue();
+            }
+        }
+    }
+    
     public void ContinueDialogue() {
 
         if (currentStory == null || stopDialogue) return;
@@ -455,8 +544,7 @@ public class DialogueManager : MonoBehaviour
                         // Grab the appropriate expression
                         currentExpression = car.currentPassenger.expressions.Find(x => x.name.Trim().ToLower() == tagValue);
                     } else {
-                        Debug.LogError("The requested expression: " + tagValue + " could not be found on this passenger!");
-                        break;
+                        throw new System.Exception("The requested expression: " + tagValue + " could not be found on this passenger!");
                     }
                     break;
                 case PRE_EMOTION_TAG:
@@ -467,8 +555,7 @@ public class DialogueManager : MonoBehaviour
                         // Grab the appropriate expression
                         currentPreExpression = car.currentPassenger.expressions.Find(x => x.name.Trim().ToLower() == tagValue);
                     } else {
-                        Debug.LogError("The requested expression: " + tagValue + " could not be found on this passenger!");
-                        break;
+                        throw new System.Exception("The requested expression: " + tagValue + " could not be found on this passenger!");
                     }
                     break;
                 case PAUSE_TAG:
@@ -482,7 +569,7 @@ public class DialogueManager : MonoBehaviour
                     if (int.TryParse(tagValue, out int giftIndex)) {
                         currentGift = car.currentPassenger.gifts[giftIndex];
                     } else {
-                        Debug.LogError("Unreadable gift index for passenger: " + car.currentPassenger.passengerName);
+                        throw new System.Exception("Unreadable gift index for passenger: " + car.currentPassenger.passengerName);
                     }
                     break;
                 case HALLUCINATION_TAG:
@@ -495,8 +582,7 @@ public class DialogueManager : MonoBehaviour
                             isHallucinating = true;
                             break;
                         default:
-                            Debug.LogError("Hallucination status can't be read!");
-                            break;
+                            throw new System.Exception("Hallucination status can't be read!");
                     }
                     break;
                 case KICKED_OUT_TAG:
@@ -505,8 +591,9 @@ public class DialogueManager : MonoBehaviour
                 case TIME_LOOP_TAG:
                     timeLoop = true;
                     break;
-                case VOICE_LINE_TAG:
-                    Debug.Log("voice!");
+                case VOICE_TAG:
+                    // Finds the voice line with the
+                    currentVox = car.currentPassenger.voicelines.Find(x => x.name.Split("_")[^1] == tagValue);
                     break;
                 case GREETING_END_TAG:
                     waitForRouting = true;
@@ -530,19 +617,20 @@ public class DialogueManager : MonoBehaviour
                     if (float.TryParse(tagValue, out float mood)) {
                         GameStateManager.comfortManager.currentComfortability += mood;
                     } else {
-                        Debug.LogError("Unrecognized characters in MOOD_TAG!");
+                        throw new System.Exception("Unrecognized characters in MOOD_TAG!");
                     }
                     
                     break;
                 default:
-                    Debug.LogError("Could not read this tag: " + tag + "!");
-                    break;
+                    throw new System.Exception("Could not read this tag: " + tag + "!");
             }
         }
     }
 
     // Visually types the current sentence
     public IEnumerator TypeSentence(string line) {
+        textLineDone = false;
+        voiceLineDone = false;
 
         // Start fading previous dialogue line element
         if (activeDialogueBlocks.Count >= maxDialogueElements) {
@@ -626,7 +714,7 @@ public class DialogueManager : MonoBehaviour
             dScript = script;
             currentDialogueText = script.elementText;
         } else {
-            Debug.LogError("Could not find DialogueUIElement component on this dialogue element!");
+            throw new System.Exception("Could not find DialogueUIElement component on this dialogue element!");
         }
 
         // Set appropriate expression before talking
@@ -750,7 +838,7 @@ public class DialogueManager : MonoBehaviour
                 StartCoroutine(FadeVignette(vignette, true));
 
             } else {
-                Debug.LogError("Could not get Vignette component on global volume!");
+                throw new System.Exception("Could not get Vignette component on global volume!");
             }
         } else if (volumeProfile.TryGet<Vignette>(out var vignette)) {
             if (vignette.intensity.value != vignetteDefault) {
@@ -771,10 +859,6 @@ public class DialogueManager : MonoBehaviour
         // Split dialogue into sections separated by < and >.
         // Even numbers are valid text, odd numbers are tags
         string[] subTexts = message.Split('<', '>');
-
-        /* foreach (var b in subTexts) {
-            Debug.Log(b.ToString());
-        } */
 
         string displayText = "";
 
@@ -1037,6 +1121,11 @@ public class DialogueManager : MonoBehaviour
 
         // Display any choices for this dialogue line
         if (currentStory.currentChoices.Count > 0) {
+
+            // Remove any voice lines
+            voiceLineDone = false;
+            currentVox = null;
+
             ShowChoices();
         }
         // Play the next dialogue line only if auto-dialogue is enabled, there isn't currently a starting expression playing, and
@@ -1045,7 +1134,11 @@ public class DialogueManager : MonoBehaviour
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
+            yield break;
         }
+
+        textLineDone = true;
+        waitForSkip = true;
     }
 
     private WaitForSeconds EvaluateTag(string tag, int start, int end, int spacesBefore, int spacesAfter, int tagLengthsBefore)
@@ -1158,6 +1251,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     private IEnumerator StartVoiceLine() {
+        voiceLineDone = false;
+
+        AudioClip playedVoiceline = currentVox;
 
         // Plays voice line
         GameStateManager.audioManager.PlayVoiceLine(currentVox, car.currentPassenger.gameObject);
@@ -1165,17 +1261,25 @@ public class DialogueManager : MonoBehaviour
         // Waits until after voice line is done, and the next sentence is ready to be said
         yield return new WaitForSeconds(currentVox.length + shortPauseTime);
 
-        // Displays next sentence
-        ContinueDialogue();
+        // Checks if the player has skipped this voiceline while the coroutine is still in session
+        if (currentVox != playedVoiceline) {
+            yield break;
+        }
+
+        // Remove completed voice line
+        currentVox = null;
+
+        // Sets boolean flag to done
+        voiceLineDone = true;
     }
 
-    private IEnumerator WaitBeforeNextSentence() {
+    public IEnumerator WaitBeforeNextSentence() {
 
         // Waits for the passenger's hold-dialogue-on-screen time
         yield return new WaitForSeconds(shortPauseTime);
 
         // Displays next sentence if available
-        ContinueDialogue();
+        textLineDone = true;
     }
 
     // Called AFTER a passenger's dropoff dialogue has concluded
@@ -1184,6 +1288,8 @@ public class DialogueManager : MonoBehaviour
 
         // Prevent ContinueDialogue() calls
         stopDialogue = true;
+        playingDialogue = false;
+        waitForSkip = false;
 
         // Gets the index number of the current passenger
         int index = CarController.PassengersDrivenIDs.IndexOf(car.currentPassenger.id);
@@ -1226,8 +1332,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void ResetDialogue() {
+        playingDialogue = false;
         stopDialogue = true;
         typingSentence = false;
+        waitForSkip = false;
 
         if (currentElement) {
             Destroy(currentElement);

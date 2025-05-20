@@ -78,6 +78,9 @@ public class Passenger : MonoBehaviour
     [Tooltip("The amount of time this passenger waits to begin talking after selecting a destination.")]
     public float waitAfterRouteTime;
 
+    [Tooltip("A list of all voice lines for this character.")]
+    public List<AudioClip> voicelines = new();
+
     [Header("DASHBOARD PREFERENCES")] // -------------------------------------------------------------------------------------------------
 
     public DashboardPreference preferences;

@@ -77,6 +77,11 @@ public class GameStateManager : MonoBehaviour
         comfortManager = GetComponent<ComfortabilityManager>();
     }
 
+    public Vector3 ConvertToCanvasSpace(Vector3 original, Canvas c) {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(c.transform as RectTransform, original, c.worldCamera, out Vector2 pos);
+        return c.transform.TransformPoint(pos);
+    }
+
     public void ExitToMainMenu() {
 
         // Reset car stuff
