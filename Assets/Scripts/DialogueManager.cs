@@ -131,7 +131,7 @@ public class DialogueManager : MonoBehaviour
     public PassengerExpression currentPreExpression;
     public const string PRE_EMOTION_TAG = "pre_emotion";
 
-    public const string NAME_REVEALED_TAG = "name_revealed";
+    public const string NAME_TAG = "name";
 
     public float currentPauseLength = 0;
     public const string PAUSE_TAG = "pause";
@@ -520,16 +520,18 @@ public class DialogueManager : MonoBehaviour
             List<string> splitTag = unreadTag.Split(":").ToList();
 
             string tag = splitTag[0].Trim().ToLower();
-            string tagValue = 1 < splitTag.Count ? splitTag[1].Trim().ToLower() : null;
+            string tagValue = 1 < splitTag.Count ? splitTag[1].Trim() : null;
 
             switch (tag.ToLower()) {
 
-                case NAME_REVEALED_TAG:
+                case NAME_TAG:
 
-                    // Reveal name if character says name and update character definition
-                    if (!car.currentPassenger.nameRevealed) {
-                        car.currentPassenger.nameRevealed = true;
-                        nameBoxText.text = car.currentPassenger.passengerName;
+                    car.currentPassenger.currentName = tagValue;
+
+                    nameBoxText.text = tagValue;
+
+                    // Only set name color if the name is the passenger's correct name
+                    if (tagValue == car.currentPassenger.passengerName) {
 
                         // Sets name box color
                         nameBoxText.color = car.currentPassenger.nameColor;
@@ -726,11 +728,7 @@ public class DialogueManager : MonoBehaviour
         if (!line.Contains("<glitch>") && !line.Contains("<wobble>")) {
 
             // Log appropriate name and message to transcript
-            if (car.currentPassenger.nameRevealed) {
-                transcriptLog.LogText(line, car.currentPassenger.passengerName);
-            } else {
-                transcriptLog.LogText(line, car.currentPassenger.hiddenName);
-            }
+            transcriptLog.LogText(line, car.currentPassenger.currentName);
         }
 
         // Spawn dashboard object if it exists
@@ -800,23 +798,13 @@ public class DialogueManager : MonoBehaviour
             nameBox.SetActive(true);
         }
 
-        // If name is already revealed, use revealed name
-        if (car.currentPassenger.nameRevealed && nameBoxText.text != car.currentPassenger.passengerName) {
+        nameBoxText.text = car.currentPassenger.currentName;
 
-            // Sets UI name
-            nameBoxText.text = car.currentPassenger.passengerName;
+        // If name is already revealed, use revealed name
+        if (car.currentPassenger.currentName == car.currentPassenger.passengerName) {
 
             // Sets name box color
             nameBoxText.color = car.currentPassenger.nameColor;
-        } 
-        // If name isn't revealed, use hidden name
-        else if (!car.currentPassenger.nameRevealed && nameBoxText.text != car.currentPassenger.hiddenName) {
-
-            // Sets UI name
-            nameBoxText.text = car.currentPassenger.hiddenName;
-
-            // Sets name box color
-            nameBoxText.color = Color.white;
         }
 
         // Separate everything but the name
@@ -847,7 +835,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Trigger speaking if line isn't silence or a hallucination
-        if (line != "..." && !isHallucinating) {
+        if (line.Trim() != "..." && !isHallucinating) {
             car.currentPassenger.animator.SetBool("Speak", true);
         }
 

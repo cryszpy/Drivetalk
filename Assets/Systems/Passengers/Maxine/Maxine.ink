@@ -62,7 +62,7 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-Hey! # emotion:default # name_revealed # voice:1
+Hey! # emotion:default # name:Maxine # voice:1
 
 Do you mind dropping me off at 270 Ardendale? # voice:2
 
@@ -228,7 +228,7 @@ I'll see you around! # voice:62
 === _2 ===
 ~ UpdateCurrentKnot("_2")
 
-<glitch>Hey!</glitch> # emotion:default # name_revealed # hallucinating:on # voice:97
+<glitch>Hey!</glitch> # emotion:default # name:Maxine # hallucinating:on # voice:97
 
 <glitch>Do you mind dropping me off at 270 Ardendale?</glitch> # voice:98
 

@@ -62,210 +62,200 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-Haha! Glad I saw you! My legs were starting to hurt. # emotion:default
+Haha! Glad I saw you! My legs were starting to hurt. # name:??? # emotion:default # voice:1
 
-Take me to 1000… No 1100 Flower Blvd. # end_greeting
+Take me to 1000… No 1100 Flower Blvd. # end_greeting # voice:2
 
-Haha! I'm actually gonna be on time at this rate. # requests_start  #emotion:smile
+Haha! I'm actually gonna be on time at this rate. # requests_start  #emotion:smile # voice:3
 
-Everyone's gonna be surprised! # pause:4
+Everyone's gonna be surprised! # pause:4 # voice:4
 
-Hey, Driver... # emotion:disappointed
+Hey, Driver... # emotion:disappointed # voice:5
 
-I know this looks bad, but...
+I know this looks bad, but... # voice:6
 
-I just realized I don't have my wallet on me.
+I just realized I don't have my wallet on me. # voice:7
 
-If you give me a ride, next time I'll bring enough to pay you back and then some. Promise. # emotion:default
+If you give me a ride, next time I'll bring enough to pay you back and then some. Promise. # emotion:default # voice:8
     + [No.]
-        C'mon! I’ll even leave my hula girl with you. She's probably worth a lot. # gift:0
+        C'mon! I’ll even leave my hula girl with you. She's probably worth a lot. # gift:0 # voice:9
         ** [I'm dropping you off here.]
-            Wait! # emotion:disappointed
+            Wait! # emotion:disappointed # voice:10
             
-            My hula girl!
+            My hula girl! # voice:11
             
-            Bro...! # requests_end # kick_out
+            Bro...! # requests_end # kick_out # voice:12
             
             -> DONE
         ** [Fine.]
-            Oh man, thank you! # emotion:smile # mood:10
+            Oh man, thank you! # emotion:smile # mood:10 # voice:13
             
             -> p1
     + [Alright.]
-        Oh man, thank you! # emotion:smile # mood:10
-        
-        Here, I’ll give you my precious hula girl as a promise that I’ll be back next time. # gift:0
+        Oh man, thank you! Here, I’ll give you my precious hula girl as collateral that I’ll be back again. # emotion:smile # mood:10 # gift:0 # voice:14
         
         -> p1
 
 = p1
-You're a lifesaver! # emotion:smile # pause:2.5
+You're a lifesaver! # emotion:smile # pause:2.5 # voice:15
 
-I can tell you're a good guy, since you let me stay.
+I can tell you're a good guy, since you let me stay. # voice:16
 
-This town could use more good people.
+This town could use more good people. # voice:17
 
-Man...there's this girl who's got me all nervous.
-
-Uh... hey driver, ever fallen in <glitch>love</glitch>?
+Uh... hey driver, ever fallen in <glitch>love</glitch>? # voice:18
     + [Once.]
-        What kinda girl was she?
+        What kinda girl was she? # voice:19
         ** [Hardworking]
-            Sounds like my girl! # mood:10
+            Sounds like my girl! # mood:10 # voice:20
             
-            I try to visit her at work but she won't let me stay long. Says I distract her. # emotion:smile
+            I try to visit her at work but she won't let me stay long. Says I distract her. # emotion:smile # voice:21
             
-            I get it. I mean, who wouldn't be distracted by all this? # emotion:laugh
+            I get it. I mean, who wouldn't be distracted by all this? # emotion:laugh # voice:100
             
-            I bet she's happy to see me, though. # emotion:smile
+            I bet she's happy to see me, though. # emotion:smile # voice:22
             
-            Whenever I close my eyes I can see her smiling.
+            Whenever I close my eyes I can see her smiling. # voice:23
             
-            She's given me more chances than I deserve. # emotion:default
+            She's given me more chances than I deserve. # emotion:default # voice:24
             
             -> p2
         ** [Talkative]
-            Sounds like my girl! # mood:10
+            Sounds like my girl! # mood:10 # voice:22
             
-            A girl that speaks her mind is easier to deal with for sure.
+            A girl that speaks her mind is easier to deal with for sure. # voice:26
             
-            When my ex and I would fight she would ignore me for days. # emotion:laugh
+            When my ex and I fought she would ignore me for days. # emotion:laugh # voice:27
             
             -> p2
         ** [Fleeting]
-            …What does that even mean??? # emotion:disappointed
+            …What does that even mean??? # emotion:disappointed # voice:28
             
             -> p2
             
     + [...]
-        Hah, well...<glitch>love</glitch> might be a strong word, but...
+        Hah, well...<glitch>love</glitch> might be a strong word, but... # voice:29
         
-        Whenever I close my eyes I can see her smiling.
+        Whenever I close my eyes I can see her smiling. # voice:23
         
-        She's given me more chances than I deserve. # emotion:default
+        She's given me more chances than I deserve. # emotion:default # voice:24
         
         -> p2
 
 = p2
-I just don't wanna mess this one up. # emotion:default
+I just don't wanna mess this one up. # emotion:default # voice:32
 
-I remember when I first got to talkin' with her a few months ago. # emotion:smile
+I remember when I first got to talkin' with her a few months ago. # emotion:smile # voice:33
 
-She used to work at the diner my uncle runs.
+She used to work at the diner my uncle runs. # voice:34
 
-My uncle's an asshole and one time she snapped at him. # emotion:default
+My uncle's an asshole and one time she snapped at him. Someone needed to get him off his horse. # pre_emotion:laugh # pre_emotion:laugh # voice:35
 
-Someone needed to get him off his horse. # emotion:smile # pre_emotion:laugh
+Tall...horse? Something like that. # emotion:default # voice:36
 
-Tall...horse? Something like that. # emotion:default
+Ah, she would know. # emotion:smile # voice:37
 
-Ah, she would know. # emotion:smile
+She's smart. # voice:38
 
-Smart <i>and</i> strong...I could learn a lot from her. # pause:1.5
+Smart <i>and</i> strong...I could learn a lot from her. # voice:39
 
-Ah...sorry, I drank a bit before this.
+Ah...sorry, I drank a bit before this. # pause:1.5 # voice:40
 
-Didn't mean to get sappy with you. # emotion:default
+Didn't mean to get sappy with you. # emotion:default # voice:41
 
-I've just been down on my luck recently. Drinkin' helps.
+I've just been down on my luck recently. Drinkin' helps. # voice:42
 
-Speakin' of, do you want some? # emotion:smile
+Speakin' of, do you want some? # emotion:smile # voice:43
 
-Ah shit what am I sayin'! You're driving! Haha, that could've been bad. # emotion:laugh # pause:1.5
+Ah shit what am I sayin'! You're driving! Haha, that could've been bad. # emotion:laugh # pause:1.5 # voice:44
 
-Man... it just feels like things need to slow down. # emotion:default
+Man... it just feels like things need to slow down. # emotion:default # voice:45
 
-My Grandpa's age has been catchin' up to him.
+My Grandpa's age has been catchin' up to him. # voice:46
 
-That stubborn old man actually lets me help him now. # emotion:smile
+That stubborn old man actually lets me help him now. # emotion:smile # voice:47
 
-We used to get into these loud arguments, but it's been real quiet lately. # emotion:default
+We used to get into these loud arguments, but it's been real quiet lately. # emotion:default # voice:48
 
-It's weird. You'd think I'd like having peace in the house, but it just reminds me that he won't be here forever. # emotion:disappointed
+It's weird. You'd think I'd like having peace in the house, but it just reminds me that he won't be here forever. # emotion:disappointed # voice:49
 
-There's never enough time...
+There's never enough time... # voice:50
 
-Or money! I could always use more of that. # emotion:smile
+Or money! I could always use more of that. # emotion:smile # voice:51
 
-Though, once I finally do get rich, I'll get a new car that actually works. An '06 Pluto, bright red.
+Though, once I finally do get rich, I'll get a new car that actually works. An '06 Pluto, bright red. # voice:52
 
-And I'll leave this town with my girl. # emotion:smile
+And I'll leave this town with my girl. # emotion:smile # voice:53
 
-...I'll probably leave Grandpa something, too. Least I could do. # pause:3
+...I'll probably leave Grandpa something, too. Least I could do. # pause:3 # voice:54
 
-Thanks again for letting me stay earlier. I swear I have the money to pay for this ride, just not on me. # emotion:default
+Thanks again for letting me stay earlier. I swear I have the money to pay for this ride, just not on me. # emotion:default # voice:55
 
-Speakin' of money, Driver, give me some lotto numbers! # emotion:smile
+Speakin' of money, Driver, give me some lotto numbers! # emotion:smile # voice:56
     + [2 5 11 24 25]
-        Haha, thanks, dude! # mood:10
+        Haha, thanks, dude! # mood:10 # voice:57
 
         -> p3
         
     + [7 9 13 37 49]
-        Haha, thanks, dude! # mood:10
+        Haha, thanks, dude! # mood:10 # voice:57
 
         -> p3
             
     + [I'd rather not.]
-        What? You think I won’t win? # emotion:disappointed # mood:-10
+        What? You think I won’t win? # emotion:disappointed # mood:-10 # voice:59
         
         -> p3
 
 = p3
-I usually just choose the same numbers over and over. # emotion:default
+I usually just choose the same numbers over and over. Maybe that's why I haven't won yet. # emotion:default # voice:60
 
-Maybe that's why I haven't won yet.
-
-I'll hit it big soon, though. # pause:3.5
+I'll hit it big soon, though. # pause:3.5 # voice:61
 
 // play cell phone audio
-Hey, it's Q-dog! # emotion:phone
+Hey, it's Q-dog! # name:Q-dog # emotion:phone # voice:62
 
-Ah, I mean it's Quinton. I'm Quinton.
+Ah, I mean it's Quinton. I'm Quinton. # name:Quinton # voice:63
 
-Oh, from SmallMart!
+Oh, from SmallMart! # voice:64
 
-Yeah...
-
-...
-
-Other candidates?!
-
-Who else applied to work at this shithole?! I'm perfectly capable!
+Yeah... # voice:65
 
 ...
 
-THAT'S why?
+Other candidates?! # voice:66
 
-That happened years ago, who even cares—
+Who else applied to work at this shithole?! I'm perfectly capable! # voice:67
 
-Bastard hung up on me. # emotion:default
+...
+
+THAT'S why? # voice:68
+
+That happened years ago, who even cares— # voice:69
+
+Bastard hung up on me. # emotion:default # voice:70
 
 ... # emotion:disappointed
 
-Man. This blows.
+Man. This blows. I've applied to a ton of different places and I've got nothin' to show for it. # voice:71
 
-I've applied to a ton of different places and I've got nothin' to show for it.
+They don't want me because of some shit I didn't even do. # emotion:default # voice:72
 
-They don't want me because of some shit I didn't even do. # emotion:default
+Hey Driver, here's some advice: don't be like me. # voice:73
 
-Hey Driver, here's some advice: don't be like me.
+If somethin' seems too good to be true, it is. Money ain't free. # voice:74
 
-If somethin' seems too good to be true, it is. Money ain't free.
+I got in some deep shit with a few sharks a while back. # spawn_dest # voice:75
 
-I got in some deep shit with a few sharks a while back. # spawn_dest
+Long story short, I ended up takin' the fall for someone who I thought was a friend in order to clear my debt. Spent some time behind bars. # voice:76
 
-Long story short, I ended up takin' the fall for someone who I thought was a friend in order to clear my debt.
+Honestly, I don't even know what the court was sayin' I did. # voice:77
 
-Spent some time behind bars.
+Thinkin' about it pisses me off to no end. # voice:78
 
-Honestly, I don't even know what the court was sayin' I did.
+Reminds me that the real bastards who did it walked away scot-free. # emotion:disappointed # voice:79
 
-Thinkin' about it pisses me off to no end.
-
-Reminds me that the real bastards who did it walked away scot-free. # emotion:disappointed
-
-Some world we live in. # emotion:default
+Some world we live in. # emotion:default # voice:80
 
 ... # dropoff # requests_end
  
@@ -273,24 +263,23 @@ Some world we live in. # emotion:default
 
 {
     - mood > 150:
-        Hey, thanks again for listening to me earlier. # emotion:smile
+        Hey, thanks again for listening to me earlier. # emotion:smile # voice:81
         
-        You're easy to talk to.
+        You're easy to talk to. # voice:82
         
-        You might see more of me, I probably won't be getting a new car soon.
+        You might see more of me, I probably won't be getting a new car soon. # voice:83
         
-        Riding in here was a nice break from all the stuff I gotta deal with.
+        Riding in here was a nice break from all the stuff I gotta deal with. # voice:84
         
     - mood > 50:
-        Thanks, this was much better than walking. # emotion:smile
+        Thanks, this was much better than walking. # emotion:smile # voice:85
 
-        Drive safe, dude.
+        Drive safe, dude. # voice:86
         
-        I'll see you around!
     - else:
-        Looks like we're here.
+        Looks like we're here. # voice:87
         
-        Later.
+        Later. # voice:88
 }
 
 ~ PostDropoff() // Drops passenger off at destination

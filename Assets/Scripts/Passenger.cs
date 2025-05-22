@@ -50,14 +50,10 @@ public class Passenger : MonoBehaviour
     [Tooltip("This passenger's name.")]
     public string passengerName;
 
-    [Tooltip("What this passenger's name shows up before they reveal it.")]
-    public string hiddenName;
+    public string currentName;
 
     [Tooltip("What color this passenger's name is in the name box.")]
     public Color nameColor = Color.white;
-
-    [Tooltip("Whether this passenger's name has been revealed yet or not.")]
-    public bool nameRevealed = false;
 
     [Tooltip("Whether this passenger's spawn requirements have been met.")]
     public bool requirementMet;

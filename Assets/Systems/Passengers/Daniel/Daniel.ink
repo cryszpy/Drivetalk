@@ -12,8 +12,8 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 - "pre_emotion:x"
     - Use to specify an expression to play BEFORE the line is said (e.g. This will play after! # pre_emotion:default)
     - This tag DOES need to be specified every line—previous pre-expressions will not carry over to future lines
-- "name_revealed"
-    - Use to reveal a passenger's name on this line (e.g. My name is Maxine! # name_revealed)
+- "name:x"
+    - Use to change a passenger's name
     - This tag does NOT need to be specified every line—use it once, and from then on the character's name is revealed
 - "pause:x"
     - Use to pause a certain amount of time before saying the line (e.g. This is said after 2 seconds! # pause:2)
@@ -62,7 +62,7 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-Yo! What's up Taxi-man? # emotion:default # voice:1
+Yo! What's up Taxi-man? # name:??? # emotion:default # voice:1
 
 You got time for a ride to Sycamore park? # voice:2
 
@@ -133,7 +133,7 @@ No way. # voice:26
 
 Dominic? # voice:27
 
-It's <b>Daniel</b>—Zay's brother! Do you remember me? # name_revealed # voice:28
+It's <b>Daniel</b>—Zay's brother! Do you remember me? # name:Daniel # voice:28
     + [I do.]
         Man, that's crazy! # emotion:laugh # voice:29
         

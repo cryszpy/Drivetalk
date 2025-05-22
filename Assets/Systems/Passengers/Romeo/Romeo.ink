@@ -62,7 +62,7 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-Mrrow # emotion:default
+Mrrow # name:??? # emotion:default
     + [! ! !]
         
         -> p1
@@ -86,7 +86,7 @@ rrrr rrrr
         -> p2
 
 = p2
-rrrya # name_revealed
+rrrya # name:Romeo
     + [This address—]
         
         -> p3

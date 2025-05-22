@@ -62,53 +62,53 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-562 Willow Blvd. # emotion:default # end_greeting
+562 Willow Blvd. # name:Old Man McStink # emotion:default # end_greeting # voice:1
 
 ... # requests_start
 
-It's been a while, Dom. # name_revealed
+It's been a while, Dom. # name:Old Man McGee # voice:2
 
-You look different now, boy. You've grown.
+You look different now, boy. You've grown. # voice:3
 
-It's only been a short year, but you've changed.
+It's only been a short year, but you've changed. # voice:4
 
-I can tell you've been through a lot.
+I can tell you've been through a lot. # voice:5
 
-I'm sorry I couldn't be there when you needed me most.
+I'm sorry I couldn't be there when you needed me most. # voice:6
 
-It all happened so suddenly.
+It all happened so suddenly. # voice:7
 
-<glitch>The day she died...</glitch>
+<glitch>The day she died...</glitch> # voice:21
 
-The day you left...
-
-...
-
-It's been hard.
-
-Even now, things feel wrong.
-
-I can't quite put my finger on it...
-
-Every day has this strange sense of deja vu.
-
-The smallest details feel different, yet everything else remains stagnant.
-
-It's not that every day feels the same.
-
-Every day <b><i>is</i></b> the same.
+The day you left... # voice:8
 
 ...
 
-Sorry, boy. I think my age is getting the better of me.
+It's been hard. # voice:9
 
-They all tell me that's just how this town is.
+Even now, things feel wrong. # voice:10
 
-I know how it is—how it's always been, but this feels different.
+I can't quite put my finger on it... # voice:11
 
-I don't know what to believe anymore.
+Every day has this strange sense of deja vu. # voice:12
 
-<glitch>I wonder what she would think.</glitch> # time_loop
+The smallest details feel different, yet everything else remains stagnant. # voice:13
+
+It's not that every day feels the same. # voice:14
+
+Every day <b><i>is</i></b> the same. # voice:15
+
+...
+
+Sorry, boy. I think my age is getting the better of me. # voice:16
+
+They all tell me that's just how this town is. # voice:17
+
+I know how it is—how it's always been, but this feels different. # voice:18
+
+I don't know what to believe anymore. # voice:19
+
+<glitch>I wonder what she would think.</glitch> # time_loop # voice:20
 
 -> DONE
 

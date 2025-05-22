@@ -56,6 +56,8 @@ public class GameStateManager : MonoBehaviour
 
     public GameObject initialCarSpawn;
 
+    public GameObject backgroundRoad;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnEnable()
     {

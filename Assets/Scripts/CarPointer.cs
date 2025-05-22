@@ -88,6 +88,8 @@ public class CarPointer : MonoBehaviour
 
     public ProceduralRoad initialRoad;
 
+    public GameObject backgroundRoad;
+
     public ProceduralRoad currentRoad;
 
     public RoadConnectionPoint furthestConnectionPoint;
@@ -341,6 +343,9 @@ public class CarPointer : MonoBehaviour
         if (roadQueue.Count >= 3) {
             ProceduralRoad discardRoad = roadQueue.Dequeue();
             int discardDirection = directionQueue.Dequeue();
+
+            // Remove the background tile when we can no longer see it
+            GameStateManager.instance.backgroundRoad.SetActive(false);
 
             // Sets the steering direction for the upcoming turn to enable turn signal
             if (roadQueue.Count >= 2) {
