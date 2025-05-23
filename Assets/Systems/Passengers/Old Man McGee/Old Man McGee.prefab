@@ -258,14 +258,12 @@ MonoBehaviour:
   requirements: []
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: d38e542ea9f344427a673dc7af99b7eb, type: 3}
-  salutes:
-  - {fileID: 11400000, guid: e2d4f465bcfd24dc89ae0e7bc65081b9, type: 2}
+  gifts: []
   rarity: 0
   id: 2
   passengerName: Old Man McGee
-  hiddenName: Old Man McStink?
+  currentName: 
   nameColor: {r: 1, g: 0.83906674, b: 0.2216981, a: 1}
-  nameRevealed: 0
   requirementMet: 0
   textCPS: 0.1
   holdTime: 2
@@ -273,4 +271,26 @@ MonoBehaviour:
   maxSwitchTime: 4
   meterSpeed: 1
   waitAfterRouteTime: 5
+  voicelines:
+  - {fileID: 8300000, guid: 6948257a188bb4544b733ffda8d507db, type: 3}
+  - {fileID: 8300000, guid: 488f3917ae7a949f0b37894c7cf32906, type: 3}
+  - {fileID: 8300000, guid: b4a5e3c2d68db4b0cb2c7696df783d21, type: 3}
+  - {fileID: 8300000, guid: e9a67445ac4bb4862a83d1ef8c71b55d, type: 3}
+  - {fileID: 8300000, guid: 98164b2031ef7416692cf8093b6aa0ab, type: 3}
+  - {fileID: 8300000, guid: 7b634faffb5054c56bb648499659b56f, type: 3}
+  - {fileID: 8300000, guid: 9581991429ba343b4b4d797b16d9b3d4, type: 3}
+  - {fileID: 8300000, guid: eb7804533c7ee49a6b29d74789a70012, type: 3}
+  - {fileID: 8300000, guid: 805685813d11a4d14b96b9bd08cdb468, type: 3}
+  - {fileID: 8300000, guid: a7dbfbaffc783439dbbc21095c5dd3ad, type: 3}
+  - {fileID: 8300000, guid: 84c5cb5353ef14bdb87c85a31c438b26, type: 3}
+  - {fileID: 8300000, guid: cbc64eaebd1c64e1c8985c7aa841a594, type: 3}
+  - {fileID: 8300000, guid: 1bc69181bccf84ac08fab7c7289ecda0, type: 3}
+  - {fileID: 8300000, guid: 043a368406ab347baa3c2bf844faa02f, type: 3}
+  - {fileID: 8300000, guid: 325cc2228db5b4215b99e1152d7a476d, type: 3}
+  - {fileID: 8300000, guid: 8fca52155b69f4e7994994427f2c8af3, type: 3}
+  - {fileID: 8300000, guid: 41a8fea6370294709a147493a01b269a, type: 3}
+  - {fileID: 8300000, guid: 5dfdb391559f541828da7d4a5a5eaf38, type: 3}
+  - {fileID: 8300000, guid: d78e51c84ec704404aaf5810855a23cd, type: 3}
+  - {fileID: 8300000, guid: a7e3992dbc500463e89e6eabae355824, type: 3}
+  - {fileID: 8300000, guid: af398c1b662be410db1105bcc484a292, type: 3}
   preferences: {fileID: 11400000, guid: 9f0a76fcf46b6440f863b7ba49c3f6e4, type: 2}
