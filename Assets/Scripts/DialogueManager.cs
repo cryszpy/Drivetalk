@@ -512,6 +512,7 @@ public class DialogueManager : MonoBehaviour
         currentVox = null;
         waitForRouting = false;
         waitForDropoff = false;
+        voiceLineDone = true;
 
         // For every tag this line has—
         foreach (string unreadTag in currentTags) {
@@ -594,8 +595,11 @@ public class DialogueManager : MonoBehaviour
                     timeLoop = true;
                     break;
                 case VOICE_TAG:
-                    // Finds the voice line with the
+
+                    // Finds the voice line with the right number
                     currentVox = car.currentPassenger.voicelines.Find(x => x.name.Split("_")[^1] == tagValue);
+                    voiceLineDone = false;
+
                     break;
                 case GREETING_END_TAG:
                     waitForRouting = true;
@@ -689,6 +693,8 @@ public class DialogueManager : MonoBehaviour
         // Start voice line and short pause time
         if (currentVox) {
             StartCoroutine(StartVoiceLine());
+        } else {
+            voiceLineDone = true;
         }
 
         // Set whether destination is ready to spawn
@@ -805,6 +811,8 @@ public class DialogueManager : MonoBehaviour
 
             // Sets name box color
             nameBoxText.color = car.currentPassenger.nameColor;
+        } else {
+            nameBoxText.color = Color.white;
         }
 
         // Separate everything but the name
@@ -1273,6 +1281,12 @@ public class DialogueManager : MonoBehaviour
     // Called AFTER a passenger's dropoff dialogue has concluded
     public void PostDropoff() {
         Debug.Log("Finished all dialogue!");
+
+        // Removes second Quinton ride 2 if Quinton ride 1 was completed
+        if (car.currentPassenger.id == 5) {
+            Passenger quinton = car.passengerList.storyPassengers.Find(x => x.id == 5);
+            car.passengerList.storyPassengers.Remove(quinton);
+        }
 
         // Prevent ContinueDialogue() calls
         stopDialogue = true;

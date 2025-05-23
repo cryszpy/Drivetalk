@@ -265,20 +265,6 @@ public class GPS : UIElementSlider
         // Disable map UI
         gpsScreen.gameObject.SetActive(false);
 
-        // Reset input
-        gpsScreen.inputField.text = "";
-        gpsScreen.actualText.text = "";
-
-        // Add destination to recent destinations if it's not there already
-        if (!gpsScreen.recentDestTiles.Contains(gpsScreen.currentDestination.tile)) {
-
-            // Spawn a recent location element
-            GameObject recent = GPSRecentDestination.Create(recentDestElement, gpsScreen.pivot.transform, gpsScreen);
-
-            // Add the current destination tile to the recent destinations list
-            gpsScreen.recentDestTiles.Add(gpsScreen.currentDestination.tile);
-        }
-
         // Disables smooth rotation
         float damp = 1;
 
@@ -292,7 +278,25 @@ public class GPS : UIElementSlider
         rotationComposer.Damping = new(0, 0);
     }
 
+    private void ResetGPSInput() {
+
+        // Reset input
+        gpsScreen.inputField.text = "";
+        gpsScreen.actualText.text = "";
+
+        // Add destination to recent destinations if it's not there already
+        if (!gpsScreen.recentDestTiles.Contains(gpsScreen.currentDestination.tile)) {
+
+            // Spawn a recent location element
+            GameObject recent = GPSRecentDestination.Create(recentDestElement, gpsScreen.pivot.transform, gpsScreen);
+
+            // Add the current destination tile to the recent destinations list
+            gpsScreen.recentDestTiles.Add(gpsScreen.currentDestination.tile);
+        }
+    }
+
     private void StartDampingReset() {
         StartCoroutine(EndDollyMovement());
+        ResetGPSInput();
     }
 }

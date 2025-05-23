@@ -213,7 +213,7 @@ I usually just choose the same numbers over and over. Maybe that's why I haven't
 I'll hit it big soon, though. # pause:3.5 # voice:61
 
 // play cell phone audio
-Hey, it's Q-dog! # name:Q-dog # emotion:phone # voice:62
+Hey, it's Q-dog! # name:Q-dog?? # emotion:phone # voice:62
 
 Ah, I mean it's Quinton. I'm Quinton. # name:Quinton # voice:63
 
@@ -288,29 +288,207 @@ Some world we live in. # emotion:default # voice:80
 === _2 ===
 ~ UpdateCurrentKnot("_2")
 
-this is two! # larie:default
+Hey. # emotion:smile # name:??? # voice:89
 
-this shouldn't change!
+Haha! Bet you didn't think you'd see me again! # pre_emotion:laugh # voice:90
 
-second line in two! # fallow:default # name_revealed
+Take me to 1100 Flower Blvd. # emotion:default # end_greeting # voice:91
+
+Oh man... I am gonna be so late... # emotion:disappointed # requests_start # voice:92
+
+I guess it's expected from me, though. # voice:93
+
+Ah, don't worry I'm not mad. # pause:2 # emotion:smile # voice:94
+
+I would've done the same thing in your shoes. # emotion:smile # voice:95
+
+In the past I probably would've picked a fight with you if I saw you, but that stuff's pointless. # emotion:default # voice:96
+
+After you kicked me out I ended up walkin' back home, and now I've got my wallet. # emotion:smile # voice:97
+
+You'll get paid, and I'll get my ride to the party. We'll both be happy. # voice:98
+
+I'm also feelin' generous today. How about you keep that hula girl. She looks better on your dashboard anyway. # voice:99
+
+Uh... hey driver, ever fallen in <glitch>love</glitch>? # voice:18 # pause:3
+    + [Once.]
+        What kinda girl was she? # voice:19
+        ** [Hardworking]
+            Sounds like my girl! # mood:10 # voice:20
+            
+            I try to visit her at work but she won't let me stay long. Says I distract her. # emotion:smile # voice:21
+            
+            I get it. I mean, who wouldn't be distracted by all this? # emotion:laugh # voice:100
+            
+            I bet she's happy to see me, though. # emotion:smile # voice:22
+            
+            Whenever I close my eyes I can see her smiling. # voice:23
+            
+            She's given me more chances than I deserve. # emotion:default # voice:24
+            
+            -> p1
+        ** [Talkative]
+            Sounds like my girl! # mood:10 # voice:22
+            
+            A girl that speaks her mind is easier to deal with for sure. # voice:26
+            
+            When my ex and I fought she would ignore me for days. # emotion:laugh # voice:27
+            
+            -> p1
+        ** [Fleeting]
+            …What does that even mean??? # emotion:disappointed # voice:28
+            
+            -> p1
+            
+    + [...]
+        Hah, well...<glitch>love</glitch> might be a strong word, but... # voice:29
+        
+        Whenever I close my eyes I can see her smiling. # voice:23
+        
+        She's given me more chances than I deserve. # emotion:default # voice:24
+        
+        -> p1
+
+= p1
+I just don't wanna mess this one up. # emotion:default # voice:32
+
+I remember when I first got to talkin' with her a few months ago. # emotion:smile # voice:33
+
+She used to work at the diner my uncle runs. # voice:34
+
+My uncle's an asshole and one time she snapped at him. Someone needed to get him off his horse. # pre_emotion:laugh # pre_emotion:laugh # voice:35
+
+Tall...horse? Something like that. # emotion:default # voice:36
+
+Ah, she would know. # emotion:smile # voice:37
+
+She's smart. # voice:38
+
+Smart <i>and</i> strong...I could learn a lot from her. # voice:39
+
+Ah...sorry, I drank a bit before this. # pause:1.5 # voice:40
+
+Didn't mean to get sappy with you. # emotion:default # voice:41
+
+I've just been down on my luck recently. Drinkin' helps. # voice:42
+
+Speakin' of, do you want some? # emotion:smile # voice:43
+
+Ah shit what am I sayin'! You're driving! Haha, that could've been bad. # emotion:laugh # pause:1.5 # voice:44
+
+Man... it just feels like things need to slow down. # emotion:default # voice:45
+
+My Grandpa's age has been catchin' up to him. # voice:46
+
+That stubborn old man actually lets me help him now. # emotion:smile # voice:47
+
+We used to get into these loud arguments, but it's been real quiet lately. # emotion:default # voice:48
+
+It's weird. You'd think I'd like having peace in the house, but it just reminds me that he won't be here forever. # emotion:disappointed # voice:49
+
+There's never enough time... # voice:50
+
+Or money! I could always use more of that. # emotion:smile # voice:51
+
+Though, once I finally do get rich, I'll get a new car that actually works. An '06 Pluto, bright red. # voice:52
+
+And I'll leave this town with my girl. # emotion:smile # voice:53
+
+...I'll probably leave Grandpa something, too. Least I could do. # pause:3 # voice:54
+
+Speakin' of money, Driver, give me some lotto numbers! # emotion:smile # voice:56
+    + [2 5 11 24 25]
+        Haha, thanks, dude! # mood:10 # voice:57
+
+        -> p2
+        
+    + [7 9 13 37 49]
+        Haha, thanks, dude! # mood:10 # voice:57
+
+        -> p2
+            
+    + [I'd rather not.]
+        What? You think I won’t win? # emotion:disappointed # mood:-10 # voice:59
+        
+        -> p2
+
+= p2
+I usually just choose the same numbers over and over. Maybe that's why I haven't won yet. # emotion:default # voice:60
+
+I'll hit it big soon, though. # pause:3.5 # voice:61
+
+// play cell phone audio
+Hey, it's Q-dog! # name:Q-dog?? # emotion:phone # voice:62
+
+Ah, I mean it's Quinton. I'm Quinton. # name:Quinton # voice:63
+
+Oh, from SmallMart! # voice:64
+
+Yeah... # voice:65
+
+...
+
+Other candidates?! # voice:66
+
+Who else applied to work at this shithole?! I'm perfectly capable! # voice:67
+
+...
+
+THAT'S why? # voice:68
+
+That happened years ago, who even cares— # voice:69
+
+Bastard hung up on me. # emotion:default # voice:70
+
+... # emotion:disappointed
+
+Man. This blows. I've applied to a ton of different places and I've got nothin' to show for it. # voice:71
+
+They don't want me because of some shit I didn't even do. # emotion:default # voice:72
+
+Hey Driver, here's some advice: don't be like me. # voice:73
+
+If somethin' seems too good to be true, it is. Money ain't free. # voice:74
+
+I got in some deep shit with a few sharks a while back. # spawn_dest # voice:75
+
+Long story short, I ended up takin' the fall for someone who I thought was a friend in order to clear my debt. Spent some time behind bars. # voice:76
+
+Honestly, I don't even know what the court was sayin' I did. # voice:77
+
+Thinkin' about it pisses me off to no end. # voice:78
+
+Reminds me that the real bastards who did it walked away scot-free. # emotion:disappointed # voice:79
+
+Some world we live in. # emotion:default # voice:80
+
+... # dropoff # requests_end
+ 
+~ temp mood = GetMood()
+
+{
+    - mood > 150:
+        Hey, thanks again for listening to me earlier. # emotion:smile # voice:81
+        
+        You're easy to talk to. # voice:82
+        
+        You might see more of me, I probably won't be getting a new car soon. # voice:83
+        
+        Riding in here was a nice break from all the stuff I gotta deal with. # voice:84
+        
+    - mood > 50:
+        Thanks, this was much better than walking. # emotion:smile # voice:85
+
+        Drive safe, dude. # voice:86
+        
+    - else:
+        Looks like we're here. # voice:87
+        
+        Later. # voice:88
+}
+
+~ PostDropoff() // Drops passenger off at destination
 -> DONE
-
-=== _3 ===
-~ UpdateCurrentKnot("_3")
-
-heyyyy what's up tyhree! # larie:default
-
-this shouldn't change!
-
-second line in three! # fallow:default # name_revealed
--> DONE
-
-
-
-
-
-
-
 
 
 -> END

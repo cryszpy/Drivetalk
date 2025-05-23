@@ -101,9 +101,16 @@ public class GPSScreen : MonoBehaviour
         GPSDestination target = currentDestination;
 
         if (destination != null) {
-            target = destination;
 
-            StartCoroutine(AssignDestination(target));
+            if (destination == currentDestination) {
+                target = destination;
+
+                StartCoroutine(AssignDestination(target));
+            } else {
+                Debug.LogWarning("Wrong address bubbo!");
+                entered = false;
+            }
+            
         } else {
 
             if (actualText.maxVisibleCharacters >= currentDestination.gpsText.Length) {

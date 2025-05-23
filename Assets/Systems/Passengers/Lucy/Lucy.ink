@@ -274,7 +274,7 @@ Someone... # voice:75
 
 No. # voice:76
 
-Everyone here always says the same thing. # voice:77
+Everyone here always says the same exact thing. # voice:77
 
 "This town never changes." "It's the same old Mackenzie it's always been." # voice:78
 
