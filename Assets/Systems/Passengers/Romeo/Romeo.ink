@@ -62,7 +62,7 @@ VALID TAG GUIDE (tags are used like this: "Hey guys!! # tagName:tagValue" )
 === _1 ===
 ~ UpdateCurrentKnot("_1")
 
-Mrrow # name:??? # emotion:default
+Mrrow # name:??? # emotion:default # voice:1
     + [! ! !]
         
         -> p1
@@ -74,7 +74,7 @@ Mrrow # name:??? # emotion:default
         -> p1
 
 = p1
-rrrr rrrr
+rrrr rrrr # voice:2
     + [Hey there.]
         
         -> p2
@@ -86,7 +86,7 @@ rrrr rrrr
         -> p2
 
 = p2
-rrrya # name:Romeo
+rrrya # name:Romeo # voice:3
     + [This address—]
         
         -> p3
@@ -100,7 +100,7 @@ rrrya # name:Romeo
 = p3
  # end_greeting
 
-Mrrow! # requests_start
+Mrrow! # requests_start # voice:4
     + [Alright, alright. I'm driving.]
         
         -> p4
@@ -112,7 +112,7 @@ Mrrow! # requests_start
         -> p4
         
 = p4
-raow
+raow # voice:5
     + [Well, you're far from the weirdest passenger I've had today.]
         
         -> p5
@@ -124,7 +124,7 @@ raow
         -> p5
         
 = p5
-rrrya
+rrrya # voice:6
     + [You're lucky you're cute, or I'd have left you at the stop.]
         
         -> p6
@@ -136,7 +136,7 @@ rrrya
         -> p6
         
 = p6
-nrrr nrrr
+nrrr nrrr # voice:7
     + [I feel like I've seen these houses before.]
         
         -> p7
@@ -160,7 +160,7 @@ nrrr nrrr
         -> p8
         
 = p8
-Mrrow!
+Mrrow! # voice:8
     + [Oh, so you were listening?]
         
         -> p9
@@ -172,7 +172,7 @@ Mrrow!
         -> p9
         
 = p9
-nrr
+nrr # voice:9
     + [She always said cats were good listeners.]
         
         -> p10
@@ -196,9 +196,9 @@ nrr
         -> p11
         
 = p11
-rryow # spawn_dest
+rryow # spawn_dest # voice:10
 
-rrya # dropoff # requests_end
+rrya # dropoff # requests_end # voice:11
     + [Maybe you're just as lost as I am.]
         
         -> p12

@@ -256,14 +256,12 @@ MonoBehaviour:
   requirements: []
   requestedDestinationTiles:
   - {fileID: 7247080473360366342, guid: 68301ff9f36d14913a0edb782146616a, type: 3}
-  salutes:
-  - {fileID: 11400000, guid: f070b229c4e1f4eccb86934c3026133a, type: 2}
+  gifts: []
   rarity: 0
   id: 6
   passengerName: Romeo
-  hiddenName: Cat?
+  currentName: 
   nameColor: {r: 0.46164113, g: 0.6251894, b: 0.735849, a: 1}
-  nameRevealed: 0
   requirementMet: 0
   textCPS: 0.2
   holdTime: 2
@@ -271,4 +269,16 @@ MonoBehaviour:
   maxSwitchTime: 4
   meterSpeed: 1
   waitAfterRouteTime: 1.5
+  voicelines:
+  - {fileID: 8300000, guid: 71cc94abc55b94371b00f1bcf63506c4, type: 3}
+  - {fileID: 8300000, guid: 92e67487933c24d56ad38dc3038d8f44, type: 3}
+  - {fileID: 8300000, guid: 166221e8ea88f4cc5a984571ac9c54ae, type: 3}
+  - {fileID: 8300000, guid: 74577bd2d6e5e48c0942847abcdd85f4, type: 3}
+  - {fileID: 8300000, guid: f2e6fa558ea094a25b88d0c4b6d54f8c, type: 3}
+  - {fileID: 8300000, guid: b660ffe6ae6534005a0385b562c59b4a, type: 3}
+  - {fileID: 8300000, guid: 83636bb98a0d140d8850324a652c5741, type: 3}
+  - {fileID: 8300000, guid: 0b3e1f8b917ef41f7b4974a924d69bd3, type: 3}
+  - {fileID: 8300000, guid: a1bb5bab7ec044f7199334d12a35e0b4, type: 3}
+  - {fileID: 8300000, guid: 19fd184a5624f44839be76581ce73a2b, type: 3}
+  - {fileID: 8300000, guid: f3576cb99b2b04295b797733dce311cc, type: 3}
   preferences: {fileID: 11400000, guid: c5dc908fc6ed74312a6abd3dcd34b122, type: 2}
