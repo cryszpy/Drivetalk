@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueUIElement : MonoBehaviour
 {
@@ -12,16 +12,24 @@ public class DialogueUIElement : MonoBehaviour
 
     public TMP_Text elementText;
 
+    public Button continueButton;
+
+    public GameObject clickIndicator;
+
     public bool finished = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (finished) {
+        if (finished)
+        {
             finished = false;
 
             if (GameStateManager.dialogueManager.autoDialogue) StartCoroutine(NaturalDestroy());
         }
+
+        // Make sure the continue button is disabled if auto-dialogue is on
+        if (continueButton) continueButton.interactable = !GameStateManager.dialogueManager.autoDialogue;
     }
 
     private IEnumerator NaturalDestroy() {
@@ -47,15 +55,16 @@ public class DialogueUIElement : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual UnityEngine.Object Create(UnityEngine.Object original, Transform parent, CarController car) {
-        GameObject dialogueBlock = Instantiate(original, parent) as GameObject;
+    public virtual (GameObject, GameObject) Create(GameObject original, Transform parent, CarController car) {
+        GameObject dialogueBlock = Instantiate(original, parent);
         
         if (dialogueBlock.TryGetComponent<DialogueUIElement>(out var script)) {
             script.car = car;
-            return dialogueBlock;
+            script.continueButton.onClick.AddListener(() => GameStateManager.dialogueManager.ContinueButton());
+            return (dialogueBlock, script.clickIndicator);
         } else {
             Debug.LogError("Could not find DialogueUIElement script or extension of such on this Object.");
-            return null;
+            return (null, null);
         }
     }
 }

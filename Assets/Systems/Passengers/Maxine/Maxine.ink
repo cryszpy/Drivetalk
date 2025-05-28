@@ -68,7 +68,7 @@ Do you mind dropping me off at 270 Ardendale? # voice:2
 
 ...
 
-Er- Do you know where that is? # voice:3
+Er- Do you remember where that is? # voice:3
 
 ...
 
@@ -234,7 +234,7 @@ I'll see you around! # voice:62
 
 <glitch>...</glitch>
 
-<glitch>Er- Do you know where that is?</glitch> # voice:99
+<glitch>Er- Do you remember where that is?</glitch> # voice:99
 
 <glitch>...</glitch>
 

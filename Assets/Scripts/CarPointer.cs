@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -74,6 +72,7 @@ public class CarPointer : MonoBehaviour
     public SteeringDirection currentSteeringDirection;
 
     public bool inIntersection = false;
+    public bool atStopSign = false;
 
     public bool calculatedDirections = false;
 
@@ -139,7 +138,7 @@ public class CarPointer : MonoBehaviour
             // If the car pointer has calculated a route, and the game is not in a menu or paused—
             if (path != null && path.Count > 0 && !car.atTaxiStop && !car.arrivedAtDest)
             {
-                if (agent.speed != car.agent.speed) agent.speed = car.agent.speed;
+                if (agent.speed != car.agent.speed && !atStopSign) agent.speed = car.agent.speed;
                 
                 // Move the car pointer along the route
                 MoveAlongPath();

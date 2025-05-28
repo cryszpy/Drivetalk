@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.UI;
 
 public class GPS : UIElementSlider
 {
@@ -211,14 +209,14 @@ public class GPS : UIElementSlider
             // If the camera isn't finished moving along the spline track, move it along at different rates
             if (splineDolly.CameraPosition < 1f) {
                 if (splineDolly.CameraPosition > 0.7f){
-                    splineDolly.CameraPosition += 0.01f;
+                    splineDolly.CameraPosition += 0.015f;
                 } else {
-                    splineDolly.CameraPosition += 0.02f;
+                    splineDolly.CameraPosition += 0.03f;
                 }
             }
 
             // Wait in between moving
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
 
         // Activate the map when the camera is done moving

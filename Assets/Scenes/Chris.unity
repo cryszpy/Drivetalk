@@ -301,7 +301,6 @@ MonoBehaviour:
   typingSentence: 0
   autoDialogue: 0
   textLineDone: 0
-  voiceLineDone: 0
   startingExpressionDone: 0
   textEffects: {fileID: 166813864}
   volumeProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}

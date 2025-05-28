@@ -38,6 +38,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject dialogueElement;
 
+    private GameObject clickIndicator;
+
     public GameObject currentElement;
 
     public Canvas dialogueCanvas;
@@ -277,15 +279,18 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Speaking
-        if (car.currentPassenger && currentVox && GameStateManager.audioManager.vo.source
-            && GameStateManager.audioManager.vo.source.isPlaying)
+        if (playingDialogue)
         {
-            car.currentPassenger.animator.SetBool("Speak", GameStateManager.audioManager.vo.source.isPlaying);
-        }
-        else if ((car.currentPassenger && !currentVox && !typingSentence)
-            || (currentVox && GameStateManager.audioManager.vo.source && !GameStateManager.audioManager.vo.source.isPlaying))
-        {
-            car.currentPassenger.animator.SetBool("Speak", false);
+            if (car.currentPassenger && currentVox && GameStateManager.audioManager.vo.source
+                && GameStateManager.audioManager.vo.source.isPlaying)
+            {
+                car.currentPassenger.animator.SetBool("Speak", GameStateManager.audioManager.vo.source.isPlaying);
+            }
+            else if ((car.currentPassenger && !currentVox && !typingSentence)
+                || (currentVox && GameStateManager.audioManager.vo.source && !GameStateManager.audioManager.vo.source.isPlaying))
+            {
+                car.currentPassenger.animator.SetBool("Speak", false);
+            } 
         }
 
         // Auto/Non-auto dialogue
@@ -654,7 +659,6 @@ public class DialogueManager : MonoBehaviour
 
             if (deadBlock.TryGetComponent<DialogueUIElement>(out var deadScript))
             {
-
                 // Starts destruction of dialogue block
                 deadScript.animator.SetTrigger("Out");
             }
@@ -712,9 +716,14 @@ public class DialogueManager : MonoBehaviour
         } */
 
         // Spawn new dialogue element
-        if (dialogueElement.TryGetComponent<DialogueUIElement>(out var blockScript)) {
-            currentElement = (GameObject)blockScript.Create(dialogueElement, dialoguePivot.transform, car);
+        if (dialogueElement.TryGetComponent<DialogueUIElement>(out var blockScript))
+        {
+
+            // Sets the current dialogue element GameObject, as well as the click indicator GameObject
+            (GameObject, GameObject) dialogueTuple = blockScript.Create(dialogueElement, dialoguePivot.transform, car);
+            currentElement = dialogueTuple.Item1;
             currentElement.transform.SetAsFirstSibling();
+            clickIndicator = dialogueTuple.Item2;
         }
 
         activeDialogueBlocks.Enqueue(currentElement);
@@ -1132,15 +1141,16 @@ public class DialogueManager : MonoBehaviour
 
             ShowChoices();
         }
-        // Play the next dialogue line only if auto-dialogue is enabled, there isn't currently a starting expression playing, and
-        // there is no voice line to be played. 
-        else if (autoDialogue && !currentVox && !stopDialogue) {
+        // Play the next dialogue line only if auto-dialogue is enabled, and there isn't currently a starting expression playing
+        else if (autoDialogue && !stopDialogue) {
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
             yield break;
         }
 
+        // Activate click indicator once sentence is done
+        if (clickIndicator) clickIndicator.SetActive(true);
         textLineDone = true;
         waitForSkip = true;
     }
@@ -1277,13 +1287,15 @@ public class DialogueManager : MonoBehaviour
         if (!GameStateManager.audioManager.vo.source.isPlaying) yield break;
     }
 
-    public IEnumerator WaitBeforeNextSentence() {
+    public IEnumerator WaitBeforeNextSentence()
+    {
 
         // Waits for the passenger's hold-dialogue-on-screen time
         yield return new WaitForSeconds(shortPauseTime);
 
         // Displays next sentence if available
         textLineDone = true;
+        waitForSkip = true;
     }
 
     // Called AFTER a passenger's dropoff dialogue has concluded

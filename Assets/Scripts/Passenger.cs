@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Tooltip("Struct definition for a requirement needed for a passenger to be able to show up.")]

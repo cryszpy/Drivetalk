@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 
 public class Intersection : Road
 {
@@ -22,6 +19,8 @@ public class Intersection : Road
                 // Set the car pointer's script reference to the script pulled from collision
                 carPointer = script.carPointer;
                 carPointer.inIntersection = true;
+
+                if (shouldStop) carPointer.atStopSign = true;
 
                 // Spawns new procedural road tile
                 carPointer.SpawnRoadTile();
@@ -52,16 +51,19 @@ public class Intersection : Road
         
         if (collider.CompareTag("CarFrame")) {
 
-            if (carPointer) {
+            if (carPointer)
+            {
 
                 // Reset turn signal and wheel rotation
-                if (carPointer.wheel && carPointer.turnSignal) {
+                if (carPointer.wheel && carPointer.turnSignal)
+                {
                     StartCoroutine(carPointer.turnSignal.SignalClick(SteeringDirection.FORWARD));
                     StartCoroutine(carPointer.wheel.TurnWheel(SteeringDirection.FORWARD));
                     GameStateManager.audioManager.StopSoundByName("Blinker");
                 }
 
                 carPointer.inIntersection = false;
+                if (shouldStop) carPointer.atStopSign = false;
             }
         }
     }
@@ -77,4 +79,3 @@ public class Intersection : Road
         carPointer.agent.speed = prevSpeed;
     }
 }
-

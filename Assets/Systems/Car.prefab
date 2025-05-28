@@ -11874,7 +11874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6978082127195823701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17500,6 +17500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7980224647404019471}
   elementText: {fileID: 2282196291338191300}
+  continueButton: {fileID: 0}
   finished: 0
 --- !u!1 &9062466873058686174
 GameObject:
@@ -18566,7 +18567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 667437217000825861, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 749671269189357657, guid: 95d7e7007f0e04bc9ac820dfe85294a5, type: 3}
       propertyPath: m_AnchoredPosition.y
