@@ -104,7 +104,7 @@ public class DialogueManager : MonoBehaviour
     public bool autoDialogue = false;
 
     public bool textLineDone = false;
-    public bool voiceLineDone = false;
+    //public bool voiceLineDone = false;
 
     private float expressionTimer = 0;
     private bool expressionTimerRunning = false;
@@ -276,14 +276,28 @@ public class DialogueManager : MonoBehaviour
             activeHeldWords.Clear();
         }
 
+        // Speaking
+        if (car.currentPassenger && currentVox && GameStateManager.audioManager.vo.source
+            && GameStateManager.audioManager.vo.source.isPlaying)
+        {
+            car.currentPassenger.animator.SetBool("Speak", GameStateManager.audioManager.vo.source.isPlaying);
+        }
+        else if ((car.currentPassenger && !currentVox && !typingSentence)
+            || (currentVox && GameStateManager.audioManager.vo.source && !GameStateManager.audioManager.vo.source.isPlaying))
+        {
+            car.currentPassenger.animator.SetBool("Speak", false);
+        }
+
         // Auto/Non-auto dialogue
-        if (autoDialogue) {
+        if (autoDialogue)
+        {
             waitForSkip = false;
 
             // If both text and voice line have finished, continue to the next dialogue piece
-            if (textLineDone && voiceLineDone) {
+            if (textLineDone && !GameStateManager.audioManager.vo.source.isPlaying)
+            {
                 textLineDone = false;
-                voiceLineDone = false;
+                //voiceLineDone = false;
                 ContinueDialogue();
             }
         }
@@ -400,16 +414,16 @@ public class DialogueManager : MonoBehaviour
 
         if (playingDialogue && !autoDialogue) {
 
-            // Skip typing on click
-            if (typingSentence) {
+            // Skip sentence on click
+            if (typingSentence)
+            {
                 currentDialogueText.maxVisibleCharacters = currentDialogueText.text.Length;
                 typingSentence = false;
-            } 
+            }
             // If sentence is typed out, play next sentence on click
-            else if (waitForSkip) {
+            else if (waitForSkip)
+            {
                 waitForSkip = false;
-                StopCoroutine(StartVoiceLine()); // Stops any voice line waiting
-                StopCoroutine(WaitAfterRouting()); // Stops any text line waiting
                 ContinueDialogue();
             }
         }
@@ -512,7 +526,6 @@ public class DialogueManager : MonoBehaviour
         currentVox = null;
         waitForRouting = false;
         waitForDropoff = false;
-        voiceLineDone = true;
 
         // For every tag this line has—
         foreach (string unreadTag in currentTags) {
@@ -577,16 +590,12 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case HALLUCINATION_TAG:
 
-                    switch (tagValue) {
-                        case "off":
-                            isHallucinating = false;
-                            break;
-                        case "on":
-                            isHallucinating = true;
-                            break;
-                        default:
-                            throw new System.Exception("Hallucination status can't be read!");
-                    }
+                    isHallucinating = tagValue switch
+                    {
+                        "off" => false,
+                        "on" => true,
+                        _ => throw new System.Exception("Hallucination status can't be read!"),
+                    };
                     break;
                 case KICKED_OUT_TAG:
                     kickedOut = true;
@@ -598,7 +607,7 @@ public class DialogueManager : MonoBehaviour
 
                     // Finds the voice line with the right number
                     currentVox = car.currentPassenger.voicelines.Find(x => x.name.Split("_")[^1] == tagValue);
-                    voiceLineDone = false;
+                    //voiceLineDone = false;
 
                     break;
                 case GREETING_END_TAG:
@@ -636,13 +645,15 @@ public class DialogueManager : MonoBehaviour
     // Visually types the current sentence
     public IEnumerator TypeSentence(string line) {
         textLineDone = false;
-        voiceLineDone = false;
+        //voiceLineDone = false;
 
         // Start fading previous dialogue line element
-        if (activeDialogueBlocks.Count >= maxDialogueElements) {
+        if (activeDialogueBlocks.Count >= maxDialogueElements)
+        {
             GameObject deadBlock = activeDialogueBlocks.Dequeue();
 
-            if (deadBlock.TryGetComponent<DialogueUIElement>(out var deadScript)) {
+            if (deadBlock.TryGetComponent<DialogueUIElement>(out var deadScript))
+            {
 
                 // Starts destruction of dialogue block
                 deadScript.animator.SetTrigger("Out");
@@ -688,13 +699,6 @@ public class DialogueManager : MonoBehaviour
         // Prevents dialogue from continuing while transcript log is shown
         while (transcriptLog.gameObject.activeInHierarchy) {
             yield return null;
-        }
-
-        // Start voice line and short pause time
-        if (currentVox) {
-            StartCoroutine(StartVoiceLine());
-        } else {
-            voiceLineDone = true;
         }
 
         // Set whether destination is ready to spawn
@@ -823,6 +827,11 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log(nameBoxText.text + ": " + message);
 
+        // Start voice line and short pause time
+        if (currentVox) {
+            StartCoroutine(StartVoiceLine());
+        }
+
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
@@ -842,8 +851,8 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        // Trigger speaking if line isn't silence or a hallucination
-        if (line.Trim() != "..." && !isHallucinating) {
+        // Trigger speaking if line isn't silence or a hallucination and speaking isn't controlled by voice
+        if (line.Trim() != "..." && !isHallucinating && !currentVox) {
             car.currentPassenger.animator.SetBool("Speak", true);
         }
 
@@ -1093,12 +1102,15 @@ public class DialogueManager : MonoBehaviour
             dScript.finished = true;
         }
 
-        // Reset speaking boolean in Animator
-        car.currentPassenger.animator.SetBool("Speak", false);
+        // Reset speaking boolean in Animator if speaking isn't controlled by voice
+        if (!currentVox)
+        {
+            car.currentPassenger.animator.SetBool("Speak", false);
 
-        // Switches back to regular expression after done talking
-        if (currentExpression != null) {
-            SwitchExpression(currentExpression);
+            // Switches back to regular expression after done talking
+            if (currentExpression != null) {
+                SwitchExpression(currentExpression);
+            }
         }
 
         // Start time loop
@@ -1117,10 +1129,6 @@ public class DialogueManager : MonoBehaviour
 
         // Display any choices for this dialogue line
         if (currentStory.currentChoices.Count > 0) {
-
-            // Remove any voice lines
-            voiceLineDone = false;
-            currentVox = null;
 
             ShowChoices();
         }
@@ -1247,26 +1255,26 @@ public class DialogueManager : MonoBehaviour
     }
 
     private IEnumerator StartVoiceLine() {
-        voiceLineDone = false;
+        //voiceLineDone = false;
 
-        AudioClip playedVoiceline = currentVox;
+        float clipLength = currentVox.length;
 
         // Plays voice line
         GameStateManager.audioManager.PlayVoiceLine(currentVox, car.currentPassenger.gameObject);
 
-        // Waits until after voice line is done, and the next sentence is ready to be said
-        yield return new WaitForSeconds(currentVox.length + shortPauseTime);
+        yield return new WaitForSeconds(clipLength);
 
-        // Checks if the player has skipped this voiceline while the coroutine is still in session
-        if (currentVox != playedVoiceline) {
-            yield break;
+        if (!GameStateManager.audioManager.vo.source.isPlaying) yield break;
+
+        // Switches back to regular expression after done talking
+        if (currentExpression != null)
+        {
+            SwitchExpression(currentExpression);
         }
 
-        // Remove completed voice line
-        currentVox = null;
+        yield return new WaitForSeconds(shortPauseTime);
 
-        // Sets boolean flag to done
-        voiceLineDone = true;
+        if (!GameStateManager.audioManager.vo.source.isPlaying) yield break;
     }
 
     public IEnumerator WaitBeforeNextSentence() {
@@ -1393,7 +1401,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void SwitchExpression(PassengerExpression expression) {
-
         expressionTimerRunning = expression.runExpressionTimer switch
         {
             true => true,

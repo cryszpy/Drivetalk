@@ -344,6 +344,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Default
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Speak
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1619361541723641954}
   m_Solo: 0

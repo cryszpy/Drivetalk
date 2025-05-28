@@ -15,7 +15,8 @@ public class AudioManager : MonoBehaviour
 
     public Sound vo;
 
-    void Awake() {
+    void Awake()
+    {
 
         // Singleton pattern
         /* if (instance != null) {
@@ -26,14 +27,20 @@ public class AudioManager : MonoBehaviour
         } */
 
         // Loops through each sound in the array
-        foreach (Sound s in sounds) {
+        foreach (Sound s in sounds)
+        {
 
             // If the audio source location object is null, plays from AudioManager object
-            if (s.location == null) {
+            if (s.location == null)
+            {
                 s.source = gameObject.AddComponent<AudioSource>();
-            } else if (s.location.TryGetComponent<AudioSource>(out var foundSource)) {
+            }
+            else if (s.location.TryGetComponent<AudioSource>(out var foundSource))
+            {
                 s.source = foundSource;
-            } else {
+            }
+            else
+            {
                 s.source = s.location.AddComponent<AudioSource>();
             }
 
@@ -48,9 +55,11 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
 
             // If sound needs to be played when created, play it
-            if (s.playOnAwake) {
+            if (s.playOnAwake)
+            {
 
-                switch (s.type) {
+                switch (s.type)
+                {
                     case SoundType.SINGLE:
                         PlaySoundByName(s.name);
                         break;
@@ -63,13 +72,15 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays a sound from a specific audio file
-    public void PlaySoundByFile(AudioClip clip) {
+    public void PlaySoundByFile(AudioClip clip)
+    {
 
         // Finds the file in question
         Sound s = Array.Find(sounds, sound => sound.clips.Contains(clip));
-        
+
         // If file exists—
-        if (s != null) {
+        if (s != null)
+        {
             Debug.Log("Playing sound: " + s.name + "- " + clip.name);
 
             // Sets the audio file to be played
@@ -77,26 +88,34 @@ public class AudioManager : MonoBehaviour
 
             // Plays sound
             s.source.Play();
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Could not find sound that contains file: " + clip.name);
         }
     }
 
-    public void PlayVoiceLine(AudioClip clip, GameObject passenger) {
+    public void PlayVoiceLine(AudioClip clip, GameObject passenger)
+    {
 
-        if (!clip || !passenger) {
+        if (!clip || !passenger)
+        {
             Debug.LogError("Voice line clip or passenger location is missing!");
             return;
         }
 
         // If the passenger already has an audio source, use that one
-        if (passenger.TryGetComponent<AudioSource>(out var foundSource)) {
+        if (passenger.TryGetComponent<AudioSource>(out var foundSource))
+        {
             vo.source = foundSource;
-        } 
+        }
         // Otherwise, add one
-        else {
+        else
+        {
             vo.source = passenger.AddComponent<AudioSource>();
         }
+
+        vo.source.Stop();
 
         // Assigns sound stats (volume, pitch, 2D/3D spatial blend, etc)
         vo.source.clip = clip;
@@ -115,13 +134,15 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays a sound by name
-    public void PlaySoundByName(string name) {
+    public void PlaySoundByName(string name)
+    {
 
         // Finds the sound in question
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        
+
         // If sound exists—
-        if (s != null) {
+        if (s != null)
+        {
             Debug.Log("Playing sound: " + s.name);
 
             // Sets the sound to be played
@@ -129,19 +150,23 @@ public class AudioManager : MonoBehaviour
 
             // Plays sound
             s.source.Play();
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Could not find sound: " + name);
         }
     }
 
     // Plays a random version of a sound by name
-    public void PlayRandomSoundByName(string name) {
+    public void PlayRandomSoundByName(string name)
+    {
 
         // Finds the sound type in question
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        
+
         // If sound exists—
-        if (s != null) {
+        if (s != null)
+        {
             Debug.Log("Playing random sound: " + s.name);
 
             // Gets a random variation of the sound
@@ -149,30 +174,38 @@ public class AudioManager : MonoBehaviour
 
             // Plays sound
             s.source.Play();
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Could not find sound: " + name);
         }
     }
 
-    public void StopSoundByName(string name) {
+    public void StopSoundByName(string name)
+    {
 
         // Finds the sound type in question
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         // If sound exists—
-        if (s != null) {
+        if (s != null)
+        {
 
-            if (s.source == null) {
+            if (s.source == null)
+            {
                 Debug.LogError("Tried to get nonexistent AudioSource");
             }
 
             s.source.Stop();
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Could not find sound: " + name);
         }
     }
 
-    public void StopSoundByFile(AudioClip clip) {
+    public void StopSoundByFile(AudioClip clip)
+    {
 
         // Finds the file in question
         Sound s = Array.Find(sounds, sound => sound.clips.Contains(clip));
@@ -180,17 +213,25 @@ public class AudioManager : MonoBehaviour
         Debug.Log(s.source.clip.name);
 
         // If sound exists—
-        if (s != null) {
+        if (s != null)
+        {
             Debug.Log("Stopping random sound: " + s.name);
 
-            if (s.source == null) {
+            if (s.source == null)
+            {
                 Debug.LogError("Tried to get nonexistent AudioSource");
             }
 
             s.source.Stop();
-            Debug.Log("hi");
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Could not find sound: " + name);
         }
+    }
+
+    public void StopVoiceLine()
+    {
+        vo.source.Stop();
     }
 }
