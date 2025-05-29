@@ -145,6 +145,8 @@ public class GameStateManager : MonoBehaviour
         // Reset car variables
         car.arrivedAtDest = false;
         car.atTaxiStop = false;
+        car.carPointer.inIntersection = false;
+        car.carPointer.atStopSign = false;
         car.carPointer.path.Clear();
         car.carPointer.gpsPath.Clear();
         car.carPointer.gpsPathRef.Clear();
