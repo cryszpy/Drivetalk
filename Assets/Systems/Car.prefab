@@ -9741,7 +9741,25 @@ MonoBehaviour:
 
     Torey Striffolino
 
-    Romeo'
+
+    <u><VOICE
+    ACTORS></u>
+
+    Maxine - Haley Vlahos
+
+    Quinton - Tim Kashani
+
+    Daniel
+    - Wesley Dye
+
+    Julie - Chari Taim
+
+    Lucy - Ellie Herbert
+
+    Romeo - Romeo
+
+    Old
+    Man McGee - Nick Shows'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 87600e7c3cc58ad42bbfa9c23d21bfaa, type: 2}
   m_sharedMaterial: {fileID: -606436220225861916, guid: 87600e7c3cc58ad42bbfa9c23d21bfaa, type: 2}
@@ -9768,12 +9786,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
+  m_fontSize: 34.7
   m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 60
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -17501,6 +17519,7 @@ MonoBehaviour:
   animator: {fileID: 7980224647404019471}
   elementText: {fileID: 2282196291338191300}
   continueButton: {fileID: 0}
+  clickIndicator: {fileID: 0}
   finished: 0
 --- !u!1 &9062466873058686174
 GameObject:

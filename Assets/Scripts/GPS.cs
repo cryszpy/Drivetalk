@@ -289,7 +289,7 @@ public class GPS : UIElementSlider
             GameObject recent = GPSRecentDestination.Create(recentDestElement, gpsScreen.pivot.transform, gpsScreen);
 
             // Add the current destination tile to the recent destinations list
-            gpsScreen.recentDestTiles.Add(gpsScreen.currentDestination.tile);
+            gpsScreen.recentDestTiles.Add(recent);
         }
     }
 

@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 7247080473360366342, guid: eedd66b96ebccd743be4577cbed0df9c, type: 3}
   destinations:
   - tile: {fileID: 7247080473360366342, guid: a834114913445423590785d124e4ee3a, type: 3}
-    gpsText: Park
+    gpsText: Sycamore Park
   - tile: {fileID: 7247080473360366342, guid: d23710308dd9f474c96cd37b22803f00, type: 3}
     gpsText: 1100 Flower Blvd
   - tile: {fileID: 7247080473360366342, guid: c486829ef693e424b85fc9822ce8cff8, type: 3}

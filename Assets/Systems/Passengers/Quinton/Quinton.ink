@@ -210,7 +210,7 @@ Speakin' of money, Driver, give me some lotto numbers! # emotion:smile # voice:5
 = p3
 I usually just choose the same numbers over and over. Maybe that's why I haven't won yet. # emotion:default # voice:60
 
-I'll hit it big soon, though. # pause:3.5 # voice:61
+I'll hit it big soon, though. # pause:5.5 # voice:61
 
 // play cell phone audio
 Hey, it's Q-dog! # name:Q-dog?? # emotion:phone # voice:62
@@ -415,7 +415,7 @@ Speakin' of money, Driver, give me some lotto numbers! # emotion:smile # voice:5
 = p2
 I usually just choose the same numbers over and over. Maybe that's why I haven't won yet. # emotion:default # voice:60
 
-I'll hit it big soon, though. # pause:3.5 # voice:61
+I'll hit it big soon, though. # pause:5.5 # voice:61
 
 // play cell phone audio
 Hey, it's Q-dog! # name:Q-dog?? # emotion:phone # voice:62

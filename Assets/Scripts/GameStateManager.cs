@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public enum GAMESTATE {
     MAINMENU, MENU, PLAYING, PAUSED, GAMEOVER
@@ -94,6 +95,11 @@ public class GameStateManager : MonoBehaviour
         car.gpsScreen.actualText.maxVisibleCharacters = 0;
         car.gpsScreen.inputField.textComponent.text = "";
         car.gpsScreen.inputField.text = "";
+
+        foreach (GameObject tile in car.gpsScreen.recentDestTiles) {
+            Destroy(tile);
+        }
+        car.gpsScreen.recentDestTiles.Clear();
 
         // Toggle hazards status off
         CarController.HazardsActive = false;
