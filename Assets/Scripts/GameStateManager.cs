@@ -101,6 +101,16 @@ public class GameStateManager : MonoBehaviour
         }
         car.gpsScreen.recentDestTiles.Clear();
 
+        // Reset gifts
+        foreach (GiftSpawn gifts in car.dashboardGiftSpawns)
+        {
+            if (gifts.gift != null)
+            {
+                Destroy(gifts.gift);
+            }
+            gifts.gift = null;
+        }
+
         // Toggle hazards status off
         CarController.HazardsActive = false;
         GameObject.FindGameObjectWithTag("Hazards").GetComponent<Hazards>().buttonAnimator.SetBool("Active", CarController.HazardsActive);

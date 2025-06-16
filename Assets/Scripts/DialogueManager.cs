@@ -40,7 +40,7 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject clickIndicator;
 
-    public GameObject currentElement;
+    public DialogueUIElement currentElement;
 
     public Canvas dialogueCanvas;
 
@@ -111,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     private float expressionTimer = 0;
     private bool expressionTimerRunning = false;
 
-    [HideInInspector] public bool startingExpressionDone = false;
+    public bool startingExpressionDone = false;
 
     private List<int> hi = new();
     private List<int> hi2 = new();
@@ -311,8 +311,8 @@ public class DialogueManager : MonoBehaviour
             // TODO: Add silly passenger quips about not moving
         }
 
-        // Switch default expressions
-        if (expressionTimerRunning && car.currentPassenger) {
+        // Switch default expressions when there aren't pre-expressions loaded
+        if (expressionTimerRunning && car.currentPassenger && !currentPreExpression) {
             expressionTimer += Time.deltaTime;
 
             if (expressionTimer > UnityEngine.Random.Range(car.currentPassenger.minSwitchTime, car.currentPassenger.maxSwitchTime) && !typingSentence) {
@@ -415,9 +415,11 @@ public class DialogueManager : MonoBehaviour
         ContinueDialogue();
     }
 
-    public void ContinueButton() {
+    public void ContinueButton() 
+    {
 
-        if (playingDialogue && !autoDialogue) {
+        if (playingDialogue && !autoDialogue) 
+        {
 
             // Skip sentence on click
             if (typingSentence)
@@ -426,19 +428,29 @@ public class DialogueManager : MonoBehaviour
                 typingSentence = false;
             }
             // If sentence is typed out, play next sentence on click
-            else if (waitForSkip)
+            else if (waitForSkip && !playingChoices)
             {
+                Debug.Log("pressed!");
+
+                // Stops previous voicelines before starting the next line
+                GameStateManager.audioManager.StopVoiceLine();
+                StopCoroutine(StartVoiceLine());
+
+                RemoveDialogueElement();
                 waitForSkip = false;
+                textLineDone = false;
                 ContinueDialogue();
             }
         }
     }
     
-    public void ContinueDialogue() {
+    public void ContinueDialogue()
+    {
 
         if (currentStory == null || stopDialogue) return;
 
-        if (currentStory.canContinue) {
+        if (currentStory.canContinue)
+        {
             StartCoroutine(TypeSentence(currentStory.Continue()));
         }
     }
@@ -506,16 +518,8 @@ public class DialogueManager : MonoBehaviour
         // Affect mood meter with appropriate change
         //GameStateManager.comfortManager.currentComfortability += choice.moodChange;
 
-        /* // If choice response exists, play it
-        if (choice.lines.Length > 0) {
-            StartDialogue(choice);
-        } 
-        // Else, go to next dialogue piece
-        else if (currentDialogue.nextDialogue) {
-            StartDialogue(currentDialogue.nextDialogue);
-        } */
         currentStory.ChooseChoiceIndex(index);
-        ContinueDialogue();
+        ContinueButton();
     }
 
     // Read the current dialogue line's tags
@@ -647,11 +651,8 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Visually types the current sentence
-    public IEnumerator TypeSentence(string line) {
-        textLineDone = false;
-        //voiceLineDone = false;
-
+    private void RemoveDialogueElement()
+    {
         // Start fading previous dialogue line element
         if (activeDialogueBlocks.Count >= maxDialogueElements)
         {
@@ -663,9 +664,18 @@ public class DialogueManager : MonoBehaviour
                 deadScript.animator.SetTrigger("Out");
             }
         }
+    }
+
+    // Visually types the current sentence
+    public IEnumerator TypeSentence(string line)
+    {
+        textLineDone = false;
+        Debug.Log("typing sentence: " + line);
 
         // Don't type empty lines
-        if (line.Length <= 1) {
+        if (line.Length <= 1)
+        {
+            Debug.Log("empty line!");
             ContinueDialogue();
             yield break;
         }
@@ -674,15 +684,18 @@ public class DialogueManager : MonoBehaviour
         textEffects.ClearEffects();
 
         // Waits until GPS has been routed to continue
-        while (waitForRouting) {
+        while (waitForRouting)
+        {
             yield return null;
         }
 
         // Parses through this dialogue line's tags
         ReadTags(currentStory.currentTags);
+        Debug.Log("parsed tags!");
 
         // Waits until car has arrived at destination to continue
-        while (waitForDropoff) {
+        while (waitForDropoff)
+        {
             yield return null;
         }
 
@@ -690,18 +703,24 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(currentPauseLength);
 
         // If there is a pre-expression to wait for, wait until it is done before typing out sentence
-        if (currentPreExpression != null) {
+        if (currentPreExpression != null)
+        {
+            Debug.Log("starting pre-expression");
             startingExpressionDone = false;
 
             SwitchExpression(currentPreExpression);
-            
-            while (!startingExpressionDone) {
+            Debug.Log("waiting for pre=exrespsion: " + currentPreExpression);
+
+            while (!startingExpressionDone)
+            {
                 yield return null;
             }
+            Debug.Log("GOT THROUGH");
         }
 
         // Prevents dialogue from continuing while transcript log is shown
-        while (transcriptLog.gameObject.activeInHierarchy) {
+        while (transcriptLog.gameObject.activeInHierarchy)
+        {
             yield return null;
         }
 
@@ -721,53 +740,66 @@ public class DialogueManager : MonoBehaviour
 
             // Sets the current dialogue element GameObject, as well as the click indicator GameObject
             (GameObject, GameObject) dialogueTuple = blockScript.Create(dialogueElement, dialoguePivot.transform, car);
-            currentElement = dialogueTuple.Item1;
+            currentElement = dialogueTuple.Item1.GetComponent<DialogueUIElement>();
             currentElement.transform.SetAsFirstSibling();
             clickIndicator = dialogueTuple.Item2;
+            Debug.Log("spawned new dialogue element!");
         }
 
-        activeDialogueBlocks.Enqueue(currentElement);
+        activeDialogueBlocks.Enqueue(currentElement.gameObject);
 
         DialogueUIElement dScript = null;
 
         // Set dialogue element text to the line's text
-        if (currentElement.TryGetComponent<DialogueUIElement>(out var script)) {
+        if (currentElement.TryGetComponent<DialogueUIElement>(out var script))
+        {
             dScript = script;
             currentDialogueText = script.elementText;
-        } else {
+            Debug.Log("set dialogue element text!");
+        }
+        else
+        {
             throw new System.Exception("Could not find DialogueUIElement component on this dialogue element!");
         }
 
         // Set appropriate expression before talking
-        if (currentExpression != null) {
+        if (currentExpression != null)
+        {
             SwitchExpression(currentExpression);
+            Debug.Log("switched to text expression!");
         }
 
         // If the current sentence doesn't have any effects—
-        if (!line.Contains("<glitch>") && !line.Contains("<wobble>")) {
+        if (!line.Contains("<glitch>") && !line.Contains("<wobble>"))
+        {
 
             // Log appropriate name and message to transcript
             transcriptLog.LogText(line, car.currentPassenger.currentName);
         }
 
         // Spawn dashboard object if it exists
-        if (currentGift) {
+        if (currentGift)
+        {
 
-            if (car.dashboardGiftSpawns.Count > 0) {
+            if (car.dashboardGiftSpawns.Count > 0)
+            {
 
                 GameObject spawnedObject = null;
 
                 // Iterate through all dashboard gift spawnpoints to check for first available
-                for (int i = 0; i < car.dashboardGiftSpawns.Count; i++){
+                for (int i = 0; i < car.dashboardGiftSpawns.Count; i++)
+                {
 
-                    if (!car.dashboardGiftSpawns[i].taken) {
+                    if (!car.dashboardGiftSpawns[i].gift)
+                    {
                         spawnedObject = Instantiate(currentGift, car.dashboardGiftSpawns[i].spawnPoint.transform);
-                        car.dashboardGiftSpawns[i].taken = true;
+                        car.dashboardGiftSpawns[i].gift = spawnedObject;
                         break;
                     }
                 }
 
-                if (spawnedObject == null) {
+                if (spawnedObject == null)
+                {
                     Debug.LogWarning("Could not find available dashboard gift spawnpoint!");
                 }
                 currentGift = null;
@@ -809,22 +841,26 @@ public class DialogueManager : MonoBehaviour
                     }
             } */
         }
- 
+
         string message = null;
 
         // Enable name box if hidden
-        if (!nameBox.activeInHierarchy) {
+        if (!nameBox.activeInHierarchy)
+        {
             nameBox.SetActive(true);
         }
 
         nameBoxText.text = car.currentPassenger.currentName;
 
         // If name is already revealed, use revealed name
-        if (car.currentPassenger.currentName == car.currentPassenger.passengerName) {
+        if (car.currentPassenger.currentName == car.currentPassenger.passengerName)
+        {
 
             // Sets name box color
             nameBoxText.color = car.currentPassenger.nameColor;
-        } else {
+        }
+        else
+        {
             nameBoxText.color = Color.white;
         }
 
@@ -837,31 +873,41 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(nameBoxText.text + ": " + message);
 
         // Start voice line and short pause time
-        if (currentVox) {
+        if (currentVox)
+        {
             StartCoroutine(StartVoiceLine());
+            Debug.Log("started voiceline!");
         }
 
         // Indicates that a sentence is being typed out
         typingSentence = true;
 
         // Trigger vignette effect if line is hallucination
-        if (isHallucinating) {
+        if (isHallucinating)
+        {
 
-            if (volumeProfile.TryGet<Vignette>(out var vignette)) {
+            if (volumeProfile.TryGet<Vignette>(out var vignette))
+            {
 
                 StartCoroutine(FadeVignette(vignette, true));
 
-            } else {
+            }
+            else
+            {
                 throw new System.Exception("Could not get Vignette component on global volume!");
             }
-        } else if (volumeProfile.TryGet<Vignette>(out var vignette)) {
-            if (vignette.intensity.value != vignetteDefault) {
+        }
+        else if (volumeProfile.TryGet<Vignette>(out var vignette))
+        {
+            if (vignette.intensity.value != vignetteDefault)
+            {
                 StartCoroutine(FadeVignette(vignette, false));
             }
         }
 
         // Trigger speaking if line isn't silence or a hallucination and speaking isn't controlled by voice
-        if (line.Trim() != "..." && !isHallucinating && !currentVox) {
+        if (line.Trim() != "..." && !isHallucinating && !currentVox)
+        {
             car.currentPassenger.animator.SetBool("Speak", true);
         }
 
@@ -888,7 +934,7 @@ public class DialogueManager : MonoBehaviour
             else if (!isCustomTag(subTexts[i].Replace("/", "")))
                 displayText += $"<{subTexts[i]}>";
         }
-        
+
         char[] bruh = displayText.ToArray();
 
         // Check to see if tag is custom tag
@@ -904,7 +950,7 @@ public class DialogueManager : MonoBehaviour
         currentDialogueText.maxVisibleCharacters = 0;
 
         // ------------------------------------------ PARSE TO FIND CUSTOM TAGS AND ACTIVATE THEM --------------------------------------------
-        
+
         int spaceCounter = 0;
         int characterTracker = 0;
         int tagTracker = 0;
@@ -912,12 +958,15 @@ public class DialogueManager : MonoBehaviour
         Queue<int> richTagLengths = new();
 
         // For every subsection split—
-        for (int element = 0; element < subTexts.Length; element++) {
+        for (int element = 0; element < subTexts.Length; element++)
+        {
 
             // If the subsection is a tag—
-            if (element % 2 == 1) {
+            if (element % 2 == 1)
+            {
 
-                switch (isCustomTag(subTexts[element].Replace("/", ""))) {
+                switch (isCustomTag(subTexts[element].Replace("/", "")))
+                {
 
                     // If the subsection is a default rich text tag—
                     case false:
@@ -928,7 +977,7 @@ public class DialogueManager : MonoBehaviour
                         // Increment tag tracker by the length of the tag
                         tagTracker += subTexts[element].Length + 2;
                         break;
-                    
+
                     // If the subsection is a custom tag—
                     case true:
 
@@ -955,7 +1004,8 @@ public class DialogueManager : MonoBehaviour
         // ------------------------------------------------------------------------- REALLY BADLY OPTIMIZED CODE --------------------
 
         // For each subsection split—
-        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++) {
+        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++)
+        {
 
             // Subsection split is an odd number, therefore is a tag
             if (sectionNum % 2 == 1)
@@ -964,19 +1014,22 @@ public class DialogueManager : MonoBehaviour
                 spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
 
                 // If this tag is a standard rich-text tag, include it in character counter
-                if (!isCustomTag(subTexts[sectionNum].Replace("/", ""))) {
+                if (!isCustomTag(subTexts[sectionNum].Replace("/", "")))
+                {
                     characterTracker += subTexts[sectionNum].Length + 2;
                     richDequeued = richTagLengths.Dequeue();
                 }
 
                 // If this tag is the START of a custom tag—
-                if (isCustomTag(subTexts[sectionNum].Replace(" ", ""))) {
+                if (isCustomTag(subTexts[sectionNum].Replace(" ", "")))
+                {
                     dequeued = tagLengths.Dequeue();
                     tagLengths.Dequeue(); // Remove closing tag as well, but don't use it
                 }
 
                 // If this tag is the START of a standard rich-text tag, add its text section to the list
-                if (!isCustomTag(subTexts[sectionNum].Replace(" ", "")) && !subTexts[sectionNum].Contains("/")) {
+                if (!isCustomTag(subTexts[sectionNum].Replace(" ", "")) && !subTexts[sectionNum].Contains("/"))
+                {
 
                     int start = (characterTracker - spaceCounter - (richDequeued + subTexts[sectionNum].Length + 2)) * 4;
                     int end = ((characterTracker + subTexts[sectionNum + 1].Length - (spaceCounter + spaces) - (richDequeued + subTexts[sectionNum].Length + 2)) * 4) - 1;
@@ -985,14 +1038,16 @@ public class DialogueManager : MonoBehaviour
                 }
 
                 // If this tag is the opening tag of any kind—
-                if (!subTexts[sectionNum].Contains("/")) {
+                if (!subTexts[sectionNum].Contains("/"))
+                {
 
                     // If the previous section exists, is not a tag, and is not just a space—
-                    if (sectionNum - 1 >= 0 && sectionNum - 1 % 2 != 1 && subTexts[sectionNum - 1].Replace(" ", "").Length > 0) {
+                    if (sectionNum - 1 >= 0 && sectionNum - 1 % 2 != 1 && subTexts[sectionNum - 1].Replace(" ", "").Length > 0)
+                    {
 
                         int start = (characterTracker - spaceCounter - dequeued) * 4;
                         int end = ((characterTracker - (spaceCounter + spaces) - dequeued) * 4) - 1;
-                        
+
                         textEffects.AddRegularTextRange(new(start, end));
                     }
                 }
@@ -1002,13 +1057,15 @@ public class DialogueManager : MonoBehaviour
             {
 
                 // For each character in this subsection
-                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum) {
+                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum)
+                {
 
                     // The current iterated character
                     string character = subTexts[sectionNum][charNum].ToString();
 
                     // If the character is a space, increment the number of spaces
-                    if (character == " ") {
+                    if (character == " ")
+                    {
                         spaceCounter++;
                     }
 
@@ -1035,7 +1092,8 @@ public class DialogueManager : MonoBehaviour
         // ------------------------------------------------------------------------- TRIGGER EFFECTS --------------------
 
         // For each subsection split—
-        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++) {
+        for (int sectionNum = 0; sectionNum < subTexts.Length; sectionNum++)
+        {
 
             // Subsection split is an odd number, therefore is a tag
             if (sectionNum % 2 == 1)
@@ -1044,13 +1102,15 @@ public class DialogueManager : MonoBehaviour
                 spaces = subTexts[sectionNum + 1].Count(x => x.ToString() == " ");
 
                 // If this tag is a standard rich-text tag, include it in character counter
-                if (!isCustomTag(subTexts[sectionNum].Replace("/", ""))) {
+                if (!isCustomTag(subTexts[sectionNum].Replace("/", "")))
+                {
                     characterTracker += subTexts[sectionNum].Length + 2;
                     richDequeued = richTagLengths.Dequeue();
                 }
 
                 // If this tag is the START of a custom tag—
-                if (isCustomTag(subTexts[sectionNum].Replace(" ", ""))) {
+                if (isCustomTag(subTexts[sectionNum].Replace(" ", "")))
+                {
                     dequeued = tagLengths.Dequeue();
                     tagLengths.Dequeue(); // Remove closing tag as well, but don't use it
                 }
@@ -1064,13 +1124,15 @@ public class DialogueManager : MonoBehaviour
             {
 
                 // For each character in this subsection
-                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum) {
+                for (int charNum = 0; charNum < subTexts[sectionNum].Length; ++charNum)
+                {
 
                     // The current iterated character
                     string character = subTexts[sectionNum][charNum].ToString();
 
                     // If the character is a space, increment the number of spaces
-                    if (character == " ") {
+                    if (character == " ")
+                    {
                         spaceCounter++;
                     }
 
@@ -1084,22 +1146,27 @@ public class DialogueManager : MonoBehaviour
         // ----------------------------------------------------- REVEAL TEXT  ---------------------------------------------------------
 
         // For every character in ONLY THE MESSAGE WITHOUT THE NAME
-        foreach (char letter in currentDialogueText.text) {
+        foreach (char letter in currentDialogueText.text)
+        {
 
-            if (typingSentence) {
+            if (typingSentence)
+            {
 
                 // Types the character and adds it to the current sentence display
                 currentDialogueText.maxVisibleCharacters++;
 
                 // Wait after typing any sort of punctuation
-                if (punctuationList.Contains(currentDialogueText.text.ToArray()[currentDialogueText.maxVisibleCharacters - 1].ToString())) {
+                if (punctuationList.Contains(currentDialogueText.text.ToArray()[currentDialogueText.maxVisibleCharacters - 1].ToString()))
+                {
                     yield return new WaitForSeconds(punctuationWaitTime);
                 }
 
                 // Waits for the typing speed time
                 yield return new WaitForSeconds(car.currentPassenger.textCPS / CarController.TextSpeedMult);
 
-            } else {
+            }
+            else
+            {
                 Debug.Log("Skipped typing!");
                 break;
             }
@@ -1107,7 +1174,9 @@ public class DialogueManager : MonoBehaviour
 
         typingSentence = false;
 
-        if (dScript) {
+        // Triggers destruction of the current Dialogue Element
+        if (dScript)
+        {
             dScript.finished = true;
         }
 
@@ -1117,19 +1186,22 @@ public class DialogueManager : MonoBehaviour
             car.currentPassenger.animator.SetBool("Speak", false);
 
             // Switches back to regular expression after done talking
-            if (currentExpression != null) {
+            if (currentExpression != null)
+            {
                 SwitchExpression(currentExpression);
             }
         }
 
         // Start time loop
-        if (timeLoop) {
+        if (timeLoop)
+        {
             StartCoroutine(StartTimeLoop());
             yield break;
         }
 
         // Initiate an early dropoff if needed
-        if (kickedOut) {
+        if (kickedOut)
+        {
             PostDropoff();
 
             GameStateManager.EOnPassengerDropoff?.Invoke();
@@ -1137,17 +1209,25 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Display any choices for this dialogue line
-        if (currentStory.currentChoices.Count > 0) {
+        if (currentStory.currentChoices.Count > 0)
+        {
 
             ShowChoices();
+            textLineDone = true;
+            waitForSkip = true;
+            yield break;
         }
+
         // Play the next dialogue line only if auto-dialogue is enabled, and there isn't currently a starting expression playing
-        else if (autoDialogue && !stopDialogue) {
+        if (autoDialogue && !stopDialogue)
+        {
 
             // Starts countdown to fade dialogue away
             StartCoroutine(WaitBeforeNextSentence());
             yield break;
         }
+
+        Debug.Log("finished typing?");
 
         // Activate click indicator once sentence is done
         if (clickIndicator) clickIndicator.SetActive(true);
@@ -1265,7 +1345,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     private IEnumerator StartVoiceLine() {
-        //voiceLineDone = false;
 
         float clipLength = currentVox.length;
 
@@ -1358,8 +1437,11 @@ public class DialogueManager : MonoBehaviour
         stopDialogue = true;
         typingSentence = false;
         waitForSkip = false;
+        waitForRouting = false;
+        waitForDropoff = false;
 
-        if (currentElement) {
+        if (currentElement)
+        {
             Destroy(currentElement);
         }
         
@@ -1412,7 +1494,8 @@ public class DialogueManager : MonoBehaviour
         car.arrivedAtDest = false;
     }
 
-    public void SwitchExpression(PassengerExpression expression) {
+    public void SwitchExpression(PassengerExpression expression)
+    {
         expressionTimerRunning = expression.runExpressionTimer switch
         {
             true => true,
@@ -1420,5 +1503,6 @@ public class DialogueManager : MonoBehaviour
         };
 
         car.currentPassenger.animator.SetTrigger(expression.animatorTrigger.ToString());
+        Debug.Log(expression);
     }
 }
