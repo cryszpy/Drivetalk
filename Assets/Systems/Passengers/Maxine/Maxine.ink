@@ -78,7 +78,7 @@ You won't make it as a taxi driver if you don't know where you're going. # emoti
 
 It's a harsh world out there for you taxi drivers! # emotion:default # voice:6
 
-Lots of competition, y'know? # voice:7
+Lots of competition, y'know? # voice:7 # spawn_dest
 
 Well, maybe. # voice:8
 

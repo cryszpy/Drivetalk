@@ -512,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carMarkers:
   - {fileID: 3438109441543801528}
+  shouldStop: 0
 --- !u!65 &340755585688497356
 BoxCollider:
   m_ObjectHideFlags: 0
